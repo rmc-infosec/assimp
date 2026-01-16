@@ -229,12 +229,23 @@ void STLImporter::LoadASCIIFile(aiNode *root) {
     std::vector<aiVector3D> positionBuffer;
     std::vector<aiVector3D> normalBuffer;
 
+    // Helper to clean up allocated resources on exception
+    auto cleanupOnError = [&meshes, &nodes]() {
+        for (auto *mesh : meshes) {
+            delete mesh;
+        }
+        for (auto *node : nodes) {
+            delete node;
+        }
+    };
+
     // try to guess how many vertices we could have
     // assume we'll need 160 bytes for each face
     size_t sizeEstimate = std::max(1ull, mFileSize / 160ull) * 3ull;
     positionBuffer.reserve(sizeEstimate);
     normalBuffer.reserve(sizeEstimate);
 
+    try {
     while (IsAsciiSTL(sz, static_cast<unsigned int>(bufferEnd - sz))) {
         std::vector<unsigned int> meshIndices;
         aiMesh *pMesh = new aiMesh();
@@ -392,6 +403,10 @@ void STLImporter::LoadASCIIFile(aiNode *root) {
     root->mChildren = new aiNode *[root->mNumChildren];
     for (size_t i = 0; i < nodes.size(); ++i) {
         root->mChildren[i] = nodes[i];
+    }
+    } catch (...) {
+        cleanupOnError();
+        throw;
     }
 }
 
