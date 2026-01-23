@@ -38,8 +38,13 @@ THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ---------------------------------------------------------------------------
 */
+
+// Export fuzzer: Import any format, export to STL, re-import
+// Tests the STL exporter code paths
+
 #include "fuzzer_common.h"
 #include <assimp/scene.h>
+#include <assimp/Exporter.hpp>
 
 using namespace Assimp;
 
@@ -49,13 +54,25 @@ extern "C" int LLVMFuzzerTestOneInput(const uint8_t *data, size_t dataSize) {
     }
 
     Importer importer;
-    // Force glTF text format only (see assimp_fuzzer_glb.cc for binary GLB)
-    if (!AssimpFuzz::ForceFormat(importer, "gltf")) {
+    unsigned int importFlags = AssimpFuzz::GetProcessingFlags(data, dataSize);
+
+    // Try to import the fuzzed data as any format
+    const aiScene *scene = importer.ReadFileFromMemory(data, dataSize, importFlags);
+    if (!scene || !scene->mRootNode) {
         return 0;
     }
 
-    unsigned int flags = AssimpFuzz::GetProcessingFlags(data, dataSize);
-    importer.ReadFileFromMemory(data, dataSize, flags, "gltf");
+    // Export to STL format with export-appropriate flags
+    Exporter exporter;
+    unsigned int exportFlags = AssimpFuzz::GetExportFlags(data, dataSize);
+    const aiExportDataBlob* blob = exporter.ExportToBlob(scene, "stl", exportFlags);
+    if (!blob || !blob->data || blob->size == 0) {
+        return 0;
+    }
+
+    // Re-import the exported data to test round-trip
+    Importer importer2;
+    importer2.ReadFileFromMemory(blob->data, blob->size, importFlags, "exported.stl");
 
     return 0;
 }

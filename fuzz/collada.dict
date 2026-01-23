@@ -1,0 +1,58 @@
+# Collada (DAE) format dictionary
+# XML header
+"<?xml"
+"COLLADA"
+"xmlns"
+"http://www.collada.org/2005/11/COLLADASchema"
+
+# Major elements
+"<asset>"
+"<library_animations>"
+"<library_cameras>"
+"<library_controllers>"
+"<library_effects>"
+"<library_geometries>"
+"<library_images>"
+"<library_lights>"
+"<library_materials>"
+"<library_nodes>"
+"<library_visual_scenes>"
+"<scene>"
+
+# Geometry
+"<geometry"
+"<mesh>"
+"<source"
+"<vertices"
+"<triangles"
+"<polylist"
+"<polygons"
+"<lines"
+"<float_array"
+"<accessor"
+"<param"
+"<input"
+
+# Controllers
+"<controller"
+"<skin"
+"<joints"
+"<vertex_weights"
+"<bind_shape_matrix"
+
+# Animation
+"<animation"
+"<sampler"
+"<channel"
+
+# Common attributes
+"semantic"
+"source"
+"offset"
+"count"
+"stride"
+"id"
+"name"
+"sid"
+"type"
+"url"

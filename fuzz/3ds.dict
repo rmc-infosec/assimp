@@ -1,0 +1,44 @@
+# 3DS format dictionary
+# Magic bytes and chunk IDs (little-endian)
+
+# Primary chunk types
+"\x4d\x4d"  # M3DMAGIC (0x4D4D) - main chunk
+"\x02\x00"  # M3D_VERSION (0x0002)
+
+# Editor chunks
+"\x3d\x3d"  # MDATA (0x3D3D) - editor data block
+"\x3e\x3d"  # MESH_VERSION (0x3D3E)
+"\x00\x01"  # MASTER_SCALE (0x0100)
+
+# Object chunks
+"\x00\x40"  # NAMED_OBJECT (0x4000)
+"\x00\x41"  # N_TRI_OBJECT (0x4100)
+"\x10\x41"  # POINT_ARRAY (0x4110)
+"\x20\x41"  # FACE_ARRAY (0x4120)
+"\x30\x41"  # MSH_MAT_GROUP (0x4130)
+"\x40\x41"  # TEX_VERTS (0x4140)
+"\x50\x41"  # SMOOTH_GROUP (0x4150)
+"\x60\x41"  # MESH_MATRIX (0x4160)
+
+# Material chunks
+"\x00\xaf"  # MAT_ENTRY (0xAF00)
+"\x01\xaf"  # MAT_NAME (0xAF01)
+"\x10\xaf"  # MAT_AMBIENT (0xAF10)
+"\x20\xaf"  # MAT_DIFFUSE (0xAF20)
+"\x30\xaf"  # MAT_SPECULAR (0xAF30)
+
+# Color chunks
+"\x10\x00"  # COLOR_24 (0x0010)
+"\x11\x00"  # COLOR_F (0x0011)
+
+# Keyframe chunks
+"\x00\xb0"  # KFDATA (0xB000)
+"\x01\xb0"  # KFHDR (0xB001)
+"\x02\xb0"  # OBJECT_NODE_TAG (0xB002)
+
+# Common strings
+"MAIN"
+"EDIT"
+"KEYF"
+"MATERIAL"
+"OBJECT"

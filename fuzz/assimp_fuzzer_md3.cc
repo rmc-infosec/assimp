@@ -49,13 +49,13 @@ extern "C" int LLVMFuzzerTestOneInput(const uint8_t *data, size_t dataSize) {
     }
 
     Importer importer;
-    // Force glTF text format only (see assimp_fuzzer_glb.cc for binary GLB)
-    if (!AssimpFuzz::ForceFormat(importer, "gltf")) {
+    // Force MD3 format
+    if (!AssimpFuzz::ForceFormat(importer, "md3")) {
         return 0;
     }
 
     unsigned int flags = AssimpFuzz::GetProcessingFlags(data, dataSize);
-    importer.ReadFileFromMemory(data, dataSize, flags, "gltf");
+    importer.ReadFileFromMemory(data, dataSize, flags, "md3");
 
     return 0;
 }

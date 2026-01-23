@@ -39,15 +39,13 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ---------------------------------------------------------------------------
 */
 #include "fuzzer_common.h"
-#include <assimp/cimport.h>
 #include <assimp/scene.h>
-#include <assimp/postprocess.h>
 
 using namespace Assimp;
 
 extern "C" int LLVMFuzzerTestOneInput(const uint8_t *data, size_t dataSize) {
     // Limit input size to 1MB
-    if (dataSize > 1024 * 1024) {
+    if (dataSize > 1024 * 1024 || dataSize < 4) {
         return 0;
     }
 
@@ -57,9 +55,9 @@ extern "C" int LLVMFuzzerTestOneInput(const uint8_t *data, size_t dataSize) {
         return 0;
     }
 
-    unsigned int flags = aiProcessPreset_TargetRealtime_Quality | aiProcess_ValidateDataStructure;
+    unsigned int flags = AssimpFuzz::GetProcessingFlags(data, dataSize);
     // We pass "obj" hint as well, though only OBJ loader is registered now.
-    const aiScene *sc = importer.ReadFileFromMemory(data, dataSize, flags, "obj");
+    importer.ReadFileFromMemory(data, dataSize, flags, "obj");
 
     return 0;
 }

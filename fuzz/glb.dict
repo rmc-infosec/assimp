@@ -1,0 +1,61 @@
+# GLB/glTF binary format dictionary
+# Magic bytes: 'g'=0x67, 'l'=0x6c, 'T'=0x54, 'F'=0x46
+"glTF"
+"\x67\x6c\x54\x46"  # glTF magic (ASCII "glTF")
+
+# JSON keywords
+"asset"
+"version"
+"generator"
+"accessors"
+"bufferViews"
+"buffers"
+"meshes"
+"nodes"
+"scenes"
+"scene"
+"materials"
+"textures"
+"images"
+"samplers"
+"skins"
+"animations"
+"cameras"
+"extensions"
+"extras"
+
+# Accessor types
+"SCALAR"
+"VEC2"
+"VEC3"
+"VEC4"
+"MAT2"
+"MAT3"
+"MAT4"
+
+# Primitive modes
+"POINTS"
+"LINES"
+"LINE_LOOP"
+"LINE_STRIP"
+"TRIANGLES"
+"TRIANGLE_STRIP"
+"TRIANGLE_FAN"
+
+# Attribute names
+"POSITION"
+"NORMAL"
+"TANGENT"
+"TEXCOORD_0"
+"TEXCOORD_1"
+"COLOR_0"
+"JOINTS_0"
+"WEIGHTS_0"
+
+# Component types
+"5120"
+"5121"
+"5122"
+"5123"
+"5125"
+"5126"

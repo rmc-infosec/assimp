@@ -1,0 +1,48 @@
+# FBX format dictionary
+# Magic and headers
+"Kaydara FBX Binary"
+"\x00\x1a\x00"
+"FBX"
+
+# Common keywords
+"Creator"
+"CreationTime"
+"FileId"
+"Version"
+"Objects"
+"Model"
+"Geometry"
+"Material"
+"Texture"
+"Video"
+"Deformer"
+"NodeAttribute"
+"AnimationStack"
+"AnimationLayer"
+"AnimationCurve"
+"AnimationCurveNode"
+"Pose"
+"GlobalSettings"
+"Documents"
+"References"
+"Definitions"
+"Connections"
+"Takes"
+
+# Property types
+"Properties70"
+"P"
+"C"
+"OO"
+"OP"
+
+# Geometry data
+"Vertices"
+"PolygonVertexIndex"
+"Normals"
+"UV"
+"UVIndex"
+"Materials"
+"LayerElementNormal"
+"LayerElementUV"
+"LayerElementMaterial"
