@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mesh>
+  <sharedgeometry vertexcount="6">
+    <vertexbuffer positions="true" normals="true">
+      <vertex><position x="0" y="0" z="0"/><normal x="0" y="0" z="1"/></vertex>
+      <vertex><position x="1" y="0" z="0"/><normal x="0" y="0" z="1"/></vertex>
+      <vertex><position x="0.5" y="1" z="0"/><normal x="0" y="0" z="1"/></vertex>
+      <vertex><position x="1" y="0" z="0"/><normal x="0" y="0" z="1"/></vertex>
+      <vertex><position x="2" y="0" z="0"/><normal x="0" y="0" z="1"/></vertex>
+      <vertex><position x="1.5" y="1" z="0"/><normal x="0" y="0" z="1"/></vertex>
+    </vertexbuffer>
+  </sharedgeometry>
+  <submeshes>
+    <submesh material="FaceMat" usesharedvertices="true" operationtype="triangle_list">
+      <faces count="1">
+        <face v1="0" v2="1" v3="2"/>
+      </faces>
+    </submesh>
+    <submesh material="EyeMat" usesharedvertices="true" operationtype="triangle_list">
+      <faces count="1">
+        <face v1="3" v2="4" v3="5"/>
+      </faces>
+    </submesh>
+  </submeshes>
+  <poses>
+    <pose name="smile" target="submesh" index="0">
+      <poseoffset index="0" x="0.1" y="0.05" z="0"/>
+      <poseoffset index="1" x="-0.1" y="0.05" z="0"/>
+      <poseoffset index="2" x="0" y="0.2" z="0.05"/>
+    </pose>
+    <pose name="frown" target="submesh" index="0">
+      <poseoffset index="0" x="-0.05" y="-0.03" z="0"/>
+      <poseoffset index="1" x="0.05" y="-0.03" z="0"/>
+      <poseoffset index="2" x="0" y="-0.15" z="0"/>
+    </pose>
+    <pose name="blink" target="submesh" index="1">
+      <poseoffset index="3" x="0" y="0" z="0"/>
+      <poseoffset index="4" x="0" y="0" z="0"/>
+      <poseoffset index="5" x="0" y="-0.5" z="0"/>
+    </pose>
+  </poses>
+</mesh>

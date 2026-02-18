@@ -1,0 +1,126 @@
+{
+  "asset": {
+    "generator": "seed-cameras-ortho",
+    "version": "1.0",
+    "copyright": "test-cameras"
+  },
+  "scene": "scene0",
+  "scenes": {
+    "scene0": {
+      "nodes": ["mesh_node", "persp_cam_node", "ortho_cam_node"]
+    }
+  },
+  "nodes": {
+    "mesh_node": {
+      "meshes": ["mesh0"],
+      "name": "MeshNode",
+      "children": ["child_node"]
+    },
+    "child_node": {
+      "name": "ChildNode",
+      "translation": [0.0, 1.0, 0.0]
+    },
+    "persp_cam_node": {
+      "camera": "cam_perspective",
+      "name": "PerspCamNode",
+      "translation": [0.0, 0.0, 5.0],
+      "rotation": [0.0, 0.0, 0.0, 1.0],
+      "scale": [1.0, 1.0, 1.0]
+    },
+    "ortho_cam_node": {
+      "camera": "cam_orthographic",
+      "name": "OrthoCamNode",
+      "matrix": [1,0,0,0, 0,1,0,0, 0,0,1,0, 0,10,0,1]
+    }
+  },
+  "cameras": {
+    "cam_perspective": {
+      "type": "perspective",
+      "perspective": {
+        "aspectRatio": 1.778,
+        "yfov": 0.785,
+        "zfar": 1000.0,
+        "znear": 0.01
+      }
+    },
+    "cam_orthographic": {
+      "type": "orthographic",
+      "orthographic": {
+        "xmag": 10.0,
+        "ymag": 5.0,
+        "zfar": 500.0,
+        "znear": 0.1
+      }
+    }
+  },
+  "meshes": {
+    "mesh0": {
+      "primitives": [{
+        "attributes": {
+          "POSITION": "acc_pos",
+          "NORMAL": "acc_norm"
+        },
+        "indices": "acc_idx",
+        "material": "mat0",
+        "mode": 4
+      }]
+    }
+  },
+  "accessors": {
+    "acc_pos": {
+      "bufferView": "bv_pos",
+      "byteOffset": 0,
+      "componentType": 5126,
+      "count": 3,
+      "type": "VEC3"
+    },
+    "acc_norm": {
+      "bufferView": "bv_norm",
+      "byteOffset": 0,
+      "componentType": 5126,
+      "count": 3,
+      "type": "VEC3"
+    },
+    "acc_idx": {
+      "bufferView": "bv_idx",
+      "byteOffset": 0,
+      "componentType": 5123,
+      "count": 3,
+      "type": "SCALAR"
+    }
+  },
+  "bufferViews": {
+    "bv_pos": {
+      "buffer": "buf0",
+      "byteOffset": 0,
+      "byteLength": 36
+    },
+    "bv_norm": {
+      "buffer": "buf0",
+      "byteOffset": 36,
+      "byteLength": 36
+    },
+    "bv_idx": {
+      "buffer": "buf0",
+      "byteOffset": 72,
+      "byteLength": 6
+    }
+  },
+  "buffers": {
+    "buf0": {
+      "uri": "data:application/octet-stream;base64,AAAAAAAAAAAAAAAAAACAPwAAAAAAAAAAAAAAAAAAgD8AAAAAAAAAAAAAAAAAAIA/AAAAAAAAAAAAAIA/AAAAAAAAAAAAAIA/AAABAAIA",
+      "byteLength": 78
+    }
+  },
+  "materials": {
+    "mat0": {
+      "values": {
+        "ambient": [0.1, 0.1, 0.1, 1.0],
+        "diffuse": [0.6, 0.6, 0.6, 1.0],
+        "specular": [1.0, 1.0, 1.0, 1.0],
+        "shininess": 32.0,
+        "transparency": 1.0
+      }
+    }
+  }
+}

@@ -1,0 +1,397 @@
+Metric (key = "distance") {float {1.0}}
+Metric (key = "angle") {float {1.0}}
+Metric (key = "time") {float {1.0}}
+Metric (key = "up") {string {"z"}}
+
+GeometryNode $node_tri
+{
+    Name {string {"TriMesh"}}
+    ObjectRef {ref {$geo_triangles}}
+    MaterialRef (index = 0) {ref {$mat_red}}
+    MaterialRef (index = 1) {ref {$mat_green}}
+
+    Transform
+    {
+        float[16]
+        {
+            {1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1}
+        }
+    }
+}
+
+GeometryNode $node_strip
+{
+    Name {string {"StripMesh"}}
+    ObjectRef {ref {$geo_strip}}
+    MaterialRef (index = 0) {ref {$mat_blue}}
+
+    Transform
+    {
+        float[16]
+        {
+            {1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 3, 0, 0, 1}
+        }
+    }
+}
+
+GeometryNode $node_lines
+{
+    Name {string {"LineMesh"}}
+    ObjectRef {ref {$geo_lines}}
+    MaterialRef (index = 0) {ref {$mat_green}}
+
+    Transform
+    {
+        float[16]
+        {
+            {1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, -3, 0, 0, 1}
+        }
+    }
+}
+
+GeometryNode $node_quads
+{
+    Name {string {"QuadMesh"}}
+    ObjectRef {ref {$geo_quads}}
+    MaterialRef (index = 0) {ref {$mat_red}}
+    MaterialRef (index = 1) {ref {$mat_textured}}
+
+    Transform
+    {
+        float[16]
+        {
+            {1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 3, 0, 1}
+        }
+    }
+}
+
+GeometryNode $node_points
+{
+    Name {string {"PointMesh"}}
+    ObjectRef {ref {$geo_points}}
+    MaterialRef (index = 0) {ref {$mat_green}}
+
+    Transform
+    {
+        float[16]
+        {
+            {1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, -3, 0, 1}
+        }
+    }
+}
+
+GeometryNode $node_unknown_prim
+{
+    Name {string {"UnknownPrimMesh"}}
+    ObjectRef {ref {$geo_unknown}}
+    MaterialRef (index = 0) {ref {$mat_blue}}
+
+    Transform
+    {
+        float[16]
+        {
+            {1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 6, 0, 0, 1}
+        }
+    }
+}
+
+GeometryObject $geo_triangles
+{
+    Mesh (primitive = "triangles")
+    {
+        VertexArray (attrib = "position")
+        {
+            float[3]
+            {
+                {0, 0, 0}, {1, 0, 0}, {0.5, 1, 0},
+                {1, 0, 0}, {2, 0, 0}, {1.5, 1, 0}
+            }
+        }
+
+        VertexArray (attrib = "normal")
+        {
+            float[3]
+            {
+                {0, 0, 1}, {0, 0, 1}, {0, 0, 1},
+                {0, 0, 1}, {0, 0, 1}, {0, 0, 1}
+            }
+        }
+
+        VertexArray (attrib = "color")
+        {
+            float[4]
+            {
+                {1, 0, 0, 1}, {0, 1, 0, 1}, {0, 0, 1, 1},
+                {1, 1, 0, 1}, {0, 1, 1, 1}, {1, 0, 1, 1}
+            }
+        }
+
+        VertexArray (attrib = "texcoord")
+        {
+            float[2]
+            {
+                {0, 0}, {1, 0}, {0.5, 1},
+                {0, 0}, {1, 0}, {0.5, 1}
+            }
+        }
+
+        IndexArray
+        {
+            unsigned_int32[3]
+            {
+                {0, 1, 2}, {3, 4, 5}
+            }
+        }
+    }
+}
+
+GeometryObject $geo_strip
+{
+    Mesh (primitive = "triangle_strip")
+    {
+        VertexArray (attrib = "position")
+        {
+            float[3]
+            {
+                {0, 0, 0}, {1, 0, 0}, {0, 1, 0}, {1, 1, 0}
+            }
+        }
+
+        VertexArray (attrib = "normal")
+        {
+            float[3]
+            {
+                {0, 0, 1}, {0, 0, 1}, {0, 0, 1}, {0, 0, 1}
+            }
+        }
+
+        VertexArray (attrib = "texcoord")
+        {
+            float[2]
+            {
+                {0, 0}, {1, 0}, {0, 1}, {1, 1}
+            }
+        }
+
+        IndexArray
+        {
+            unsigned_int32[3]
+            {
+                {0, 1, 2}, {1, 3, 2}
+            }
+        }
+    }
+}
+
+GeometryObject $geo_lines
+{
+    Mesh (primitive = "lines")
+    {
+        VertexArray (attrib = "position")
+        {
+            float[3]
+            {
+                {-1, 0, 0}, {1, 0, 0},
+                {0, -1, 0}, {0, 1, 0},
+                {0, 0, -1}, {0, 0, 1}
+            }
+        }
+
+        VertexArray (attrib = "color")
+        {
+            float[4]
+            {
+                {1, 0, 0, 1}, {1, 0, 0, 1},
+                {0, 1, 0, 1}, {0, 1, 0, 1},
+                {0, 0, 1, 1}, {0, 0, 1, 1}
+            }
+        }
+
+        IndexArray
+        {
+            unsigned_int32[2]
+            {
+                {0, 1}, {2, 3}, {4, 5}
+            }
+        }
+    }
+}
+
+GeometryObject $geo_quads
+{
+    Mesh (primitive = "quads")
+    {
+        VertexArray (attrib = "position")
+        {
+            float[3]
+            {
+                {-1, -1, 0}, {1, -1, 0}, {1, 1, 0}, {-1, 1, 0},
+                {-1, -1, 1}, {1, -1, 1}, {1, 1, 1}, {-1, 1, 1}
+            }
+        }
+
+        VertexArray (attrib = "normal")
+        {
+            float[3]
+            {
+                {0, 0, -1}, {0, 0, -1}, {0, 0, -1}, {0, 0, -1},
+                {0, 0, 1}, {0, 0, 1}, {0, 0, 1}, {0, 0, 1}
+            }
+        }
+
+        VertexArray (attrib = "color")
+        {
+            float[4]
+            {
+                {0.8, 0.2, 0.1, 1}, {0.2, 0.8, 0.1, 1}, {0.1, 0.2, 0.8, 1}, {0.8, 0.8, 0.1, 1},
+                {0.8, 0.1, 0.8, 1}, {0.1, 0.8, 0.8, 1}, {0.5, 0.5, 0.5, 1}, {1.0, 0.5, 0.0, 1}
+            }
+        }
+
+        VertexArray (attrib = "texcoord")
+        {
+            float[2]
+            {
+                {0, 0}, {1, 0}, {1, 1}, {0, 1},
+                {0, 0}, {1, 0}, {1, 1}, {0, 1}
+            }
+        }
+
+        IndexArray
+        {
+            unsigned_int32[4]
+            {
+                {0, 1, 2, 3}, {4, 5, 6, 7}
+            }
+        }
+    }
+}
+
+GeometryObject $geo_points
+{
+    Mesh (primitive = "points")
+    {
+        VertexArray (attrib = "position")
+        {
+            float[3]
+            {
+                {0, 0, 0}, {1, 0, 0}, {0, 1, 0}, {0, 0, 1},
+                {-1, 0, 0}, {0, -1, 0}, {0, 0, -1}
+            }
+        }
+
+        VertexArray (attrib = "color")
+        {
+            float[4]
+            {
+                {1, 1, 1, 1}, {1, 0, 0, 1}, {0, 1, 0, 1}, {0, 0, 1, 1},
+                {1, 1, 0, 1}, {0, 1, 1, 1}, {1, 0, 1, 1}
+            }
+        }
+
+        IndexArray
+        {
+            unsigned_int32[1]
+            {
+                {0}, {1}, {2}, {3}, {4}, {5}, {6}
+            }
+        }
+    }
+}
+
+GeometryObject $geo_unknown
+{
+    Mesh (primitive = "triangle_fan")
+    {
+        VertexArray (attrib = "position")
+        {
+            float[3]
+            {
+                {0, 0, 0}, {1, 0, 0}, {0, 1, 0}
+            }
+        }
+
+        VertexArray (attrib = "normal")
+        {
+            float[3]
+            {
+                {0, 0, 1}, {0, 0, 1}, {0, 0, 1}
+            }
+        }
+
+        IndexArray
+        {
+            unsigned_int32[3]
+            {
+                {0, 1, 2}
+            }
+        }
+    }
+}
+
+Material $mat_red
+{
+    Name {string {"Red"}}
+    Color (attrib = "diffuse") {float[3] {{0.9, 0.1, 0.1}}}
+    Color (attrib = "specular") {float[3] {{1.0, 0.8, 0.8}}}
+    Param (attrib = "specular_power") {float {60.0}}
+
+    Texture (attrib = "diffuse")
+    {
+        string {"textures/red_diffuse.png"}
+    }
+}
+
+Material $mat_green
+{
+    Name {string {"Green"}}
+    Color (attrib = "diffuse") {float[3] {{0.1, 0.8, 0.1}}}
+    Color (attrib = "specular") {float[4] {{0.5, 1.0, 0.5, 1.0}}}
+    Color (attrib = "emission") {float[3] {{0.05, 0.2, 0.05}}}
+}
+
+Material $mat_blue
+{
+    Name {string {"Blue"}}
+    Color (attrib = "diffuse") {float[4] {{0.1, 0.2, 0.9, 0.8}}}
+
+    Texture (attrib = "normal")
+    {
+        string {"textures/blue_normal.png"}
+    }
+    Texture (attrib = "specular")
+    {
+        string {"textures/blue_spec.png"}
+    }
+}
+
+Material $mat_textured
+{
+    Name {string {"FullTextured"}}
+    Color (attrib = "diffuse") {float[3] {{1.0, 1.0, 1.0}}}
+    Color (attrib = "specular") {float[3] {{0.9, 0.9, 0.9}}}
+    Color (attrib = "emission") {float[3] {{0.0, 0.0, 0.0}}}
+
+    Param (attrib = "specular_power") {float {128.0}}
+
+    Texture (attrib = "diffuse")
+    {
+        string {"textures/checker_diffuse.png"}
+    }
+    Texture (attrib = "specular")
+    {
+        string {"textures/checker_spec.png"}
+    }
+    Texture (attrib = "emission")
+    {
+        string {"textures/checker_emit.png"}
+    }
+    Texture (attrib = "opacity")
+    {
+        string {"textures/checker_alpha.png"}
+    }
+    Texture (attrib = "normal")
+    {
+        string {"textures/checker_normal.png"}
+    }
+}

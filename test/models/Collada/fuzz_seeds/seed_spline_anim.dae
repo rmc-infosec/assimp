@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8"?>
+<COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1">
+<asset><created>2026-01-01</created><modified>2026-01-01</modified></asset>
+<library_geometries>
+  <geometry id="cube" name="Cube">
+    <mesh>
+      <source id="cp"><float_array id="cpa" count="24">-1 -1 -1 1 -1 -1 1 1 -1 -1 1 -1 -1 -1 1 1 -1 1 1 1 1 -1 1 1</float_array>
+        <technique_common><accessor source="#cpa" count="8" stride="3">
+          <param name="X" type="float"/><param name="Y" type="float"/><param name="Z" type="float"/>
+        </accessor></technique_common></source>
+      <source id="cn"><float_array id="cna" count="18">0 0 -1 0 0 1 0 -1 0 1 0 0 0 1 0 -1 0 0</float_array>
+        <technique_common><accessor source="#cna" count="6" stride="3">
+          <param name="X" type="float"/><param name="Y" type="float"/><param name="Z" type="float"/>
+        </accessor></technique_common></source>
+      <vertices id="cv"><input semantic="POSITION" source="#cp"/></vertices>
+      <triangles count="4">
+        <input semantic="VERTEX" source="#cv" offset="0"/>
+        <input semantic="NORMAL" source="#cn" offset="1"/>
+        <p>0 0 1 0 2 0 0 0 2 0 3 0 4 1 6 1 5 1 4 1 7 1 6 1</p>
+      </triangles>
+    </mesh>
+  </geometry>
+  <geometry id="tri" name="Tri">
+    <mesh>
+      <source id="tp"><float_array id="tpa" count="9">0 0 0 2 0 0 1 2 0</float_array>
+        <technique_common><accessor source="#tpa" count="3" stride="3">
+          <param name="X" type="float"/><param name="Y" type="float"/><param name="Z" type="float"/>
+        </accessor></technique_common></source>
+      <vertices id="tv"><input semantic="POSITION" source="#tp"/></vertices>
+      <triangles count="1"><input semantic="VERTEX" source="#tv" offset="0"/>
+        <p>0 1 2</p></triangles>
+    </mesh>
+  </geometry>
+</library_geometries>
+<library_animations>
+  <!-- Container animation with nested sub-animations -->
+  <animation id="masterAnim" name="MasterAnimation">
+    <!-- Sub-animation 1: Bezier translation on CubeNode -->
+    <animation id="bzTranslate" name="BezierTranslate">
+      <source id="bti"><float_array id="btia" count="4">0 0.33 0.66 1</float_array>
+        <technique_common><accessor source="#btia" count="4" stride="1">
+          <param name="TIME" type="float"/>
+        </accessor></technique_common></source>
+      <source id="bto"><float_array id="btoa" count="12">0 0 0 3 2 0 5 0 1 0 0 0</float_array>
+        <technique_common><accessor source="#btoa" count="4" stride="3">
+          <param name="X" type="float"/><param name="Y" type="float"/><param name="Z" type="float"/>
+        </accessor></technique_common></source>
+      <source id="btit"><float_array id="btita" count="12">0 0 0 2 1.5 0 4 0.5 0.8 -0.5 0 0</float_array>
+        <technique_common><accessor source="#btita" count="4" stride="3">
+          <param name="X" type="float"/><param name="Y" type="float"/><param name="Z" type="float"/>
+        </accessor></technique_common></source>
+      <source id="btot"><float_array id="btota" count="12">0.5 0.5 0 3.5 2.5 0.2 5 0 1 0.5 0 0</float_array>
+        <technique_common><accessor source="#btota" count="4" stride="3">
+          <param name="X" type="float"/><param name="Y" type="float"/><param name="Z" type="float"/>
+        </accessor></technique_common></source>
+      <source id="btip"><Name_array id="btipa" count="4">BEZIER BEZIER BEZIER BEZIER</Name_array>
+        <technique_common><accessor source="#btipa" count="4" stride="1">
+          <param name="INTERPOLATION" type="name"/>
+        </accessor></technique_common></source>
+      <sampler id="bts">
+        <input semantic="INPUT" source="#bti"/>
+        <input semantic="OUTPUT" source="#bto"/>
+        <input semantic="IN_TANGENT" source="#btit"/>
+        <input semantic="OUT_TANGENT" source="#btot"/>
+        <input semantic="INTERPOLATION" source="#btip"/>
+      </sampler>
+      <channel source="#bts" target="CubeNode/translate"/>
+    </animation>
+    <!-- Sub-animation 2: Hermite rotation on CubeNode with large angle delta for sub-sampling -->
+    <animation id="hmRotate" name="HermiteRotateZ">
+      <source id="hri"><float_array id="hria" count="3">0 0.5 1</float_array>
+        <technique_common><accessor source="#hria" count="3" stride="1">
+          <param name="TIME" type="float"/>
+        </accessor></technique_common></source>
+      <source id="hro"><float_array id="hroa" count="12">0 0 1 0 0 0 1 270 0 0 1 360</float_array>
+        <technique_common><accessor source="#hroa" count="3" stride="4">
+          <param name="X" type="float"/><param name="Y" type="float"/><param name="Z" type="float"/><param name="ANGLE" type="float"/>
+        </accessor></technique_common></source>
+      <source id="hrit"><float_array id="hrita" count="12">0 0 1 0 0 0 1 200 0 0 1 330</float_array>
+        <technique_common><accessor source="#hrita" count="3" stride="4">
+          <param name="X" type="float"/><param name="Y" type="float"/><param name="Z" type="float"/><param name="ANGLE" type="float"/>
+        </accessor></technique_common></source>
+      <source id="hrot"><float_array id="hrota" count="12">0 0 1 50 0 0 1 290 0 0 1 360</float_array>
+        <technique_common><accessor source="#hrota" count="3" stride="4">
+          <param name="X" type="float"/><param name="Y" type="float"/><param name="Z" type="float"/><param name="ANGLE" type="float"/>
+        </accessor></technique_common></source>
+      <source id="hrip"><Name_array id="hripa" count="3">HERMITE HERMITE HERMITE</Name_array>
+        <technique_common><accessor source="#hripa" count="3" stride="1">
+          <param name="INTERPOLATION" type="name"/>
+        </accessor></technique_common></source>
+      <sampler id="hrs">
+        <input semantic="INPUT" source="#hri"/>
+        <input semantic="OUTPUT" source="#hro"/>
+        <input semantic="IN_TANGENT" source="#hrit"/>
+        <input semantic="OUT_TANGENT" source="#hrot"/>
+        <input semantic="INTERPOLATION" source="#hrip"/>
+      </sampler>
+      <channel source="#hrs" target="CubeNode/rotateZ"/>
+    </animation>
+    <!-- Sub-animation 3: Bezier scale on CubeNode -->
+    <animation id="bzScale" name="BezierScale">
+      <source id="bsi"><float_array id="bsia" count="3">0 0.5 1</float_array>
+        <technique_common><accessor source="#bsia" count="3" stride="1">
+          <param name="TIME" type="float"/>
+        </accessor></technique_common></source>
+      <source id="bso"><float_array id="bsoa" count="9">1 1 1 2 2 2 1 1 1</float_array>
+        <technique_common><accessor source="#bsoa" count="3" stride="3">
+          <param name="X" type="float"/><param name="Y" type="float"/><param name="Z" type="float"/>
+        </accessor></technique_common></source>
+      <source id="bsit"><float_array id="bsita" count="9">1 1 1 1.5 1.5 1.5 1.5 1.5 1.5</float_array>
+        <technique_common><accessor source="#bsita" count="3" stride="3">
+          <param name="X" type="float"/><param name="Y" type="float"/><param name="Z" type="float"/>
+        </accessor></technique_common></source>
+      <source id="bsot"><float_array id="bsota" count="9">1.5 1.5 1.5 2 2 2 1 1 1</float_array>
+        <technique_common><accessor source="#bsota" count="3" stride="3">
+          <param name="X" type="float"/><param name="Y" type="float"/><param name="Z" type="float"/>
+        </accessor></technique_common></source>
+      <source id="bsip"><Name_array id="bsipa" count="3">BEZIER BEZIER BEZIER</Name_array>
+        <technique_common><accessor source="#bsipa" count="3" stride="1">
+          <param name="INTERPOLATION" type="name"/>
+        </accessor></technique_common></source>
+      <sampler id="bss">
+        <input semantic="INPUT" source="#bsi"/>
+        <input semantic="OUTPUT" source="#bso"/>
+        <input semantic="IN_TANGENT" source="#bsit"/>
+        <input semantic="OUT_TANGENT" source="#bsot"/>
+        <input semantic="INTERPOLATION" source="#bsip"/>
+      </sampler>
+      <channel source="#bss" target="CubeNode/scale"/>
+    </animation>
+  </animation>
+  <!-- Top-level animation: Mixed interpolation on TriNode translate.X -->
+  <animation id="mixedAnim" name="MixedInterp">
+    <source id="mxi"><float_array id="mxia" count="5">0 0.25 0.5 0.75 1</float_array>
+      <technique_common><accessor source="#mxia" count="5" stride="1">
+        <param name="TIME" type="float"/>
+      </accessor></technique_common></source>
+    <source id="mxo"><float_array id="mxoa" count="5">0 3 5 2 0</float_array>
+      <technique_common><accessor source="#mxoa" count="5" stride="1">
+        <param name="X" type="float"/>
+      </accessor></technique_common></source>
+    <source id="mxit"><float_array id="mxita" count="5">0 2 4 1.5 -0.5</float_array>
+      <technique_common><accessor source="#mxita" count="5" stride="1">
+        <param name="X" type="float"/>
+      </accessor></technique_common></source>
+    <source id="mxot"><float_array id="mxota" count="5">0.5 3.5 5.5 2.5 0</float_array>
+      <technique_common><accessor source="#mxota" count="5" stride="1">
+        <param name="X" type="float"/>
+      </accessor></technique_common></source>
+    <source id="mxip"><Name_array id="mxipa" count="5">LINEAR BEZIER HERMITE LINEAR BEZIER</Name_array>
+      <technique_common><accessor source="#mxipa" count="5" stride="1">
+        <param name="INTERPOLATION" type="name"/>
+      </accessor></technique_common></source>
+    <sampler id="mxs">
+      <input semantic="INPUT" source="#mxi"/>
+      <input semantic="OUTPUT" source="#mxo"/>
+      <input semantic="IN_TANGENT" source="#mxit"/>
+      <input semantic="OUT_TANGENT" source="#mxot"/>
+      <input semantic="INTERPOLATION" source="#mxip"/>
+    </sampler>
+    <channel source="#mxs" target="TriNode/translate.X"/>
+  </animation>
+  <!-- Top-level animation: Bezier on TriNode rotateY with 360-degree jump to trigger sub-sampling -->
+  <animation id="bigRotAnim" name="BigRotation">
+    <source id="bri"><float_array id="bria" count="3">0 0.5 1</float_array>
+      <technique_common><accessor source="#bria" count="3" stride="1">
+        <param name="TIME" type="float"/>
+      </accessor></technique_common></source>
+    <source id="bro"><float_array id="broa" count="12">0 1 0 0 0 1 0 360 0 1 0 720</float_array>
+      <technique_common><accessor source="#broa" count="3" stride="4">
+        <param name="X" type="float"/><param name="Y" type="float"/><param name="Z" type="float"/><param name="ANGLE" type="float"/>
+      </accessor></technique_common></source>
+    <source id="brit"><float_array id="brita" count="12">0 1 0 0 0 1 0 300 0 1 0 650</float_array>
+      <technique_common><accessor source="#brita" count="3" stride="4">
+        <param name="X" type="float"/><param name="Y" type="float"/><param name="Z" type="float"/><param name="ANGLE" type="float"/>
+      </accessor></technique_common></source>
+    <source id="brot"><float_array id="brota" count="12">0 1 0 60 0 1 0 400 0 1 0 720</float_array>
+      <technique_common><accessor source="#brota" count="3" stride="4">
+        <param name="X" type="float"/><param name="Y" type="float"/><param name="Z" type="float"/><param name="ANGLE" type="float"/>
+      </accessor></technique_common></source>
+    <source id="brip"><Name_array id="bripa" count="3">BEZIER BEZIER BEZIER</Name_array>
+      <technique_common><accessor source="#bripa" count="3" stride="1">
+        <param name="INTERPOLATION" type="name"/>
+      </accessor></technique_common></source>
+    <sampler id="brs">
+      <input semantic="INPUT" source="#bri"/>
+      <input semantic="OUTPUT" source="#bro"/>
+      <input semantic="IN_TANGENT" source="#brit"/>
+      <input semantic="OUT_TANGENT" source="#brot"/>
+      <input semantic="INTERPOLATION" source="#brip"/>
+    </sampler>
+    <channel source="#brs" target="TriNode/rotateY"/>
+  </animation>
+  <!-- Top-level animation: Bezier matrix animation on TriNode -->
+  <animation id="matAnim" name="MatrixAnim">
+    <source id="mai"><float_array id="maia" count="3">0 0.5 1</float_array>
+      <technique_common><accessor source="#maia" count="3" stride="1">
+        <param name="TIME" type="float"/>
+      </accessor></technique_common></source>
+    <source id="mao"><float_array id="maoa" count="48">1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0.707 -0.707 0 0 0.707 0.707 0 0 0 0 1 0 2 3 0 1 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</float_array>
+      <technique_common><accessor source="#maoa" count="3" stride="16">
+        <param name="TRANSFORM" type="float4x4"/>
+      </accessor></technique_common></source>
+    <source id="maip"><Name_array id="maipa" count="3">LINEAR LINEAR LINEAR</Name_array>
+      <technique_common><accessor source="#maipa" count="3" stride="1">
+        <param name="INTERPOLATION" type="name"/>
+      </accessor></technique_common></source>
+    <sampler id="mas">
+      <input semantic="INPUT" source="#mai"/>
+      <input semantic="OUTPUT" source="#mao"/>
+      <input semantic="INTERPOLATION" source="#maip"/>
+    </sampler>
+    <channel source="#mas" target="TriNode/transform"/>
+  </animation>
+</library_animations>
+<library_visual_scenes>
+  <visual_scene id="Scene" name="Scene">
+    <node id="CubeNode" name="CubeNode" type="NODE">
+      <translate sid="translate">0 0 0</translate>
+      <rotate sid="rotateZ">0 0 1 0</rotate>
+      <scale sid="scale">1 1 1</scale>
+      <matrix sid="transform">1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</matrix>
+      <instance_geometry url="#cube"/>
+    </node>
+    <node id="TriNode" name="TriNode" type="NODE">
+      <translate sid="translate">5 0 0</translate>
+      <rotate sid="rotateY">0 1 0 0</rotate>
+      <matrix sid="transform">1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</matrix>
+      <instance_geometry url="#tri"/>
+    </node>
+  </visual_scene>
+</library_visual_scenes>
+<scene><instance_visual_scene url="#Scene"/></scene>
+</COLLADA>

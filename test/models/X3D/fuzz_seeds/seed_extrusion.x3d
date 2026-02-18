@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<X3D profile="Interchange" version="3.3">
+  <Scene>
+    <Shape>
+      <Appearance><Material diffuseColor="1 0 0"/></Appearance>
+      <Extrusion crossSection="1 1, 1 -1, -1 -1, -1 1, 1 1" spine="0 0 0, 0 1 0, 0 2 0" scale="1 1, 0.8 0.8, 0.5 0.5" orientation="0 0 1 0, 0 0 1 0, 0 0 1 0" beginCap="true" endCap="true" ccw="true" convex="true" creaseAngle="1.0" solid="true"/>
+    </Shape>
+  </Scene>
+</X3D>

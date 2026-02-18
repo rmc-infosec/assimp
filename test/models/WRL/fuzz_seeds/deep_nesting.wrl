@@ -1,0 +1,20 @@
+#VRML V2.0 utf8
+
+Group { children [
+  Transform { translation 0 0 0 children [
+    Group { children [
+      Transform { rotation 0 1 0 1.57 children [
+        Switch { whichChoice 0 choice [
+          Shape {
+            geometry IndexedFaceSet {
+              coord Coordinate {
+                point [ 0 0 0, 1 0 0, 0.5 1 0 ]
+              }
+              coordIndex [ 0 1 2 -1 ]
+            }
+          }
+        ] }
+      ] }
+    ] }
+  ] }
+] }

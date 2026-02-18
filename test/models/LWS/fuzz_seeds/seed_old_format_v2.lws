@@ -1,0 +1,133 @@
+LWSC
+2
+
+RenderRangeType 0
+FirstFrame 1
+LastFrame 120
+FrameStep 1
+RenderRangeObject 0
+RenderRangeArbitrary 1-120
+PreviewFirstFrame 0
+PreviewLastFrame 120
+PreviewFrameStep 1
+FramesPerSecond 24
+
+AddNullObject
+ShowObject 7 -1 0.376471 0.878431 0.941176
+Group 0
+ObjectMotion (unnamed)
+  9
+  4
+  0 0 2 0 0 0
+  1.5 0.333333 2 0 0 0
+  -0.8 0.666666 2 0 0 0
+  2.1 1.0 2 0 0 0
+  3
+  0 0 2 0 0 0
+  0.5 0.5 2 0 0 0
+  -0.3 1.0 2 0 0 0
+  2
+  0 0 2 0 0 0
+  1.2 1.0 2 0 0 0
+  3
+  0 0 2 0 0 0
+  0.785398 0.5 2 0 0 0
+  0 1.0 2 0 0 0
+  2
+  0 0 2 0 0 0
+  0.523599 1.0 2 0 0 0
+  2
+  0 0 2 0 0 0
+  1.5708 1.0 2 0 0 0
+  1
+  1.0 0 2 0 0 0
+  1
+  1.0 0 2 0 0 0
+  1
+  1.0 0 2 0 0 0
+Pre/PostBehavior 1 2 2 3 1 1 3 2 1 4 1 1 1 1 1 1 1 1
+PathAlignLookAhead 0.033
+PathAlignMaxLookSteps 10
+PathAlignReliableDist 0.001
+IKInitialState 0
+SubPatchLevel 3 3
+AmbientColor 255 255 255
+AmbIntensity 0.05
+
+AddLight
+LightName SpotLight1
+ShowLight 1 -1 0.941176 0.376471 0.941176
+LightMotion (unnamed)
+  9
+  2
+  5.0 0 2 0 0 0
+  -3.0 1.0 2 0 0 0
+  2
+  8.0 0 2 0 0 0
+  4.0 1.0 2 0 0 0
+  2
+  -5.0 0 2 0 0 0
+  -2.0 1.0 2 0 0 0
+  1
+  0.3 0 2 0 0 0
+  1
+  -0.5 0 2 0 0 0
+  1
+  0 0 2 0 0 0
+  1
+  1 0 2 0 0 0
+  1
+  1 0 2 0 0 0
+  1
+  1 0 2 0 0 0
+Pre/PostBehavior 2 2 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+PathAlignLookAhead 0.033
+PathAlignMaxLookSteps 10
+PathAlignReliableDist 0.001
+IKInitialState 0
+LightColor 255 240 200
+LgtIntensity 1.5
+LightType 2
+ShadowType 1
+ShadowColor 0 0 0
+
+AddCamera
+CameraName MainCamera
+ShowCamera 1 -1 0.125490 0.878431 0.125490
+CameraMotion (unnamed)
+  6
+  3
+  -0.1 0 2 0 0 0
+  5.0 0.5 2 0 0 0
+  -0.1 1.0 2 0 0 0
+  2
+  0.95 0 2 0 0 0
+  2.0 1.0 2 0 0 0
+  2
+  -6.384 0 2 0 0 0
+  -3.0 1.0 2 0 0 0
+  1
+  0 0 2 0 0 0
+  1
+  0 0 2 0 0 0
+  1
+  0 0 2 0 0 0
+Pre/PostBehavior 1 3 1 1 1 1 1 1 1 1 1 1
+PathAlignLookAhead 0.033
+PathAlignMaxLookSteps 10
+PathAlignReliableDist 0.001
+IKInitialState 0
+ZoomFactor 3.2
+ZoomType 1
+Resolution 1
+CustomSize 640 480
+PixelAspectRatio -1
+
+SolidBackdrop 1
+BackdropColor 0 0 0
+FogType 0
+FogMinDistance 0
+FogMaxDistance 1
+FogMinAmount 0
+FogMaxAmount 1
+FogColor 130 130 140

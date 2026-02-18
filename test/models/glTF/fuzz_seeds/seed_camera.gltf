@@ -1,0 +1,102 @@
+{
+  "asset": {
+    "generator": "seed",
+    "version": "1.0"
+  },
+  "scene": "scene0",
+  "scenes": {
+    "scene0": {
+      "nodes": ["mesh_node", "cam_persp_node", "cam_ortho_node"]
+    }
+  },
+  "nodes": {
+    "mesh_node": {
+      "meshes": ["mesh0"],
+      "name": "MeshNode"
+    },
+    "cam_persp_node": {
+      "camera": "cam_persp",
+      "name": "PerspCam",
+      "translation": [0, 0, 5],
+      "rotation": [0, 0, 0, 1]
+    },
+    "cam_ortho_node": {
+      "camera": "cam_ortho",
+      "name": "OrthoCam",
+      "matrix": [1,0,0,0, 0,1,0,0, 0,0,1,0, 0,5,0,1]
+    }
+  },
+  "cameras": {
+    "cam_persp": {
+      "type": "perspective",
+      "perspective": {
+        "aspectRatio": 1.5,
+        "yfov": 0.785,
+        "zfar": 100.0,
+        "znear": 0.1
+      }
+    },
+    "cam_ortho": {
+      "type": "orthographic",
+      "orthographic": {
+        "xmag": 5.0,
+        "ymag": 5.0,
+        "zfar": 100.0,
+        "znear": 0.01
+      }
+    }
+  },
+  "meshes": {
+    "mesh0": {
+      "primitives": [{
+        "attributes": {
+          "POSITION": "acc_pos"
+        },
+        "indices": "acc_idx",
+        "material": "mat0",
+        "mode": 4
+      }]
+    }
+  },
+  "accessors": {
+    "acc_pos": {
+      "bufferView": "bv_pos",
+      "byteOffset": 0,
+      "componentType": 5126,
+      "count": 3,
+      "type": "VEC3"
+    },
+    "acc_idx": {
+      "bufferView": "bv_idx",
+      "byteOffset": 0,
+      "componentType": 5123,
+      "count": 3,
+      "type": "SCALAR"
+    }
+  },
+  "bufferViews": {
+    "bv_pos": {
+      "buffer": "buf0",
+      "byteOffset": 0,
+      "byteLength": 36
+    },
+    "bv_idx": {
+      "buffer": "buf0",
+      "byteOffset": 36,
+      "byteLength": 6
+    }
+  },
+  "buffers": {
+    "buf0": {
+      "uri": "data:application/octet-stream;base64,AAAAAAAAAAAAAAAAAACAPwAAAAAAAAAAAAAAAAAAgD8AAAAAAAABAAIA",
+      "byteLength": 42
+    }
+  },
+  "materials": {
+    "mat0": {
+      "values": {
+        "diffuse": [0.6, 0.6, 0.6, 1.0]
+      }
+    }
+  }
+}

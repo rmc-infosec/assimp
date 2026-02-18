@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<X3D profile="Interchange" version="3.3">
+  <Scene>
+    <Shape>
+      <Appearance><Material diffuseColor="1 0 0"/></Appearance>
+      <TriangleSet ccw="true" solid="true" colorPerVertex="true" normalPerVertex="true">
+        <Coordinate point="0 0 0, 1 0 0, 0.5 1 0, 2 0 0, 3 0 0, 2.5 1 0"/>
+        <Normal vector="0 0 1, 0 0 1, 0 0 1, 0 0 1, 0 0 1, 0 0 1"/>
+        <Color color="1 0 0, 0 1 0, 0 0 1, 1 1 0, 0 1 1, 1 0 1"/>
+      </TriangleSet>
+    </Shape>
+    <Shape>
+      <Appearance><Material diffuseColor="0 1 0"/></Appearance>
+      <TriangleStripSet stripCount="5" ccw="true" solid="true">
+        <Coordinate point="0 0 0, 1 0 0, 0.5 1 0, 1.5 1 0, 1 2 0"/>
+      </TriangleStripSet>
+    </Shape>
+    <Shape>
+      <Appearance><Material diffuseColor="0 0 1"/></Appearance>
+      <TriangleFanSet fanCount="4" ccw="true" solid="true">
+        <Coordinate point="0 0 0, 1 0 0, 0.7 0.7 0, 0 1 0"/>
+      </TriangleFanSet>
+    </Shape>
+  </Scene>
+</X3D>

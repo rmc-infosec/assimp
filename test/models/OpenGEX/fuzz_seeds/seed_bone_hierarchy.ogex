@@ -1,0 +1,385 @@
+Metric (key = "distance") {int32 {1}}
+Metric (key = "angle") {float {1.0}}
+Metric (key = "time") {float {1.0}}
+Metric (key = "up") {string {"z"}}
+
+GeometryNode $geonode1
+{
+    Name {string {"SkinnedMesh"}}
+    ObjectRef {ref {$geometry1}}
+    MaterialRef {ref {$skin_mat}}
+
+    Transform
+    {
+        float[16]
+        {
+            {1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1}
+        }
+    }
+
+    GeometryNode $geonode_child
+    {
+        Name {string {"ChildMesh"}}
+        ObjectRef {ref {$geometry2}}
+        MaterialRef {ref {$child_mat}}
+
+        Transform
+        {
+            float[16]
+            {
+                {1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 2, 0, 1}
+            }
+        }
+    }
+}
+
+GeometryNode $geonode2
+{
+    Name {string {"SharedGeoUser"}}
+    ObjectRef {ref {$geometry1}}
+    MaterialRef {ref {$child_mat}}
+
+    Transform
+    {
+        float[16]
+        {
+            {1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 5, 0, 0, 1}
+        }
+    }
+}
+
+Node $armature
+{
+    Name {string {"Armature"}}
+
+    Transform %xform_arm
+    {
+        float[16]
+        {
+            {1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1}
+        }
+    }
+
+    BoneNode $bone0
+    {
+        Name {string {"Root"}}
+
+        Transform %xform_b0
+        {
+            float[16]
+            {
+                {1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1}
+            }
+        }
+
+        BoneNode $bone1
+        {
+            Name {string {"Spine"}}
+
+            Transform %xform_b1
+            {
+                float[16]
+                {
+                    {1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 1, 0, 1}
+                }
+            }
+
+            BoneNode $bone2
+            {
+                Name {string {"Chest"}}
+
+                Transform %xform_b2
+                {
+                    float[16]
+                    {
+                        {1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 1, 0, 1}
+                    }
+                }
+
+                BoneNode $bone3
+                {
+                    Name {string {"Neck"}}
+
+                    Transform %xform_b3
+                    {
+                        float[16]
+                        {
+                            {1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0.5, 0, 1}
+                        }
+                    }
+
+                    BoneNode $bone4
+                    {
+                        Name {string {"Head"}}
+
+                        Transform %xform_b4
+                        {
+                            float[16]
+                            {
+                                {1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0.5, 0, 1}
+                            }
+                        }
+                    }
+                }
+
+                BoneNode $bone5
+                {
+                    Name {string {"LeftArm"}}
+
+                    Transform %xform_b5
+                    {
+                        float[16]
+                        {
+                            {0, 0, -1, 0, 0, 1, 0, 0, 1, 0, 0, 0, -0.5, 0.8, 0, 1}
+                        }
+                    }
+
+                    BoneNode $bone6
+                    {
+                        Name {string {"LeftHand"}}
+
+                        Transform %xform_b6
+                        {
+                            float[16]
+                            {
+                                {1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, -0.8, 1}
+                            }
+                        }
+                    }
+                }
+
+                BoneNode $bone7
+                {
+                    Name {string {"RightArm"}}
+
+                    Transform %xform_b7
+                    {
+                        float[16]
+                        {
+                            {0, 0, 1, 0, 0, 1, 0, 0, -1, 0, 0, 0, 0.5, 0.8, 0, 1}
+                        }
+                    }
+
+                    BoneNode $bone8
+                    {
+                        Name {string {"RightHand"}}
+
+                        Transform %xform_b8
+                        {
+                            float[16]
+                            {
+                                {1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0.8, 1}
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        BoneNode $bone9
+        {
+            Name {string {"LeftLeg"}}
+
+            Transform %xform_b9
+            {
+                float[16]
+                {
+                    {1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, -0.3, -1, 0, 1}
+                }
+            }
+        }
+
+        BoneNode $bone10
+        {
+            Name {string {"RightLeg"}}
+
+            Transform %xform_b10
+            {
+                float[16]
+                {
+                    {1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0.3, -1, 0, 1}
+                }
+            }
+        }
+    }
+}
+
+GeometryObject $geometry1
+{
+    Mesh (primitive = "triangles")
+    {
+        VertexArray (attrib = "position")
+        {
+            float[3]
+            {
+                {-0.3, 0, -0.3}, {0.3, 0, -0.3}, {0.3, 2, -0.3},
+                {-0.3, 2, -0.3}, {-0.3, 0, 0.3}, {0.3, 0, 0.3},
+                {0.3, 2, 0.3}, {-0.3, 2, 0.3}
+            }
+        }
+
+        VertexArray (attrib = "normal")
+        {
+            float[3]
+            {
+                {0, 0, -1}, {0, 0, -1}, {0, 0, -1}, {0, 0, -1},
+                {0, 0, 1}, {0, 0, 1}, {0, 0, 1}, {0, 0, 1}
+            }
+        }
+
+        VertexArray (attrib = "color")
+        {
+            float[3]
+            {
+                {1, 0, 0}, {0, 1, 0}, {0, 0, 1}, {1, 1, 0},
+                {1, 0, 1}, {0, 1, 1}, {0.5, 0.5, 0.5}, {1, 0.5, 0}
+            }
+        }
+
+        VertexArray (attrib = "texcoord")
+        {
+            float[2]
+            {
+                {0, 0}, {1, 0}, {1, 1}, {0, 1},
+                {0, 0}, {1, 0}, {1, 1}, {0, 1}
+            }
+        }
+
+        IndexArray
+        {
+            unsigned_int32[3]
+            {
+                {0, 1, 2}, {0, 2, 3}, {4, 5, 6}, {4, 6, 7},
+                {0, 4, 7}, {0, 7, 3}, {1, 5, 6}, {1, 6, 2}
+            }
+        }
+    }
+}
+
+GeometryObject $geometry2
+{
+    Mesh (primitive = "lines")
+    {
+        VertexArray (attrib = "position")
+        {
+            float[3]
+            {
+                {0, 0, 0}, {1, 0, 0}, {0, 0, 0}, {0, 1, 0}
+            }
+        }
+
+        IndexArray
+        {
+            unsigned_int16[2]
+            {
+                {0, 1}, {2, 3}
+            }
+        }
+    }
+}
+
+Animation (clip = 0)
+{
+    Track (target = %xform_b1)
+    {
+        Time
+        {
+            Key {float {0.0, 0.5, 1.0}}
+        }
+
+        Value
+        {
+            Key
+            {
+                float[16]
+                {
+                    {1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 1, 0, 1},
+                    {0.707, 0.707, 0, 0, -0.707, 0.707, 0, 0, 0, 0, 1, 0, 0, 1, 0, 1},
+                    {0, 1, 0, 0, -1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 1}
+                }
+            }
+        }
+    }
+}
+
+Animation (clip = 0)
+{
+    Track (target = %xform_b5)
+    {
+        Time
+        {
+            Key {float {0.0, 0.33, 0.66, 1.0}}
+        }
+
+        Value
+        {
+            Key
+            {
+                float[16]
+                {
+                    {0, 0, -1, 0, 0, 1, 0, 0, 1, 0, 0, 0, -0.5, 0.8, 0, 1},
+                    {0, 0.383, -0.924, 0, 0, 0.924, 0.383, 0, 1, 0, 0, 0, -0.5, 0.8, 0, 1},
+                    {0, 0.707, -0.707, 0, 0, 0.707, 0.707, 0, 1, 0, 0, 0, -0.5, 0.8, 0, 1},
+                    {0, 0, -1, 0, 0, 1, 0, 0, 1, 0, 0, 0, -0.5, 0.8, 0, 1}
+                }
+            }
+        }
+    }
+}
+
+Animation (clip = 0)
+{
+    Track (target = %xform_b7)
+    {
+        Time
+        {
+            Key {float {0.0, 0.5, 1.0}}
+        }
+
+        Value
+        {
+            Key
+            {
+                float[16]
+                {
+                    {0, 0, 1, 0, 0, 1, 0, 0, -1, 0, 0, 0, 0.5, 0.8, 0, 1},
+                    {0, -0.383, 0.924, 0, 0, 0.924, 0.383, 0, -1, 0, 0, 0, 0.5, 0.8, 0, 1},
+                    {0, 0, 1, 0, 0, 1, 0, 0, -1, 0, 0, 0, 0.5, 0.8, 0, 1}
+                }
+            }
+        }
+    }
+}
+
+Material $skin_mat
+{
+    Name {string {"SkinMat"}}
+    Color (attrib = "diffuse") {float[3] {{0.85, 0.65, 0.5}}}
+    Color (attrib = "specular") {float[3] {{0.3, 0.3, 0.3}}}
+    Color (attrib = "emission") {float[3] {{0.02, 0.01, 0.0}}}
+
+    Texture (attrib = "diffuse")
+    {
+        string {"textures/skin_diffuse.png"}
+    }
+    Texture (attrib = "normal")
+    {
+        string {"textures/skin_normal.png"}
+    }
+}
+
+Material $child_mat
+{
+    Name {string {"ChildMat"}}
+    Color (attrib = "diffuse") {float[4] {{0.5, 0.5, 0.9, 0.8}}}
+    Color (attrib = "specular") {float[4] {{1.0, 1.0, 1.0, 1.0}}}
+
+    Texture (attrib = "specular_power")
+    {
+        string {"textures/child_specpow.png"}
+    }
+    Texture (attrib = "opacity")
+    {
+        string {"textures/child_opacity.png"}
+    }
+}

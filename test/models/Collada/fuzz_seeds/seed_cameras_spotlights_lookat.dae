@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1">
+<asset><created>2026</created><modified>2026</modified>
+<unit name="meter" meter="1"/><up_axis>Z_UP</up_axis></asset>
+<library_cameras>
+<camera id="cam1"><optics><technique_common>
+<perspective><yfov>45</yfov><aspect_ratio>1.5</aspect_ratio><znear>0.1</znear><zfar>100</zfar></perspective>
+</technique_common></optics></camera>
+<camera id="cam2"><optics><technique_common>
+<perspective><yfov>60</yfov><znear>1</znear><zfar>500</zfar></perspective>
+</technique_common></optics></camera>
+</library_cameras>
+<library_lights>
+<light id="spt"><technique_common>
+<spot><color>1 1 0.9</color><falloff_angle>30</falloff_angle><falloff_exponent>2</falloff_exponent></spot>
+</technique_common>
+<extra><technique profile="FCOLLADA">
+<penumbra_angle>10</penumbra_angle><intensity>2</intensity>
+</technique></extra>
+</light>
+<light id="spt2"><technique_common>
+<spot><color>0.9 0.9 1</color><falloff_angle>45</falloff_angle><falloff_exponent>0</falloff_exponent></spot>
+</technique_common>
+<extra><technique profile="FCOLLADA">
+<outer_cone>60</outer_cone><intensity>1.5</intensity>
+</technique></extra>
+</light>
+</library_lights>
+<library_geometries>
+<geometry id="tri"><mesh>
+<source id="tp"><float_array id="tpa" count="9">0 0 0 1 0 0 0 1 0</float_array>
+<technique_common><accessor source="#tpa" count="3" stride="3">
+<param name="X" type="float"/><param name="Y" type="float"/><param name="Z" type="float"/>
+</accessor></technique_common></source>
+<vertices id="tv"><input semantic="POSITION" source="#tp"/></vertices>
+<triangles count="1"><input semantic="VERTEX" source="#tv" offset="0"/><p>0 1 2</p></triangles>
+</mesh></geometry>
+</library_geometries>
+<library_nodes>
+<node id="shared" name="SharedGeo" type="NODE">
+<scale>2 2 2</scale>
+<instance_geometry url="#tri"/>
+</node>
+</library_nodes>
+<library_visual_scenes>
+<visual_scene id="Scene">
+<node id="CamNode1" type="NODE">
+<lookat sid="lookat">0 0 10 0 0 0 0 1 0</lookat>
+<instance_camera url="#cam1"/>
+</node>
+<node id="CamNode2" type="NODE">
+<translate>5 5 5</translate><rotate>0 1 0 45</rotate>
+<instance_camera url="#cam2"/>
+</node>
+<node id="SpotNode1" type="NODE">
+<translate>0 5 0</translate><rotate>1 0 0 -90</rotate>
+<instance_light url="#spt"/>
+</node>
+<node id="SpotNode2" type="NODE">
+<translate>5 5 0</translate>
+<instance_light url="#spt2"/>
+</node>
+<node id="GeoNode" type="NODE">
+<instance_geometry url="#tri"/>
+</node>
+<node id="RefNode" type="NODE">
+<translate>3 0 0</translate>
+<instance_node url="#shared"/>
+</node>
+</visual_scene>
+</library_visual_scenes>
+<scene><instance_visual_scene url="#Scene"/></scene>
+</COLLADA>

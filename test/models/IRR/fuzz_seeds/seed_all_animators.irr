@@ -1,0 +1,296 @@
+<?xml version="1.0"?>
+<irr_scene>
+  <attributes>
+    <string name="Name" value="root"/>
+    <vector3d name="Position" value="0, 0, 0"/>
+    <vector3d name="Rotation" value="0, 0, 0"/>
+    <vector3d name="Scale" value="1, 1, 1"/>
+    <bool name="Visible" value="true"/>
+    <int name="AutomaticCulling" value="1"/>
+  </attributes>
+
+  <!-- Mesh node with flyCircle + rotation animators -->
+  <node type="mesh">
+    <attributes>
+      <string name="Name" value="MeshNode1"/>
+      <string name="Mesh" value="cube.b3d"/>
+      <vector3d name="Position" value="0, 0, 0"/>
+      <vector3d name="Rotation" value="0, 0, 0"/>
+      <vector3d name="Scale" value="1, 1, 1"/>
+      <bool name="Visible" value="true"/>
+    </attributes>
+    <materials>
+      <attributes>
+        <enum name="Type" value="solid"/>
+        <color name="Diffuse" value="ff8080ff"/>
+        <color name="Ambient" value="ff404040"/>
+        <color name="Specular" value="ffffffff"/>
+        <color name="Emissive" value="ff000000"/>
+        <float name="Shininess" value="20.0"/>
+        <texture name="Texture1" value="texture.png"/>
+        <bool name="Wireframe" value="false"/>
+        <bool name="BackfaceCulling" value="true"/>
+        <bool name="Lighting" value="true"/>
+      </attributes>
+    </materials>
+    <animators>
+      <attributes>
+        <string name="Type" value="flyCircle"/>
+        <vector3d name="Center" value="0, 0, 0"/>
+        <float name="Radius" value="100"/>
+        <float name="Speed" value="0.001"/>
+        <vector3d name="Direction" value="0, 1, 0"/>
+        <float name="StartPosition" value="0"/>
+        <float name="RadiusEllipsoid" value="0"/>
+      </attributes>
+    </animators>
+    <animators>
+      <attributes>
+        <string name="Type" value="rotation"/>
+        <vector3d name="Rotation" value="0, 0.8, 0"/>
+      </attributes>
+    </animators>
+  </node>
+
+  <!-- Point light -->
+  <node type="light">
+    <attributes>
+      <string name="Name" value="PointLight"/>
+      <vector3d name="Position" value="100, 200, 50"/>
+      <vector3d name="Rotation" value="0, 0, 0"/>
+      <vector3d name="Scale" value="1, 1, 1"/>
+      <enum name="LightType" value="Point"/>
+      <colorf name="AmbientColor" value="0.1, 0.1, 0.1, 1.0"/>
+      <colorf name="DiffuseColor" value="1.0, 1.0, 1.0, 1.0"/>
+      <colorf name="SpecularColor" value="1.0, 1.0, 1.0, 1.0"/>
+      <float name="Radius" value="500"/>
+      <bool name="CastShadows" value="true"/>
+    </attributes>
+  </node>
+
+  <!-- Spot light with flyStraight animator -->
+  <node type="light">
+    <attributes>
+      <string name="Name" value="SpotLight"/>
+      <vector3d name="Position" value="0, 300, 0"/>
+      <vector3d name="Rotation" value="-90, 0, 0"/>
+      <vector3d name="Scale" value="1, 1, 1"/>
+      <enum name="LightType" value="Spot"/>
+      <colorf name="DiffuseColor" value="1.0, 0.9, 0.8, 1.0"/>
+      <float name="Radius" value="1000"/>
+      <float name="InnerCone" value="20"/>
+      <float name="OuterCone" value="45"/>
+      <float name="Falloff" value="2.0"/>
+    </attributes>
+    <animators>
+      <attributes>
+        <string name="Type" value="flyStraight"/>
+        <vector3d name="Start" value="0, 300, 0"/>
+        <vector3d name="End" value="200, 300, 200"/>
+        <int name="TimeForWay" value="3000"/>
+        <bool name="Loop" value="true"/>
+      </attributes>
+    </animators>
+  </node>
+
+  <!-- Directional light -->
+  <node type="light">
+    <attributes>
+      <string name="Name" value="DirLight"/>
+      <vector3d name="Position" value="0, 0, 0"/>
+      <vector3d name="Rotation" value="-45, 30, 0"/>
+      <vector3d name="Scale" value="1, 1, 1"/>
+      <enum name="LightType" value="Directional"/>
+      <colorf name="DiffuseColor" value="0.8, 0.8, 1.0, 1.0"/>
+    </attributes>
+  </node>
+
+  <!-- Camera with followSpline animator -->
+  <node type="camera">
+    <attributes>
+      <string name="Name" value="Camera1"/>
+      <vector3d name="Position" value="0, 100, -300"/>
+      <vector3d name="Rotation" value="0, 0, 0"/>
+      <vector3d name="Scale" value="1, 1, 1"/>
+      <vector3d name="Target" value="0, 50, 0"/>
+      <float name="Fovy" value="1.2"/>
+      <float name="Aspect" value="1.333"/>
+      <float name="ZNear" value="1.0"/>
+      <float name="ZFar" value="5000.0"/>
+      <bool name="Binding" value="true"/>
+    </attributes>
+    <animators>
+      <attributes>
+        <string name="Type" value="followSpline"/>
+        <float name="Speed" value="0.5"/>
+        <float name="Tightness" value="0.5"/>
+        <vector3d name="Point0" value="0, 100, -300"/>
+        <vector3d name="Point1" value="200, 120, -200"/>
+        <vector3d name="Point2" value="300, 80, 0"/>
+        <vector3d name="Point3" value="100, 100, 100"/>
+      </attributes>
+    </animators>
+  </node>
+
+  <!-- Billboard with deletion animator -->
+  <node type="billboardTextSceneNode">
+    <attributes>
+      <string name="Name" value="Billboard1"/>
+      <vector3d name="Position" value="50, 80, 0"/>
+      <vector3d name="Rotation" value="0, 0, 0"/>
+      <vector3d name="Scale" value="1, 1, 1"/>
+      <dimension2d name="Size" value="40, 40"/>
+      <color name="Shade_Top" value="ffffffff"/>
+      <color name="Shade_Down" value="ff808080"/>
+    </attributes>
+    <animators>
+      <attributes>
+        <string name="Type" value="deletion"/>
+        <int name="TimeMs" value="10000"/>
+      </attributes>
+    </animators>
+  </node>
+
+  <!-- Skybox with 6 materials -->
+  <node type="skybox">
+    <attributes>
+      <string name="Name" value="Skybox1"/>
+      <vector3d name="Position" value="0, 0, 0"/>
+      <vector3d name="Rotation" value="0, 0, 0"/>
+      <vector3d name="Scale" value="1, 1, 1"/>
+    </attributes>
+    <materials>
+      <attributes>
+        <texture name="Texture1" value="sky_top.jpg"/>
+        <bool name="Lighting" value="false"/>
+      </attributes>
+    </materials>
+    <materials>
+      <attributes><texture name="Texture1" value="sky_bottom.jpg"/></attributes>
+    </materials>
+    <materials>
+      <attributes><texture name="Texture1" value="sky_left.jpg"/></attributes>
+    </materials>
+    <materials>
+      <attributes><texture name="Texture1" value="sky_right.jpg"/></attributes>
+    </materials>
+    <materials>
+      <attributes><texture name="Texture1" value="sky_front.jpg"/></attributes>
+    </materials>
+    <materials>
+      <attributes><texture name="Texture1" value="sky_back.jpg"/></attributes>
+    </materials>
+  </node>
+
+  <!-- Terrain with collisionResponse animator -->
+  <node type="terrain">
+    <attributes>
+      <string name="Name" value="Terrain1"/>
+      <string name="Heightmap" value="heightmap.bmp"/>
+      <vector3d name="Position" value="0, -50, 0"/>
+      <vector3d name="Rotation" value="0, 0, 0"/>
+      <vector3d name="Scale" value="4, 0.5, 4"/>
+    </attributes>
+    <animators>
+      <attributes>
+        <string name="Type" value="collisionResponse"/>
+        <vector3d name="Radius" value="30, 50, 30"/>
+        <vector3d name="Gravity" value="0, -9.8, 0"/>
+        <vector3d name="Translation" value="0, -30, 0"/>
+      </attributes>
+    </animators>
+  </node>
+
+  <!-- Empty node with texture animator and nested child -->
+  <node type="empty">
+    <attributes>
+      <string name="Name" value="EmptyPivot"/>
+      <vector3d name="Position" value="0, 50, 0"/>
+      <vector3d name="Rotation" value="0, 0, 0"/>
+      <vector3d name="Scale" value="1, 1, 1"/>
+    </attributes>
+    <animators>
+      <attributes>
+        <string name="Type" value="texture"/>
+        <int name="TimePerFrame" value="100"/>
+        <bool name="Loop" value="true"/>
+        <texture name="Texture1" value="anim0.png"/>
+        <texture name="Texture2" value="anim1.png"/>
+        <texture name="Texture3" value="anim2.png"/>
+      </attributes>
+    </animators>
+    <!-- Nested child mesh under empty -->
+    <node type="mesh">
+      <attributes>
+        <string name="Name" value="ChildMesh"/>
+        <string name="Mesh" value="sphere.3ds"/>
+        <vector3d name="Position" value="30, 0, 0"/>
+        <vector3d name="Rotation" value="0, 0, 0"/>
+        <vector3d name="Scale" value="0.5, 0.5, 0.5"/>
+      </attributes>
+    </node>
+  </node>
+
+  <!-- flyCircle with non-Y direction (different vecV branch) -->
+  <node type="cube">
+    <attributes>
+      <string name="Name" value="FlyCircleAltDir"/>
+      <vector3d name="Position" value="5, 0, 0"/>
+      <float name="Size" value="0.5"/>
+    </attributes>
+    <materials>
+      <attributes>
+        <enum name="Type" value="solid"/>
+        <color name="Diffuse" value="ff00ff00"/>
+      </attributes>
+    </materials>
+    <animators>
+      <attributes>
+        <string name="Type" value="flyCircle"/>
+        <vector3d name="Center" value="5, 0, 0"/>
+        <float name="Radius" value="3.0"/>
+        <float name="Speed" value="0.001"/>
+        <vector3d name="Direction" value="1, 0, 0"/>
+      </attributes>
+    </animators>
+  </node>
+
+  <!-- Multiple animators on one node (triggers dummy node insertion) -->
+  <node type="sphere">
+    <attributes>
+      <string name="Name" value="MultiAnimNode"/>
+      <vector3d name="Position" value="0, 15, 0"/>
+      <float name="Radius" value="1.0"/>
+    </attributes>
+    <materials>
+      <attributes>
+        <enum name="Type" value="solid"/>
+        <color name="Diffuse" value="ffffaa00"/>
+      </attributes>
+    </materials>
+    <animators>
+      <attributes>
+        <string name="Type" value="rotation"/>
+        <vector3d name="Rotation" value="0.1, 0.2, 0.3"/>
+      </attributes>
+    </animators>
+    <animators>
+      <attributes>
+        <string name="Type" value="flyCircle"/>
+        <vector3d name="Center" value="0, 15, 0"/>
+        <float name="Radius" value="5.0"/>
+        <float name="Speed" value="0.001"/>
+        <vector3d name="Direction" value="0, 1, 0"/>
+      </attributes>
+    </animators>
+    <animators>
+      <attributes>
+        <string name="Type" value="flyStraight"/>
+        <vector3d name="Start" value="0, 10, 0"/>
+        <vector3d name="End" value="0, 20, 0"/>
+        <int name="TimeForWay" value="2000"/>
+        <bool name="Loop" value="true"/>
+      </attributes>
+    </animators>
+  </node>
+</irr_scene>

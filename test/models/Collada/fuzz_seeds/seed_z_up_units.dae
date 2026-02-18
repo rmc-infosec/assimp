@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1">
+  <asset>
+    <created>2025-01-01</created>
+    <modified>2025-01-01</modified>
+    <unit name="centimeter" meter="0.01"/>
+    <up_axis>Z_UP</up_axis>
+  </asset>
+  <library_images>
+    <image id="diffuse-img" name="DiffuseTex"><init_from>diffuse.png</init_from></image>
+    <image id="specular-img" name="SpecularTex"><init_from>specular.png</init_from></image>
+  </library_images>
+  <library_effects>
+    <effect id="mat-fx">
+      <profile_COMMON>
+        <newparam sid="diff-surface"><surface type="2D"><init_from>diffuse-img</init_from></surface></newparam>
+        <newparam sid="diff-sampler"><sampler2D><source>diff-surface</source><wrap_s>WRAP</wrap_s><wrap_t>MIRROR</wrap_t><minfilter>LINEAR_MIPMAP_LINEAR</minfilter><magfilter>LINEAR</magfilter></sampler2D></newparam>
+        <newparam sid="spec-surface"><surface type="2D"><init_from>specular-img</init_from></surface></newparam>
+        <newparam sid="spec-sampler"><sampler2D><source>spec-surface</source><wrap_s>CLAMP</wrap_s><wrap_t>CLAMP</wrap_t></sampler2D></newparam>
+        <technique sid="common">
+          <phong>
+            <diffuse><texture texture="diff-sampler" texcoord="TEX0"/></diffuse>
+            <specular><texture texture="spec-sampler" texcoord="TEX0"/></specular>
+            <shininess><float>25.0</float></shininess>
+            <reflective><color>0.1 0.1 0.1 1</color></reflective>
+          </phong>
+        </technique>
+      </profile_COMMON>
+    </effect>
+  </library_effects>
+  <library_materials>
+    <material id="mat" name="Material"><instance_effect url="#mat-fx"/></material>
+  </library_materials>
+  <library_geometries>
+    <geometry id="tri-mesh" name="TriMesh">
+      <mesh>
+        <source id="tri-pos">
+          <float_array id="tri-pos-arr" count="9">0 0 0 1 0 0 0.5 1 0</float_array>
+          <technique_common>
+            <accessor source="#tri-pos-arr" count="3" stride="3">
+              <param name="X" type="float"/><param name="Y" type="float"/><param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="tri-norm">
+          <float_array id="tri-norm-arr" count="9">0 0 1 0 0 1 0 0 1</float_array>
+          <technique_common>
+            <accessor source="#tri-norm-arr" count="3" stride="3">
+              <param name="X" type="float"/><param name="Y" type="float"/><param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="tri-uv">
+          <float_array id="tri-uv-arr" count="6">0 0 1 0 0.5 1</float_array>
+          <technique_common>
+            <accessor source="#tri-uv-arr" count="3" stride="2">
+              <param name="S" type="float"/><param name="T" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <vertices id="tri-verts"><input semantic="POSITION" source="#tri-pos"/></vertices>
+        <triangles count="1" material="mat-ref">
+          <input semantic="VERTEX" source="#tri-verts" offset="0"/>
+          <input semantic="NORMAL" source="#tri-norm" offset="1"/>
+          <input semantic="TEXCOORD" source="#tri-uv" offset="2" set="0"/>
+          <p>0 0 0 1 1 1 2 2 2</p>
+        </triangles>
+      </mesh>
+    </geometry>
+  </library_geometries>
+  <library_visual_scenes>
+    <visual_scene id="Scene" name="Scene">
+      <node id="MeshNode" name="MeshNode" type="NODE">
+        <translate>1.0 2.0 3.0</translate>
+        <rotate>0 0 1 45.0</rotate>
+        <scale>0.5 0.5 0.5</scale>
+        <instance_geometry url="#tri-mesh">
+          <bind_material>
+            <technique_common>
+              <instance_material symbol="mat-ref" target="#mat">
+                <bind_vertex_input semantic="TEX0" input_semantic="TEXCOORD" input_set="0"/>
+              </instance_material>
+            </technique_common>
+          </bind_material>
+        </instance_geometry>
+      </node>
+    </visual_scene>
+  </library_visual_scenes>
+  <scene><instance_visual_scene url="#Scene"/></scene>
+</COLLADA>

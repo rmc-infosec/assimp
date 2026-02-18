@@ -1,0 +1,22 @@
+#VRML V2.0 utf8
+
+Group {
+  children [
+    Transform {
+      translation 0 0 0
+      children [
+        Inline {
+          url [ "other_model.wrl" "fallback.wrl" ]
+        }
+      ]
+    }
+    Transform {
+      translation 5 0 0
+      children [
+        Inline {
+          url "another_model.wrl"
+        }
+      ]
+    }
+  ]
+}

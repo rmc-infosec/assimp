@@ -1,0 +1,26 @@
+ply
+format ascii 1.0
+comment custom properties and multiple element types
+element vertex 3
+property float x
+property float y
+property float z
+property float confidence
+property int label
+property float intensity
+element face 1
+property list uchar int vertex_indices
+element material 2
+property float ambient_red
+property float ambient_green
+property float ambient_blue
+property float diffuse_red
+property float diffuse_green
+property float diffuse_blue
+end_header
+0.0 0.0 0.0 0.95 1 0.8
+1.0 0.0 0.0 0.85 2 0.6
+0.5 1.0 0.0 0.90 1 0.7
+3 0 1 2
+0.1 0.1 0.1 0.8 0.2 0.2
+0.2 0.2 0.2 0.3 0.9 0.3

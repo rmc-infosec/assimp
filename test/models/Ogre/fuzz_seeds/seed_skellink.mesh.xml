@@ -1,0 +1,23 @@
+<mesh>
+  <submeshes>
+    <submesh material="LinkedMat" usesharedvertices="false" operationtype="triangle_list">
+      <faces count="1">
+        <face v1="0" v2="1" v3="2"/>
+      </faces>
+      <geometry vertexcount="3">
+        <vertexbuffer positions="true">
+          <vertex><position x="0" y="0" z="0"/></vertex>
+          <vertex><position x="1" y="0" z="0"/></vertex>
+          <vertex><position x="0.5" y="1" z="0"/></vertex>
+        </vertexbuffer>
+      </geometry>
+      <boneassignments>
+        <vertexboneassignment vertexindex="0" boneindex="0" weight="1.0"/>
+        <vertexboneassignment vertexindex="1" boneindex="0" weight="0.5"/>
+        <vertexboneassignment vertexindex="1" boneindex="1" weight="0.5"/>
+        <vertexboneassignment vertexindex="2" boneindex="1" weight="1.0"/>
+      </boneassignments>
+    </submesh>
+  </submeshes>
+  <skeletonlink name="character.skeleton.xml"/>
+</mesh>

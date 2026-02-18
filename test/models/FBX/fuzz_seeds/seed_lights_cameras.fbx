@@ -1,0 +1,191 @@
+; FBX 7.4.0 project file
+; ----------------------------------------------------
+
+FBXHeaderExtension:  {
+	FBXHeaderVersion: 1003
+	FBXVersion: 7400
+	Creator: "seed"
+}
+GlobalSettings:  {
+	Version: 1000
+	Properties70:  {
+		P: "UpAxis", "int", "Integer", "",1
+		P: "UpAxisSign", "int", "Integer", "",1
+		P: "FrontAxis", "int", "Integer", "",2
+		P: "FrontAxisSign", "int", "Integer", "",1
+		P: "CoordAxis", "int", "Integer", "",0
+		P: "CoordAxisSign", "int", "Integer", "",1
+		P: "OriginalUpAxis", "int", "Integer", "",1
+		P: "OriginalUpAxisSign", "int", "Integer", "",1
+		P: "UnitScaleFactor", "double", "Number", "",1
+		P: "OriginalUnitScaleFactor", "double", "Number", "",1
+	}
+}
+
+Documents:  {
+	Count: 1
+	Document: 100000, "", "Scene" {
+		Properties70:  {
+			P: "SourceObject", "object", "", ""
+			P: "ActiveAnimStackName", "KString", "", "", ""
+		}
+		RootNode: 0
+	}
+}
+
+References:  {
+}
+
+Definitions:  {
+	Version: 100
+	Count: 3
+	ObjectType: "GlobalSettings" {
+		Count: 1
+	}
+	ObjectType: "NodeAttribute" {
+		Count: 4
+	}
+	ObjectType: "Model" {
+		Count: 4
+		PropertyTemplate: "FbxNode" {
+			Properties70:  {
+				P: "Lcl Translation", "Lcl Translation", "", "A",0,0,0
+				P: "Lcl Rotation", "Lcl Rotation", "", "A",0,0,0
+				P: "Lcl Scaling", "Lcl Scaling", "", "A",1,1,1
+				P: "Visibility", "Visibility", "", "A",1
+			}
+		}
+	}
+}
+
+Objects:  {
+	NodeAttribute: 1100001, "NodeAttribute::PointLightAttr", "Light" {
+		GeometryVersion: 124
+		Properties70:  {
+			P: "LightType", "enum", "", "",0
+			P: "CastLight", "bool", "", "",1
+			P: "Color", "Color", "", "A",1,0.9,0.8
+			P: "Intensity", "Number", "", "A",100
+			P: "DecayType", "enum", "", "",2
+			P: "DecayStart", "double", "Number", "",25
+			P: "CastShadows", "bool", "", "",1
+			P: "ShadowColor", "Color", "", "A",0,0,0
+		}
+	}
+	NodeAttribute: 1100002, "NodeAttribute::SpotLightAttr", "Light" {
+		GeometryVersion: 124
+		Properties70:  {
+			P: "LightType", "enum", "", "",2
+			P: "CastLight", "bool", "", "",1
+			P: "Color", "Color", "", "A",1,1,1
+			P: "Intensity", "Number", "", "A",150
+			P: "DecayType", "enum", "", "",2
+			P: "DecayStart", "double", "Number", "",30
+			P: "InnerAngle", "Number", "", "A",30
+			P: "OuterAngle", "Number", "", "A",60
+			P: "CastShadows", "bool", "", "",1
+			P: "ShadowColor", "Color", "", "A",0,0,0
+		}
+	}
+	NodeAttribute: 1100003, "NodeAttribute::DirLightAttr", "Light" {
+		GeometryVersion: 124
+		Properties70:  {
+			P: "LightType", "enum", "", "",1
+			P: "CastLight", "bool", "", "",1
+			P: "Color", "Color", "", "A",0.95,0.95,1
+			P: "Intensity", "Number", "", "A",80
+			P: "CastShadows", "bool", "", "",1
+			P: "ShadowColor", "Color", "", "A",0,0,0
+		}
+	}
+	NodeAttribute: 1100004, "NodeAttribute::PerspCameraAttr", "Camera" {
+		Properties70:  {
+			P: "Position", "Vector", "", "A",10,5,10
+			P: "UpVector", "Vector", "", "A",0,1,0
+			P: "InterestPosition", "Vector", "", "A",0,0,0
+			P: "ApertureMode", "enum", "", "",2
+			P: "FieldOfView", "FieldOfView", "", "A",39.6
+			P: "FieldOfViewX", "FieldOfViewX", "", "A",60
+			P: "FieldOfViewY", "FieldOfViewY", "", "A",40
+			P: "FocalLength", "Number", "", "A",35
+			P: "NearPlane", "double", "Number", "",0.1
+			P: "FarPlane", "double", "Number", "",1000
+			P: "FilmWidth", "double", "Number", "",0.980
+			P: "FilmHeight", "double", "Number", "",0.735
+			P: "FilmAspectRatio", "double", "Number", "",1.333
+			P: "AspectWidth", "double", "Number", "",320
+			P: "AspectHeight", "double", "Number", "",240
+			P: "CameraProjectionType", "enum", "", "",0
+		}
+		TypeFlags: "Camera"
+		GeometryVersion: 124
+		Position: 10,5,10
+		Up: 0,1,0
+		LookAt: 0,0,0
+	}
+	Model: 3000001, "Model::PointLight", "Light" {
+		Version: 232
+		Properties70:  {
+			P: "Lcl Translation", "Lcl Translation", "", "A",3,5,0
+			P: "DefaultAttributeIndex", "int", "Integer", "",0
+		}
+		Shading: Y
+		Culling: "CullingOff"
+	}
+	Model: 3000002, "Model::SpotLight", "Light" {
+		Version: 232
+		Properties70:  {
+			P: "Lcl Translation", "Lcl Translation", "", "A",0,8,-3
+			P: "Lcl Rotation", "Lcl Rotation", "", "A",-45,0,0
+			P: "DefaultAttributeIndex", "int", "Integer", "",0
+		}
+		Shading: Y
+		Culling: "CullingOff"
+	}
+	Model: 3000003, "Model::DirLight", "Light" {
+		Version: 232
+		Properties70:  {
+			P: "Lcl Translation", "Lcl Translation", "", "A",0,10,0
+			P: "Lcl Rotation", "Lcl Rotation", "", "A",-90,0,0
+			P: "DefaultAttributeIndex", "int", "Integer", "",0
+		}
+		Shading: Y
+		Culling: "CullingOff"
+	}
+	Model: 3000004, "Model::PerspCamera", "Camera" {
+		Version: 232
+		Properties70:  {
+			P: "Lcl Translation", "Lcl Translation", "", "A",10,5,10
+			P: "Lcl Rotation", "Lcl Rotation", "", "A",-20,45,0
+			P: "DefaultAttributeIndex", "int", "Integer", "",0
+		}
+		Shading: Y
+		Culling: "CullingOff"
+	}
+}
+
+Connections:  {
+	;Model::PointLight, Model::RootNode
+	C: "OO",3000001,0
+
+	;Model::SpotLight, Model::RootNode
+	C: "OO",3000002,0
+
+	;Model::DirLight, Model::RootNode
+	C: "OO",3000003,0
+
+	;Model::PerspCamera, Model::RootNode
+	C: "OO",3000004,0
+
+	;NodeAttribute::PointLightAttr, Model::PointLight
+	C: "OO",1100001,3000001
+
+	;NodeAttribute::SpotLightAttr, Model::SpotLight
+	C: "OO",1100002,3000002
+
+	;NodeAttribute::DirLightAttr, Model::DirLight
+	C: "OO",1100003,3000003
+
+	;NodeAttribute::PerspCameraAttr, Model::PerspCamera
+	C: "OO",1100004,3000004
+}

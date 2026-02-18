@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1">
+<asset><created>2026-01-01</created><modified>2026-01-01</modified></asset>
+<!-- No geometries - skeleton only scene triggers SkeletonMeshBuilder -->
+<library_animations>
+  <animation id="rootAnim" name="RootAnim">
+    <source id="rt"><float_array id="rta" count="3">0 0.5 1</float_array>
+      <technique_common><accessor source="#rta" count="3" stride="1">
+        <param name="TIME" type="float"/>
+      </accessor></technique_common></source>
+    <source id="rv"><float_array id="rva" count="9">0 0 0 0 1 0 0 2 0</float_array>
+      <technique_common><accessor source="#rva" count="3" stride="3">
+        <param name="X" type="float"/><param name="Y" type="float"/><param name="Z" type="float"/>
+      </accessor></technique_common></source>
+    <sampler id="rs">
+      <input semantic="INPUT" source="#rt"/>
+      <input semantic="OUTPUT" source="#rv"/>
+    </sampler>
+    <channel source="#rs" target="Root/translate"/>
+  </animation>
+  <animation id="bone1Anim" name="Bone1Anim">
+    <source id="b1t"><float_array id="b1ta" count="3">0 0.5 1</float_array>
+      <technique_common><accessor source="#b1ta" count="3" stride="1">
+        <param name="TIME" type="float"/>
+      </accessor></technique_common></source>
+    <source id="b1v"><float_array id="b1va" count="12">0 1 0 0 0 1 0 45 0 1 0 90</float_array>
+      <technique_common><accessor source="#b1va" count="3" stride="4">
+        <param name="X" type="float"/><param name="Y" type="float"/><param name="Z" type="float"/><param name="ANGLE" type="float"/>
+      </accessor></technique_common></source>
+    <sampler id="b1s">
+      <input semantic="INPUT" source="#b1t"/>
+      <input semantic="OUTPUT" source="#b1v"/>
+    </sampler>
+    <channel source="#b1s" target="Bone1/rotateX"/>
+  </animation>
+  <animation id="bone2Anim" name="Bone2Anim">
+    <source id="b2t"><float_array id="b2ta" count="3">0 0.5 1</float_array>
+      <technique_common><accessor source="#b2ta" count="3" stride="1">
+        <param name="TIME" type="float"/>
+      </accessor></technique_common></source>
+    <source id="b2v"><float_array id="b2va" count="12">1 0 0 0 1 0 0 -30 1 0 0 -60</float_array>
+      <technique_common><accessor source="#b2va" count="3" stride="4">
+        <param name="X" type="float"/><param name="Y" type="float"/><param name="Z" type="float"/><param name="ANGLE" type="float"/>
+      </accessor></technique_common></source>
+    <sampler id="b2s">
+      <input semantic="INPUT" source="#b2t"/>
+      <input semantic="OUTPUT" source="#b2v"/>
+    </sampler>
+    <channel source="#b2s" target="Bone2/rotateX"/>
+  </animation>
+</library_animations>
+<library_visual_scenes>
+  <visual_scene id="Scene" name="Scene">
+    <node id="Root" sid="Root" name="Root" type="JOINT">
+      <translate sid="translate">0 0 0</translate>
+      <node id="Bone1" sid="Bone1" name="Bone1" type="JOINT">
+        <translate sid="translate">0 1 0</translate>
+        <rotate sid="rotateX">1 0 0 0</rotate>
+        <node id="Bone2" sid="Bone2" name="Bone2" type="JOINT">
+          <translate sid="translate">0 1 0</translate>
+          <rotate sid="rotateX">1 0 0 0</rotate>
+          <node id="Bone3" sid="Bone3" name="Bone3" type="JOINT">
+            <translate sid="translate">0 0.5 0</translate>
+          </node>
+        </node>
+      </node>
+    </node>
+  </visual_scene>
+</library_visual_scenes>
+<scene><instance_visual_scene url="#Scene"/></scene>
+</COLLADA>

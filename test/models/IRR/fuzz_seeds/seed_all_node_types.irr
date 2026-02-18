@@ -1,0 +1,289 @@
+<?xml version="1.0"?>
+<irr_scene>
+  <attributes>
+    <string name="Name" value="root"/>
+  </attributes>
+
+  <!-- Cube node with Size attribute -->
+  <node type="cube">
+    <attributes>
+      <string name="Name" value="MyCube"/>
+      <vector3d name="Position" value="0, 0, 0"/>
+      <vector3d name="Rotation" value="15, 30, 0"/>
+      <vector3d name="Scale" value="1, 1, 1"/>
+      <float name="Size" value="5.0"/>
+    </attributes>
+    <materials>
+      <attributes>
+        <enum name="Type" value="solid"/>
+        <color name="Diffuse" value="ff808080"/>
+        <color name="Ambient" value="ff404040"/>
+        <color name="Specular" value="ffffffff"/>
+        <float name="Shininess" value="20.0"/>
+        <bool name="Wireframe" value="false"/>
+        <bool name="GouraudShading" value="true"/>
+        <bool name="BackfaceCulling" value="true"/>
+        <texture name="Texture1" value="cube_diffuse.png"/>
+        <enum name="TextureWrap1" value="texture_clamp_repeat"/>
+      </attributes>
+    </materials>
+  </node>
+
+  <!-- Sphere node with radius and poly counts -->
+  <node type="sphere">
+    <attributes>
+      <string name="Name" value="MySphere"/>
+      <vector3d name="Position" value="10, 0, 0"/>
+      <vector3d name="Rotation" value="0, 0, 0"/>
+      <vector3d name="Scale" value="1, 1, 1"/>
+      <float name="Radius" value="3.0"/>
+      <int name="PolyCountX" value="20"/>
+      <int name="PolyCountY" value="20"/>
+    </attributes>
+    <materials>
+      <attributes>
+        <enum name="Type" value="trans_vertex_alpha"/>
+        <color name="Diffuse" value="80ff0000"/>
+        <color name="Ambient" value="ff200000"/>
+        <float name="Shininess" value="10.0"/>
+        <bool name="GouraudShading" value="true"/>
+        <bool name="BackfaceCulling" value="false"/>
+        <texture name="Texture1" value="sphere_tex.png"/>
+        <enum name="TextureWrap1" value="texture_clamp_mirror"/>
+      </attributes>
+    </materials>
+  </node>
+
+  <!-- Low-poly sphere (mul < 100 path) -->
+  <node type="sphere">
+    <attributes>
+      <string name="Name" value="LowPolySphere"/>
+      <vector3d name="Position" value="-10, 0, 0"/>
+      <vector3d name="Rotation" value="0, 0, 0"/>
+      <vector3d name="Scale" value="2, 2, 2"/>
+      <float name="Radius" value="1.5"/>
+      <int name="PolyCountX" value="5"/>
+      <int name="PolyCountY" value="5"/>
+    </attributes>
+    <materials>
+      <attributes>
+        <enum name="Type" value="solid"/>
+        <color name="Diffuse" value="ff00ff00"/>
+      </attributes>
+    </materials>
+  </node>
+
+  <!-- High-poly sphere (mul >= 300 path) -->
+  <node type="sphere">
+    <attributes>
+      <string name="Name" value="HighPolySphere"/>
+      <vector3d name="Position" value="-10, 5, 0"/>
+      <float name="Radius" value="2.0"/>
+      <int name="PolyCountX" value="20"/>
+      <int name="PolyCountY" value="20"/>
+    </attributes>
+    <materials>
+      <attributes>
+        <enum name="Type" value="solid"/>
+        <color name="Diffuse" value="ff0000ff"/>
+      </attributes>
+    </materials>
+  </node>
+
+  <!-- OctTree node (treated as mesh) -->
+  <node type="octTree">
+    <attributes>
+      <string name="Name" value="MyOctTree"/>
+      <string name="Mesh" value="level.obj"/>
+      <vector3d name="Position" value="0, -5, 0"/>
+      <vector3d name="Rotation" value="0, 0, 0"/>
+      <vector3d name="Scale" value="1, 1, 1"/>
+    </attributes>
+    <materials>
+      <attributes>
+        <enum name="Type" value="lightmap"/>
+        <color name="Diffuse" value="ffffffff"/>
+        <texture name="Texture1" value="level_diffuse.png"/>
+        <texture name="Texture2" value="level_lightmap.png"/>
+        <enum name="TextureWrap1" value="texture_clamp_repeat"/>
+        <enum name="TextureWrap2" value="texture_clamp_repeat"/>
+      </attributes>
+    </materials>
+  </node>
+
+  <!-- Mesh node -->
+  <node type="mesh">
+    <attributes>
+      <string name="Name" value="StaticMesh"/>
+      <string name="Mesh" value="model.obj"/>
+      <vector3d name="Position" value="5, 0, 5"/>
+      <vector3d name="Rotation" value="0, 90, 0"/>
+      <vector3d name="Scale" value="1, 1, 1"/>
+    </attributes>
+    <materials>
+      <attributes>
+        <enum name="Type" value="normalmap_solid"/>
+        <color name="Diffuse" value="ffffffff"/>
+        <color name="Ambient" value="ff404040"/>
+        <color name="Specular" value="ffffffff"/>
+        <float name="Shininess" value="32.0"/>
+        <texture name="Texture1" value="model_diffuse.png"/>
+        <texture name="Texture2" value="model_normal.png"/>
+        <enum name="TextureWrap1" value="texture_clamp_repeat"/>
+        <enum name="TextureWrap2" value="texture_clamp_repeat"/>
+      </attributes>
+    </materials>
+  </node>
+
+  <!-- AnimatedMesh node with FramesPerSecond -->
+  <node type="animatedMesh">
+    <attributes>
+      <string name="Name" value="AnimCharacter"/>
+      <string name="Mesh" value="character.md2"/>
+      <vector3d name="Position" value="-5, 0, 5"/>
+      <vector3d name="Rotation" value="0, 180, 0"/>
+      <vector3d name="Scale" value="1, 1, 1"/>
+      <float name="FramesPerSecond" value="24.0"/>
+    </attributes>
+    <materials>
+      <attributes>
+        <enum name="Type" value="solid"/>
+        <color name="Diffuse" value="ffffffff"/>
+        <texture name="Texture1" value="char_skin.png"/>
+      </attributes>
+    </materials>
+  </node>
+
+  <!-- Skybox with 6 materials -->
+  <node type="skybox">
+    <attributes>
+      <string name="Name" value="MySkybox"/>
+    </attributes>
+    <materials>
+      <attributes>
+        <enum name="Type" value="solid"/>
+        <texture name="Texture1" value="sky_front.jpg"/>
+      </attributes>
+    </materials>
+    <materials>
+      <attributes>
+        <enum name="Type" value="solid"/>
+        <texture name="Texture1" value="sky_left.jpg"/>
+      </attributes>
+    </materials>
+    <materials>
+      <attributes>
+        <enum name="Type" value="solid"/>
+        <texture name="Texture1" value="sky_back.jpg"/>
+      </attributes>
+    </materials>
+    <materials>
+      <attributes>
+        <enum name="Type" value="solid"/>
+        <texture name="Texture1" value="sky_right.jpg"/>
+      </attributes>
+    </materials>
+    <materials>
+      <attributes>
+        <enum name="Type" value="solid"/>
+        <texture name="Texture1" value="sky_top.jpg"/>
+      </attributes>
+    </materials>
+    <materials>
+      <attributes>
+        <enum name="Type" value="solid"/>
+        <texture name="Texture1" value="sky_bottom.jpg"/>
+      </attributes>
+    </materials>
+  </node>
+
+  <!-- Billboard (becomes dummy) -->
+  <node type="billBoard">
+    <attributes>
+      <string name="Name" value="MyBillboard"/>
+      <vector3d name="Position" value="0, 10, 0"/>
+    </attributes>
+  </node>
+
+  <!-- Terrain node -->
+  <node type="terrain">
+    <attributes>
+      <string name="Name" value="MyTerrain"/>
+      <string name="Heightmap" value="heightmap.bmp"/>
+      <vector3d name="Position" value="-128, 0, -128"/>
+      <vector3d name="Scale" value="4, 1, 4"/>
+    </attributes>
+  </node>
+
+  <!-- Empty/dummy node with children -->
+  <node type="empty">
+    <attributes>
+      <string name="Name" value="GroupNode"/>
+      <vector3d name="Position" value="20, 0, 0"/>
+      <vector3d name="Rotation" value="0, 45, 0"/>
+      <vector3d name="Scale" value="2, 2, 2"/>
+    </attributes>
+    <node type="cube">
+      <attributes>
+        <string name="Name" value="ChildCube"/>
+        <vector3d name="Position" value="0, 2, 0"/>
+        <float name="Size" value="1.0"/>
+      </attributes>
+      <materials>
+        <attributes>
+          <enum name="Type" value="solid"/>
+          <color name="Diffuse" value="ffff0000"/>
+        </attributes>
+      </materials>
+    </node>
+    <node type="sphere">
+      <attributes>
+        <string name="Name" value="ChildSphere"/>
+        <vector3d name="Position" value="3, 0, 0"/>
+        <float name="Radius" value="0.5"/>
+        <int name="PolyCountX" value="12"/>
+        <int name="PolyCountY" value="12"/>
+      </attributes>
+      <materials>
+        <attributes>
+          <enum name="Type" value="solid"/>
+          <color name="Diffuse" value="ff00ff00"/>
+        </attributes>
+      </materials>
+    </node>
+  </node>
+
+  <!-- Unknown node type (triggers DUMMY fallback) -->
+  <node type="waterSurface">
+    <attributes>
+      <string name="Name" value="WaterNode"/>
+      <vector3d name="Position" value="0, -2, 0"/>
+    </attributes>
+  </node>
+
+  <!-- Camera with Aspect (triggers FOV*aspect computation) -->
+  <node type="camera">
+    <attributes>
+      <string name="Name" value="PerspCamera"/>
+      <vector3d name="Position" value="0, 10, -20"/>
+      <vector3d name="Target" value="0, 0, 0"/>
+      <vector3d name="UpVector" value="0, 1, 0"/>
+      <float name="Fovy" value="0.8"/>
+      <float name="Aspect" value="1.777"/>
+      <float name="ZNear" value="0.1"/>
+      <float name="ZFar" value="5000"/>
+    </attributes>
+  </node>
+
+  <!-- Camera without Aspect (triggers the warning branch) -->
+  <node type="camera">
+    <attributes>
+      <string name="Name" value="NoAspectCamera"/>
+      <vector3d name="Position" value="0, 5, -10"/>
+      <vector3d name="Target" value="0, 0, 0"/>
+      <float name="Fovy" value="1.2"/>
+      <float name="ZNear" value="1.0"/>
+      <float name="ZFar" value="1000"/>
+    </attributes>
+  </node>
+</irr_scene>

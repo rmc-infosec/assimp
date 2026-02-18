@@ -1,0 +1,45 @@
+<mesh>
+  <submeshes>
+    <submesh material="AnimMat" usesharedvertices="false" operationtype="triangle_list">
+      <faces count="2">
+        <face v1="0" v2="1" v3="2"/>
+        <face v1="2" v2="3" v3="0"/>
+      </faces>
+      <geometry vertexcount="4">
+        <vertexbuffer positions="true" normals="true">
+          <vertex><position x="0" y="0" z="0"/><normal x="0" y="0" z="1"/></vertex>
+          <vertex><position x="1" y="0" z="0"/><normal x="0" y="0" z="1"/></vertex>
+          <vertex><position x="1" y="1" z="0"/><normal x="0" y="0" z="1"/></vertex>
+          <vertex><position x="0" y="1" z="0"/><normal x="0" y="0" z="1"/></vertex>
+        </vertexbuffer>
+      </geometry>
+    </submesh>
+  </submeshes>
+  <poses>
+    <pose name="morph_open" target="submesh" index="0">
+      <poseoffset index="0" x="0" y="-0.2" z="0"/>
+      <poseoffset index="1" x="0" y="-0.2" z="0"/>
+      <poseoffset index="2" x="0" y="0.2" z="0"/>
+      <poseoffset index="3" x="0" y="0.2" z="0"/>
+    </pose>
+  </poses>
+  <animations>
+    <animation name="morph_anim" length="1.0">
+      <tracks>
+        <track target="submesh" index="0" type="pose">
+          <keyframes>
+            <keyframe time="0">
+              <poseref poseindex="0" influence="0.0"/>
+            </keyframe>
+            <keyframe time="0.5">
+              <poseref poseindex="0" influence="1.0"/>
+            </keyframe>
+            <keyframe time="1.0">
+              <poseref poseindex="0" influence="0.0"/>
+            </keyframe>
+          </keyframes>
+        </track>
+      </tracks>
+    </animation>
+  </animations>
+</mesh>

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1">
+  <asset>
+    <created>2024-01-01</created>
+    <modified>2024-01-01</modified>
+  </asset>
+  <library_geometries>
+    <geometry id="ArmMesh" name="ArmMesh">
+      <mesh>
+        <source id="arm-pos">
+          <float_array id="arm-pos-arr" count="18">-0.5 0 0  0.5 0 0  -0.5 1 0  0.5 1 0  -0.5 2 0  0.5 2 0</float_array>
+          <technique_common>
+            <accessor source="#arm-pos-arr" count="6" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="arm-norm">
+          <float_array id="arm-norm-arr" count="18">0 0 1  0 0 1  0 0 1  0 0 1  0 0 1  0 0 1</float_array>
+          <technique_common>
+            <accessor source="#arm-norm-arr" count="6" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <vertices id="arm-verts">
+          <input semantic="POSITION" source="#arm-pos"/>
+          <input semantic="NORMAL" source="#arm-norm"/>
+        </vertices>
+        <triangles count="4">
+          <input semantic="VERTEX" source="#arm-verts" offset="0"/>
+          <p>0 1 2  1 3 2  2 3 4  3 5 4</p>
+        </triangles>
+      </mesh>
+    </geometry>
+  </library_geometries>
+  <library_controllers>
+    <controller id="ArmSkinCtrl" name="ArmSkinCtrl">
+      <skin source="#ArmMesh">
+        <bind_shape_matrix>1 0 0 0  0 1 0 0  0 0 1 0  0 0 0 1</bind_shape_matrix>
+        <source id="skin-joints">
+          <Name_array id="skin-joints-arr" count="3">Root Upper Lower</Name_array>
+          <technique_common>
+            <accessor source="#skin-joints-arr" count="3" stride="1">
+              <param name="JOINT" type="name"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="skin-ibm">
+          <float_array id="skin-ibm-arr" count="48">1 0 0 0  0 1 0 0  0 0 1 0  0 0 0 1  1 0 0 0  0 1 0 -1  0 0 1 0  0 0 0 1  1 0 0 0  0 1 0 -2  0 0 1 0  0 0 0 1</float_array>
+          <technique_common>
+            <accessor source="#skin-ibm-arr" count="3" stride="16">
+              <param name="TRANSFORM" type="float4x4"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="skin-weights">
+          <float_array id="skin-weights-arr" count="5">1.0 0.5 0.5 0.3 0.7</float_array>
+          <technique_common>
+            <accessor source="#skin-weights-arr" count="5" stride="1">
+              <param name="WEIGHT" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <joints>
+          <input semantic="JOINT" source="#skin-joints"/>
+          <input semantic="INV_BIND_MATRIX" source="#skin-ibm"/>
+        </joints>
+        <vertex_weights count="6">
+          <input semantic="JOINT" source="#skin-joints" offset="0"/>
+          <input semantic="WEIGHT" source="#skin-weights" offset="1"/>
+          <vcount>1 1 2 2 2 2</vcount>
+          <v>0 0  0 0  0 1  1 2  0 1  1 2  1 3  2 4  1 3  2 4</v>
+        </vertex_weights>
+      </skin>
+    </controller>
+  </library_controllers>
+  <library_visual_scenes>
+    <visual_scene id="Scene" name="Scene">
+      <node id="Armature" name="Armature" type="NODE">
+        <matrix sid="transform">1 0 0 0  0 1 0 0  0 0 1 0  0 0 0 1</matrix>
+        <node id="Root" name="Root" sid="Root" type="JOINT">
+          <matrix sid="transform">1 0 0 0  0 1 0 0  0 0 1 0  0 0 0 1</matrix>
+          <node id="Upper" name="Upper" sid="Upper" type="JOINT">
+            <matrix sid="transform">1 0 0 0  0 1 0 1  0 0 1 0  0 0 0 1</matrix>
+            <node id="Lower" name="Lower" sid="Lower" type="JOINT">
+              <matrix sid="transform">1 0 0 0  0 1 0 1  0 0 1 0  0 0 0 1</matrix>
+            </node>
+          </node>
+        </node>
+      </node>
+      <node id="ArmMeshNode" name="ArmMeshNode" type="NODE">
+        <instance_controller url="#ArmSkinCtrl">
+          <skeleton>#Root</skeleton>
+        </instance_controller>
+      </node>
+    </visual_scene>
+  </library_visual_scenes>
+  <scene>
+    <instance_visual_scene url="#Scene"/>
+  </scene>
+</COLLADA>

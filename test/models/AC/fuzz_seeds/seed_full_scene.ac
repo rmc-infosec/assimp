@@ -1,0 +1,87 @@
+AC3Db
+MATERIAL "red_shiny" rgb 0.9 0.1 0.1  amb 0.3 0.05 0.05  emis 0.1 0 0  spec 0.8 0.8 0.8  shi 96  trans 0
+MATERIAL "blue_glass" rgb 0.1 0.1 0.9  amb 0.05 0.05 0.3  emis 0 0 0.05  spec 0.5 0.5 0.5  shi 48  trans 0.4
+MATERIAL "green_matte" rgb 0.1 0.8 0.1  amb 0.1 0.3 0.1  emis 0 0 0  spec 0 0 0  shi 0  trans 0
+MATERIAL "emissive_white" rgb 1 1 1  amb 0.5 0.5 0.5  emis 0.8 0.8 0.8  spec 1 1 1  shi 128  trans 0
+OBJECT world
+name "scene_root"
+kids 4
+OBJECT group
+name "geometry_group"
+loc 0 1.5 0
+rot 1 0 0 0 1 0 0 0 1
+kids 2
+OBJECT poly
+name "textured_quad"
+texture "wood.png"
+texrep 2.0 2.0
+texoff 0.1 0.2
+loc 0 0 0
+crease 45.0
+numvert 4
+-1.0 0.0 -1.0
+ 1.0 0.0 -1.0
+ 1.0 0.0  1.0
+-1.0 0.0  1.0
+numsurf 1
+SURF 0x0
+mat 0
+refs 4
+0 0.0 0.0
+1 1.0 0.0
+2 1.0 1.0
+3 0.0 1.0
+kids 0
+OBJECT poly
+name "double_sided_tri"
+loc 2.5 0 0
+numvert 3
+0.0 0.0 0.0
+1.0 0.0 0.0
+0.5 1.0 0.0
+numsurf 1
+SURF 0x20
+mat 1
+refs 3
+0 0.0 0.0
+1 1.0 0.0
+2 0.5 1.0
+kids 0
+OBJECT poly
+name "line_shapes"
+loc -3 0 0
+numvert 6
+0.0 0.0 0.0
+1.0 0.0 0.0
+1.0 1.0 0.0
+0.0 1.0 0.0
+2.0 0.0 0.0
+2.0 1.0 0.0
+numsurf 3
+SURF 0x1
+mat 2
+refs 4
+0 0.0 0.0
+1 1.0 0.0
+2 1.0 1.0
+3 0.0 1.0
+SURF 0x2
+mat 2
+refs 3
+0 0.0 0.0
+4 1.0 0.0
+5 1.0 1.0
+SURF 0x4
+mat 3
+refs 4
+0 0.0 0.0
+1 1.0 0.0
+2 1.0 1.0
+3 0.0 1.0
+kids 0
+OBJECT light
+name "point_light_0"
+loc 0 5 0
+numvert 0
+numsurf 0
+kids 0

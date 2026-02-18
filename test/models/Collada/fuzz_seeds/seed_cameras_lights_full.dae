@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1">
+  <asset><created>2024-01-01</created><modified>2024-01-01</modified></asset>
+  <library_lights>
+    <light id="point-light" name="PointLight">
+      <technique_common>
+        <point>
+          <color>1 0.8 0.6</color>
+          <constant_attenuation>1.0</constant_attenuation>
+          <linear_attenuation>0.045</linear_attenuation>
+          <quadratic_attenuation>0.0075</quadratic_attenuation>
+        </point>
+      </technique_common>
+    </light>
+    <light id="dir-light" name="DirectionalLight">
+      <technique_common>
+        <directional>
+          <color>0.9 0.9 1.0</color>
+        </directional>
+      </technique_common>
+    </light>
+    <light id="spot-light" name="SpotLight">
+      <technique_common>
+        <spot>
+          <color>1 1 0.9</color>
+          <constant_attenuation>1.0</constant_attenuation>
+          <linear_attenuation>0.02</linear_attenuation>
+          <quadratic_attenuation>0.005</quadratic_attenuation>
+          <falloff_angle>35</falloff_angle>
+          <falloff_exponent>1.5</falloff_exponent>
+        </spot>
+      </technique_common>
+    </light>
+    <light id="ambient-light" name="AmbientLight">
+      <technique_common>
+        <ambient>
+          <color>0.15 0.15 0.2</color>
+        </ambient>
+      </technique_common>
+    </light>
+  </library_lights>
+  <library_cameras>
+    <camera id="persp-cam" name="PerspCamera">
+      <optics>
+        <technique_common>
+          <perspective>
+            <xfov>60</xfov>
+            <yfov>40</yfov>
+            <aspect_ratio>1.5</aspect_ratio>
+            <znear>0.1</znear>
+            <zfar>1000</zfar>
+          </perspective>
+        </technique_common>
+      </optics>
+    </camera>
+    <camera id="ortho-cam" name="OrthoCamera">
+      <optics>
+        <technique_common>
+          <orthographic>
+            <xmag>12</xmag>
+            <ymag>8</ymag>
+            <znear>0.01</znear>
+            <zfar>500</zfar>
+          </orthographic>
+        </technique_common>
+      </optics>
+    </camera>
+  </library_cameras>
+  <library_geometries>
+    <geometry id="cube-mesh" name="Cube">
+      <mesh>
+        <source id="cube-positions">
+          <float_array id="cube-positions-array" count="24">-1 -1 -1 1 -1 -1 1 1 -1 -1 1 -1 -1 -1 1 1 -1 1 1 1 1 -1 1 1</float_array>
+          <technique_common>
+            <accessor source="#cube-positions-array" count="8" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <vertices id="cube-vertices">
+          <input semantic="POSITION" source="#cube-positions"/>
+        </vertices>
+        <triangles count="2">
+          <input semantic="VERTEX" source="#cube-vertices" offset="0"/>
+          <p>0 1 2 0 2 3</p>
+        </triangles>
+      </mesh>
+    </geometry>
+  </library_geometries>
+  <library_visual_scenes>
+    <visual_scene id="Scene" name="Scene">
+      <node id="CubeNode" name="CubeNode" type="NODE">
+        <instance_geometry url="#cube-mesh"/>
+      </node>
+      <node id="PointLightNode" name="PointLightNode" type="NODE">
+        <translate>3 5 2</translate>
+        <instance_light url="#point-light"/>
+      </node>
+      <node id="DirLightNode" name="DirLightNode" type="NODE">
+        <rotate>1 0 0 -45</rotate>
+        <instance_light url="#dir-light"/>
+      </node>
+      <node id="SpotLightNode" name="SpotLightNode" type="NODE">
+        <translate>0 8 0</translate>
+        <rotate>1 0 0 -90</rotate>
+        <instance_light url="#spot-light"/>
+      </node>
+      <node id="AmbientNode" name="AmbientNode" type="NODE">
+        <instance_light url="#ambient-light"/>
+      </node>
+      <node id="PerspCamNode" name="PerspCamNode" type="NODE">
+        <translate>0 2 10</translate>
+        <instance_camera url="#persp-cam"/>
+      </node>
+      <node id="OrthoCamNode" name="OrthoCamNode" type="NODE">
+        <translate>5 5 5</translate>
+        <rotate>0 1 0 45</rotate>
+        <instance_camera url="#ortho-cam"/>
+      </node>
+    </visual_scene>
+  </library_visual_scenes>
+  <scene><instance_visual_scene url="#Scene"/></scene>
+</COLLADA>

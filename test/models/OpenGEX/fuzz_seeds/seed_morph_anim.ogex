@@ -1,0 +1,181 @@
+Metric (key = "distance") {float {1.0}}
+Metric (key = "angle") {float {1.0}}
+Metric (key = "time") {int32 {24}}
+Metric (key = "up") {string {"y"}}
+
+GeometryNode $node1
+{
+    Name {string {"MorphMesh"}}
+    ObjectRef {ref {$geo1}}
+    MaterialRef {ref {$morph_mat}}
+
+    Transform %xform_morph
+    {
+        float[16]
+        {
+            {1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1}
+        }
+    }
+}
+
+GeometryNode $node2
+{
+    Name {string {"MorphInstance"}}
+    ObjectRef {ref {$geo1}}
+    MaterialRef {ref {$morph_mat}}
+
+    Transform
+    {
+        float[16]
+        {
+            {1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 3, 0, 0, 1}
+        }
+    }
+}
+
+GeometryObject $geo1
+{
+    Mesh (primitive = "triangles")
+    {
+        VertexArray (attrib = "position")
+        {
+            float[3]
+            {
+                {0, 0, 0}, {1, 0, 0}, {0, 1, 0}, {1, 1, 0}, {0.5, 0.5, 1}
+            }
+        }
+
+        VertexArray (attrib = "normal")
+        {
+            float[3]
+            {
+                {0, 0, 1}, {0, 0, 1}, {0, 0, 1}, {0, 0, 1}, {0, 0, 1}
+            }
+        }
+
+        VertexArray (attrib = "color")
+        {
+            float[4]
+            {
+                {1, 0, 0, 1}, {0, 1, 0, 1}, {0, 0, 1, 1}, {1, 1, 0, 1}, {1, 0, 1, 0.5}
+            }
+        }
+
+        VertexArray (attrib = "texcoord")
+        {
+            float[2]
+            {
+                {0, 0}, {1, 0}, {0, 1}, {1, 1}, {0.5, 0.5}
+            }
+        }
+
+        IndexArray
+        {
+            unsigned_int16[3]
+            {
+                {0, 1, 2}, {1, 3, 2}, {0, 1, 4}, {1, 3, 4}
+            }
+        }
+    }
+
+    Mesh (primitive = "triangles", morph = 1)
+    {
+        VertexArray (attrib = "position")
+        {
+            float[3]
+            {
+                {0.1, 0.1, 0}, {1.1, 0.1, 0}, {0.1, 1.1, 0}, {1.1, 1.1, 0}, {0.6, 0.6, 1.2}
+            }
+        }
+
+        VertexArray (attrib = "normal")
+        {
+            float[3]
+            {
+                {0, 0, 1}, {0, 0, 1}, {0, 0, 1}, {0, 0, 1}, {0, 0, 1}
+            }
+        }
+    }
+
+    Mesh (primitive = "triangles", morph = 2)
+    {
+        VertexArray (attrib = "position")
+        {
+            float[3]
+            {
+                {-0.1, -0.1, 0}, {0.9, -0.1, 0}, {-0.1, 0.9, 0}, {0.9, 0.9, 0}, {0.4, 0.4, 0.8}
+            }
+        }
+
+        VertexArray (attrib = "normal")
+        {
+            float[3]
+            {
+                {0, 0, 1}, {0, 0, 1}, {0, 0, 1}, {0, 0, 1}, {0, 0, 1}
+            }
+        }
+    }
+}
+
+Animation (clip = 0)
+{
+    Track (target = %xform_morph)
+    {
+        Time
+        {
+            Key {float {0.0, 0.25, 0.5, 0.75, 1.0}}
+        }
+
+        Value
+        {
+            Key
+            {
+                float[16]
+                {
+                    {1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1},
+                    {0.924, 0.383, 0, 0, -0.383, 0.924, 0, 0, 0, 0, 1, 0, 0.5, 0, 0, 1},
+                    {0.707, 0.707, 0, 0, -0.707, 0.707, 0, 0, 0, 0, 1, 0, 1, 0, 0, 1},
+                    {0.924, 0.383, 0, 0, -0.383, 0.924, 0, 0, 0, 0, 1, 0, 0.5, 0, 0, 1},
+                    {1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1}
+                }
+            }
+        }
+    }
+}
+
+Material $morph_mat
+{
+    Name {string {"MorphMat"}}
+    Color (attrib = "diffuse") {float[4] {{0.8, 0.3, 0.1, 0.9}}}
+    Color (attrib = "specular") {float[4] {{1.0, 1.0, 1.0, 1.0}}}
+    Color (attrib = "emission") {float[3] {{0.1, 0.05, 0.0}}}
+
+    Texture (attrib = "diffuse")
+    {
+        string {"textures/morph_diffuse.png"}
+    }
+    Texture (attrib = "specular")
+    {
+        string {"textures/morph_spec.png"}
+    }
+    Texture (attrib = "specular_power")
+    {
+        string {"textures/morph_specpow.png"}
+    }
+    Texture (attrib = "emission")
+    {
+        string {"textures/morph_emit.png"}
+    }
+    Texture (attrib = "opacity")
+    {
+        string {"textures/morph_opacity.png"}
+    }
+    Texture (attrib = "transparency")
+    {
+        string {"textures/morph_trans.png"}
+    }
+    Texture (attrib = "normal")
+    {
+        string {"textures/morph_normal.png"}
+    }
+}

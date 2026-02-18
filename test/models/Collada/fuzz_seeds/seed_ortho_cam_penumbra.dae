@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1">
+  <asset><created>2025-01-01</created><modified>2025-01-01</modified></asset>
+  <library_effects>
+    <effect id="fx1"><profile_COMMON><technique sid="common"><phong>
+      <diffuse><color>0.7 0.3 0.2 1</color></diffuse>
+    </phong></technique></profile_COMMON></effect>
+  </library_effects>
+  <library_materials>
+    <material id="m1"><instance_effect url="#fx1"/></material>
+  </library_materials>
+  <library_cameras>
+    <camera id="ortho_cam" name="OrthoCam">
+      <optics><technique_common>
+        <orthographic>
+          <xmag>10.0</xmag>
+          <ymag>7.5</ymag>
+          <znear>0.1</znear>
+          <zfar>100.0</zfar>
+        </orthographic>
+      </technique_common></optics>
+    </camera>
+    <camera id="persp_cam" name="PerspCam">
+      <optics><technique_common>
+        <perspective>
+          <xfov>60.0</xfov>
+          <yfov>45.0</yfov>
+          <aspect_ratio>1.333</aspect_ratio>
+          <znear>0.01</znear>
+          <zfar>500.0</zfar>
+        </perspective>
+      </technique_common></optics>
+    </camera>
+  </library_cameras>
+  <library_lights>
+    <light id="spot1" name="SpotPenumbra">
+      <technique_common>
+        <spot>
+          <color>1 0.9 0.8</color>
+          <constant_attenuation>1.0</constant_attenuation>
+          <linear_attenuation>0.01</linear_attenuation>
+          <quadratic_attenuation>0.001</quadratic_attenuation>
+          <falloff_angle>30.0</falloff_angle>
+          <falloff_exponent>2.0</falloff_exponent>
+        </spot>
+      </technique_common>
+      <extra><technique profile="FCOLLADA">
+        <penumbra_angle>15.0</penumbra_angle>
+        <intensity>1.5</intensity>
+      </technique></extra>
+    </light>
+    <light id="spot2" name="SpotOuterCone">
+      <technique_common>
+        <spot>
+          <color>0.8 0.8 1.0</color>
+          <falloff_angle>25.0</falloff_angle>
+          <falloff_exponent>1.0</falloff_exponent>
+        </spot>
+      </technique_common>
+      <extra><technique profile="FCOLLADA">
+        <outer_cone>50.0</outer_cone>
+        <intensity>2.0</intensity>
+      </technique></extra>
+    </light>
+  </library_lights>
+  <library_geometries>
+    <geometry id="quad" name="Quad">
+      <mesh>
+        <source id="q_pos">
+          <float_array id="q_pos_arr" count="12">-1 0 -1 1 0 -1 1 0 1 -1 0 1</float_array>
+          <technique_common><accessor source="#q_pos_arr" count="4" stride="3">
+            <param name="X" type="float"/><param name="Y" type="float"/><param name="Z" type="float"/>
+          </accessor></technique_common>
+        </source>
+        <vertices id="q_verts"><input semantic="POSITION" source="#q_pos"/></vertices>
+        <triangles material="m1" count="2">
+          <input semantic="VERTEX" source="#q_verts" offset="0"/>
+          <p>0 1 2 0 2 3</p>
+        </triangles>
+      </mesh>
+    </geometry>
+  </library_geometries>
+  <library_visual_scenes>
+    <visual_scene id="scene" name="Scene">
+      <node id="mesh_node" name="Mesh" type="NODE">
+        <instance_geometry url="#quad">
+          <bind_material><technique_common>
+            <instance_material symbol="m1" target="#m1"/>
+          </technique_common></bind_material>
+        </instance_geometry>
+      </node>
+      <node id="ortho_node" name="OrthoCam" type="NODE">
+        <translate>0 10 0</translate>
+        <rotate>1 0 0 -90</rotate>
+        <instance_camera url="#ortho_cam"/>
+      </node>
+      <node id="persp_node" name="PerspCam" type="NODE">
+        <translate>5 5 5</translate>
+        <instance_camera url="#persp_cam"/>
+      </node>
+      <node id="spot1_node" name="SpotNode1" type="NODE">
+        <translate>0 3 0</translate>
+        <rotate>1 0 0 -90</rotate>
+        <instance_light url="#spot1"/>
+      </node>
+      <node id="spot2_node" name="SpotNode2" type="NODE">
+        <translate>3 3 0</translate>
+        <rotate>1 0 0 -45</rotate>
+        <instance_light url="#spot2"/>
+      </node>
+    </visual_scene>
+  </library_visual_scenes>
+  <scene><instance_visual_scene url="#scene"/></scene>
+</COLLADA>

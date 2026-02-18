@@ -1,0 +1,22 @@
+#VRML V2.0 utf8
+
+DEF T TimeSensor {
+  cycleInterval 2.0
+  loop TRUE
+}
+DEF CoordI CoordinateInterpolator {
+  key [ 0 0.5 1 ]
+  keyValue [
+    0 0 0, 1 0 0, 0.5 1 0,
+    0 0.5 0, 1 0.5 0, 0.5 1.5 0,
+    0 0 0, 1 0 0, 0.5 1 0
+  ]
+}
+DEF NormI NormalInterpolator {
+  key [ 0 1 ]
+  keyValue [
+    0 0 1, 0 0 1, 0 0 1,
+    0 1 0, 0 1 0, 0 1 0
+  ]
+}
+ROUTE T.fraction_changed TO CoordI.set_fraction

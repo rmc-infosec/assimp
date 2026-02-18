@@ -1,0 +1,188 @@
+{
+  "asset": {
+    "generator": "seed-primitive-modes",
+    "version": "1.0"
+  },
+  "scene": "scene0",
+  "scenes": {
+    "scene0": {
+      "nodes": ["node_points", "node_lines", "node_linestrip", "node_tris", "node_tristrip", "node_trifan"]
+    }
+  },
+  "nodes": {
+    "node_points": {
+      "meshes": ["mesh_points"],
+      "name": "PointsNode"
+    },
+    "node_lines": {
+      "meshes": ["mesh_lines"],
+      "name": "LinesNode",
+      "translation": [2.0, 0.0, 0.0]
+    },
+    "node_linestrip": {
+      "meshes": ["mesh_linestrip"],
+      "name": "LineStripNode",
+      "translation": [4.0, 0.0, 0.0]
+    },
+    "node_tris": {
+      "meshes": ["mesh_tris"],
+      "name": "TrisNode",
+      "translation": [0.0, 2.0, 0.0]
+    },
+    "node_tristrip": {
+      "meshes": ["mesh_tristrip"],
+      "name": "TriStripNode",
+      "translation": [2.0, 2.0, 0.0]
+    },
+    "node_trifan": {
+      "meshes": ["mesh_trifan"],
+      "name": "TriFanNode",
+      "translation": [4.0, 2.0, 0.0]
+    }
+  },
+  "meshes": {
+    "mesh_points": {
+      "primitives": [{
+        "attributes": { "POSITION": "acc_pos" },
+        "indices": "acc_idx_points",
+        "mode": 0
+      }]
+    },
+    "mesh_lines": {
+      "primitives": [{
+        "attributes": { "POSITION": "acc_pos" },
+        "indices": "acc_idx_lines",
+        "mode": 1
+      }]
+    },
+    "mesh_linestrip": {
+      "primitives": [{
+        "attributes": { "POSITION": "acc_pos" },
+        "indices": "acc_idx_linestrip",
+        "mode": 3
+      }]
+    },
+    "mesh_tris": {
+      "primitives": [{
+        "attributes": { "POSITION": "acc_pos" },
+        "indices": "acc_idx_tris",
+        "mode": 4
+      }]
+    },
+    "mesh_tristrip": {
+      "primitives": [{
+        "attributes": { "POSITION": "acc_pos" },
+        "indices": "acc_idx_tristrip",
+        "mode": 5
+      }]
+    },
+    "mesh_trifan": {
+      "primitives": [{
+        "attributes": { "POSITION": "acc_pos" },
+        "indices": "acc_idx_trifan",
+        "mode": 6
+      }]
+    }
+  },
+  "accessors": {
+    "acc_pos": {
+      "bufferView": "bv_pos",
+      "byteOffset": 0,
+      "componentType": 5126,
+      "count": 6,
+      "type": "VEC3"
+    },
+    "acc_idx_points": {
+      "bufferView": "bv_idx_points",
+      "byteOffset": 0,
+      "componentType": 5123,
+      "count": 3,
+      "type": "SCALAR"
+    },
+    "acc_idx_lines": {
+      "bufferView": "bv_idx_lines",
+      "byteOffset": 0,
+      "componentType": 5123,
+      "count": 4,
+      "type": "SCALAR"
+    },
+    "acc_idx_linestrip": {
+      "bufferView": "bv_idx_linestrip",
+      "byteOffset": 0,
+      "componentType": 5123,
+      "count": 4,
+      "type": "SCALAR"
+    },
+    "acc_idx_tris": {
+      "bufferView": "bv_idx_tris",
+      "byteOffset": 0,
+      "componentType": 5123,
+      "count": 3,
+      "type": "SCALAR"
+    },
+    "acc_idx_tristrip": {
+      "bufferView": "bv_idx_tristrip",
+      "byteOffset": 0,
+      "componentType": 5123,
+      "count": 4,
+      "type": "SCALAR"
+    },
+    "acc_idx_trifan": {
+      "bufferView": "bv_idx_trifan",
+      "byteOffset": 0,
+      "componentType": 5123,
+      "count": 5,
+      "type": "SCALAR"
+    }
+  },
+  "bufferViews": {
+    "bv_pos": {
+      "buffer": "buf0",
+      "byteOffset": 0,
+      "byteLength": 72
+    },
+    "bv_idx_points": {
+      "buffer": "buf0",
+      "byteOffset": 72,
+      "byteLength": 6
+    },
+    "bv_idx_lines": {
+      "buffer": "buf0",
+      "byteOffset": 78,
+      "byteLength": 8
+    },
+    "bv_idx_linestrip": {
+      "buffer": "buf0",
+      "byteOffset": 86,
+      "byteLength": 8
+    },
+    "bv_idx_tris": {
+      "buffer": "buf0",
+      "byteOffset": 94,
+      "byteLength": 6
+    },
+    "bv_idx_tristrip": {
+      "buffer": "buf0",
+      "byteOffset": 100,
+      "byteLength": 8
+    },
+    "bv_idx_trifan": {
+      "buffer": "buf0",
+      "byteOffset": 108,
+      "byteLength": 10
+    }
+  },
+  "buffers": {
+    "buf0": {
+      "uri": "data:application/octet-stream;base64,AAAAAAAAAAAAAAAAAACAPwAAAAAAAAAAAAAAAAAAgD8AAAAAAACAPwAAgD8AAAAAAAAAAAAAAAAAAIA/AAAAPwAAAD8AAAAAAAABAAIAAAABAAIAAwAAAAEAAgADAAAAAQACAAAAAQACAAMAAAABAAIAAwAEAA==",
+      "byteLength": 118
+    }
+  },
+  "materials": {
+    "mat0": {
+      "values": {
+        "diffuse": [0.5, 0.5, 0.5, 1.0]
+      }
+    }
+  }
+}

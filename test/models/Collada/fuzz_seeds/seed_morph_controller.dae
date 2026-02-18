@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1">
+  <asset>
+    <created>2024-01-01</created>
+    <modified>2024-01-01</modified>
+  </asset>
+  <library_geometries>
+    <geometry id="BaseMesh" name="BaseMesh">
+      <mesh>
+        <source id="base-pos">
+          <float_array id="base-pos-arr" count="12">0 0 0  1 0 0  0.5 1 0  0.5 0.5 0.5</float_array>
+          <technique_common>
+            <accessor source="#base-pos-arr" count="4" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <vertices id="base-verts">
+          <input semantic="POSITION" source="#base-pos"/>
+        </vertices>
+        <triangles count="2">
+          <input semantic="VERTEX" source="#base-verts" offset="0"/>
+          <p>0 1 2  0 2 3</p>
+        </triangles>
+      </mesh>
+    </geometry>
+    <geometry id="MorphTarget1" name="MorphTarget1">
+      <mesh>
+        <source id="mt1-pos">
+          <float_array id="mt1-pos-arr" count="12">0 0 0  1 0 0  0.5 1.5 0  0.5 0.75 0.8</float_array>
+          <technique_common>
+            <accessor source="#mt1-pos-arr" count="4" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <vertices id="mt1-verts">
+          <input semantic="POSITION" source="#mt1-pos"/>
+        </vertices>
+        <triangles count="2">
+          <input semantic="VERTEX" source="#mt1-verts" offset="0"/>
+          <p>0 1 2  0 2 3</p>
+        </triangles>
+      </mesh>
+    </geometry>
+    <geometry id="MorphTarget2" name="MorphTarget2">
+      <mesh>
+        <source id="mt2-pos">
+          <float_array id="mt2-pos-arr" count="12">-0.2 0 0  1.2 0 0  0.5 0.8 0  0.5 0.4 1.0</float_array>
+          <technique_common>
+            <accessor source="#mt2-pos-arr" count="4" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <vertices id="mt2-verts">
+          <input semantic="POSITION" source="#mt2-pos"/>
+        </vertices>
+        <triangles count="2">
+          <input semantic="VERTEX" source="#mt2-verts" offset="0"/>
+          <p>0 1 2  0 2 3</p>
+        </triangles>
+      </mesh>
+    </geometry>
+  </library_geometries>
+  <library_controllers>
+    <controller id="MorphCtrl" name="MorphCtrl">
+      <morph source="#BaseMesh" method="NORMALIZED">
+        <source id="morph-targets">
+          <IDREF_array id="morph-targets-arr" count="2">MorphTarget1 MorphTarget2</IDREF_array>
+          <technique_common>
+            <accessor source="#morph-targets-arr" count="2" stride="1">
+              <param name="MORPH_TARGET" type="IDREF"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="morph-weights">
+          <float_array id="morph-weights-arr" count="2">0.4 0.6</float_array>
+          <technique_common>
+            <accessor source="#morph-weights-arr" count="2" stride="1">
+              <param name="MORPH_WEIGHT" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <targets>
+          <input semantic="MORPH_TARGET" source="#morph-targets"/>
+          <input semantic="MORPH_WEIGHT" source="#morph-weights"/>
+        </targets>
+      </morph>
+    </controller>
+  </library_controllers>
+  <library_visual_scenes>
+    <visual_scene id="Scene" name="Scene">
+      <node id="MorphNode" name="MorphNode" type="NODE">
+        <instance_controller url="#MorphCtrl"/>
+      </node>
+    </visual_scene>
+  </library_visual_scenes>
+  <scene>
+    <instance_visual_scene url="#Scene"/>
+  </scene>
+</COLLADA>

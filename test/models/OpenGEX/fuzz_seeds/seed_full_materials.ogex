@@ -1,0 +1,260 @@
+Metric (key = "distance") {float {1.0}}
+Metric (key = "angle") {float {1.0}}
+Metric (key = "time") {float {1.0}}
+Metric (key = "up") {string {"z"}}
+
+GeometryNode $node1
+{
+    Name {string {"AllTexMesh"}}
+    ObjectRef {ref {$geo1}}
+    MaterialRef (index = 0) {ref {$mat_all_tex}}
+
+    Transform
+    {
+        float[16]
+        {
+            {1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1}
+        }
+    }
+}
+
+GeometryNode $node2
+{
+    Name {string {"EmissiveMesh"}}
+    ObjectRef {ref {$geo1}}
+    MaterialRef (index = 0) {ref {$mat_emissive}}
+
+    Transform
+    {
+        float[16]
+        {
+            {1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 3, 0, 0, 1}
+        }
+    }
+}
+
+GeometryNode $node3
+{
+    Name {string {"OpacityMesh"}}
+    ObjectRef {ref {$geo2}}
+    MaterialRef (index = 0) {ref {$mat_opacity}}
+
+    Transform
+    {
+        float[16]
+        {
+            {1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, -3, 0, 0, 1}
+        }
+    }
+}
+
+GeometryNode $node4
+{
+    Name {string {"TransparentMesh"}}
+    ObjectRef {ref {$geo2}}
+    MaterialRef (index = 0) {ref {$mat_transparent}}
+
+    Transform
+    {
+        float[16]
+        {
+            {1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 3, 0, 1}
+        }
+    }
+}
+
+GeometryNode $node5
+{
+    Name {string {"SpecPowerMesh"}}
+    ObjectRef {ref {$geo1}}
+    MaterialRef (index = 0) {ref {$mat_specpower}}
+
+    Transform
+    {
+        float[16]
+        {
+            {1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, -3, 0, 1}
+        }
+    }
+}
+
+GeometryObject $geo1
+{
+    Mesh (primitive = "triangles")
+    {
+        VertexArray (attrib = "position")
+        {
+            float[3]
+            {
+                {0, 0, 0}, {1, 0, 0}, {0, 1, 0}, {1, 1, 0}
+            }
+        }
+
+        VertexArray (attrib = "normal")
+        {
+            float[3]
+            {
+                {0, 0, 1}, {0, 0, 1}, {0, 0, 1}, {0, 0, 1}
+            }
+        }
+
+        VertexArray (attrib = "texcoord")
+        {
+            float[2]
+            {
+                {0, 0}, {1, 0}, {0, 1}, {1, 1}
+            }
+        }
+
+        IndexArray
+        {
+            unsigned_int32[3]
+            {
+                {0, 1, 2}, {1, 3, 2}
+            }
+        }
+    }
+}
+
+GeometryObject $geo2
+{
+    Mesh (primitive = "triangles")
+    {
+        VertexArray (attrib = "position")
+        {
+            float[3]
+            {
+                {-1, -1, 0}, {1, -1, 0}, {0, 1, 0}
+            }
+        }
+
+        VertexArray (attrib = "normal")
+        {
+            float[3]
+            {
+                {0, 0, 1}, {0, 0, 1}, {0, 0, 1}
+            }
+        }
+
+        IndexArray
+        {
+            unsigned_int32[3]
+            {
+                {0, 1, 2}
+            }
+        }
+    }
+}
+
+Material $mat_all_tex
+{
+    Name {string {"AllTexturesMat"}}
+
+    Color (attrib = "diffuse") {float[3] {{0.8, 0.8, 0.8}}}
+    Color (attrib = "specular") {float[3] {{1.0, 1.0, 1.0}}}
+    Color (attrib = "emission") {float[3] {{0.1, 0.05, 0.0}}}
+
+    Param (attrib = "specular_power") {float {90.0}}
+
+    Texture (attrib = "diffuse")
+    {
+        string {"textures/all_diffuse.png"}
+    }
+    Texture (attrib = "specular")
+    {
+        string {"textures/all_specular.png"}
+    }
+    Texture (attrib = "specular_power")
+    {
+        string {"textures/all_specpow.png"}
+    }
+    Texture (attrib = "emission")
+    {
+        string {"textures/all_emission.png"}
+    }
+    Texture (attrib = "opacity")
+    {
+        string {"textures/all_opacity.png"}
+    }
+    Texture (attrib = "transparency")
+    {
+        string {"textures/all_transparency.png"}
+    }
+    Texture (attrib = "normal")
+    {
+        string {"textures/all_normal.png"}
+    }
+}
+
+Material $mat_emissive
+{
+    Name {string {"EmissiveOnly"}}
+
+    Color (attrib = "diffuse") {float[4] {{0.0, 0.0, 0.0, 1.0}}}
+    Color (attrib = "emission") {float[4] {{1.0, 0.5, 0.0, 1.0}}}
+
+    Texture (attrib = "emission")
+    {
+        string {"textures/glow_emission.png"}
+    }
+}
+
+Material $mat_opacity
+{
+    Name {string {"OpacityMat"}}
+
+    Color (attrib = "diffuse") {float[3] {{0.5, 0.7, 0.9}}}
+    Color (attrib = "specular") {float[4] {{0.9, 0.9, 0.9, 1.0}}}
+
+    Param (attrib = "specular_power") {float {50.0}}
+
+    Texture (attrib = "diffuse")
+    {
+        string {"textures/glass_diffuse.png"}
+    }
+    Texture (attrib = "opacity")
+    {
+        string {"textures/glass_opacity.png"}
+    }
+    Texture (attrib = "normal")
+    {
+        string {"textures/glass_normal.png"}
+    }
+}
+
+Material $mat_transparent
+{
+    Name {string {"TransparentMat"}}
+
+    Color (attrib = "diffuse") {float[4] {{0.2, 0.8, 0.3, 0.4}}}
+    Color (attrib = "specular") {float[3] {{0.6, 0.6, 0.6}}}
+
+    Texture (attrib = "transparency")
+    {
+        string {"textures/trans_alpha.png"}
+    }
+    Texture (attrib = "diffuse")
+    {
+        string {"textures/trans_diffuse.png"}
+    }
+}
+
+Material $mat_specpower
+{
+    Name {string {"SpecPowerMat"}}
+
+    Color (attrib = "diffuse") {float[3] {{0.9, 0.9, 0.9}}}
+    Color (attrib = "specular") {float[3] {{1.0, 1.0, 1.0}}}
+    Color (attrib = "emission") {float[3] {{0.0, 0.0, 0.0}}}
+
+    Param (attrib = "specular_power") {float {200.0}}
+
+    Texture (attrib = "specular")
+    {
+        string {"textures/chrome_specular.png"}
+    }
+    Texture (attrib = "specular_power")
+    {
+        string {"textures/chrome_specpow.png"}
+    }
+}

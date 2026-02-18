@@ -1,0 +1,32 @@
+
+# Multiple spheres with different colors and tessellation levels
+from 0 0 20
+at 0 0 0
+up 0 1 0
+angle 60
+resolution 640 480
+
+l 10 10 10
+
+# red sphere
+f 1 0 0 0.8 0.2 40 0 1
+tess 3
+s 0 0 0 2
+
+# green sphere with higher tessellation
+f 0 1 0 0.6 0.4 60 0 1
+tess 4
+s 5 0 0 1.5
+
+# blue sphere
+f 0 0 1 0.5 0.5 80 0 1.5
+s -5 0 0 1
+
+# small white sphere
+f 1 1 1 0.9 0.1 10 0 1
+tess 2
+s 0 4 0 0.5
+
+# yellow sphere with 2 subdiv values
+f 1 1 0 0.7 0.3 30 0 1
+s 0 -4 0 3 4 4

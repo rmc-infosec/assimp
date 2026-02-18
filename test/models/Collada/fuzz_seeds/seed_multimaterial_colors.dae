@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1">
+  <asset>
+    <created>2024-01-01</created>
+    <modified>2024-01-01</modified>
+  </asset>
+  <library_effects>
+    <effect id="RedFX">
+      <profile_COMMON>
+        <technique sid="common">
+          <phong>
+            <diffuse><color>0.9 0.1 0.1 1.0</color></diffuse>
+            <specular><color>1 1 1 1</color></specular>
+            <shininess><float>30</float></shininess>
+          </phong>
+        </technique>
+      </profile_COMMON>
+    </effect>
+    <effect id="BlueFX">
+      <profile_COMMON>
+        <technique sid="common">
+          <lambert>
+            <diffuse><color>0.1 0.1 0.9 1.0</color></diffuse>
+          </lambert>
+        </technique>
+      </profile_COMMON>
+    </effect>
+    <effect id="WireFX">
+      <profile_COMMON>
+        <technique sid="common">
+          <constant>
+            <emission><color>1 1 0 1</color></emission>
+          </constant>
+        </technique>
+      </profile_COMMON>
+    </effect>
+  </library_effects>
+  <library_materials>
+    <material id="RedMat" name="RedMat">
+      <instance_effect url="#RedFX"/>
+    </material>
+    <material id="BlueMat" name="BlueMat">
+      <instance_effect url="#BlueFX"/>
+    </material>
+    <material id="WireMat" name="WireMat">
+      <instance_effect url="#WireFX"/>
+    </material>
+  </library_materials>
+  <library_geometries>
+    <geometry id="ColorMesh" name="ColorMesh">
+      <mesh>
+        <source id="cm-pos">
+          <float_array id="cm-pos-arr" count="18">0 0 0  2 0 0  2 2 0  0 2 0  1 3 0  1 -1 0</float_array>
+          <technique_common>
+            <accessor source="#cm-pos-arr" count="6" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="cm-norm">
+          <float_array id="cm-norm-arr" count="18">0 0 1  0 0 1  0 0 1  0 0 1  0 0 1  0 0 1</float_array>
+          <technique_common>
+            <accessor source="#cm-norm-arr" count="6" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="cm-color0">
+          <float_array id="cm-color0-arr" count="24">1 0 0 1  0 1 0 1  0 0 1 1  1 1 0 1  1 0 1 1  0 1 1 1</float_array>
+          <technique_common>
+            <accessor source="#cm-color0-arr" count="6" stride="4">
+              <param name="R" type="float"/>
+              <param name="G" type="float"/>
+              <param name="B" type="float"/>
+              <param name="A" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="cm-uv0">
+          <float_array id="cm-uv0-arr" count="12">0 0  1 0  1 1  0 1  0.5 1.5  0.5 -0.5</float_array>
+          <technique_common>
+            <accessor source="#cm-uv0-arr" count="6" stride="2">
+              <param name="S" type="float"/>
+              <param name="T" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="cm-uv1">
+          <float_array id="cm-uv1-arr" count="12">0 0  0.5 0  0.5 0.5  0 0.5  0.25 0.75  0.25 -0.25</float_array>
+          <technique_common>
+            <accessor source="#cm-uv1-arr" count="6" stride="2">
+              <param name="S" type="float"/>
+              <param name="T" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <vertices id="cm-verts">
+          <input semantic="POSITION" source="#cm-pos"/>
+        </vertices>
+        <triangles count="2" material="red_group">
+          <input semantic="VERTEX" source="#cm-verts" offset="0"/>
+          <input semantic="NORMAL" source="#cm-norm" offset="1"/>
+          <input semantic="COLOR" source="#cm-color0" offset="2" set="0"/>
+          <input semantic="TEXCOORD" source="#cm-uv0" offset="3" set="0"/>
+          <input semantic="TEXCOORD" source="#cm-uv1" offset="4" set="1"/>
+          <p>0 0 0 0 0  1 1 1 1 1  2 2 2 2 2  0 0 0 0 0  2 2 2 2 2  3 3 3 3 3</p>
+        </triangles>
+        <triangles count="1" material="blue_group">
+          <input semantic="VERTEX" source="#cm-verts" offset="0"/>
+          <input semantic="NORMAL" source="#cm-norm" offset="1"/>
+          <input semantic="COLOR" source="#cm-color0" offset="2" set="0"/>
+          <input semantic="TEXCOORD" source="#cm-uv0" offset="3" set="0"/>
+          <p>2 2 2 2  3 3 3 3  4 4 4 4</p>
+        </triangles>
+        <lines count="2" material="wire_group">
+          <input semantic="VERTEX" source="#cm-verts" offset="0"/>
+          <input semantic="COLOR" source="#cm-color0" offset="1" set="0"/>
+          <p>0 0  5 5  1 1  5 5</p>
+        </lines>
+      </mesh>
+    </geometry>
+  </library_geometries>
+  <library_visual_scenes>
+    <visual_scene id="Scene" name="Scene">
+      <node id="ColorMeshNode" name="ColorMeshNode" type="NODE">
+        <instance_geometry url="#ColorMesh">
+          <bind_material>
+            <technique_common>
+              <instance_material symbol="red_group" target="#RedMat">
+                <bind_vertex_input semantic="UVMap0" input_semantic="2" input_set="0"/>
+                <bind_vertex_input semantic="UVMap1" input_semantic="2" input_set="1"/>
+              </instance_material>
+              <instance_material symbol="blue_group" target="#BlueMat">
+                <bind_vertex_input semantic="UVMap0" input_semantic="2" input_set="0"/>
+              </instance_material>
+              <instance_material symbol="wire_group" target="#WireMat"/>
+            </technique_common>
+          </bind_material>
+        </instance_geometry>
+      </node>
+    </visual_scene>
+  </library_visual_scenes>
+  <scene>
+    <instance_visual_scene url="#Scene"/>
+  </scene>
+</COLLADA>

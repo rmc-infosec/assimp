@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<X3D profile="Interchange" version="3.3">
+<Scene>
+  <!-- IndexedLineSet with coordIndex, colorPerVertex, Color child -->
+  <Shape>
+    <IndexedLineSet coordIndex="0 1 -1 1 2 3 -1" colorIndex="0 1 -1 2 3 0 -1" colorPerVertex="true">
+      <Coordinate point="0 0 0, 1 0 0, 1 1 0, 0 1 0"/>
+      <Color color="1 0 0, 0 1 0, 0 0 1, 1 1 0"/>
+    </IndexedLineSet>
+  </Shape>
+  <!-- PointSet with Color child -->
+  <Transform translation="3 0 0">
+    <Shape>
+      <PointSet>
+        <Coordinate point="0 0 0, 0.5 0.5 0, 1 0 0"/>
+        <ColorRGBA color="1 0 0 1, 0 1 0 0.5, 0 0 1 1"/>
+      </PointSet>
+    </Shape>
+  </Transform>
+  <!-- LineSet with vertexCount and Color -->
+  <Transform translation="0 3 0">
+    <Shape>
+      <LineSet vertexCount="3 2">
+        <Coordinate point="0 0 0, 1 0 0, 1 1 0, 2 0 0, 3 0 0"/>
+        <Color color="1 0 0, 0 1 0, 0 0 1, 1 1 0, 0 1 1"/>
+      </LineSet>
+    </Shape>
+  </Transform>
+  <!-- IndexedTriangleSet with ccw=false, normalPerVertex, Color, Normal, TextureCoordinate -->
+  <Transform translation="5 0 0">
+    <Shape>
+      <Appearance><Material diffuseColor="0.8 0.8 0.8"/></Appearance>
+      <IndexedTriangleSet index="0 1 2 0 2 3" ccw="false" normalPerVertex="true" solid="false" colorPerVertex="true">
+        <Coordinate point="0 0 0, 2 0 0, 2 2 0, 0 2 0"/>
+        <Normal vector="0 0 1, 0 0 1, 0 0 1, 0 0 1"/>
+        <Color color="1 0 0, 0 1 0, 0 0 1, 1 1 0"/>
+        <TextureCoordinate point="0 0, 1 0, 1 1, 0 1"/>
+      </IndexedTriangleSet>
+    </Shape>
+  </Transform>
+  <!-- IndexedTriangleStripSet with Normal, ccw=false -->
+  <Transform translation="0 -3 0">
+    <Shape>
+      <IndexedTriangleStripSet index="0 1 2 3 -1" ccw="false" normalPerVertex="false" solid="true">
+        <Coordinate point="0 0 0, 1 0 0, 0.5 1 0, 1.5 1 0"/>
+        <Normal vector="0 0 1"/>
+      </IndexedTriangleStripSet>
+    </Shape>
+  </Transform>
+  <!-- IndexedTriangleFanSet with ccw=false, TextureCoordinate -->
+  <Transform translation="5 -3 0">
+    <Shape>
+      <IndexedTriangleFanSet index="0 1 2 3 -1" ccw="false" solid="false">
+        <Coordinate point="0 0 0, 1 0 0, 0.7 0.7 0, 0 1 0"/>
+        <TextureCoordinate point="0.5 0.5, 1 0, 1 1, 0 1"/>
+        <Color color="1 0 0, 0 1 0, 0 0 1, 1 1 0"/>
+      </IndexedTriangleFanSet>
+    </Shape>
+  </Transform>
+  <!-- TriangleSet2D -->
+  <Transform translation="-3 0 0">
+    <Shape>
+      <Appearance><Material diffuseColor="0.8 0 0.8"/></Appearance>
+      <TriangleSet2D vertices="0 0, 1 0, 0.5 0.8, 1 0, 2 0, 1.5 0.8" solid="true"/>
+    </Shape>
+  </Transform>
+  <!-- Disk2D with inner radius (ring) -->
+  <Transform translation="-3 3 0">
+    <Shape>
+      <Disk2D innerRadius="0.3" outerRadius="0.8" solid="true"/>
+    </Shape>
+  </Transform>
+  <!-- Disk2D with innerRadius=outerRadius (circle line) -->
+  <Transform translation="-3 -3 0">
+    <Shape>
+      <Disk2D innerRadius="0.5" outerRadius="0.5"/>
+    </Shape>
+  </Transform>
+  <!-- Rectangle2D with solid=true -->
+  <Transform translation="-6 0 0">
+    <Shape>
+      <Rectangle2D size="1.5 1" solid="true"/>
+    </Shape>
+  </Transform>
+  <!-- Circle2D -->
+  <Transform translation="-6 3 0">
+    <Shape>
+      <Circle2D radius="0.6"/>
+    </Shape>
+  </Transform>
+  <!-- Arc2D -->
+  <Transform translation="-6 -3 0">
+    <Shape>
+      <Arc2D startAngle="0.5" endAngle="2.5" radius="0.7"/>
+    </Shape>
+  </Transform>
+  <!-- ArcClose2D with CHORD closureType -->
+  <Transform translation="8 0 0">
+    <Shape>
+      <ArcClose2D startAngle="0" endAngle="2.0" radius="0.8" closureType="CHORD" solid="true"/>
+    </Shape>
+  </Transform>
+  <!-- Polyline2D -->
+  <Transform translation="8 3 0">
+    <Shape>
+      <Polyline2D lineSegments="0 0, 1 0, 1.5 0.5, 0.5 1"/>
+    </Shape>
+  </Transform>
+  <!-- Polypoint2D -->
+  <Transform translation="8 -3 0">
+    <Shape>
+      <Polypoint2D point="0 0, 0.3 0.3, 0.6 0, 0.9 0.3"/>
+    </Shape>
+  </Transform>
+  <!-- TriangleSet with Color, Normal, TexCoord children -->
+  <Transform translation="0 6 0">
+    <Shape>
+      <TriangleSet ccw="true" normalPerVertex="true" solid="true" colorPerVertex="true">
+        <Coordinate point="0 0 0, 1 0 0, 0.5 1 0"/>
+        <Normal vector="0 0 1, 0 0 1, 0 0 1"/>
+        <Color color="1 0 0, 0 1 0, 0 0 1"/>
+        <TextureCoordinate point="0 0, 1 0, 0.5 1"/>
+      </TriangleSet>
+    </Shape>
+  </Transform>
+  <!-- TriangleFanSet with Color, Normal children -->
+  <Transform translation="3 6 0">
+    <Shape>
+      <TriangleFanSet fanCount="4" ccw="false" normalPerVertex="false" solid="false" colorPerVertex="false">
+        <Coordinate point="0 0 0, 1 0 0, 0.7 0.7 0, 0 1 0"/>
+        <Normal vector="0 0 1, 0 0 1"/>
+        <Color color="1 0 0, 0 1 0"/>
+      </TriangleFanSet>
+    </Shape>
+  </Transform>
+  <!-- TriangleStripSet with Color, Normal, TexCoord children -->
+  <Transform translation="6 6 0">
+    <Shape>
+      <TriangleStripSet stripCount="4" ccw="true" normalPerVertex="true" solid="true">
+        <Coordinate point="0 0 0, 0 1 0, 1 0 0, 1 1 0"/>
+        <Normal vector="0 0 1, 0 0 1, 0 0 1, 0 0 1"/>
+        <Color color="1 0 0, 0 1 0, 0 0 1, 1 1 0"/>
+        <TextureCoordinate point="0 0, 0 1, 1 0, 1 1"/>
+      </TriangleStripSet>
+    </Shape>
+  </Transform>
+</Scene>
+</X3D>

@@ -1,0 +1,18 @@
+#VRML V2.0 utf8
+
+Shape {
+  appearance Appearance {
+    texture ImageTexture {
+      url [
+        "tex1.png"
+        "tex2.jpg"
+        "tex3.gif"
+        "http://example.com/tex4.png"
+      ]
+    }
+  }
+  geometry Sphere { radius 1 }
+}
+Inline {
+  url [ "model1.wrl" "model2.wrl" "http://example.com/model3.wrl" ]
+}

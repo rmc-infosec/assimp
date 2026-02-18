@@ -1,0 +1,63 @@
+{
+  "asset": {"version": "2.0", "generator": "assimp-fuzz-seeds"},
+  "scene": 0,
+  "scenes": [{"nodes": [0, 1, 2, 3]}],
+  "nodes": [
+    {"mesh": 0, "name": "MeshNode"},
+    {"camera": 0, "name": "CamZeroAspect"},
+    {"camera": 1, "name": "CamExtremeRange"},
+    {"camera": 2, "name": "CamOrtho"}
+  ],
+  "meshes": [
+    {
+      "name": "SimpleMesh",
+      "primitives": [{"attributes": {"POSITION": 0}, "indices": 1}]
+    }
+  ],
+  "accessors": [
+    {"bufferView": 0, "componentType": 5126, "count": 3, "type": "VEC3", "max": [1,1,0], "min": [0,0,0]},
+    {"bufferView": 1, "componentType": 5123, "count": 3, "type": "SCALAR"}
+  ],
+  "bufferViews": [
+    {"buffer": 0, "byteOffset": 0, "byteLength": 36, "target": 34962},
+    {"buffer": 0, "byteOffset": 36, "byteLength": 6, "target": 34963}
+  ],
+  "buffers": [
+    {
+      "uri": "data:application/octet-stream;base64,AAAAAAAAAAAAAAAAAACAPwAAAAAAAAAAAAAAPwAAgD8AAAAAAAABAAIAAAA=",
+      "byteLength": 44
+    }
+  ],
+  "cameras": [
+    {
+      "name": "ZeroAspectPerspective",
+      "type": "perspective",
+      "perspective": {
+        "aspectRatio": 0,
+        "yfov": 0.7854,
+        "znear": 0.1,
+        "zfar": 100.0
+      }
+    },
+    {
+      "name": "ExtremeRangePerspective",
+      "type": "perspective",
+      "perspective": {
+        "aspectRatio": 1.777,
+        "yfov": 1.0472,
+        "znear": 0.001,
+        "zfar": 100000.0
+      }
+    },
+    {
+      "name": "SmallOrtho",
+      "type": "orthographic",
+      "orthographic": {
+        "xmag": 0.001,
+        "ymag": 10.0,
+        "znear": 0.01,
+        "zfar": 500.0
+      }
+    }
+  ]
+}

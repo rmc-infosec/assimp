@@ -1,0 +1,31 @@
+#VRML V2.0 utf8
+
+Transform {
+  translation 0 0 0
+  children [
+    Shape {
+      geometry Text {
+        string [ "Hello" "VRML" "World" ]
+        fontStyle FontStyle {
+          family [ "SERIF" ]
+          style "BOLD"
+          size 1.5
+          spacing 1.0
+          justify [ "MIDDLE" "MIDDLE" ]
+          horizontal TRUE
+          leftToRight TRUE
+          topToBottom TRUE
+          language "en"
+        }
+        maxExtent 0.0
+        length [ 0 0 0 ]
+      }
+      appearance Appearance {
+        material Material {
+          diffuseColor 1 1 0
+          emissiveColor 0.2 0.2 0
+        }
+      }
+    }
+  ]
+}

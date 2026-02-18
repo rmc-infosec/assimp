@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1">
+  <asset>
+    <created>2026-01-01</created>
+    <modified>2026-01-01</modified>
+    <up_axis>Y_UP</up_axis>
+  </asset>
+
+  <library_geometries>
+    <geometry id="mesh0" name="Triangle">
+      <mesh>
+        <source id="mesh0-positions">
+          <float_array id="mesh0-positions-array" count="9">0 0 0 1 0 0 0 1 0</float_array>
+          <technique_common>
+            <accessor source="#mesh0-positions-array" count="3" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <vertices id="mesh0-vertices">
+          <input semantic="POSITION" source="#mesh0-positions"/>
+        </vertices>
+        <triangles count="1" material="mat0">
+          <input semantic="VERTEX" source="#mesh0-vertices" offset="0"/>
+          <p>0 1 2</p>
+        </triangles>
+      </mesh>
+    </geometry>
+  </library_geometries>
+
+  <library_animations>
+    <animation id="anim_tx" name="TranslateX">
+      <source id="tx-input">
+        <float_array id="tx-input-array" count="4">0 0.33 0.67 1.0</float_array>
+        <technique_common>
+          <accessor source="#tx-input-array" count="4" stride="1">
+            <param name="TIME" type="float"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <source id="tx-output">
+        <float_array id="tx-output-array" count="4">0 2.5 4.0 5.0</float_array>
+        <technique_common>
+          <accessor source="#tx-output-array" count="4" stride="1">
+            <param name="VALUE" type="float"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <source id="tx-interpolation">
+        <Name_array id="tx-interp-array" count="4">LINEAR LINEAR LINEAR LINEAR</Name_array>
+        <technique_common>
+          <accessor source="#tx-interp-array" count="4" stride="1">
+            <param name="INTERPOLATION" type="name"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <source id="tx-intangent">
+        <float_array id="tx-intangent-array" count="8">-0.1 0 0.2 2.0 0.5 3.5 0.8 4.5</float_array>
+        <technique_common>
+          <accessor source="#tx-intangent-array" count="4" stride="2">
+            <param name="X" type="float"/>
+            <param name="Y" type="float"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <source id="tx-outtangent">
+        <float_array id="tx-outtangent-array" count="8">0.1 0.5 0.4 3.0 0.75 4.2 1.1 5.0</float_array>
+        <technique_common>
+          <accessor source="#tx-outtangent-array" count="4" stride="2">
+            <param name="X" type="float"/>
+            <param name="Y" type="float"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <sampler id="tx-sampler">
+        <input semantic="INPUT" source="#tx-input"/>
+        <input semantic="OUTPUT" source="#tx-output"/>
+        <input semantic="INTERPOLATION" source="#tx-interpolation"/>
+        <input semantic="IN_TANGENT" source="#tx-intangent"/>
+        <input semantic="OUT_TANGENT" source="#tx-outtangent"/>
+      </sampler>
+      <channel source="#tx-sampler" target="Node0/translate.X"/>
+    </animation>
+    <animation id="anim_rz" name="RotateZ">
+      <source id="rz-input">
+        <float_array id="rz-input-array" count="3">0 0.5 1.0</float_array>
+        <technique_common>
+          <accessor source="#rz-input-array" count="3" stride="1">
+            <param name="TIME" type="float"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <source id="rz-output">
+        <float_array id="rz-output-array" count="3">0 45 90</float_array>
+        <technique_common>
+          <accessor source="#rz-output-array" count="3" stride="1">
+            <param name="VALUE" type="float"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <source id="rz-interpolation">
+        <Name_array id="rz-interp-array" count="3">LINEAR LINEAR LINEAR</Name_array>
+        <technique_common>
+          <accessor source="#rz-interp-array" count="3" stride="1">
+            <param name="INTERPOLATION" type="name"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <sampler id="rz-sampler">
+        <input semantic="INPUT" source="#rz-input"/>
+        <input semantic="OUTPUT" source="#rz-output"/>
+        <input semantic="INTERPOLATION" source="#rz-interpolation"/>
+      </sampler>
+      <channel source="#rz-sampler" target="Node0/rotateZ.ANGLE"/>
+    </animation>
+    <animation id="anim_sc" name="Scale">
+      <source id="sc-input">
+        <float_array id="sc-input-array" count="3">0 0.5 1.0</float_array>
+        <technique_common>
+          <accessor source="#sc-input-array" count="3" stride="1">
+            <param name="TIME" type="float"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <source id="sc-output">
+        <float_array id="sc-output-array" count="9">1 1 1  1.5 1.5 1.5  1 1 1</float_array>
+        <technique_common>
+          <accessor source="#sc-output-array" count="3" stride="3">
+            <param name="X" type="float"/>
+            <param name="Y" type="float"/>
+            <param name="Z" type="float"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <source id="sc-interpolation">
+        <Name_array id="sc-interp-array" count="3">LINEAR LINEAR LINEAR</Name_array>
+        <technique_common>
+          <accessor source="#sc-interp-array" count="3" stride="1">
+            <param name="INTERPOLATION" type="name"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <sampler id="sc-sampler">
+        <input semantic="INPUT" source="#sc-input"/>
+        <input semantic="OUTPUT" source="#sc-output"/>
+        <input semantic="INTERPOLATION" source="#sc-interpolation"/>
+      </sampler>
+      <channel source="#sc-sampler" target="Node0/scale"/>
+    </animation>
+  </library_animations>
+
+  <library_animation_clips>
+    <animation_clip id="clip_walk" name="WalkCycle" start="0" end="0.5">
+      <instance_animation url="#anim_tx"/>
+      <instance_animation url="#anim_rz"/>
+    </animation_clip>
+    <animation_clip id="clip_run" name="RunCycle" start="0.5" end="1.0">
+      <instance_animation url="#anim_tx"/>
+      <instance_animation url="#anim_sc"/>
+    </animation_clip>
+    <animation_clip id="clip_full" name="FullMotion">
+      <instance_animation url="#anim_tx"/>
+      <instance_animation url="#anim_rz"/>
+      <instance_animation url="#anim_sc"/>
+    </animation_clip>
+  </library_animation_clips>
+
+  <library_materials>
+    <material id="mat0" name="Material0">
+      <instance_effect url="#effect0"/>
+    </material>
+  </library_materials>
+
+  <library_effects>
+    <effect id="effect0">
+      <profile_COMMON>
+        <technique sid="common">
+          <phong>
+            <diffuse>
+              <color>0.8 0.2 0.2 1.0</color>
+            </diffuse>
+          </phong>
+        </technique>
+      </profile_COMMON>
+    </effect>
+  </library_effects>
+
+  <library_visual_scenes>
+    <visual_scene id="Scene" name="Scene">
+      <node id="Node0" name="Node0" type="NODE">
+        <translate sid="translate">0 0 0</translate>
+        <rotate sid="rotateZ">0 0 1 0</rotate>
+        <scale sid="scale">1 1 1</scale>
+        <instance_geometry url="#mesh0">
+          <bind_material>
+            <technique_common>
+              <instance_material symbol="mat0" target="#mat0"/>
+            </technique_common>
+          </bind_material>
+        </instance_geometry>
+      </node>
+    </visual_scene>
+  </library_visual_scenes>
+
+  <scene>
+    <instance_visual_scene url="#Scene"/>
+  </scene>
+</COLLADA>

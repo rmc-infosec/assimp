@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<mesh xmlns="http://irrlicht.sourceforge.net/IRRMESH_09_2007" version="1.0">
+  <buffer material="solid" boundingBox="-1 -1 -1 1 1 1">
+    <material Ambient="ff404040" Diffuse="ff808080" Specular="ffffffff" Emissive="ff000000"
+      Shininess="20" Type="solid" Param1="0" Param2="0"
+      Wireframe="false" GouraudShading="true" BackfaceCulling="true"
+      Lighting="true" ZWriteEnable="true" ZBuffer="1"
+      NormalizeNormals="false" AntiAliasing="1" ColorMask="15"
+      FogEnable="false" BilinearFilter1="true" TrilinearFilter1="false"
+      AnisotropicFilter1="0" TextureWrap1="texture_clamp_repeat"/>
+    <vertices type="standard" vertexCount="8">
+      -1 -1 -1 0 0 -1 ffffffff 0 1
+      1 -1 -1 0 0 -1 ffffffff 1 1
+      1 1 -1 0 0 -1 ffffffff 1 0
+      -1 1 -1 0 0 -1 ffffffff 0 0
+      -1 -1 1 0 0 1 ffffffff 0 1
+      1 -1 1 0 0 1 ffffffff 1 1
+      1 1 1 0 0 1 ffffffff 1 0
+      -1 1 1 0 0 1 ffffffff 0 0
+    </vertices>
+    <indices indexCount="36">
+      0 1 2 0 2 3 4 6 5 4 7 6
+      0 4 5 0 5 1 2 6 7 2 7 3
+      0 3 7 0 7 4 1 5 6 1 6 2
+    </indices>
+  </buffer>
+</mesh>

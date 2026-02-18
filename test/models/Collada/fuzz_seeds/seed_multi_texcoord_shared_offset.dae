@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1">
+<asset><created>2026-01-01</created><modified>2026-01-01</modified></asset>
+<library_images>
+  <image id="img0"><init_from>diffuse.png</init_from></image>
+  <image id="img1"><init_from>normal.png</init_from></image>
+  <image id="img2"><init_from>specular.png</init_from></image>
+</library_images>
+<library_effects>
+  <effect id="fx">
+    <profile_COMMON>
+      <newparam sid="s0"><surface type="2D"><init_from>img0</init_from></surface></newparam>
+      <newparam sid="sm0"><sampler2D><source>s0</source></sampler2D></newparam>
+      <newparam sid="s1"><surface type="2D"><init_from>img1</init_from></surface></newparam>
+      <newparam sid="sm1"><sampler2D><source>s1</source></sampler2D></newparam>
+      <newparam sid="s2"><surface type="2D"><init_from>img2</init_from></surface></newparam>
+      <newparam sid="sm2"><sampler2D><source>s2</source></sampler2D></newparam>
+      <technique sid="common">
+        <phong>
+          <diffuse><texture texture="sm0" texcoord="UV0"/></diffuse>
+          <bump><texture texture="sm1" texcoord="UV1"/></bump>
+          <specular><texture texture="sm2" texcoord="UV2"/></specular>
+          <shininess><float>48</float></shininess>
+        </phong>
+      </technique>
+      <extra><technique profile="OKINO">
+        <weighting>0.8</weighting>
+        <mix_with_previous_layer>0.5</mix_with_previous_layer>
+      </technique></extra>
+      <extra><technique profile="MAX3D">
+        <amount>0.7</amount>
+      </technique></extra>
+    </profile_COMMON>
+  </effect>
+</library_effects>
+<library_materials>
+  <material id="mat" name="TriTexMat"><instance_effect url="#fx"/></material>
+</library_materials>
+<library_geometries>
+  <geometry id="geo" name="TriTexGeo">
+    <mesh>
+      <source id="pos">
+        <float_array id="posa" count="12">0 0 0 1 0 0 1 1 0 0 1 0</float_array>
+        <technique_common><accessor source="#posa" count="4" stride="3">
+          <param name="X" type="float"/><param name="Y" type="float"/><param name="Z" type="float"/>
+        </accessor></technique_common>
+      </source>
+      <source id="nrm">
+        <float_array id="nrma" count="3">0 0 1</float_array>
+        <technique_common><accessor source="#nrma" count="1" stride="3">
+          <param name="X" type="float"/><param name="Y" type="float"/><param name="Z" type="float"/>
+        </accessor></technique_common>
+      </source>
+      <source id="uv0">
+        <float_array id="uv0a" count="8">0 0 1 0 1 1 0 1</float_array>
+        <technique_common><accessor source="#uv0a" count="4" stride="2">
+          <param name="S" type="float"/><param name="T" type="float"/>
+        </accessor></technique_common>
+      </source>
+      <source id="uv1">
+        <float_array id="uv1a" count="8">0 0 2 0 2 2 0 2</float_array>
+        <technique_common><accessor source="#uv1a" count="4" stride="2">
+          <param name="S" type="float"/><param name="T" type="float"/>
+        </accessor></technique_common>
+      </source>
+      <source id="uv2">
+        <float_array id="uv2a" count="12">0 0 0 1 0 0 1 1 0 0 1 0</float_array>
+        <technique_common><accessor source="#uv2a" count="4" stride="3">
+          <param name="S" type="float"/><param name="T" type="float"/><param name="P" type="float"/>
+        </accessor></technique_common>
+      </source>
+      <vertices id="vt"><input semantic="POSITION" source="#pos"/></vertices>
+      <!-- Two TEXCOORD inputs share offset 2, the third has offset 3 -->
+      <triangles count="2" material="mat">
+        <input semantic="VERTEX" source="#vt" offset="0"/>
+        <input semantic="NORMAL" source="#nrm" offset="1"/>
+        <input semantic="TEXCOORD" source="#uv0" offset="2" set="0"/>
+        <input semantic="TEXCOORD" source="#uv1" offset="2" set="1"/>
+        <input semantic="TEXCOORD" source="#uv2" offset="3" set="2"/>
+        <p>0 0 0 0 1 0 1 1 2 0 2 2 0 0 0 0 2 0 2 2 3 0 3 3</p>
+      </triangles>
+    </mesh>
+  </geometry>
+</library_geometries>
+<library_visual_scenes>
+  <visual_scene id="Scene" name="Scene">
+    <node id="N" name="N" type="NODE">
+      <matrix sid="transform">1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</matrix>
+      <instance_geometry url="#geo">
+        <bind_material><technique_common>
+          <instance_material symbol="mat" target="#mat">
+            <bind_vertex_input semantic="UV0" input_semantic="TEXCOORD" input_set="0"/>
+            <bind_vertex_input semantic="UV1" input_semantic="TEXCOORD" input_set="1"/>
+            <bind_vertex_input semantic="UV2" input_semantic="TEXCOORD" input_set="2"/>
+          </instance_material>
+        </technique_common></bind_material>
+      </instance_geometry>
+    </node>
+  </visual_scene>
+</library_visual_scenes>
+<scene><instance_visual_scene url="#Scene"/></scene>
+</COLLADA>

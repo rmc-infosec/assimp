@@ -1,0 +1,20 @@
+<mesh>
+  <submeshes>
+    <submesh material="StripMat" usesharedvertices="false" use32bitindexes="false" operationtype="triangle_strip">
+      <faces count="3">
+        <face v1="0" v2="1" v3="2"/>
+        <face v1="1" v2="2" v3="3"/>
+        <face v1="2" v2="3" v3="4"/>
+      </faces>
+      <geometry vertexcount="5">
+        <vertexbuffer positions="true" normals="true">
+          <vertex><position x="0" y="0" z="0"/><normal x="0" y="0" z="1"/></vertex>
+          <vertex><position x="1" y="0" z="0"/><normal x="0" y="0" z="1"/></vertex>
+          <vertex><position x="0.5" y="1" z="0"/><normal x="0" y="0" z="1"/></vertex>
+          <vertex><position x="1.5" y="1" z="0"/><normal x="0" y="0" z="1"/></vertex>
+          <vertex><position x="1" y="2" z="0"/><normal x="0" y="0" z="1"/></vertex>
+        </vertexbuffer>
+      </geometry>
+    </submesh>
+  </submeshes>
+</mesh>

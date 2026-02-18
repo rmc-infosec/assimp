@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<mesh xmlns="http://irrlicht.sourceforge.net/IRRMESH_09_2007" version="1.0">
+  <buffer material="normalmap_solid" boundingBox="-1 -1 0 1 1 0">
+    <material Ambient="ff404040" Diffuse="ff808080" Specular="ffffffff" Emissive="ff000000"
+      Shininess="32" Type="normalmap_solid" Lighting="true"
+      Texture1="diffuse.png" Texture2="normal.png"/>
+    <vertices type="tangents" vertexCount="4">
+      -1 -1 0 0 0 -1 ffffffff 0 1 1 0 0 0 1 0
+      1 -1 0 0 0 -1 ffffffff 1 1 1 0 0 0 1 0
+      1 1 0 0 0 -1 ffffffff 1 0 1 0 0 0 1 0
+      -1 1 0 0 0 -1 ffffffff 0 0 1 0 0 0 1 0
+    </vertices>
+    <indices indexCount="6">
+      0 1 2 0 2 3
+    </indices>
+  </buffer>
+</mesh>

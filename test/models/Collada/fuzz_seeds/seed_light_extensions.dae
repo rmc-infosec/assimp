@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1">
+  <asset><created>2024-01-01</created><modified>2024-01-01</modified></asset>
+  <library_lights>
+    <light id="spot1" name="ExtSpot">
+      <technique_common>
+        <spot>
+          <color>1 1 0.9</color>
+          <constant_attenuation>1</constant_attenuation>
+          <linear_attenuation>0.01</linear_attenuation>
+          <quadratic_attenuation>0.001</quadratic_attenuation>
+          <falloff_angle>60</falloff_angle>
+          <falloff_exponent>3</falloff_exponent>
+        </spot>
+      </technique_common>
+      <extra>
+        <technique profile="FCOLLADA">
+          <outer_cone>75</outer_cone>
+          <penumbra_angle>15</penumbra_angle>
+          <intensity>2.5</intensity>
+          <falloff>0.5</falloff>
+          <hotspot_beam>40</hotspot_beam>
+        </technique>
+        <technique profile="OpenCOLLADA">
+          <decay_falloff>1</decay_falloff>
+        </technique>
+      </extra>
+    </light>
+    <light id="point1" name="ExtPoint">
+      <technique_common>
+        <point>
+          <color>0.8 0.9 1</color>
+          <constant_attenuation>0.5</constant_attenuation>
+          <linear_attenuation>0.05</linear_attenuation>
+          <quadratic_attenuation>0.01</quadratic_attenuation>
+        </point>
+      </technique_common>
+      <extra>
+        <technique profile="FCOLLADA">
+          <intensity>1.5</intensity>
+        </technique>
+      </extra>
+    </light>
+  </library_lights>
+  <library_visual_scenes>
+    <visual_scene id="Scene">
+      <node id="SpotNode" type="NODE">
+        <translate>0 5 0</translate>
+        <rotate>1 0 0 -90</rotate>
+        <instance_light url="#spot1"/>
+      </node>
+      <node id="PointNode" type="NODE">
+        <translate>3 3 3</translate>
+        <instance_light url="#point1"/>
+      </node>
+    </visual_scene>
+  </library_visual_scenes>
+  <scene><instance_visual_scene url="#Scene"/></scene>
+</COLLADA>

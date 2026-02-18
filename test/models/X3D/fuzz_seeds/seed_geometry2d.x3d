@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<X3D profile="Interchange" version="3.3">
+  <Scene>
+    <Transform translation="-5 0 0">
+      <Shape>
+        <Arc2D startAngle="0" endAngle="1.5708" radius="1"/>
+      </Shape>
+    </Transform>
+    <Transform translation="-3 0 0">
+      <Shape>
+        <Appearance><Material diffuseColor="0.8 0.2 0.2"/></Appearance>
+        <ArcClose2D startAngle="0" endAngle="2.0" radius="1" closureType="PIE" solid="false"/>
+      </Shape>
+    </Transform>
+    <Transform translation="-1 0 0">
+      <Shape>
+        <Circle2D radius="0.8"/>
+      </Shape>
+    </Transform>
+    <Transform translation="1 0 0">
+      <Shape>
+        <Appearance><Material diffuseColor="0 0.6 0"/></Appearance>
+        <Disk2D innerRadius="0" outerRadius="0.8" solid="false"/>
+      </Shape>
+    </Transform>
+    <Transform translation="3 0 0">
+      <Shape>
+        <Appearance><Material diffuseColor="0 0 0.8"/></Appearance>
+        <Disk2D innerRadius="0.4" outerRadius="0.8" solid="false"/>
+      </Shape>
+    </Transform>
+    <Transform translation="5 0 0">
+      <Shape>
+        <Polyline2D lineSegments="0 0, 1 0, 1 1, 0 1"/>
+      </Shape>
+    </Transform>
+    <Transform translation="0 3 0">
+      <Shape>
+        <Polypoint2D point="0 0, 0.5 0.5, 1 0, 0.5 -0.5"/>
+      </Shape>
+    </Transform>
+    <Transform translation="3 3 0">
+      <Shape>
+        <Appearance><Material diffuseColor="0.5 0.5 0"/></Appearance>
+        <Rectangle2D size="1.5 1" solid="false"/>
+      </Shape>
+    </Transform>
+    <Transform translation="-3 3 0">
+      <Shape>
+        <Appearance><Material diffuseColor="0.8 0 0.8"/></Appearance>
+        <TriangleSet2D vertices="0 0, 1 0, 0.5 1" solid="false"/>
+      </Shape>
+    </Transform>
+  </Scene>
+</X3D>

@@ -1,0 +1,26 @@
+
+# Basic NFF seed - viewpoint, background, simple polygon
+from 0 0 10
+at 0 0 0
+up 0 1 0
+angle 45
+resolution 512 512
+
+# light source
+l 5 5 10
+
+# fill color: red, Kd=0.7, Ks=0.3, Shine=20, T=0, refract=1
+f 1 0 0 0.7 0.3 20 0 1
+
+# a simple triangle
+p 3
+-1 -1 0
+1 -1 0
+0 1 0
+
+# a simple quad
+p 4
+-2 -2 -3
+2 -2 -3
+2 2 -3
+-2 2 -3

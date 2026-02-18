@@ -1,0 +1,23 @@
+#VRML V2.0 utf8
+
+DEF Clk TimeSensor {
+  cycleInterval 5.0
+  loop TRUE
+}
+DEF S Script {
+  eventIn SFFloat fraction
+  eventOut SFVec3f position
+  field SFFloat amplitude 3.0
+  url "javascript:
+    function fraction(val) {
+      position = new SFVec3f(Math.sin(val*6.28)*amplitude, 0, 0);
+    }
+  "
+}
+DEF T Transform {
+  children [
+    Shape { geometry Sphere { radius 0.3 } }
+  ]
+}
+ROUTE Clk.fraction_changed TO S.fraction
+ROUTE S.position TO T.set_translation

@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1">
+  <asset>
+    <created>2024-01-01</created>
+    <modified>2024-01-01</modified>
+  </asset>
+  <library_geometries>
+    <geometry id="Cube" name="Cube">
+      <mesh>
+        <source id="cube-pos">
+          <float_array id="cube-pos-arr" count="24">-1 -1 -1  1 -1 -1  1 1 -1  -1 1 -1  -1 -1 1  1 -1 1  1 1 1  -1 1 1</float_array>
+          <technique_common>
+            <accessor source="#cube-pos-arr" count="8" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <vertices id="cube-verts">
+          <input semantic="POSITION" source="#cube-pos"/>
+        </vertices>
+        <triangles count="4">
+          <input semantic="VERTEX" source="#cube-verts" offset="0"/>
+          <p>0 1 2  0 2 3  4 5 6  4 6 7</p>
+        </triangles>
+      </mesh>
+    </geometry>
+  </library_geometries>
+  <library_animations>
+    <animation id="LinearTranslateAnim" name="LinearTranslateAnim">
+      <source id="lt-input">
+        <float_array id="lt-input-arr" count="4">0.0 0.5 1.0 1.5</float_array>
+        <technique_common>
+          <accessor source="#lt-input-arr" count="4" stride="1">
+            <param name="TIME" type="float"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <source id="lt-output">
+        <float_array id="lt-output-arr" count="12">0 0 0  2 0 0  2 3 0  0 0 0</float_array>
+        <technique_common>
+          <accessor source="#lt-output-arr" count="4" stride="3">
+            <param name="X" type="float"/>
+            <param name="Y" type="float"/>
+            <param name="Z" type="float"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <source id="lt-interp">
+        <Name_array id="lt-interp-arr" count="4">LINEAR LINEAR LINEAR LINEAR</Name_array>
+        <technique_common>
+          <accessor source="#lt-interp-arr" count="4" stride="1">
+            <param name="INTERPOLATION" type="name"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <sampler id="lt-sampler">
+        <input semantic="INPUT" source="#lt-input"/>
+        <input semantic="OUTPUT" source="#lt-output"/>
+        <input semantic="INTERPOLATION" source="#lt-interp"/>
+      </sampler>
+      <channel source="#lt-sampler" target="AnimCube/translate"/>
+    </animation>
+    <animation id="StepVisibilityAnim" name="StepVisibilityAnim">
+      <source id="sv-input">
+        <float_array id="sv-input-arr" count="3">0.0 0.75 1.5</float_array>
+        <technique_common>
+          <accessor source="#sv-input-arr" count="3" stride="1">
+            <param name="TIME" type="float"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <source id="sv-output">
+        <float_array id="sv-output-arr" count="3">1.0 0.0 1.0</float_array>
+        <technique_common>
+          <accessor source="#sv-output-arr" count="3" stride="1">
+            <param name="X" type="float"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <source id="sv-interp">
+        <Name_array id="sv-interp-arr" count="3">STEP STEP STEP</Name_array>
+        <technique_common>
+          <accessor source="#sv-interp-arr" count="3" stride="1">
+            <param name="INTERPOLATION" type="name"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <sampler id="sv-sampler">
+        <input semantic="INPUT" source="#sv-input"/>
+        <input semantic="OUTPUT" source="#sv-output"/>
+        <input semantic="INTERPOLATION" source="#sv-interp"/>
+      </sampler>
+      <channel source="#sv-sampler" target="AnimCube/visibility"/>
+    </animation>
+    <animation id="BezierRotateAnim" name="BezierRotateAnim">
+      <source id="br-input">
+        <float_array id="br-input-arr" count="3">0.0 0.75 1.5</float_array>
+        <technique_common>
+          <accessor source="#br-input-arr" count="3" stride="1">
+            <param name="TIME" type="float"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <source id="br-output">
+        <float_array id="br-output-arr" count="48">1 0 0 0  0 1 0 0  0 0 1 0  0 0 0 1  0.707 -0.707 0 0  0.707 0.707 0 0  0 0 1 0  0 0 0 1  1 0 0 0  0 1 0 0  0 0 1 0  0 0 0 1</float_array>
+        <technique_common>
+          <accessor source="#br-output-arr" count="3" stride="16">
+            <param name="TRANSFORM" type="float4x4"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <source id="br-interp">
+        <Name_array id="br-interp-arr" count="3">BEZIER BEZIER BEZIER</Name_array>
+        <technique_common>
+          <accessor source="#br-interp-arr" count="3" stride="1">
+            <param name="INTERPOLATION" type="name"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <source id="br-intangent">
+        <float_array id="br-intangent-arr" count="6">-0.1 0.0  0.55 0.0  1.3 0.0</float_array>
+        <technique_common>
+          <accessor source="#br-intangent-arr" count="3" stride="2">
+            <param name="X" type="float"/>
+            <param name="Y" type="float"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <source id="br-outtangent">
+        <float_array id="br-outtangent-arr" count="6">0.1 0.0  0.95 0.0  1.6 0.0</float_array>
+        <technique_common>
+          <accessor source="#br-outtangent-arr" count="3" stride="2">
+            <param name="X" type="float"/>
+            <param name="Y" type="float"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <sampler id="br-sampler">
+        <input semantic="INPUT" source="#br-input"/>
+        <input semantic="OUTPUT" source="#br-output"/>
+        <input semantic="INTERPOLATION" source="#br-interp"/>
+        <input semantic="IN_TANGENT" source="#br-intangent"/>
+        <input semantic="OUT_TANGENT" source="#br-outtangent"/>
+      </sampler>
+      <channel source="#br-sampler" target="AnimCube/matrix"/>
+    </animation>
+    <animation id="SubAnimParent" name="SubAnimParent">
+      <animation id="SubAnimChild" name="SubAnimChild">
+        <source id="sub-input">
+          <float_array id="sub-input-arr" count="2">0.0 1.0</float_array>
+          <technique_common>
+            <accessor source="#sub-input-arr" count="2" stride="1">
+              <param name="TIME" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="sub-output">
+          <float_array id="sub-output-arr" count="6">0 0 0  0 2 0</float_array>
+          <technique_common>
+            <accessor source="#sub-output-arr" count="2" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="sub-interp">
+          <Name_array id="sub-interp-arr" count="2">LINEAR LINEAR</Name_array>
+          <technique_common>
+            <accessor source="#sub-interp-arr" count="2" stride="1">
+              <param name="INTERPOLATION" type="name"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <sampler id="sub-sampler">
+          <input semantic="INPUT" source="#sub-input"/>
+          <input semantic="OUTPUT" source="#sub-output"/>
+          <input semantic="INTERPOLATION" source="#sub-interp"/>
+        </sampler>
+        <channel source="#sub-sampler" target="AnimCube/translate"/>
+      </animation>
+    </animation>
+  </library_animations>
+  <library_visual_scenes>
+    <visual_scene id="Scene" name="Scene">
+      <node id="AnimCube" name="AnimCube" type="NODE">
+        <translate sid="translate">0 0 0</translate>
+        <rotate sid="rotate">0 0 1 0</rotate>
+        <matrix sid="matrix">1 0 0 0  0 1 0 0  0 0 1 0  0 0 0 1</matrix>
+        <instance_geometry url="#Cube"/>
+      </node>
+    </visual_scene>
+  </library_visual_scenes>
+  <scene>
+    <instance_visual_scene url="#Scene"/>
+  </scene>
+</COLLADA>

@@ -1,0 +1,45 @@
+nff
+version 2.0
+viewpos 0 5 15
+viewdir 0 -0.3 -1
+TexturedFloor
+4
+-5 0 -5 norm 0 1 0 uv 0 0
+5 0 -5 norm 0 1 0 uv 4 0
+5 0 5 norm 0 1 0 uv 4 4
+-5 0 5 norm 0 1 0 uv 0 4
+2
+3 0 1 2 _t 0xAA8855
+3 0 2 3 _t 0xAA8855
+ColorBox
+8
+-1 0 -1 norm 0 0 -1 uv 0 0
+1 0 -1 norm 0 0 -1 uv 1 0
+1 2 -1 norm 0 0 -1 uv 1 1
+-1 2 -1 norm 0 0 -1 uv 0 1
+-1 0 1 norm 0 0 1 uv 0 0
+1 0 1 norm 0 0 1 uv 1 0
+1 2 1 norm 0 0 1 uv 1 1
+-1 2 1 norm 0 0 1 uv 0 1
+12
+3 0 1 2 0xFF0000
+3 0 2 3 0xFF0000
+3 4 6 5 0x00FF00
+3 4 7 6 0x00FF00
+3 0 5 1 both 0x0000FF
+3 0 4 5 both 0x0000FF
+3 2 6 7 0xFFFF00
+3 2 7 3 0xFFFF00
+3 0 3 7 0xFF00FF
+3 0 7 4 0xFF00FF
+3 1 5 6 0x00FFFF
+3 1 6 2 0x00FFFF
+MirrorPlane
+4
+-3 3 -3 norm 0 0 1 uv 0 0
+3 3 -3 norm 0 0 1 uv 2 0
+3 6 -3 norm 0 0 1 uv 2 2
+-3 6 -3 norm 0 0 1 uv 0 2
+2
+3 0 1 2 _v 0x888888
+3 0 2 3 _v 0x888888

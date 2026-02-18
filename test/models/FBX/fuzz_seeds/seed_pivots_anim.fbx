@@ -1,0 +1,510 @@
+; FBX 7.4.0 project file
+; Tests pivot inverse animation chains and complex transform decomposition
+; in FBXConverter::GenerateNodeAnimations with preservePivots=true
+
+FBXHeaderExtension:  {
+	FBXHeaderVersion: 1003
+	FBXVersion: 7400
+	Creator: "seed"
+}
+GlobalSettings:  {
+	Version: 1000
+	Properties70:  {
+		P: "UpAxis", "int", "Integer", "",1
+		P: "UpAxisSign", "int", "Integer", "",1
+		P: "FrontAxis", "int", "Integer", "",2
+		P: "FrontAxisSign", "int", "Integer", "",1
+		P: "CoordAxis", "int", "Integer", "",0
+		P: "CoordAxisSign", "int", "Integer", "",1
+		P: "OriginalUpAxis", "int", "Integer", "",1
+		P: "OriginalUpAxisSign", "int", "Integer", "",1
+		P: "UnitScaleFactor", "double", "Number", "",1
+		P: "OriginalUnitScaleFactor", "double", "Number", "",1
+	}
+}
+
+Documents:  {
+	Count: 1
+	Document: 100000, "", "Scene" {
+		Properties70:  {
+			P: "SourceObject", "object", "", ""
+			P: "ActiveAnimStackName", "KString", "", "", "Take 001"
+		}
+		RootNode: 0
+	}
+}
+
+References:  {
+}
+
+Definitions:  {
+	Version: 100
+	Count: 7
+	ObjectType: "GlobalSettings" {
+		Count: 1
+	}
+	ObjectType: "Geometry" {
+		Count: 1
+	}
+	ObjectType: "Model" {
+		Count: 1
+	}
+	ObjectType: "Material" {
+		Count: 1
+	}
+	ObjectType: "AnimationStack" {
+		Count: 1
+	}
+	ObjectType: "AnimationLayer" {
+		Count: 1
+	}
+	ObjectType: "AnimationCurveNode" {
+		Count: 7
+	}
+	ObjectType: "AnimationCurve" {
+		Count: 12
+	}
+}
+
+Objects:  {
+	Geometry: 2000001, "Geometry::PivotAnimBox", "Mesh" {
+		Vertices: *24 {
+			a: -1,-1,-1,1,-1,-1,-1,1,-1,1,1,-1,-1,-1,1,1,-1,1,-1,1,1,1,1,1
+		}
+		PolygonVertexIndex: *24 {
+			a: 0,2,3,-2,4,5,7,-7,0,1,5,-5,1,3,7,-6,3,2,6,-8,2,0,4,-7
+		}
+		GeometryVersion: 124
+		LayerElementNormal: 0 {
+			Version: 102
+			Name: ""
+			MappingInformationType: "ByPolygonVertex"
+			ReferenceInformationType: "Direct"
+			Normals: *72 {
+				a: 0,0,-1,0,0,-1,0,0,-1,0,0,-1,0,0,1,0,0,1,0,0,1,0,0,1,0,-1,0,0,-1,0,0,-1,0,0,-1,0,1,0,0,1,0,0,1,0,0,1,0,0,0,1,0,0,1,0,0,1,0,0,1,0,-1,0,0,-1,0,0,-1,0,0,-1,0,0
+			}
+		}
+		LayerElementMaterial: 0 {
+			Version: 101
+			Name: ""
+			MappingInformationType: "AllSame"
+			ReferenceInformationType: "IndexToDirect"
+			Materials: *1 {
+				a: 0
+			}
+		}
+		Layer: 0 {
+			Version: 100
+			LayerElement:  {
+				Type: "LayerElementNormal"
+				TypedIndex: 0
+			}
+			LayerElement:  {
+				Type: "LayerElementMaterial"
+				TypedIndex: 0
+			}
+		}
+	}
+	Model: 3000001, "Model::PivotAnimNode", "Mesh" {
+		Version: 232
+		Properties70:  {
+			P: "RotationOffset", "Vector3D", "Vector", "",0.5,0,0
+			P: "RotationPivot", "Vector3D", "Vector", "",1,2,0
+			P: "ScalingOffset", "Vector3D", "Vector", "",0,0.3,0
+			P: "ScalingPivot", "Vector3D", "Vector", "",0,0,1.5
+			P: "PreRotation", "Vector3D", "Vector", "",15,0,0
+			P: "PostRotation", "Vector3D", "Vector", "",0,0,30
+			P: "RotationActive", "bool", "", "",1
+			P: "RotationOrder", "enum", "", "",0
+			P: "GeometricTranslation", "Vector3D", "Vector", "",0.2,0.3,0.4
+			P: "GeometricRotation", "Vector3D", "Vector", "",10,20,0
+			P: "GeometricScaling", "Vector3D", "Vector", "",1.5,1.5,1.5
+			P: "InheritType", "enum", "", "",1
+			P: "Lcl Translation", "Lcl Translation", "", "A",0,0,0
+			P: "Lcl Rotation", "Lcl Rotation", "", "A",45,0,0
+			P: "Lcl Scaling", "Lcl Scaling", "", "A",2,2,2
+			P: "DefaultAttributeIndex", "int", "Integer", "",0
+		}
+		Shading: T
+		Culling: "CullingOff"
+	}
+	Material: 5000001, "Material::PivotMat", "" {
+		Version: 102
+		ShadingModel: "lambert"
+		MultiLayer: 0
+		Properties70:  {
+			P: "DiffuseColor", "Color", "", "A",0.8,0.2,0.2
+		}
+	}
+	AnimationStack: 6000001, "AnimStack::Take 001", "" {
+		Properties70:  {
+			P: "LocalStart", "KTime", "Time", "",0
+			P: "LocalStop", "KTime", "Time", "",46186158000
+			P: "ReferenceStart", "KTime", "Time", "",0
+			P: "ReferenceStop", "KTime", "Time", "",46186158000
+		}
+	}
+	AnimationLayer: 6100001, "AnimLayer::BaseLayer", "" {
+	}
+
+	; Standard translation animation
+	AnimationCurveNode: 6200001, "AnimCurveNode::T", "" {
+		Properties70:  {
+			P: "d|X", "Number", "", "A",0
+			P: "d|Y", "Number", "", "A",0
+			P: "d|Z", "Number", "", "A",0
+		}
+	}
+	; Standard rotation animation
+	AnimationCurveNode: 6200002, "AnimCurveNode::R", "" {
+		Properties70:  {
+			P: "d|X", "Number", "", "A",0
+			P: "d|Y", "Number", "", "A",0
+			P: "d|Z", "Number", "", "A",0
+		}
+	}
+	; Standard scaling animation
+	AnimationCurveNode: 6200003, "AnimCurveNode::S", "" {
+		Properties70:  {
+			P: "d|X", "Number", "", "A",1
+			P: "d|Y", "Number", "", "A",1
+			P: "d|Z", "Number", "", "A",1
+		}
+	}
+	; Animated RotationPivot (complex component -> has_complex=true)
+	AnimationCurveNode: 6200004, "AnimCurveNode::RotPivot", "" {
+		Properties70:  {
+			P: "d|X", "Number", "", "A",1
+			P: "d|Y", "Number", "", "A",2
+			P: "d|Z", "Number", "", "A",0
+		}
+	}
+	; Animated ScalingPivot (complex component)
+	AnimationCurveNode: 6200005, "AnimCurveNode::ScalePivot", "" {
+		Properties70:  {
+			P: "d|X", "Number", "", "A",0
+			P: "d|Y", "Number", "", "A",0
+			P: "d|Z", "Number", "", "A",1.5
+		}
+	}
+	; Animated PreRotation (complex component, rotation type)
+	AnimationCurveNode: 6200006, "AnimCurveNode::PreRot", "" {
+		Properties70:  {
+			P: "d|X", "Number", "", "A",15
+			P: "d|Y", "Number", "", "A",0
+			P: "d|Z", "Number", "", "A",0
+		}
+	}
+	; Animated PostRotation (complex component, rotation type)
+	AnimationCurveNode: 6200007, "AnimCurveNode::PostRot", "" {
+		Properties70:  {
+			P: "d|X", "Number", "", "A",0
+			P: "d|Y", "Number", "", "A",0
+			P: "d|Z", "Number", "", "A",30
+		}
+	}
+
+	; --- Animation Curves ---
+	; Translation X
+	AnimationCurve: 6300001, "AnimCurve::", "" {
+		Default: 0
+		KeyVer: 4009
+		KeyTime: *3 {
+			a: 0,23093079000,46186158000
+		}
+		KeyValueFloat: *3 {
+			a: 0,5,0
+		}
+		KeyAttrFlags: *1 {
+			a: 24840
+		}
+		KeyAttrDataFloat: *4 {
+			a: 0,0,0,0
+		}
+		KeyAttrRefCount: *1 {
+			a: 3
+		}
+	}
+	; Rotation Y
+	AnimationCurve: 6300002, "AnimCurve::", "" {
+		Default: 0
+		KeyVer: 4009
+		KeyTime: *3 {
+			a: 0,23093079000,46186158000
+		}
+		KeyValueFloat: *3 {
+			a: 0,180,360
+		}
+		KeyAttrFlags: *1 {
+			a: 24840
+		}
+		KeyAttrDataFloat: *4 {
+			a: 0,0,0,0
+		}
+		KeyAttrRefCount: *1 {
+			a: 3
+		}
+	}
+	; Scaling X
+	AnimationCurve: 6300003, "AnimCurve::", "" {
+		Default: 1
+		KeyVer: 4009
+		KeyTime: *3 {
+			a: 0,23093079000,46186158000
+		}
+		KeyValueFloat: *3 {
+			a: 1,2,1
+		}
+		KeyAttrFlags: *1 {
+			a: 24840
+		}
+		KeyAttrDataFloat: *4 {
+			a: 0,0,0,0
+		}
+		KeyAttrRefCount: *1 {
+			a: 3
+		}
+	}
+	; RotationPivot X (animated pivot)
+	AnimationCurve: 6300004, "AnimCurve::", "" {
+		Default: 1
+		KeyVer: 4009
+		KeyTime: *3 {
+			a: 0,23093079000,46186158000
+		}
+		KeyValueFloat: *3 {
+			a: 1,3,1
+		}
+		KeyAttrFlags: *1 {
+			a: 24840
+		}
+		KeyAttrDataFloat: *4 {
+			a: 0,0,0,0
+		}
+		KeyAttrRefCount: *1 {
+			a: 3
+		}
+	}
+	; RotationPivot Y (animated pivot)
+	AnimationCurve: 6300005, "AnimCurve::", "" {
+		Default: 2
+		KeyVer: 4009
+		KeyTime: *3 {
+			a: 0,23093079000,46186158000
+		}
+		KeyValueFloat: *3 {
+			a: 2,4,2
+		}
+		KeyAttrFlags: *1 {
+			a: 24840
+		}
+		KeyAttrDataFloat: *4 {
+			a: 0,0,0,0
+		}
+		KeyAttrRefCount: *1 {
+			a: 3
+		}
+	}
+	; ScalingPivot Z (animated pivot)
+	AnimationCurve: 6300006, "AnimCurve::", "" {
+		Default: 1.5
+		KeyVer: 4009
+		KeyTime: *3 {
+			a: 0,23093079000,46186158000
+		}
+		KeyValueFloat: *3 {
+			a: 1.5,3,1.5
+		}
+		KeyAttrFlags: *1 {
+			a: 24840
+		}
+		KeyAttrDataFloat: *4 {
+			a: 0,0,0,0
+		}
+		KeyAttrRefCount: *1 {
+			a: 3
+		}
+	}
+	; PreRotation X (animated complex rotation)
+	AnimationCurve: 6300007, "AnimCurve::", "" {
+		Default: 15
+		KeyVer: 4009
+		KeyTime: *3 {
+			a: 0,23093079000,46186158000
+		}
+		KeyValueFloat: *3 {
+			a: 15,45,15
+		}
+		KeyAttrFlags: *1 {
+			a: 24840
+		}
+		KeyAttrDataFloat: *4 {
+			a: 0,0,0,0
+		}
+		KeyAttrRefCount: *1 {
+			a: 3
+		}
+	}
+	; PostRotation Z (animated complex rotation)
+	AnimationCurve: 6300008, "AnimCurve::", "" {
+		Default: 30
+		KeyVer: 4009
+		KeyTime: *3 {
+			a: 0,23093079000,46186158000
+		}
+		KeyValueFloat: *3 {
+			a: 30,60,30
+		}
+		KeyAttrFlags: *1 {
+			a: 24840
+		}
+		KeyAttrDataFloat: *4 {
+			a: 0,0,0,0
+		}
+		KeyAttrRefCount: *1 {
+			a: 3
+		}
+	}
+	; Translation Y
+	AnimationCurve: 6300009, "AnimCurve::", "" {
+		Default: 0
+		KeyVer: 4009
+		KeyTime: *3 {
+			a: 0,23093079000,46186158000
+		}
+		KeyValueFloat: *3 {
+			a: 0,3,0
+		}
+		KeyAttrFlags: *1 {
+			a: 24840
+		}
+		KeyAttrDataFloat: *4 {
+			a: 0,0,0,0
+		}
+		KeyAttrRefCount: *1 {
+			a: 3
+		}
+	}
+	; Rotation X
+	AnimationCurve: 6300010, "AnimCurve::", "" {
+		Default: 0
+		KeyVer: 4009
+		KeyTime: *3 {
+			a: 0,23093079000,46186158000
+		}
+		KeyValueFloat: *3 {
+			a: 0,90,0
+		}
+		KeyAttrFlags: *1 {
+			a: 24840
+		}
+		KeyAttrDataFloat: *4 {
+			a: 0,0,0,0
+		}
+		KeyAttrRefCount: *1 {
+			a: 3
+		}
+	}
+	; Scaling Y
+	AnimationCurve: 6300011, "AnimCurve::", "" {
+		Default: 1
+		KeyVer: 4009
+		KeyTime: *3 {
+			a: 0,23093079000,46186158000
+		}
+		KeyValueFloat: *3 {
+			a: 1,1.5,1
+		}
+		KeyAttrFlags: *1 {
+			a: 24840
+		}
+		KeyAttrDataFloat: *4 {
+			a: 0,0,0,0
+		}
+		KeyAttrRefCount: *1 {
+			a: 3
+		}
+	}
+	; Scaling Z
+	AnimationCurve: 6300012, "AnimCurve::", "" {
+		Default: 1
+		KeyVer: 4009
+		KeyTime: *3 {
+			a: 0,23093079000,46186158000
+		}
+		KeyValueFloat: *3 {
+			a: 1,2,1
+		}
+		KeyAttrFlags: *1 {
+			a: 24840
+		}
+		KeyAttrDataFloat: *4 {
+			a: 0,0,0,0
+		}
+		KeyAttrRefCount: *1 {
+			a: 3
+		}
+	}
+}
+
+Connections:  {
+	; Model to root
+	C: "OO",3000001,0
+
+	; Geometry and Material to Model
+	C: "OO",2000001,3000001
+	C: "OO",5000001,3000001
+
+	; AnimLayer to AnimStack
+	C: "OO",6100001,6000001
+
+	; All AnimCurveNodes to AnimLayer
+	C: "OO",6200001,6100001
+	C: "OO",6200002,6100001
+	C: "OO",6200003,6100001
+	C: "OO",6200004,6100001
+	C: "OO",6200005,6100001
+	C: "OO",6200006,6100001
+	C: "OO",6200007,6100001
+
+	; AnimCurveNodes to Model properties
+	; Standard transforms
+	C: "OP",6200001,3000001,"Lcl Translation"
+	C: "OP",6200002,3000001,"Lcl Rotation"
+	C: "OP",6200003,3000001,"Lcl Scaling"
+	; Complex pivot/rotation properties (triggers has_complex=true)
+	C: "OP",6200004,3000001,"RotationPivot"
+	C: "OP",6200005,3000001,"ScalingPivot"
+	C: "OP",6200006,3000001,"PreRotation"
+	C: "OP",6200007,3000001,"PostRotation"
+
+	; AnimCurves to AnimCurveNodes
+	; Translation X,Y
+	C: "OP",6300001,6200001,"d|X"
+	C: "OP",6300009,6200001,"d|Y"
+	; Rotation X,Y
+	C: "OP",6300010,6200002,"d|X"
+	C: "OP",6300002,6200002,"d|Y"
+	; Scaling X,Y,Z
+	C: "OP",6300003,6200003,"d|X"
+	C: "OP",6300011,6200003,"d|Y"
+	C: "OP",6300012,6200003,"d|Z"
+	; RotationPivot X,Y
+	C: "OP",6300004,6200004,"d|X"
+	C: "OP",6300005,6200004,"d|Y"
+	; ScalingPivot Z
+	C: "OP",6300006,6200005,"d|Z"
+	; PreRotation X
+	C: "OP",6300007,6200006,"d|X"
+	; PostRotation Z
+	C: "OP",6300008,6200007,"d|Z"
+}
+
+Takes:  {
+	Current: "Take 001"
+	Take: "Take 001" {
+		FileName: "Take_001.tak"
+		LocalTime: 0,46186158000
+		ReferenceTime: 0,46186158000
+	}
+}

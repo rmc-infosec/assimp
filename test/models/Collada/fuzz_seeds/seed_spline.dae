@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1">
+  <asset><created>2024-01-01</created><modified>2024-01-01</modified>
+    <unit name="meter" meter="1"/>
+    <up_axis>Y_UP</up_axis>
+  </asset>
+  <library_geometries>
+    <geometry id="polylist-mesh" name="PolylistMesh">
+      <mesh>
+        <source id="pl-pos">
+          <float_array id="pl-pos-array" count="15">0 0 0 2 0 0 2 2 0 0 2 0 1 1 1</float_array>
+          <technique_common>
+            <accessor source="#pl-pos-array" count="5" stride="3">
+              <param name="X" type="float"/><param name="Y" type="float"/><param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="pl-norm">
+          <float_array id="pl-norm-array" count="12">0 0 -1 0 -1 0.5 0 1 0.5 -1 0 0.5</float_array>
+          <technique_common>
+            <accessor source="#pl-norm-array" count="4" stride="3">
+              <param name="X" type="float"/><param name="Y" type="float"/><param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <vertices id="pl-vtx"><input semantic="POSITION" source="#pl-pos"/></vertices>
+        <polylist count="4">
+          <input semantic="VERTEX" source="#pl-vtx" offset="0"/>
+          <input semantic="NORMAL" source="#pl-norm" offset="1"/>
+          <vcount>3 3 3 3</vcount>
+          <p>0 1 1 1 4 1 1 2 2 2 4 2 2 3 3 3 4 3 3 0 0 0 4 0</p>
+        </polylist>
+      </mesh>
+    </geometry>
+    <geometry id="lines-geo" name="LinesMesh">
+      <mesh>
+        <source id="ln-pos">
+          <float_array id="ln-pos-array" count="12">0 0 0 1 0 0 1 1 0 0 1 0</float_array>
+          <technique_common>
+            <accessor source="#ln-pos-array" count="4" stride="3">
+              <param name="X" type="float"/><param name="Y" type="float"/><param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <vertices id="ln-vtx"><input semantic="POSITION" source="#ln-pos"/></vertices>
+        <lines count="4">
+          <input semantic="VERTEX" source="#ln-vtx" offset="0"/>
+          <p>0 1 1 2 2 3 3 0</p>
+        </lines>
+      </mesh>
+    </geometry>
+  </library_geometries>
+  <library_visual_scenes>
+    <visual_scene id="Scene" name="Scene">
+      <node id="PolyNode" name="PolyNode" type="NODE">
+        <matrix sid="transform">1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</matrix>
+        <instance_geometry url="#polylist-mesh"/>
+      </node>
+      <node id="LineNode" name="LineNode" type="NODE">
+        <translate>5 0 0</translate>
+        <instance_geometry url="#lines-geo"/>
+      </node>
+    </visual_scene>
+  </library_visual_scenes>
+  <scene><instance_visual_scene url="#Scene"/></scene>
+</COLLADA>

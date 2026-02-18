@@ -1,0 +1,45 @@
+#VRML V2.0 utf8
+
+Group {
+  children [
+    Transform {
+      translation -2 0 0
+      children [
+        Shape {
+          geometry Box { size 1 1 1 }
+          appearance Appearance {
+            material Material { diffuseColor 1 0 0 }
+          }
+        }
+      ]
+    }
+    Transform {
+      translation 0 0 0
+      children [
+        Shape {
+          geometry Sphere { radius 0.5 }
+          appearance Appearance {
+            material Material { diffuseColor 0 1 0 }
+          }
+        }
+      ]
+    }
+  ]
+}
+Switch {
+  whichChoice 0
+  choice [
+    Shape {
+      geometry Cone { height 2 bottomRadius 1 }
+      appearance Appearance {
+        material Material { diffuseColor 0 0 1 }
+      }
+    }
+    Shape {
+      geometry Cylinder { height 2 radius 0.5 }
+      appearance Appearance {
+        material Material { diffuseColor 1 1 0 }
+      }
+    }
+  ]
+}

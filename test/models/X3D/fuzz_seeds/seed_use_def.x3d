@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<X3D profile="Interchange" version="3.3">
+  <Scene>
+    <Shape>
+      <Appearance DEF="SharedAppearance">
+        <Material DEF="SharedMaterial" diffuseColor="0.9 0.1 0.1"/>
+      </Appearance>
+      <Box DEF="SharedBox" size="1 1 1"/>
+    </Shape>
+    <Transform translation="3 0 0">
+      <Shape>
+        <Appearance USE="SharedAppearance"/>
+        <Box USE="SharedBox"/>
+      </Shape>
+    </Transform>
+  </Scene>
+</X3D>

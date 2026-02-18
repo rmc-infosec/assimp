@@ -1,0 +1,231 @@
+{
+  "asset": {
+    "version": "2.0",
+    "generator": "fuzz_seed"
+  },
+  "scene": 0,
+  "scenes": [
+    {
+      "nodes": [
+        0
+      ]
+    }
+  ],
+  "nodes": [
+    {
+      "mesh": 0,
+      "name": "ColorMesh"
+    }
+  ],
+  "meshes": [
+    {
+      "primitives": [
+        {
+          "attributes": {
+            "POSITION": 0,
+            "NORMAL": 1,
+            "TEXCOORD_0": 2,
+            "TEXCOORD_1": 3,
+            "COLOR_0": 4,
+            "COLOR_1": 5
+          },
+          "indices": 6
+        }
+      ]
+    }
+  ],
+  "animations": [
+    {
+      "name": "MixedInterp",
+      "channels": [
+        {
+          "sampler": 0,
+          "target": {
+            "node": 0,
+            "path": "translation"
+          }
+        },
+        {
+          "sampler": 1,
+          "target": {
+            "node": 0,
+            "path": "rotation"
+          }
+        },
+        {
+          "sampler": 2,
+          "target": {
+            "node": 0,
+            "path": "scale"
+          }
+        }
+      ],
+      "samplers": [
+        {
+          "input": 7,
+          "output": 8,
+          "interpolation": "CUBICSPLINE"
+        },
+        {
+          "input": 7,
+          "output": 9,
+          "interpolation": "STEP"
+        },
+        {
+          "input": 7,
+          "output": 10,
+          "interpolation": "LINEAR"
+        }
+      ]
+    }
+  ],
+  "accessors": [
+    {
+      "bufferView": 0,
+      "componentType": 5126,
+      "count": 4,
+      "type": "VEC3",
+      "max": [
+        1,
+        1,
+        0
+      ],
+      "min": [
+        -1,
+        -1,
+        0
+      ]
+    },
+    {
+      "bufferView": 1,
+      "componentType": 5126,
+      "count": 4,
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 2,
+      "componentType": 5126,
+      "count": 4,
+      "type": "VEC2"
+    },
+    {
+      "bufferView": 3,
+      "componentType": 5126,
+      "count": 4,
+      "type": "VEC2"
+    },
+    {
+      "bufferView": 4,
+      "componentType": 5121,
+      "count": 4,
+      "type": "VEC4",
+      "normalized": true
+    },
+    {
+      "bufferView": 5,
+      "componentType": 5123,
+      "count": 4,
+      "type": "VEC4",
+      "normalized": true
+    },
+    {
+      "bufferView": 6,
+      "componentType": 5123,
+      "count": 6,
+      "type": "SCALAR"
+    },
+    {
+      "bufferView": 7,
+      "componentType": 5126,
+      "count": 3,
+      "type": "SCALAR",
+      "max": [
+        1.0
+      ],
+      "min": [
+        0.0
+      ]
+    },
+    {
+      "bufferView": 8,
+      "componentType": 5126,
+      "count": 9,
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 9,
+      "componentType": 5126,
+      "count": 3,
+      "type": "VEC4"
+    },
+    {
+      "bufferView": 10,
+      "componentType": 5126,
+      "count": 3,
+      "type": "VEC3"
+    }
+  ],
+  "bufferViews": [
+    {
+      "buffer": 0,
+      "byteOffset": 0,
+      "byteLength": 48
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 48,
+      "byteLength": 48
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 96,
+      "byteLength": 32
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 128,
+      "byteLength": 32
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 160,
+      "byteLength": 16
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 176,
+      "byteLength": 32
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 208,
+      "byteLength": 12
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 220,
+      "byteLength": 12
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 232,
+      "byteLength": 108
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 340,
+      "byteLength": 48
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 388,
+      "byteLength": 36
+    }
+  ],
+  "buffers": [
+    {
+      "byteLength": 424,
+      "uri": "data:application/octet-stream;base64,AACAvwAAgL8AAAAAAACAPwAAgL8AAAAAAACAPwAAgD8AAAAAAACAvwAAgD8AAAAAAAAAAAAAAAAAAIA/AAAAAAAAAAAAAIA/AAAAAAAAAAAAAIA/AAAAAAAAAAAAAIA/AAAAAAAAAAAAAIA/AAAAAAAAgD8AAIA/AAAAAAAAgD8AAAA/AAAAAAAAgD8AAAA/AAAAPwAAgD8AAAAAAAAAP/8AAP8A/wD/AAD/////AP///wAAAAD//wAA//8AAP//AAAAAP///////////////wAAAQACAAAAAgADAAAAAAAAAAA/AACAPwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIA/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIC/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgD8AAAAA9P00PwAAAAD0/TQ/AAAAAAAAgD8AAAAAAAAAAAAAgD8AAIA/AACAPwAAAEAAAABAAAAAQAAAgD8AAIA/AACAPw=="
+    }
+  ]
+}

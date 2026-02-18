@@ -1,0 +1,81 @@
+AC3Db
+MATERIAL "red_mat" rgb 0.8 0.2 0.1  amb 0.2 0.1 0.05  emis 0 0 0  spec 0.5 0.5 0.5  shi 64  trans 0
+MATERIAL "blue_mat" rgb 0.1 0.2 0.8  amb 0.05 0.1 0.2  emis 0.01 0.01 0.02  spec 0.3 0.3 0.3  shi 32  trans 0.1
+OBJECT group
+name "root_group"
+kids 2
+OBJECT poly
+name "cube_subdiv"
+crease 30.0
+subdiv 2
+texture "diffuse.png"
+texrep 1.0 1.0
+numvert 8
+-1.0 -1.0 -1.0
+ 1.0 -1.0 -1.0
+ 1.0  1.0 -1.0
+-1.0  1.0 -1.0
+-1.0 -1.0  1.0
+ 1.0 -1.0  1.0
+ 1.0  1.0  1.0
+-1.0  1.0  1.0
+numsurf 6
+SURF 0x10
+mat 0
+refs 4
+0 0.0 0.0
+1 1.0 0.0
+2 1.0 1.0
+3 0.0 1.0
+SURF 0x10
+mat 0
+refs 4
+4 0.0 0.0
+7 1.0 0.0
+6 1.0 1.0
+5 0.0 1.0
+SURF 0x10
+mat 1
+refs 4
+0 0.0 0.0
+4 1.0 0.0
+5 1.0 1.0
+1 0.0 1.0
+SURF 0x10
+mat 1
+refs 4
+2 0.0 0.0
+6 1.0 0.0
+7 1.0 1.0
+3 0.0 1.0
+SURF 0x10
+mat 0
+refs 4
+0 0.0 0.0
+3 1.0 0.0
+7 1.0 1.0
+4 0.0 1.0
+SURF 0x10
+mat 0
+refs 4
+1 0.0 0.0
+5 1.0 0.0
+6 1.0 1.0
+2 0.0 1.0
+kids 0
+OBJECT poly
+name "triangle"
+loc 3.0 0.0 0.0
+crease 45.0
+numvert 3
+0.0 0.0 0.0
+1.0 0.0 0.0
+0.5 1.0 0.0
+numsurf 1
+SURF 0x20
+mat 1
+refs 3
+0 0.0 0.0
+1 1.0 0.0
+2 0.5 1.0
+kids 0

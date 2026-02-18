@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1">
+  <asset><created>2024-01-01</created><modified>2024-01-01</modified></asset>
+  <library_geometries>
+    <geometry id="tri">
+      <mesh>
+        <source id="tri-pos">
+          <float_array id="tri-pos-array" count="9">0 0 0 1 0 0 0 1 0</float_array>
+          <technique_common>
+            <accessor source="#tri-pos-array" count="3" stride="3">
+              <param name="X" type="float"/><param name="Y" type="float"/><param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <vertices id="tri-vtx"><input semantic="POSITION" source="#tri-pos"/></vertices>
+        <triangles count="1">
+          <input semantic="VERTEX" source="#tri-vtx" offset="0"/>
+          <p>0 1 2</p>
+        </triangles>
+      </mesh>
+    </geometry>
+  </library_geometries>
+  <library_nodes>
+    <node id="SharedNode" name="SharedNode" type="NODE">
+      <translate>1 2 3</translate>
+      <instance_geometry url="#tri"/>
+    </node>
+  </library_nodes>
+  <library_visual_scenes>
+    <visual_scene id="Scene">
+      <node id="LookatNode" name="LookatNode" type="NODE">
+        <lookat>0 0 10 0 0 0 0 1 0</lookat>
+        <instance_geometry url="#tri"/>
+      </node>
+      <node id="SkewNode" name="SkewNode" type="NODE">
+        <skew>45 0 1 0 1 0 0</skew>
+        <instance_geometry url="#tri"/>
+      </node>
+      <node id="InstanceRef1" name="InstanceRef1" type="NODE">
+        <translate>5 0 0</translate>
+        <instance_node url="#SharedNode"/>
+      </node>
+      <node id="InstanceRef2" name="InstanceRef2" type="NODE">
+        <translate>-5 0 0</translate>
+        <instance_node url="#SharedNode"/>
+      </node>
+    </visual_scene>
+  </library_visual_scenes>
+  <scene><instance_visual_scene url="#Scene"/></scene>
+</COLLADA>

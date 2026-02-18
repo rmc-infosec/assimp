@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1">
+<asset><created>2026-01-01</created><modified>2026-01-01</modified></asset>
+<library_geometries>
+  <geometry id="cube" name="Cube">
+    <mesh>
+      <source id="cp"><float_array id="cpa" count="24">
+        -0.5 -0.5 -0.5  0.5 -0.5 -0.5  0.5 0.5 -0.5  -0.5 0.5 -0.5
+        -0.5 -0.5 0.5  0.5 -0.5 0.5  0.5 0.5 0.5  -0.5 0.5 0.5
+      </float_array>
+        <technique_common><accessor source="#cpa" count="8" stride="3">
+          <param name="X" type="float"/><param name="Y" type="float"/><param name="Z" type="float"/>
+        </accessor></technique_common></source>
+      <vertices id="cv"><input semantic="POSITION" source="#cp"/></vertices>
+      <triangles count="4">
+        <input semantic="VERTEX" source="#cv" offset="0"/>
+        <p>0 1 2 0 2 3 4 5 6 4 6 7</p>
+      </triangles>
+    </mesh>
+  </geometry>
+</library_geometries>
+<library_lights>
+  <light id="pointLight">
+    <technique_common>
+      <point>
+        <color>1 1 1</color>
+        <constant_attenuation>1</constant_attenuation>
+        <linear_attenuation>0.1</linear_attenuation>
+        <quadratic_attenuation>0.01</quadratic_attenuation>
+      </point>
+    </technique_common>
+  </light>
+</library_lights>
+<library_cameras>
+  <camera id="cam" name="MainCam">
+    <optics><technique_common>
+      <perspective>
+        <xfov>60</xfov>
+        <yfov>45</yfov>
+        <aspect_ratio>1.333</aspect_ratio>
+        <znear>0.1</znear>
+        <zfar>1000</zfar>
+      </perspective>
+    </technique_common></optics>
+  </camera>
+  <camera id="ortho_cam" name="OrthoCam">
+    <optics><technique_common>
+      <orthographic>
+        <xmag>10</xmag>
+        <ymag>7.5</ymag>
+        <znear>0.1</znear>
+        <zfar>500</zfar>
+      </orthographic>
+    </technique_common></optics>
+  </camera>
+</library_cameras>
+<library_nodes>
+  <node id="SharedCube" name="SharedCube" type="NODE">
+    <translate sid="translate">0 0 0</translate>
+    <instance_geometry url="#cube"/>
+  </node>
+</library_nodes>
+<library_visual_scenes>
+  <visual_scene id="Scene" name="Scene">
+    <node id="Root" name="Root" type="NODE">
+      <matrix sid="transform">1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</matrix>
+      <node id="Inst1" name="Inst1" type="NODE">
+        <translate sid="translate">-2 0 0</translate>
+        <instance_node url="#SharedCube"/>
+      </node>
+      <node id="Inst2" name="Inst2" type="NODE">
+        <translate sid="translate">2 0 0</translate>
+        <instance_node url="#SharedCube"/>
+      </node>
+      <node id="CamNode" name="CamNode" type="NODE">
+        <lookat sid="lookAt">0 0 10 0 0 0 0 1 0</lookat>
+        <instance_camera url="#cam"/>
+      </node>
+      <node id="OrthoNode" name="OrthoNode" type="NODE">
+        <translate sid="translate">0 5 0</translate>
+        <instance_camera url="#ortho_cam"/>
+      </node>
+      <node id="LightNode" name="LightNode" type="NODE">
+        <translate sid="translate">0 5 5</translate>
+        <instance_light url="#pointLight"/>
+      </node>
+    </node>
+    <evaluate_scene>
+      <render camera_node="#CamNode"/>
+    </evaluate_scene>
+  </visual_scene>
+</library_visual_scenes>
+<scene><instance_visual_scene url="#Scene"/></scene>
+</COLLADA>

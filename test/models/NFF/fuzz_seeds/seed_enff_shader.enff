@@ -1,0 +1,20 @@
+nff
+version 1.0
+viewpos 0 3 8
+viewdir 0 -0.3 -1
+RedObj
+4
+-1 0 -1 norm 0 1 0 uv 0 0
+1 0 -1 norm 0 1 0 uv 1 0
+1 0 1 norm 0 1 0 uv 1 1
+-1 0 1 norm 0 1 0 uv 0 1
+2
+3 0 1 2 0xFF0000
+3 0 2 3 0xFF0000
+BlueObj
+3
+0 0 0 norm 0 0 1 uv 0 0
+2 0 0 norm 0 0 1 uv 1 0
+1 2 0 norm 0 0 1 uv 0.5 1
+1
+3 0 1 2 0x0000FF

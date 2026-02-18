@@ -1,0 +1,908 @@
+; FBX 7.4.0 project file
+; Kitchen-sink seed: mesh(multi-mat, multi-UV, vertex colors, normals, 14 tri faces),
+; skeleton(3 bones, skin clusters, bind pose), blend shapes(2 channels, animated),
+; cameras(persp+ortho), lights(point+spot+dir), geometric/pivot transforms, animation
+
+FBXHeaderExtension:  {
+	FBXHeaderVersion: 1003
+	FBXVersion: 7400
+	Creator: "seed"
+}
+GlobalSettings:  {
+	Version: 1000
+	Properties70:  {
+		P: "UpAxis", "int", "Integer", "",1
+		P: "UpAxisSign", "int", "Integer", "",1
+		P: "FrontAxis", "int", "Integer", "",2
+		P: "FrontAxisSign", "int", "Integer", "",1
+		P: "CoordAxis", "int", "Integer", "",0
+		P: "CoordAxisSign", "int", "Integer", "",1
+		P: "OriginalUpAxis", "int", "Integer", "",1
+		P: "OriginalUpAxisSign", "int", "Integer", "",1
+		P: "UnitScaleFactor", "double", "Number", "",1
+		P: "OriginalUnitScaleFactor", "double", "Number", "",1
+	}
+}
+
+Documents:  {
+	Count: 1
+	Document: 100000, "", "Scene" {
+		Properties70:  {
+			P: "SourceObject", "object", "", ""
+			P: "ActiveAnimStackName", "KString", "", "", "Take 001"
+		}
+		RootNode: 0
+	}
+}
+
+References:  {
+}
+
+Definitions:  {
+	Version: 100
+	Count: 11
+	ObjectType: "GlobalSettings" {
+		Count: 1
+	}
+	ObjectType: "Geometry" {
+		Count: 4
+		PropertyTemplate: "FbxMesh" {
+			Properties70:  {
+				P: "Color", "ColorRGB", "Color", "",0.8,0.8,0.8
+				P: "BBoxMin", "Vector3D", "Vector", "",0,0,0
+				P: "BBoxMax", "Vector3D", "Vector", "",0,0,0
+				P: "Primary Visibility", "bool", "", "",1
+				P: "Casts Shadows", "bool", "", "",1
+				P: "Receive Shadows", "bool", "", "",1
+			}
+		}
+	}
+	ObjectType: "Model" {
+		Count: 11
+		PropertyTemplate: "FbxNode" {
+			Properties70:  {
+				P: "Lcl Translation", "Lcl Translation", "", "A",0,0,0
+				P: "Lcl Rotation", "Lcl Rotation", "", "A",0,0,0
+				P: "Lcl Scaling", "Lcl Scaling", "", "A",1,1,1
+				P: "Visibility", "Visibility", "", "A",1
+			}
+		}
+	}
+	ObjectType: "NodeAttribute" {
+		Count: 8
+	}
+	ObjectType: "Deformer" {
+		Count: 8
+	}
+	ObjectType: "Material" {
+		Count: 3
+	}
+	ObjectType: "Pose" {
+		Count: 1
+	}
+	ObjectType: "AnimationStack" {
+		Count: 1
+	}
+	ObjectType: "AnimationLayer" {
+		Count: 1
+	}
+	ObjectType: "AnimationCurveNode" {
+		Count: 4
+	}
+	ObjectType: "AnimationCurve" {
+		Count: 6
+	}
+}
+
+Objects:  {
+	; ==========================================================================
+	; MAIN MESH: 12 vertices, 14 triangulated faces, multi-material, multi-UV,
+	; vertex colors, normals
+	; ==========================================================================
+	; Vertices: extruded quad grid  (4 bottom + 4 middle + 4 top = 12 verts)
+	; y=0 plane: v0(-1,0,-1) v1(1,0,-1) v2(1,0,1) v3(-1,0,1)
+	; y=1 plane: v4(-1,1,-1) v5(1,1,-1) v6(1,1,1) v7(-1,1,1)
+	; y=2 plane: v8(-1,2,-1) v9(1,2,-1) v10(1,2,1) v11(-1,2,1)
+	Geometry: 2000001, "Geometry::KitchenMesh", "Mesh" {
+		Vertices: *36 {
+			a: -1,0,-1,1,0,-1,1,0,1,-1,0,1,-1,1,-1,1,1,-1,1,1,1,-1,1,1,-1,2,-1,1,2,-1,1,2,1,-1,2,1
+		}
+		; 14 triangles (negative index = end of polygon, value = -(idx+1))
+		; Bottom face: 0,1,2 and 0,2,3
+		; Top face: 8,10,9 and 8,11,10
+		; Front: 0,5,1 and 0,4,5
+		; Back: 2,7,3 and 2,6,7
+		; Middle band front: 4,9,5 and 4,8,9
+		; Middle band back: 6,11,7 and 6,10,11
+		; Left: 3,4,0 and 3,7,4
+		PolygonVertexIndex: *42 {
+			a: 0,1,-3,0,2,-4,8,10,-10,8,11,-11,0,5,-2,0,4,-6,2,7,-4,2,6,-8,4,9,-6,4,8,-10,6,11,-8,6,10,-12,3,4,-1,3,7,-5
+		}
+		GeometryVersion: 124
+		LayerElementNormal: 0 {
+			Version: 102
+			Name: ""
+			MappingInformationType: "ByPolygonVertex"
+			ReferenceInformationType: "Direct"
+			; 42 vertex normals (14 tris * 3 verts)
+			Normals: *126 {
+				a: 0,-1,0,0,-1,0,0,-1,0,0,-1,0,0,-1,0,0,-1,0,0,1,0,0,1,0,0,1,0,0,1,0,0,1,0,0,1,0,0,0,-1,0,0,-1,0,0,-1,0,0,-1,0,0,-1,0,0,-1,0,0,1,0,0,1,0,0,1,0,0,1,0,0,1,0,0,1,0,0,-1,0,0,-1,0,0,-1,0,0,-1,0,0,-1,0,0,-1,0,0,1,0,0,1,0,0,1,0,0,1,0,0,1,0,0,1,-1,0,0,-1,0,0,-1,0,0,-1,0,0,-1,0,0,-1,0,0
+			}
+		}
+		LayerElementUV: 0 {
+			Version: 101
+			Name: "DiffuseUV"
+			MappingInformationType: "ByPolygonVertex"
+			ReferenceInformationType: "IndexToDirect"
+			UV: *8 {
+				a: 0,0,1,0,0,1,1,1
+			}
+			UVIndex: *42 {
+				a: 0,1,3,0,3,2,0,1,3,0,3,2,0,1,3,0,3,2,0,1,3,0,3,2,0,1,3,0,3,2,0,1,3,0,3,2,0,1,3,0,3,2
+			}
+		}
+		LayerElementUV: 1 {
+			Version: 101
+			Name: "LightmapUV"
+			MappingInformationType: "ByPolygonVertex"
+			ReferenceInformationType: "IndexToDirect"
+			UV: *8 {
+				a: 0,0,0.5,0,0,0.5,0.5,0.5
+			}
+			UVIndex: *42 {
+				a: 0,1,3,0,3,2,0,1,3,0,3,2,0,1,3,0,3,2,0,1,3,0,3,2,0,1,3,0,3,2,0,1,3,0,3,2,0,1,3,0,3,2
+			}
+		}
+		LayerElementColor: 0 {
+			Version: 101
+			Name: "VertColors"
+			MappingInformationType: "ByPolygonVertex"
+			ReferenceInformationType: "Direct"
+			; 42 RGBA values
+			Colors: *168 {
+				a: 1,0,0,1,1,0,0,1,1,0,0,1,1,0,0,1,1,0,0,1,1,0,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,0,1,1,0,0,1,1,0,0,1,1,0,0,1,1,0,0,1,1,0,0,1,1,1,1,0,1,1,1,0,1,1,1,0,1,1,1,0,1,1,1,0,1,1,1,0,1,0,1,1,1,0,1,1,1,0,1,1,1,0,1,1,1,0,1,1,1,0,1,1,1,1,0,1,1,1,0,1,1,1,0,1,1,1,0,1,1,1,0,1,1,1,0,1,1,0.5,0.5,0.5,1,0.5,0.5,0.5,1,0.5,0.5,0.5,1,0.5,0.5,0.5,1,0.5,0.5,0.5,1,0.5,0.5,0.5,1
+			}
+		}
+		LayerElementMaterial: 0 {
+			Version: 101
+			Name: ""
+			MappingInformationType: "ByPolygon"
+			ReferenceInformationType: "IndexToDirect"
+			; 14 polygons -> material indices: mat0 for bottom(2), mat1 for middle(6), mat2 for top+sides(6)
+			Materials: *14 {
+				a: 0,0,2,2,1,1,1,1,1,1,1,1,2,2
+			}
+		}
+		Layer: 0 {
+			Version: 100
+			LayerElement:  {
+				Type: "LayerElementNormal"
+				TypedIndex: 0
+			}
+			LayerElement:  {
+				Type: "LayerElementUV"
+				TypedIndex: 0
+			}
+			LayerElement:  {
+				Type: "LayerElementMaterial"
+				TypedIndex: 0
+			}
+			LayerElement:  {
+				Type: "LayerElementColor"
+				TypedIndex: 0
+			}
+		}
+		Layer: 1 {
+			Version: 100
+			LayerElement:  {
+				Type: "LayerElementUV"
+				TypedIndex: 1
+			}
+		}
+	}
+
+	; ==========================================================================
+	; BLEND SHAPE GEOMETRIES (2 shapes)
+	; ==========================================================================
+	Geometry: 2000002, "Geometry::ShapePush", "Shape" {
+		Version: 100
+		Indexes: *4 {
+			a: 0,1,2,3
+		}
+		Vertices: *12 {
+			a: 0,0,0.3,0,0,0.3,0,0,0.3,0,0,0.3
+		}
+		Normals: *12 {
+			a: 0,0,1,0,0,1,0,0,1,0,0,1
+		}
+	}
+	Geometry: 2000003, "Geometry::ShapeLift", "Shape" {
+		Version: 100
+		Indexes: *4 {
+			a: 8,9,10,11
+		}
+		Vertices: *12 {
+			a: 0,0.5,0,0,0.5,0,0,0.5,0,0,0.5,0
+		}
+		Normals: *12 {
+			a: 0,1,0,0,1,0,0,1,0,0,1,0
+		}
+	}
+
+	; ==========================================================================
+	; NODE ATTRIBUTES: bones, cameras, lights
+	; ==========================================================================
+	; Bone attributes
+	NodeAttribute: 1100001, "NodeAttribute::RootBoneAttr", "LimbNode" {
+		Properties70:  {
+			P: "Size", "double", "Number", "",1
+		}
+		TypeFlags: "Skeleton"
+	}
+	NodeAttribute: 1100002, "NodeAttribute::MidBoneAttr", "LimbNode" {
+		Properties70:  {
+			P: "Size", "double", "Number", "",1
+		}
+		TypeFlags: "Skeleton"
+	}
+	NodeAttribute: 1100003, "NodeAttribute::TipBoneAttr", "LimbNode" {
+		Properties70:  {
+			P: "Size", "double", "Number", "",1
+		}
+		TypeFlags: "Skeleton"
+	}
+	; Camera attributes
+	NodeAttribute: 1100004, "NodeAttribute::PerspCamAttr", "Camera" {
+		Properties70:  {
+			P: "Position", "Vector", "", "A",10,5,10
+			P: "UpVector", "Vector", "", "A",0,1,0
+			P: "InterestPosition", "Vector", "", "A",0,0,0
+			P: "ApertureMode", "enum", "", "",2
+			P: "FieldOfView", "FieldOfView", "", "A",60
+			P: "FieldOfViewX", "FieldOfViewX", "", "A",60
+			P: "FieldOfViewY", "FieldOfViewY", "", "A",40
+			P: "FocalLength", "Number", "", "A",35
+			P: "NearPlane", "double", "Number", "",0.1
+			P: "FarPlane", "double", "Number", "",5000
+			P: "FilmWidth", "double", "Number", "",0.980
+			P: "FilmHeight", "double", "Number", "",0.735
+			P: "FilmAspectRatio", "double", "Number", "",1.333
+			P: "AspectWidth", "double", "Number", "",1920
+			P: "AspectHeight", "double", "Number", "",1080
+			P: "CameraProjectionType", "enum", "", "",0
+		}
+		TypeFlags: "Camera"
+		GeometryVersion: 124
+		Position: 10,5,10
+		Up: 0,1,0
+		LookAt: 0,0,0
+	}
+	NodeAttribute: 1100005, "NodeAttribute::OrthoCamAttr", "Camera" {
+		Properties70:  {
+			P: "Position", "Vector", "", "A",0,20,0
+			P: "UpVector", "Vector", "", "A",0,0,-1
+			P: "InterestPosition", "Vector", "", "A",0,0,0
+			P: "ApertureMode", "enum", "", "",2
+			P: "FieldOfView", "FieldOfView", "", "A",90
+			P: "FieldOfViewX", "FieldOfViewX", "", "A",90
+			P: "FieldOfViewY", "FieldOfViewY", "", "A",90
+			P: "FocalLength", "Number", "", "A",50
+			P: "NearPlane", "double", "Number", "",0.01
+			P: "FarPlane", "double", "Number", "",1000
+			P: "FilmWidth", "double", "Number", "",1.417
+			P: "FilmHeight", "double", "Number", "",1.417
+			P: "FilmAspectRatio", "double", "Number", "",1.0
+			P: "AspectWidth", "double", "Number", "",1024
+			P: "AspectHeight", "double", "Number", "",1024
+			P: "CameraProjectionType", "enum", "", "",1
+			P: "OrthoZoom", "double", "Number", "",1.0
+		}
+		TypeFlags: "Camera"
+		GeometryVersion: 124
+		Position: 0,20,0
+		Up: 0,0,-1
+		LookAt: 0,0,0
+	}
+	; Light attributes
+	NodeAttribute: 1100006, "NodeAttribute::PointLightAttr", "Light" {
+		GeometryVersion: 124
+		Properties70:  {
+			P: "LightType", "enum", "", "",0
+			P: "CastLight", "bool", "", "",1
+			P: "Color", "Color", "", "A",1,0.9,0.8
+			P: "Intensity", "Number", "", "A",100
+			P: "DecayType", "enum", "", "",2
+			P: "DecayStart", "double", "Number", "",25
+			P: "CastShadows", "bool", "", "",1
+			P: "ShadowColor", "Color", "", "A",0,0,0
+		}
+	}
+	NodeAttribute: 1100007, "NodeAttribute::SpotLightAttr", "Light" {
+		GeometryVersion: 124
+		Properties70:  {
+			P: "LightType", "enum", "", "",2
+			P: "CastLight", "bool", "", "",1
+			P: "Color", "Color", "", "A",1,1,1
+			P: "Intensity", "Number", "", "A",150
+			P: "DecayType", "enum", "", "",2
+			P: "DecayStart", "double", "Number", "",30
+			P: "InnerAngle", "Number", "", "A",30
+			P: "OuterAngle", "Number", "", "A",60
+			P: "CastShadows", "bool", "", "",1
+			P: "ShadowColor", "Color", "", "A",0,0,0
+		}
+	}
+	NodeAttribute: 1100008, "NodeAttribute::DirLightAttr", "Light" {
+		GeometryVersion: 124
+		Properties70:  {
+			P: "LightType", "enum", "", "",1
+			P: "CastLight", "bool", "", "",1
+			P: "Color", "Color", "", "A",0.95,0.95,1
+			P: "Intensity", "Number", "", "A",80
+			P: "CastShadows", "bool", "", "",1
+			P: "ShadowColor", "Color", "", "A",0,0,0
+		}
+	}
+
+	; ==========================================================================
+	; MODELS: hierarchy with pivots, bones, cameras, lights
+	; ==========================================================================
+	; Root group node (level 1)
+	Model: 3000001, "Model::RootGroup", "Null" {
+		Version: 232
+		Properties70:  {
+			P: "RotationOffset", "Vector3D", "Vector", "",0.5,0,0
+			P: "RotationPivot", "Vector3D", "Vector", "",1,2,0
+			P: "ScalingOffset", "Vector3D", "Vector", "",0,0.3,0
+			P: "ScalingPivot", "Vector3D", "Vector", "",0,0,1.5
+			P: "PreRotation", "Vector3D", "Vector", "",15,0,0
+			P: "PostRotation", "Vector3D", "Vector", "",0,0,30
+			P: "RotationActive", "bool", "", "",1
+			P: "RotationOrder", "enum", "", "",0
+			P: "GeometricTranslation", "Vector3D", "Vector", "",0.2,0.3,0.4
+			P: "GeometricRotation", "Vector3D", "Vector", "",10,20,0
+			P: "GeometricScaling", "Vector3D", "Vector", "",1.5,1.5,1.5
+			P: "InheritType", "enum", "", "",1
+			P: "Lcl Translation", "Lcl Translation", "", "A",0,0,0
+			P: "Lcl Rotation", "Lcl Rotation", "", "A",0,0,0
+			P: "Lcl Scaling", "Lcl Scaling", "", "A",1,1,1
+		}
+		Shading: Y
+		Culling: "CullingOff"
+	}
+	; Mesh node (level 2, child of RootGroup)
+	Model: 3000002, "Model::MeshNode", "Mesh" {
+		Version: 232
+		Properties70:  {
+			P: "Lcl Translation", "Lcl Translation", "", "A",0,0,0
+			P: "Lcl Rotation", "Lcl Rotation", "", "A",0,0,0
+			P: "Lcl Scaling", "Lcl Scaling", "", "A",1,1,1
+			P: "DefaultAttributeIndex", "int", "Integer", "",0
+		}
+		Shading: T
+		Culling: "CullingOff"
+	}
+	; Skeleton hierarchy (level 2,3,4 - child chain of RootGroup)
+	Model: 3000003, "Model::RootBone", "LimbNode" {
+		Version: 232
+		Properties70:  {
+			P: "Lcl Translation", "Lcl Translation", "", "A",0,0,0
+			P: "Lcl Rotation", "Lcl Rotation", "", "A",0,0,0
+			P: "Lcl Scaling", "Lcl Scaling", "", "A",1,1,1
+			P: "DefaultAttributeIndex", "int", "Integer", "",0
+		}
+		Shading: Y
+		Culling: "CullingOff"
+	}
+	Model: 3000004, "Model::MidBone", "LimbNode" {
+		Version: 232
+		Properties70:  {
+			P: "Lcl Translation", "Lcl Translation", "", "A",0,1,0
+			P: "Lcl Rotation", "Lcl Rotation", "", "A",0,0,0
+			P: "Lcl Scaling", "Lcl Scaling", "", "A",1,1,1
+			P: "DefaultAttributeIndex", "int", "Integer", "",0
+		}
+		Shading: Y
+		Culling: "CullingOff"
+	}
+	Model: 3000005, "Model::TipBone", "LimbNode" {
+		Version: 232
+		Properties70:  {
+			P: "Lcl Translation", "Lcl Translation", "", "A",0,1,0
+			P: "Lcl Rotation", "Lcl Rotation", "", "A",0,0,0
+			P: "Lcl Scaling", "Lcl Scaling", "", "A",1,1,1
+			P: "DefaultAttributeIndex", "int", "Integer", "",0
+		}
+		Shading: Y
+		Culling: "CullingOff"
+	}
+	; Cameras (level 2, children of RootGroup)
+	Model: 3000006, "Model::PerspCamera", "Camera" {
+		Version: 232
+		Properties70:  {
+			P: "Lcl Translation", "Lcl Translation", "", "A",10,5,10
+			P: "Lcl Rotation", "Lcl Rotation", "", "A",-20,45,0
+			P: "DefaultAttributeIndex", "int", "Integer", "",0
+		}
+		Shading: Y
+		Culling: "CullingOff"
+	}
+	Model: 3000007, "Model::OrthoCamera", "Camera" {
+		Version: 232
+		Properties70:  {
+			P: "Lcl Translation", "Lcl Translation", "", "A",0,20,0
+			P: "Lcl Rotation", "Lcl Rotation", "", "A",-90,0,0
+			P: "DefaultAttributeIndex", "int", "Integer", "",0
+		}
+		Shading: Y
+		Culling: "CullingOff"
+	}
+	; Lights (level 2, children of RootGroup)
+	Model: 3000008, "Model::PointLight", "Light" {
+		Version: 232
+		Properties70:  {
+			P: "Lcl Translation", "Lcl Translation", "", "A",3,5,0
+			P: "DefaultAttributeIndex", "int", "Integer", "",0
+		}
+		Shading: Y
+		Culling: "CullingOff"
+	}
+	Model: 3000009, "Model::SpotLight", "Light" {
+		Version: 232
+		Properties70:  {
+			P: "Lcl Translation", "Lcl Translation", "", "A",0,8,-3
+			P: "Lcl Rotation", "Lcl Rotation", "", "A",-45,0,0
+			P: "DefaultAttributeIndex", "int", "Integer", "",0
+		}
+		Shading: Y
+		Culling: "CullingOff"
+	}
+	Model: 3000010, "Model::DirLight", "Light" {
+		Version: 232
+		Properties70:  {
+			P: "Lcl Translation", "Lcl Translation", "", "A",0,10,0
+			P: "Lcl Rotation", "Lcl Rotation", "", "A",-90,0,0
+			P: "DefaultAttributeIndex", "int", "Integer", "",0
+		}
+		Shading: Y
+		Culling: "CullingOff"
+	}
+	; Extra child node for deeper hierarchy (level 3 under MeshNode)
+	Model: 3000011, "Model::SubChild", "Null" {
+		Version: 232
+		Properties70:  {
+			P: "Lcl Translation", "Lcl Translation", "", "A",2,0,0
+			P: "Lcl Rotation", "Lcl Rotation", "", "A",0,45,0
+			P: "Lcl Scaling", "Lcl Scaling", "", "A",1,1,1
+		}
+		Shading: Y
+		Culling: "CullingOff"
+	}
+
+	; ==========================================================================
+	; DEFORMERS: Skin (3 clusters) + BlendShape (2 channels)
+	; ==========================================================================
+	; Skin deformer
+	Deformer: 4000001, "Deformer::Skin", "Skin" {
+		Version: 101
+		Link_DeformAcuracy: 50
+		SkinningType: "Linear"
+	}
+	; Cluster for RootBone (verts 0-3 full weight, 4-7 half weight)
+	Deformer: 4000002, "SubDeformer::RootCluster", "Cluster" {
+		Version: 100
+		UserData: "", ""
+		Indexes: *8 {
+			a: 0,1,2,3,4,5,6,7
+		}
+		Weights: *8 {
+			a: 1,1,1,1,0.5,0.5,0.5,0.5
+		}
+		Transform: *16 {
+			a: 1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1
+		}
+		TransformLink: *16 {
+			a: 1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1
+		}
+	}
+	; Cluster for MidBone (verts 4-7 half weight, 8-11 half weight)
+	Deformer: 4000003, "SubDeformer::MidCluster", "Cluster" {
+		Version: 100
+		UserData: "", ""
+		Indexes: *8 {
+			a: 4,5,6,7,8,9,10,11
+		}
+		Weights: *8 {
+			a: 0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5
+		}
+		Transform: *16 {
+			a: 1,0,0,0,0,1,0,0,0,0,1,0,0,-1,0,1
+		}
+		TransformLink: *16 {
+			a: 1,0,0,0,0,1,0,0,0,0,1,0,0,1,0,1
+		}
+	}
+	; Cluster for TipBone (verts 8-11 half weight)
+	Deformer: 4000004, "SubDeformer::TipCluster", "Cluster" {
+		Version: 100
+		UserData: "", ""
+		Indexes: *4 {
+			a: 8,9,10,11
+		}
+		Weights: *4 {
+			a: 0.5,0.5,0.5,0.5
+		}
+		Transform: *16 {
+			a: 1,0,0,0,0,1,0,0,0,0,1,0,0,-2,0,1
+		}
+		TransformLink: *16 {
+			a: 1,0,0,0,0,1,0,0,0,0,1,0,0,2,0,1
+		}
+	}
+	; BlendShape deformer
+	Deformer: 4000005, "Deformer::BlendShape", "BlendShape" {
+		Version: 100
+	}
+	; BlendShapeChannel 1: PushForward
+	Deformer: 4000006, "SubDeformer::PushForward", "BlendShapeChannel" {
+		Version: 100
+		DeformPercent: 50
+		Properties70:  {
+			P: "DeformPercent", "double", "Number", "",50
+		}
+		FullWeights: *1 {
+			a: 100
+		}
+	}
+	; BlendShapeChannel 2: LiftTop
+	Deformer: 4000007, "SubDeformer::LiftTop", "BlendShapeChannel" {
+		Version: 100
+		DeformPercent: 30
+		Properties70:  {
+			P: "DeformPercent", "double", "Number", "",30
+		}
+		FullWeights: *1 {
+			a: 100
+		}
+	}
+
+	; ==========================================================================
+	; MATERIALS: 3 materials for ByPolygon mapping
+	; ==========================================================================
+	Material: 5000001, "Material::RedMat", "" {
+		Version: 102
+		ShadingModel: "phong"
+		MultiLayer: 0
+		Properties70:  {
+			P: "DiffuseColor", "Color", "", "A",0.9,0.1,0.1
+			P: "SpecularColor", "Color", "", "A",1,1,1
+			P: "Shininess", "Number", "", "A",30
+			P: "EmissiveColor", "Color", "", "A",0.1,0,0
+			P: "Opacity", "Number", "", "A",1
+		}
+	}
+	Material: 5000002, "Material::GreenMat", "" {
+		Version: 102
+		ShadingModel: "lambert"
+		MultiLayer: 0
+		Properties70:  {
+			P: "DiffuseColor", "Color", "", "A",0.1,0.8,0.1
+			P: "AmbientColor", "Color", "", "A",0.05,0.1,0.05
+			P: "Opacity", "Number", "", "A",0.9
+		}
+	}
+	Material: 5000003, "Material::BlueMat", "" {
+		Version: 102
+		ShadingModel: "phong"
+		MultiLayer: 0
+		Properties70:  {
+			P: "DiffuseColor", "Color", "", "A",0.1,0.1,0.9
+			P: "SpecularColor", "Color", "", "A",0.8,0.8,1
+			P: "Shininess", "Number", "", "A",60
+			P: "TransparencyFactor", "Number", "", "A",0.3
+		}
+	}
+
+	; ==========================================================================
+	; BIND POSE
+	; ==========================================================================
+	Pose: 8000001, "Pose::BindPose", "BindPose" {
+		Type: "BindPose"
+		Version: 100
+		NbPoseNodes: 4
+		PoseNode:  {
+			Node: 3000002
+			Matrix: *16 {
+				a: 1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1
+			}
+		}
+		PoseNode:  {
+			Node: 3000003
+			Matrix: *16 {
+				a: 1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1
+			}
+		}
+		PoseNode:  {
+			Node: 3000004
+			Matrix: *16 {
+				a: 1,0,0,0,0,1,0,0,0,0,1,0,0,1,0,1
+			}
+		}
+		PoseNode:  {
+			Node: 3000005
+			Matrix: *16 {
+				a: 1,0,0,0,0,1,0,0,0,0,1,0,0,2,0,1
+			}
+		}
+	}
+
+	; ==========================================================================
+	; ANIMATION: Stack, Layer, CurveNodes, Curves
+	; ==========================================================================
+	AnimationStack: 6000001, "AnimStack::Take 001", "" {
+		Properties70:  {
+			P: "LocalStart", "KTime", "Time", "",0
+			P: "LocalStop", "KTime", "Time", "",46186158000
+			P: "ReferenceStart", "KTime", "Time", "",0
+			P: "ReferenceStop", "KTime", "Time", "",46186158000
+		}
+	}
+	AnimationLayer: 6100001, "AnimLayer::BaseLayer", "" {
+	}
+	; Translation animation on RootGroup
+	AnimationCurveNode: 6200001, "AnimCurveNode::T", "" {
+		Properties70:  {
+			P: "d|X", "Number", "", "A",0
+			P: "d|Y", "Number", "", "A",0
+			P: "d|Z", "Number", "", "A",0
+		}
+	}
+	; Rotation animation on RootGroup
+	AnimationCurveNode: 6200002, "AnimCurveNode::R", "" {
+		Properties70:  {
+			P: "d|X", "Number", "", "A",0
+			P: "d|Y", "Number", "", "A",0
+			P: "d|Z", "Number", "", "A",0
+		}
+	}
+	; DeformPercent animation on PushForward channel
+	AnimationCurveNode: 6200003, "AnimCurveNode::DeformPercent", "" {
+		Properties70:  {
+			P: "DeformPercent", "Number", "", "A",0
+		}
+	}
+	; DeformPercent animation on LiftTop channel
+	AnimationCurveNode: 6200004, "AnimCurveNode::DeformPercent", "" {
+		Properties70:  {
+			P: "DeformPercent", "Number", "", "A",0
+		}
+	}
+	; Translation X curve
+	AnimationCurve: 6300001, "AnimCurve::TransX", "" {
+		Default: 0
+		KeyVer: 4009
+		KeyTime: *3 {
+			a: 0,23093079000,46186158000
+		}
+		KeyValueFloat: *3 {
+			a: 0,5,0
+		}
+		KeyAttrFlags: *1 {
+			a: 24840
+		}
+		KeyAttrDataFloat: *4 {
+			a: 0,0,0,0
+		}
+		KeyAttrRefCount: *1 {
+			a: 3
+		}
+	}
+	; Translation Y curve
+	AnimationCurve: 6300002, "AnimCurve::TransY", "" {
+		Default: 0
+		KeyVer: 4009
+		KeyTime: *3 {
+			a: 0,23093079000,46186158000
+		}
+		KeyValueFloat: *3 {
+			a: 0,3,0
+		}
+		KeyAttrFlags: *1 {
+			a: 24840
+		}
+		KeyAttrDataFloat: *4 {
+			a: 0,0,0,0
+		}
+		KeyAttrRefCount: *1 {
+			a: 3
+		}
+	}
+	; Rotation Y curve
+	AnimationCurve: 6300003, "AnimCurve::RotY", "" {
+		Default: 0
+		KeyVer: 4009
+		KeyTime: *3 {
+			a: 0,23093079000,46186158000
+		}
+		KeyValueFloat: *3 {
+			a: 0,180,360
+		}
+		KeyAttrFlags: *1 {
+			a: 24840
+		}
+		KeyAttrDataFloat: *4 {
+			a: 0,0,0,0
+		}
+		KeyAttrRefCount: *1 {
+			a: 3
+		}
+	}
+	; Rotation X curve (different interpolation flag)
+	AnimationCurve: 6300004, "AnimCurve::RotX", "" {
+		Default: 0
+		KeyVer: 4009
+		KeyTime: *4 {
+			a: 0,15395386000,30790772000,46186158000
+		}
+		KeyValueFloat: *4 {
+			a: 0,45,-45,0
+		}
+		KeyAttrFlags: *1 {
+			a: 8456
+		}
+		KeyAttrDataFloat: *4 {
+			a: 0,0,0,0
+		}
+		KeyAttrRefCount: *1 {
+			a: 4
+		}
+	}
+	; DeformPercent curve for PushForward
+	AnimationCurve: 6300005, "AnimCurve::DeformPush", "" {
+		Default: 0
+		KeyVer: 4009
+		KeyTime: *3 {
+			a: 0,23093079000,46186158000
+		}
+		KeyValueFloat: *3 {
+			a: 0,100,0
+		}
+		KeyAttrFlags: *1 {
+			a: 24840
+		}
+		KeyAttrDataFloat: *4 {
+			a: 0,0,0,0
+		}
+		KeyAttrRefCount: *1 {
+			a: 3
+		}
+	}
+	; DeformPercent curve for LiftTop
+	AnimationCurve: 6300006, "AnimCurve::DeformLift", "" {
+		Default: 0
+		KeyVer: 4009
+		KeyTime: *3 {
+			a: 0,23093079000,46186158000
+		}
+		KeyValueFloat: *3 {
+			a: 0,80,0
+		}
+		KeyAttrFlags: *1 {
+			a: 24840
+		}
+		KeyAttrDataFloat: *4 {
+			a: 0,0,0,0
+		}
+		KeyAttrRefCount: *1 {
+			a: 3
+		}
+	}
+}
+
+Connections:  {
+	; --- Node hierarchy ---
+	; RootGroup -> scene root (level 1)
+	C: "OO",3000001,0
+
+	; MeshNode -> RootGroup (level 2)
+	C: "OO",3000002,3000001
+
+	; SubChild -> MeshNode (level 3)
+	C: "OO",3000011,3000002
+
+	; Bone chain -> RootGroup (level 2,3,4)
+	C: "OO",3000003,3000001
+	C: "OO",3000004,3000003
+	C: "OO",3000005,3000004
+
+	; Cameras -> RootGroup (level 2)
+	C: "OO",3000006,3000001
+	C: "OO",3000007,3000001
+
+	; Lights -> RootGroup (level 2)
+	C: "OO",3000008,3000001
+	C: "OO",3000009,3000001
+	C: "OO",3000010,3000001
+
+	; --- NodeAttribute -> Model ---
+	C: "OO",1100001,3000003
+	C: "OO",1100002,3000004
+	C: "OO",1100003,3000005
+	C: "OO",1100004,3000006
+	C: "OO",1100005,3000007
+	C: "OO",1100006,3000008
+	C: "OO",1100007,3000009
+	C: "OO",1100008,3000010
+
+	; --- Geometry -> Model ---
+	C: "OO",2000001,3000002
+
+	; --- Materials -> Model (order matters for ByPolygon indexing) ---
+	C: "OO",5000001,3000002
+	C: "OO",5000002,3000002
+	C: "OO",5000003,3000002
+
+	; --- Skin deformation chain ---
+	; Skin -> Geometry
+	C: "OO",4000001,2000001
+	; Clusters -> Skin
+	C: "OO",4000002,4000001
+	C: "OO",4000003,4000001
+	C: "OO",4000004,4000001
+	; Bones -> Clusters
+	C: "OO",3000003,4000002
+	C: "OO",3000004,4000003
+	C: "OO",3000005,4000004
+
+	; --- BlendShape deformation chain ---
+	; BlendShape -> Geometry
+	C: "OO",4000005,2000001
+	; BlendShapeChannels -> BlendShape
+	C: "OO",4000006,4000005
+	C: "OO",4000007,4000005
+	; Shape geometries -> BlendShapeChannels
+	C: "OO",2000002,4000006
+	C: "OO",2000003,4000007
+
+	; --- Animation connections ---
+	; AnimLayer -> AnimStack
+	C: "OO",6100001,6000001
+
+	; AnimCurveNodes -> AnimLayer
+	C: "OO",6200001,6100001
+	C: "OO",6200002,6100001
+	C: "OO",6200003,6100001
+	C: "OO",6200004,6100001
+
+	; AnimCurveNode::T -> Model::RootGroup "Lcl Translation"
+	C: "OP",6200001,3000001,"Lcl Translation"
+	; AnimCurveNode::R -> Model::RootGroup "Lcl Rotation"
+	C: "OP",6200002,3000001,"Lcl Rotation"
+	; AnimCurveNode::DeformPercent -> SubDeformer::PushForward
+	C: "OP",6200003,4000006,"DeformPercent"
+	; AnimCurveNode::DeformPercent -> SubDeformer::LiftTop
+	C: "OP",6200004,4000007,"DeformPercent"
+
+	; AnimCurves -> AnimCurveNodes (property connections)
+	; TransX -> T.d|X
+	C: "OP",6300001,6200001,"d|X"
+	; TransY -> T.d|Y
+	C: "OP",6300002,6200001,"d|Y"
+	; RotY -> R.d|Y
+	C: "OP",6300003,6200002,"d|Y"
+	; RotX -> R.d|X
+	C: "OP",6300004,6200002,"d|X"
+	; DeformPush -> DeformPercent (PushForward)
+	C: "OP",6300005,6200003,"DeformPercent"
+	; DeformLift -> DeformPercent (LiftTop)
+	C: "OP",6300006,6200004,"DeformPercent"
+}
+
+Takes:  {
+	Current: "Take 001"
+	Take: "Take 001" {
+		FileName: "Take_001.tak"
+		LocalTime: 0,46186158000
+		ReferenceTime: 0,46186158000
+	}
+}

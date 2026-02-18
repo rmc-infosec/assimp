@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<X3D profile="Interchange" version="3.3">
+  <Scene>
+    <Shape>
+      <Appearance><Material diffuseColor="1 0 0"/></Appearance>
+      <ElevationGrid xDimension="3" zDimension="3" xSpacing="1.0" zSpacing="1.0" height="0 0.5 0, 0.5 1 0.5, 0 0.5 0" solid="true" ccw="true" colorPerVertex="true" normalPerVertex="true" creaseAngle="0.8">
+        <Color color="1 0 0, 0 1 0, 0 0 1, 1 1 0, 1 1 1, 0 1 1, 1 0 1, 0.5 0.5 0.5, 0 0 0"/>
+      </ElevationGrid>
+    </Shape>
+  </Scene>
+</X3D>

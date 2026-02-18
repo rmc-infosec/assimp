@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<COLLADA xmlns="http://www.collada.org/2008/03/COLLADASchema" version="1.5.0">
+<asset><created>2026-01-01</created><modified>2026-01-01</modified></asset>
+<library_images>
+  <image id="hex_img" name="HexImage">
+    <init_from><hex format="png">89504E470D0A1A0A0000000D4948445200000002000000020802000000FDD49A730000001549444154789C6260606000620004000006000144DEBCDE0000000049454E44AE426082</hex></init_from>
+  </image>
+  <image id="ref_img" name="RefImage">
+    <init_from><ref>textures/diffuse.png</ref></init_from>
+  </image>
+</library_images>
+<library_effects>
+  <effect id="eff"><profile_COMMON>
+    <newparam sid="s2d"><sampler2D><instance_image url="#hex_img"/></sampler2D></newparam>
+    <technique sid="common">
+      <phong>
+        <diffuse><texture texture="s2d" texcoord="UV0"/></diffuse>
+        <specular><color>0.5 0.5 0.5 1</color></specular>
+        <shininess><float>32</float></shininess>
+      </phong>
+    </technique>
+  </profile_COMMON></effect>
+</library_effects>
+<library_materials>
+  <material id="mat"><instance_effect url="#eff"/></material>
+</library_materials>
+<library_geometries>
+  <geometry id="quad" name="Quad">
+    <mesh>
+      <source id="p"><float_array id="pa" count="12">-1 0 -1 1 0 -1 1 0 1 -1 0 1</float_array>
+        <technique_common><accessor source="#pa" count="4" stride="3">
+          <param name="X" type="float"/><param name="Y" type="float"/><param name="Z" type="float"/>
+        </accessor></technique_common></source>
+      <source id="n"><float_array id="na" count="3">0 1 0</float_array>
+        <technique_common><accessor source="#na" count="1" stride="3">
+          <param name="X" type="float"/><param name="Y" type="float"/><param name="Z" type="float"/>
+        </accessor></technique_common></source>
+      <source id="uv"><float_array id="uva" count="8">0 0 1 0 1 1 0 1</float_array>
+        <technique_common><accessor source="#uva" count="4" stride="2">
+          <param name="S" type="float"/><param name="T" type="float"/>
+        </accessor></technique_common></source>
+      <vertices id="v"><input semantic="POSITION" source="#p"/></vertices>
+      <triangles material="msym" count="2"><input semantic="VERTEX" source="#v" offset="0"/>
+        <input semantic="NORMAL" source="#n" offset="1"/>
+        <input semantic="TEXCOORD" source="#uv" offset="2" set="0"/>
+        <p>0 0 0 1 0 1 2 0 2 0 0 0 2 0 2 3 0 3</p></triangles>
+    </mesh>
+  </geometry>
+</library_geometries>
+<library_visual_scenes>
+  <visual_scene id="Scene">
+    <node id="Quad" type="NODE">
+      <matrix sid="transform">1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</matrix>
+      <instance_geometry url="#quad">
+        <bind_material><technique_common>
+          <instance_material symbol="msym" target="#mat"/>
+        </technique_common></bind_material>
+      </instance_geometry>
+    </node>
+  </visual_scene>
+</library_visual_scenes>
+<scene><instance_visual_scene url="#Scene"/></scene>
+</COLLADA>

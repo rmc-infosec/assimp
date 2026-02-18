@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1">
+<asset><created>2026-01-01</created><modified>2026-01-01</modified></asset>
+<library_geometries>
+  <geometry id="baseMesh" name="Base">
+    <mesh>
+      <source id="bp"><float_array id="bpa" count="12">0 0 0 1 0 0 1 1 0 0 1 0</float_array>
+        <technique_common><accessor source="#bpa" count="4" stride="3">
+          <param name="X" type="float"/><param name="Y" type="float"/><param name="Z" type="float"/>
+        </accessor></technique_common></source>
+      <vertices id="bv"><input semantic="POSITION" source="#bp"/></vertices>
+      <triangles count="2"><input semantic="VERTEX" source="#bv" offset="0"/>
+        <p>0 1 2 0 2 3</p></triangles>
+    </mesh>
+  </geometry>
+  <geometry id="tgt1" name="T1">
+    <mesh>
+      <source id="t1p"><float_array id="t1a" count="12">0 0 1 1 0 1 1 1 1 0 1 1</float_array>
+        <technique_common><accessor source="#t1a" count="4" stride="3">
+          <param name="X" type="float"/><param name="Y" type="float"/><param name="Z" type="float"/>
+        </accessor></technique_common></source>
+      <vertices id="t1v"><input semantic="POSITION" source="#t1p"/></vertices>
+      <triangles count="2"><input semantic="VERTEX" source="#t1v" offset="0"/>
+        <p>0 1 2 0 2 3</p></triangles>
+    </mesh>
+  </geometry>
+</library_geometries>
+<library_controllers>
+  <!-- Morph controller referencing the base mesh -->
+  <controller id="morphCtrl">
+    <morph source="#baseMesh" method="NORMALIZED">
+      <source id="mt"><IDREF_array id="mta" count="1">tgt1</IDREF_array>
+        <technique_common><accessor source="#mta" count="1" stride="1">
+          <param name="MORPH_TARGET" type="IDREF"/>
+        </accessor></technique_common></source>
+      <source id="mw"><float_array id="mwa" count="1">0.5</float_array>
+        <technique_common><accessor source="#mwa" count="1" stride="1">
+          <param name="MORPH_WEIGHT" type="float"/>
+        </accessor></technique_common></source>
+      <targets>
+        <input semantic="MORPH_TARGET" source="#mt"/>
+        <input semantic="MORPH_WEIGHT" source="#mw"/>
+      </targets>
+    </morph>
+  </controller>
+  <!-- Skin controller referencing the morph controller (chained) -->
+  <controller id="skinCtrl">
+    <skin source="#morphCtrl">
+      <bind_shape_matrix>1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</bind_shape_matrix>
+      <source id="jn">
+        <Name_array id="jna" count="2">Root Bone1</Name_array>
+        <technique_common><accessor source="#jna" count="2" stride="1">
+          <param name="JOINT" type="name"/>
+        </accessor></technique_common>
+      </source>
+      <source id="ibm">
+        <float_array id="ibma" count="32">
+          1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1
+          1 0 0 0 0 1 0 -1 0 0 1 0 0 0 0 1
+        </float_array>
+        <technique_common><accessor source="#ibma" count="2" stride="16">
+          <param name="TRANSFORM" type="float4x4"/>
+        </accessor></technique_common>
+      </source>
+      <source id="sw">
+        <float_array id="swa" count="3">1.0 0.6 0.4</float_array>
+        <technique_common><accessor source="#swa" count="3" stride="1">
+          <param name="WEIGHT" type="float"/>
+        </accessor></technique_common>
+      </source>
+      <joints>
+        <input semantic="JOINT" source="#jn"/>
+        <input semantic="INV_BIND_MATRIX" source="#ibm"/>
+      </joints>
+      <vertex_weights count="4">
+        <input semantic="JOINT" source="#jn" offset="0"/>
+        <input semantic="WEIGHT" source="#sw" offset="1"/>
+        <vcount>1 1 2 2</vcount>
+        <v>0 0 0 0 0 1 1 2 1 1 0 2</v>
+      </vertex_weights>
+    </skin>
+  </controller>
+</library_controllers>
+<library_visual_scenes>
+  <visual_scene id="Scene" name="Scene">
+    <node id="Root" sid="Root" name="Root" type="JOINT">
+      <matrix sid="transform">1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</matrix>
+      <node id="Bone1" sid="Bone1" name="Bone1" type="JOINT">
+        <translate sid="translate">0 1 0</translate>
+      </node>
+    </node>
+    <node id="SkinNode" name="SkinNode" type="NODE">
+      <matrix sid="transform">1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</matrix>
+      <instance_controller url="#skinCtrl">
+        <skeleton>#Root</skeleton>
+      </instance_controller>
+    </node>
+  </visual_scene>
+</library_visual_scenes>
+<scene><instance_visual_scene url="#Scene"/></scene>
+</COLLADA>

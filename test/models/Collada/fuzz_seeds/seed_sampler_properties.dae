@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1">
+  <asset><created>2024-01-01</created><modified>2024-01-01</modified></asset>
+  <library_images>
+    <image id="tex1"><init_from>diffuse.png</init_from></image>
+    <image id="tex2"><init_from>bump.png</init_from></image>
+  </library_images>
+  <library_effects>
+    <effect id="fx1">
+      <profile_COMMON>
+        <newparam sid="surface1">
+          <surface type="2D"><init_from>tex1</init_from></surface>
+        </newparam>
+        <newparam sid="sampler1">
+          <sampler2D>
+            <source>surface1</source>
+            <wrap_s>WRAP</wrap_s>
+            <wrap_t>MIRROR</wrap_t>
+            <minfilter>LINEAR_MIPMAP_LINEAR</minfilter>
+            <magfilter>LINEAR</magfilter>
+          </sampler2D>
+        </newparam>
+        <newparam sid="surface2">
+          <surface type="2D"><init_from>tex2</init_from></surface>
+        </newparam>
+        <newparam sid="sampler2">
+          <sampler2D>
+            <source>surface2</source>
+          </sampler2D>
+        </newparam>
+        <technique sid="common">
+          <phong>
+            <emission><color>0.1 0.1 0.1 1</color></emission>
+            <ambient><color>0.2 0.2 0.2 1</color></ambient>
+            <diffuse><texture texture="sampler1" texcoord="UVSET0"/></diffuse>
+            <specular><color>1 1 1 1</color></specular>
+            <shininess><float>50</float></shininess>
+            <reflective><color>0.5 0.5 0.5 1</color></reflective>
+            <reflectivity><float>0.3</float></reflectivity>
+            <transparent opaque="A_ONE"><color>1 1 1 1</color></transparent>
+            <transparency><float>0.9</float></transparency>
+            <index_of_refraction><float>1.5</float></index_of_refraction>
+          </phong>
+          <extra>
+            <technique profile="MAYA">
+              <wrapU>TRUE</wrapU>
+              <wrapV>TRUE</wrapV>
+              <repeatU>2.0</repeatU>
+              <repeatV>3.0</repeatV>
+              <offsetU>0.5</offsetU>
+              <offsetV>0.25</offsetV>
+              <rotateUV>45.0</rotateUV>
+              <blend_mode>MULTIPLY</blend_mode>
+            </technique>
+            <technique profile="OKINO">
+              <weighting>0.8</weighting>
+              <mix_with_previous_layer>1</mix_with_previous_layer>
+            </technique>
+            <technique profile="MAX3D">
+              <amount>0.7</amount>
+            </technique>
+          </extra>
+        </technique>
+      </profile_COMMON>
+    </effect>
+  </library_effects>
+  <library_materials>
+    <material id="mat1"><instance_effect url="#fx1"/></material>
+  </library_materials>
+  <library_geometries>
+    <geometry id="mesh1">
+      <mesh>
+        <source id="pos1">
+          <float_array id="pos1-array" count="9">0 0 0 1 0 0 0 1 0</float_array>
+          <technique_common>
+            <accessor source="#pos1-array" count="3" stride="3">
+              <param name="X" type="float"/><param name="Y" type="float"/><param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="uv1">
+          <float_array id="uv1-array" count="6">0 0 1 0 0 1</float_array>
+          <technique_common>
+            <accessor source="#uv1-array" count="3" stride="2">
+              <param name="S" type="float"/><param name="T" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <vertices id="vtx1"><input semantic="POSITION" source="#pos1"/></vertices>
+        <triangles count="1" material="mat1">
+          <input semantic="VERTEX" source="#vtx1" offset="0"/>
+          <input semantic="TEXCOORD" source="#uv1" offset="0" set="0"/>
+          <p>0 1 2</p>
+        </triangles>
+      </mesh>
+    </geometry>
+  </library_geometries>
+  <library_visual_scenes>
+    <visual_scene id="Scene">
+      <node id="Node1" type="NODE">
+        <instance_geometry url="#mesh1">
+          <bind_material><technique_common>
+            <instance_material symbol="mat1" target="#mat1">
+              <bind_vertex_input semantic="UVSET0" input_semantic="TEXCOORD" input_set="0"/>
+            </instance_material>
+          </technique_common></bind_material>
+        </instance_geometry>
+      </node>
+    </visual_scene>
+  </library_visual_scenes>
+  <scene><instance_visual_scene url="#Scene"/></scene>
+</COLLADA>

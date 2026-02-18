@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1">
+<asset><created>2026</created><modified>2026</modified><unit name="meter" meter="1"/><up_axis>Y_UP</up_axis></asset>
+<library_cameras>
+<camera id="pc"><optics><technique_common>
+<perspective><xfov>60</xfov><yfov>45</yfov><aspect_ratio>1.778</aspect_ratio><znear>0.01</znear><zfar>1000</zfar></perspective>
+</technique_common></optics></camera>
+<camera id="oc"><optics><technique_common>
+<orthographic><xmag>10</xmag><ymag>7.5</ymag><znear>0.1</znear><zfar>500</zfar></orthographic>
+</technique_common></optics></camera>
+</library_cameras>
+<library_lights>
+<light id="s1" name="SpotMain"><technique_common><spot>
+<color sid="color">1 0.95 0.8</color>
+<constant_attenuation>1</constant_attenuation><linear_attenuation>0.09</linear_attenuation><quadratic_attenuation>0.032</quadratic_attenuation>
+<falloff_angle sid="fall_off_angle">25</falloff_angle><falloff_exponent sid="fall_off_exponent">1.5</falloff_exponent>
+</spot></technique_common>
+<extra><technique profile="FCOLLADA"><outer_cone>35</outer_cone><penumbra_angle>10</penumbra_angle><intensity>3</intensity><falloff>0.7</falloff><hotspot_beam>20</hotspot_beam></technique>
+<technique profile="OpenCOLLADA"><decay_falloff>2</decay_falloff></technique></extra></light>
+<light id="a1"><technique_common><ambient><color sid="color">0.15 0.15 0.2</color></ambient></technique_common></light>
+<light id="d1"><technique_common><directional><color sid="color">1 1 0.95</color></directional></technique_common></light>
+<light id="p1"><technique_common><point><color sid="color">0.9 0.85 1</color>
+<constant_attenuation>0.5</constant_attenuation><linear_attenuation>0.02</linear_attenuation><quadratic_attenuation>0.005</quadratic_attenuation>
+</point></technique_common></light>
+</library_lights>
+<library_geometries>
+<geometry id="pl"><mesh>
+<source id="pp"><float_array id="ppa" count="12">-1 0 -1 1 0 -1 1 0 1 -1 0 1</float_array>
+<technique_common><accessor source="#ppa" count="4" stride="3">
+<param name="X" type="float"/><param name="Y" type="float"/><param name="Z" type="float"/>
+</accessor></technique_common></source>
+<vertices id="pv"><input semantic="POSITION" source="#pp"/></vertices>
+<triangles count="2"><input semantic="VERTEX" source="#pv" offset="0"/><p>0 1 2 0 2 3</p></triangles>
+</mesh></geometry>
+</library_geometries>
+<library_visual_scenes>
+<visual_scene id="Scene">
+<node id="N1" type="NODE"><lookat sid="lookat">0 5 10 0 0 0 0 1 0</lookat><instance_camera url="#pc"/></node>
+<node id="N2" type="NODE"><translate>-5 8 0</translate><rotate>1 0 0 -60</rotate><instance_camera url="#oc"/></node>
+<node id="N3" type="NODE"><translate>0 5 0</translate><rotate>1 0 0 -90</rotate><instance_light url="#s1"/></node>
+<node id="N4" type="NODE"><instance_light url="#a1"/></node>
+<node id="N5" type="NODE"><rotate>1 0 0 -45</rotate><instance_light url="#d1"/></node>
+<node id="N6" type="NODE"><translate>3 2 3</translate><instance_light url="#p1"/></node>
+<node id="N7" type="NODE"><scale>5 1 5</scale><instance_geometry url="#pl"/></node>
+</visual_scene>
+</library_visual_scenes>
+<scene><instance_visual_scene url="#Scene"/></scene>
+</COLLADA>

@@ -1,0 +1,57 @@
+{
+  "asset": {"version": "2.0", "generator": "assimp-fuzz-seeds"},
+  "extensionsUsed": ["KHR_materials_clearcoat", "KHR_materials_emissive_strength"],
+  "scene": 0,
+  "scenes": [{"nodes": [0]}],
+  "nodes": [{"mesh": 0, "name": "ClearcoatNode"}],
+  "meshes": [
+    {
+      "name": "ClearcoatMesh",
+      "primitives": [{"attributes": {"POSITION": 0, "NORMAL": 1, "TEXCOORD_0": 2}, "indices": 3, "material": 0}]
+    }
+  ],
+  "accessors": [
+    {"bufferView": 0, "componentType": 5126, "count": 3, "type": "VEC3", "max": [1,1,0], "min": [0,0,0]},
+    {"bufferView": 1, "componentType": 5126, "count": 3, "type": "VEC3"},
+    {"bufferView": 2, "componentType": 5126, "count": 3, "type": "VEC2"},
+    {"bufferView": 3, "componentType": 5123, "count": 3, "type": "SCALAR"}
+  ],
+  "bufferViews": [
+    {"buffer": 0, "byteOffset": 0, "byteLength": 36, "target": 34962},
+    {"buffer": 0, "byteOffset": 36, "byteLength": 36, "target": 34962},
+    {"buffer": 0, "byteOffset": 72, "byteLength": 24, "target": 34962},
+    {"buffer": 0, "byteOffset": 96, "byteLength": 8, "target": 34963}
+  ],
+  "buffers": [
+    {
+      "uri": "data:application/octet-stream;base64,AAAAAAAAAAAAAAAAAACAPwAAAAAAAAAAAAAAPwAAgD8AAAAAAAAAAAAAAAAAAIA/AAAAAAAAAAAAAIA/AAAAAAAAAAAAAIA/AAAAAAAAAAAAAIA/AAAAAAAAAD8AAIA/AAABAAIAAAA=",
+      "byteLength": 104
+    }
+  ],
+  "materials": [
+    {
+      "name": "ClearcoatMat",
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [0.9, 0.1, 0.1, 1.0],
+        "metallicFactor": 0.0,
+        "roughnessFactor": 0.4
+      },
+      "emissiveFactor": [0.2, 0.1, 0.0],
+      "extensions": {
+        "KHR_materials_clearcoat": {
+          "clearcoatFactor": 0.8,
+          "clearcoatRoughnessFactor": 0.2,
+          "clearcoatTexture": {"index": 0, "texCoord": 0},
+          "clearcoatRoughnessTexture": {"index": 0, "texCoord": 0},
+          "clearcoatNormalTexture": {"index": 0, "texCoord": 0, "scale": 1.0}
+        },
+        "KHR_materials_emissive_strength": {
+          "emissiveStrength": 2.5
+        }
+      }
+    }
+  ],
+  "textures": [{"source": 0, "sampler": 0}],
+  "images": [{"uri": "data:application/octet-stream;base64,/////w==", "mimeType": "image/png"}],
+  "samplers": [{"magFilter": 9729, "minFilter": 9987, "wrapS": 10497, "wrapT": 10497}]
+}

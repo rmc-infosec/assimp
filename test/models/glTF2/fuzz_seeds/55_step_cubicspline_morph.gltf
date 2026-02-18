@@ -1,0 +1,52 @@
+{
+  "asset": {"version": "2.0", "generator": "assimp-fuzz-seeds"},
+  "scene": 0,
+  "scenes": [{"nodes": [0]}],
+  "nodes": [{"mesh": 0, "name": "MorphNode"}],
+  "meshes": [
+    {
+      "name": "MorphMesh",
+      "primitives": [{"attributes": {"POSITION": 0}, "indices": 1, "targets": [{"POSITION": 2}]}],
+      "weights": [0.0]
+    }
+  ],
+  "accessors": [
+    {"bufferView": 0, "componentType": 5126, "count": 3, "type": "VEC3", "max": [1,1,0], "min": [0,0,0]},
+    {"bufferView": 1, "componentType": 5123, "count": 3, "type": "SCALAR"},
+    {"bufferView": 2, "componentType": 5126, "count": 3, "type": "VEC3", "max": [0,0,0.5], "min": [0,0,0.5]},
+    {"bufferView": 3, "componentType": 5126, "count": 3, "type": "SCALAR", "max": [1.0], "min": [0.0]},
+    {"bufferView": 4, "componentType": 5126, "count": 3, "type": "VEC3"},
+    {"bufferView": 5, "componentType": 5126, "count": 3, "type": "SCALAR"},
+    {"bufferView": 6, "componentType": 5126, "count": 9, "type": "SCALAR"}
+  ],
+  "bufferViews": [
+    {"buffer": 0, "byteOffset": 0, "byteLength": 36, "target": 34962},
+    {"buffer": 0, "byteOffset": 36, "byteLength": 6, "target": 34963},
+    {"buffer": 0, "byteOffset": 44, "byteLength": 36, "target": 34962},
+    {"buffer": 0, "byteOffset": 80, "byteLength": 12},
+    {"buffer": 0, "byteOffset": 92, "byteLength": 36},
+    {"buffer": 0, "byteOffset": 128, "byteLength": 12},
+    {"buffer": 0, "byteOffset": 140, "byteLength": 36}
+  ],
+  "buffers": [
+    {
+      "uri": "data:application/octet-stream;base64,AAAAAAAAAAAAAAAAAACAPwAAAAAAAAAAAAAAPwAAgD8AAAAAAAABAAIAAAAAAAAAAAAAAAAAAD8AAAAAAAAAAAAAAD8AAAAAAAAAAAAAAD8AAAAAAAAAPwAAgD8AAAAAAAAAAAAAAAAAAIA/AAAAAAAAAAAAAAAAAACAPwAAAAAAAAAAAAAAPwAAgD8AAAAAAAAAAAAAAAAAAAAAAAAAPwAAAAAAAAAAAACAPwAAAAA=",
+      "byteLength": 176
+    }
+  ],
+  "animations": [
+    {
+      "name": "MorphAnim",
+      "samplers": [
+        {"input": 3, "output": 4, "interpolation": "LINEAR"},
+        {"input": 3, "output": 5, "interpolation": "STEP"},
+        {"input": 3, "output": 6, "interpolation": "CUBICSPLINE"}
+      ],
+      "channels": [
+        {"sampler": 0, "target": {"node": 0, "path": "translation"}},
+        {"sampler": 1, "target": {"node": 0, "path": "weights"}},
+        {"sampler": 2, "target": {"node": 0, "path": "weights"}}
+      ]
+    }
+  ]
+}

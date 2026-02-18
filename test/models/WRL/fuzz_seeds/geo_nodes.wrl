@@ -1,0 +1,18 @@
+#VRML V2.0 utf8
+
+GeoViewpoint {
+  position "39.75 -104.99 1650"
+  orientation 1 0 0 -1.2
+  description "Denver View"
+}
+GeoLocation {
+  geoCoords "39.75 -104.99 1600"
+  children [
+    Shape {
+      geometry Box { size 100 100 100 }
+      appearance Appearance {
+        material Material { diffuseColor 0.8 0.2 0.2 }
+      }
+    }
+  ]
+}

@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1">
+  <asset>
+    <created>2026-01-01</created>
+    <modified>2026-01-01</modified>
+    <up_axis>Y_UP</up_axis>
+  </asset>
+
+  <library_cameras>
+    <camera id="ortho_cam" name="OrthoCamera">
+      <optics>
+        <technique_common>
+          <orthographic>
+            <xmag>10.0</xmag>
+            <ymag>7.5</ymag>
+            <znear>0.1</znear>
+            <zfar>1000.0</zfar>
+          </orthographic>
+        </technique_common>
+      </optics>
+    </camera>
+    <camera id="persp_cam" name="PerspCamera">
+      <optics>
+        <technique_common>
+          <perspective>
+            <xfov>60.0</xfov>
+            <aspect_ratio>1.333</aspect_ratio>
+            <znear>0.1</znear>
+            <zfar>500.0</zfar>
+          </perspective>
+        </technique_common>
+      </optics>
+    </camera>
+  </library_cameras>
+
+  <library_lights>
+    <light id="spot_light" name="SpotLight">
+      <technique_common>
+        <spot>
+          <color>1.0 0.9 0.8</color>
+          <constant_attenuation>1.0</constant_attenuation>
+          <linear_attenuation>0.05</linear_attenuation>
+          <quadratic_attenuation>0.01</quadratic_attenuation>
+          <falloff_angle>45.0</falloff_angle>
+          <falloff_exponent>2.0</falloff_exponent>
+        </spot>
+      </technique_common>
+    </light>
+    <light id="point_light" name="PointLight">
+      <technique_common>
+        <point>
+          <color>0.8 0.8 1.0</color>
+          <constant_attenuation>1.0</constant_attenuation>
+          <linear_attenuation>0.1</linear_attenuation>
+          <quadratic_attenuation>0.02</quadratic_attenuation>
+        </point>
+      </technique_common>
+    </light>
+    <light id="dir_light" name="DirectionalLight">
+      <technique_common>
+        <directional>
+          <color>1.0 1.0 1.0</color>
+        </directional>
+      </technique_common>
+    </light>
+    <light id="ambient_light" name="AmbientLight">
+      <technique_common>
+        <ambient>
+          <color>0.2 0.2 0.3</color>
+        </ambient>
+      </technique_common>
+    </light>
+  </library_lights>
+
+  <library_geometries>
+    <geometry id="mesh0" name="Plane">
+      <mesh>
+        <source id="mesh0-positions">
+          <float_array id="mesh0-positions-array" count="12">
+            -1 0 -1  1 0 -1  1 0 1  -1 0 1
+          </float_array>
+          <technique_common>
+            <accessor source="#mesh0-positions-array" count="4" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <vertices id="mesh0-vertices">
+          <input semantic="POSITION" source="#mesh0-positions"/>
+        </vertices>
+        <triangles count="2">
+          <input semantic="VERTEX" source="#mesh0-vertices" offset="0"/>
+          <p>0 1 2  0 2 3</p>
+        </triangles>
+      </mesh>
+    </geometry>
+  </library_geometries>
+
+  <library_visual_scenes>
+    <visual_scene id="Scene" name="Scene">
+      <node id="OrthoCamNode" name="OrthoCamNode" type="NODE">
+        <translate>0 5 10</translate>
+        <rotate>1 0 0 -30</rotate>
+        <instance_camera url="#ortho_cam"/>
+      </node>
+      <node id="PerspCamNode" name="PerspCamNode" type="NODE">
+        <translate>5 3 8</translate>
+        <rotate>0 1 0 45</rotate>
+        <instance_camera url="#persp_cam"/>
+      </node>
+      <node id="SpotLightNode" name="SpotLightNode" type="NODE">
+        <translate>0 5 5</translate>
+        <rotate>1 0 0 -45</rotate>
+        <instance_light url="#spot_light"/>
+      </node>
+      <node id="PointLightNode" name="PointLightNode" type="NODE">
+        <translate>3 2 0</translate>
+        <instance_light url="#point_light"/>
+      </node>
+      <node id="DirLightNode" name="DirLightNode" type="NODE">
+        <rotate>1 0 0 -60</rotate>
+        <instance_light url="#dir_light"/>
+      </node>
+      <node id="AmbientLightNode" name="AmbientLightNode" type="NODE">
+        <instance_light url="#ambient_light"/>
+      </node>
+      <node id="MeshNode" name="MeshNode" type="NODE">
+        <instance_geometry url="#mesh0"/>
+      </node>
+    </visual_scene>
+  </library_visual_scenes>
+
+  <scene>
+    <instance_visual_scene url="#Scene"/>
+  </scene>
+</COLLADA>

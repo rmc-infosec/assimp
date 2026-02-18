@@ -1,0 +1,46 @@
+{
+  "asset": { "version": "2.0", "generator": "fuzz" },
+  "scene": 0,
+  "scenes": [{ "nodes": [0], "extras": { "scene_tag": "test", "scene_id": 42 } }],
+  "nodes": [
+    {
+      "name": "ExtNode",
+      "mesh": 0,
+      "extras": {
+        "string_val": "hello",
+        "number_val": 3.14,
+        "int_val": 99,
+        "bool_val": true,
+        "nested": {
+          "inner_str": "deep",
+          "inner_num": 2.7
+        }
+      },
+      "extensions": {
+        "CUSTOM_ext": {
+          "data": "custom_data",
+          "value": 123
+        }
+      }
+    }
+  ],
+  "meshes": [{
+    "name": "M",
+    "primitives": [{
+      "attributes": { "POSITION": 0 },
+      "indices": 1,
+      "extras": { "prim_tag": "tri" }
+    }],
+    "extras": { "mesh_tag": "box" }
+  }],
+  "accessors": [
+    { "bufferView": 0, "componentType": 5126, "count": 4, "type": "VEC3", "max": [1,1,0], "min": [-1,-1,0] },
+    { "bufferView": 1, "componentType": 5123, "count": 6, "type": "SCALAR" }
+  ],
+  "bufferViews": [
+    { "buffer": 0, "byteOffset": 0, "byteLength": 48 },
+    { "buffer": 0, "byteOffset": 48, "byteLength": 12 }
+  ],
+  "buffers": [{ "uri": "data:application/octet-stream;base64,AAAAvwAAAL8AAAAAAAAAgAAAAL8AAAAAAAAAgAAAAD8AAAAAAAAAvwAAAD8AAAAAAAAAAAIAAQACAAMAAA==", "byteLength": 60 }],
+  "extensionsUsed": ["CUSTOM_ext"]
+}

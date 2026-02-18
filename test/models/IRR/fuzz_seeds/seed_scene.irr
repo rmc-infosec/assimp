@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<irr_scene>
+  <attributes>
+    <string name="Name" value="root"/>
+  </attributes>
+  <node type="mesh">
+    <attributes>
+      <string name="Name" value="Box"/>
+      <string name="Mesh" value="box.irrmesh"/>
+      <vector3d name="Position" value="0, 0, 0"/>
+      <vector3d name="Rotation" value="0, 0, 0"/>
+      <vector3d name="Scale" value="1, 1, 1"/>
+      <bool name="Visible" value="true"/>
+      <int name="AutomaticCulling" value="1"/>
+      <bool name="IsDebugObject" value="false"/>
+    </attributes>
+    <materials>
+      <attributes>
+        <enum name="Type" value="solid"/>
+        <color name="Ambient" value="ff404040"/>
+        <color name="Diffuse" value="ff808080"/>
+        <color name="Specular" value="ffffffff"/>
+        <color name="Emissive" value="ff000000"/>
+        <float name="Shininess" value="20"/>
+        <bool name="Wireframe" value="false"/>
+        <bool name="GouraudShading" value="true"/>
+        <bool name="Lighting" value="true"/>
+        <bool name="BackfaceCulling" value="true"/>
+      </attributes>
+    </materials>
+  </node>
+  <node type="light">
+    <attributes>
+      <string name="Name" value="Light1"/>
+      <vector3d name="Position" value="5, 10, 5"/>
+      <vector3d name="Rotation" value="0, 0, 0"/>
+      <vector3d name="Scale" value="1, 1, 1"/>
+      <bool name="Visible" value="true"/>
+      <enum name="LightType" value="Point"/>
+      <colorf name="AmbientColor" value="0.1, 0.1, 0.1, 1"/>
+      <colorf name="DiffuseColor" value="1, 1, 1, 1"/>
+      <colorf name="SpecularColor" value="1, 1, 1, 1"/>
+      <float name="Radius" value="100"/>
+      <float name="Attenuation" value="0.01"/>
+      <bool name="CastShadows" value="true"/>
+    </attributes>
+  </node>
+  <node type="camera">
+    <attributes>
+      <string name="Name" value="Camera1"/>
+      <vector3d name="Position" value="0, 5, -10"/>
+      <vector3d name="Target" value="0, 0, 0"/>
+      <vector3d name="Rotation" value="0, 0, 0"/>
+      <float name="Fovy" value="1.2"/>
+      <float name="Aspect" value="1.333"/>
+      <float name="ZNear" value="1"/>
+      <float name="ZFar" value="3000"/>
+    </attributes>
+  </node>
+</irr_scene>

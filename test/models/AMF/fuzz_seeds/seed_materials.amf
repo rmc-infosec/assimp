@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<amf unit="inch" version="1.1">
+  <metadata type="name">MaterialsSeed</metadata>
+  <material id="1">
+    <metadata type="name">RedMaterial</metadata>
+    <color><r>0.9</r><g>0.1</g><b>0.1</b><a>1.0</a></color>
+  </material>
+  <material id="2">
+    <metadata type="name">GreenMaterial</metadata>
+    <color><r>0.1</r><g>0.9</g><b>0.1</b><a>0.8</a></color>
+  </material>
+  <material id="3">
+    <metadata type="name">BlueMaterial</metadata>
+    <color><r>0.1</r><g>0.1</g><b>0.9</b><a>0.5</a></color>
+  </material>
+  <material id="4">
+    <metadata type="name">CompositeRG</metadata>
+    <composite materialid="1">0.6</composite>
+    <composite materialid="2">0.4</composite>
+  </material>
+  <material id="5">
+    <metadata type="name">CompositeAll</metadata>
+    <composite materialid="1">0.33</composite>
+    <composite materialid="2">0.33</composite>
+    <composite materialid="3">0.34</composite>
+  </material>
+  <material id="6">
+    <metadata type="name">TransparentWhite</metadata>
+    <color><r>1.0</r><g>1.0</g><b>1.0</b><a>0.2</a></color>
+  </material>
+  <object id="1">
+    <metadata type="name">MultiMatObject</metadata>
+    <mesh>
+      <vertices>
+        <vertex><coordinates><x>0</x><y>0</y><z>0</z></coordinates></vertex>
+        <vertex><coordinates><x>2</x><y>0</y><z>0</z></coordinates></vertex>
+        <vertex><coordinates><x>1</x><y>2</y><z>0</z></coordinates></vertex>
+        <vertex><coordinates><x>1</x><y>1</y><z>2</z></coordinates></vertex>
+        <vertex><coordinates><x>-1</x><y>1</y><z>0</z></coordinates></vertex>
+        <vertex><coordinates><x>3</x><y>1</y><z>0</z></coordinates></vertex>
+      </vertices>
+      <volume materialid="1">
+        <metadata type="name">RedVolume</metadata>
+        <triangle><v1>0</v1><v2>1</v2><v3>2</v3></triangle>
+      </volume>
+      <volume materialid="4">
+        <metadata type="name">CompositeVolume</metadata>
+        <triangle><v1>0</v1><v2>1</v2><v3>3</v3></triangle>
+        <triangle><v1>1</v1><v2>2</v2><v3>3</v3></triangle>
+      </volume>
+      <volume materialid="5">
+        <metadata type="name">TripleCompositeVolume</metadata>
+        <triangle><v1>0</v1><v2>2</v2><v3>3</v3></triangle>
+      </volume>
+      <volume materialid="6">
+        <metadata type="name">TransparentVolume</metadata>
+        <triangle><v1>2</v1><v2>4</v2><v3>3</v3></triangle>
+        <triangle><v1>1</v1><v2>5</v2><v3>3</v3></triangle>
+      </volume>
+    </mesh>
+  </object>
+</amf>

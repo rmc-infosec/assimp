@@ -1,0 +1,422 @@
+<skeleton blendmode="cumulative">
+    <bones>
+        <bone id="0" name="Root">
+            <position x="0" y="0" z="0"/>
+            <rotation angle="0">
+                <axis x="0" y="1" z="0"/>
+            </rotation>
+            <scale x="1" y="1" z="1"/>
+        </bone>
+        <bone id="1" name="Spine">
+            <position x="0" y="1" z="0"/>
+            <rotation angle="0.1">
+                <axis x="1" y="0" z="0"/>
+            </rotation>
+            <scale factor="1.0"/>
+        </bone>
+        <bone id="2" name="Chest">
+            <position x="0" y="1" z="0"/>
+            <rotation angle="0">
+                <axis x="0" y="1" z="0"/>
+            </rotation>
+            <scale x="1.1" y="1" z="1.1"/>
+        </bone>
+        <bone id="3" name="Head">
+            <position x="0" y="0.8" z="0"/>
+            <rotation angle="0">
+                <axis x="0" y="1" z="0"/>
+            </rotation>
+        </bone>
+        <bone id="4" name="LeftArm">
+            <position x="-0.5" y="0.7" z="0"/>
+            <rotation angle="0.785">
+                <axis x="0" y="0" z="1"/>
+            </rotation>
+            <scale x="1" y="1" z="1"/>
+        </bone>
+        <bone id="5" name="LeftHand">
+            <position x="-0.6" y="0" z="0"/>
+            <rotation angle="0">
+                <axis x="0" y="1" z="0"/>
+            </rotation>
+            <scale factor="0.9"/>
+        </bone>
+        <bone id="6" name="RightArm">
+            <position x="0.5" y="0.7" z="0"/>
+            <rotation angle="-0.785">
+                <axis x="0" y="0" z="1"/>
+            </rotation>
+        </bone>
+        <bone id="7" name="RightHand">
+            <position x="0.6" y="0" z="0"/>
+            <rotation angle="0">
+                <axis x="0" y="1" z="0"/>
+            </rotation>
+        </bone>
+    </bones>
+    <bonehierarchy>
+        <boneparent bone="Spine" parent="Root"/>
+        <boneparent bone="Chest" parent="Spine"/>
+        <boneparent bone="Head" parent="Chest"/>
+        <boneparent bone="LeftArm" parent="Chest"/>
+        <boneparent bone="LeftHand" parent="LeftArm"/>
+        <boneparent bone="RightArm" parent="Chest"/>
+        <boneparent bone="RightHand" parent="RightArm"/>
+    </bonehierarchy>
+    <animations>
+        <animation name="wave" length="2.0">
+            <tracks>
+                <track bone="Root">
+                    <keyframes>
+                        <keyframe time="0">
+                            <translate x="0" y="0" z="0"/>
+                            <rotate angle="0">
+                                <axis x="0" y="1" z="0"/>
+                            </rotate>
+                            <scale x="1" y="1" z="1"/>
+                        </keyframe>
+                        <keyframe time="1.0">
+                            <translate x="0" y="0.2" z="0"/>
+                            <rotate angle="0.1">
+                                <axis x="0" y="1" z="0"/>
+                            </rotate>
+                            <scale x="1" y="1" z="1"/>
+                        </keyframe>
+                        <keyframe time="2.0">
+                            <translate x="0" y="0" z="0"/>
+                            <rotate angle="0">
+                                <axis x="0" y="1" z="0"/>
+                            </rotate>
+                            <scale x="1" y="1" z="1"/>
+                        </keyframe>
+                    </keyframes>
+                </track>
+                <track bone="Spine">
+                    <keyframes>
+                        <keyframe time="0">
+                            <translate x="0" y="0" z="0"/>
+                            <rotate angle="0">
+                                <axis x="1" y="0" z="0"/>
+                            </rotate>
+                        </keyframe>
+                        <keyframe time="1.0">
+                            <translate x="0" y="0" z="0"/>
+                            <rotate angle="0.2">
+                                <axis x="1" y="0" z="0"/>
+                            </rotate>
+                        </keyframe>
+                        <keyframe time="2.0">
+                            <translate x="0" y="0" z="0"/>
+                            <rotate angle="0">
+                                <axis x="1" y="0" z="0"/>
+                            </rotate>
+                        </keyframe>
+                    </keyframes>
+                </track>
+                <track bone="LeftArm">
+                    <keyframes>
+                        <keyframe time="0">
+                            <translate x="0" y="0" z="0"/>
+                            <rotate angle="0">
+                                <axis x="0" y="0" z="1"/>
+                            </rotate>
+                        </keyframe>
+                        <keyframe time="0.5">
+                            <translate x="0" y="0" z="0"/>
+                            <rotate angle="1.57">
+                                <axis x="0" y="0" z="1"/>
+                            </rotate>
+                        </keyframe>
+                        <keyframe time="1.0">
+                            <translate x="0" y="0" z="0"/>
+                            <rotate angle="0.785">
+                                <axis x="0" y="0" z="1"/>
+                            </rotate>
+                        </keyframe>
+                        <keyframe time="1.5">
+                            <translate x="0" y="0" z="0"/>
+                            <rotate angle="1.57">
+                                <axis x="0" y="0" z="1"/>
+                            </rotate>
+                        </keyframe>
+                        <keyframe time="2.0">
+                            <translate x="0" y="0" z="0"/>
+                            <rotate angle="0">
+                                <axis x="0" y="0" z="1"/>
+                            </rotate>
+                        </keyframe>
+                    </keyframes>
+                </track>
+                <track bone="LeftHand">
+                    <keyframes>
+                        <keyframe time="0">
+                            <translate x="0" y="0" z="0"/>
+                            <rotate angle="0">
+                                <axis x="1" y="0" z="0"/>
+                            </rotate>
+                            <scale x="1" y="1" z="1"/>
+                        </keyframe>
+                        <keyframe time="1.0">
+                            <translate x="0" y="0" z="0"/>
+                            <rotate angle="0.5">
+                                <axis x="1" y="0" z="0"/>
+                            </rotate>
+                            <scale x="0.8" y="0.8" z="0.8"/>
+                        </keyframe>
+                        <keyframe time="2.0">
+                            <translate x="0" y="0" z="0"/>
+                            <rotate angle="0">
+                                <axis x="1" y="0" z="0"/>
+                            </rotate>
+                            <scale x="1" y="1" z="1"/>
+                        </keyframe>
+                    </keyframes>
+                </track>
+                <track bone="Head">
+                    <keyframes>
+                        <keyframe time="0">
+                            <translate x="0" y="0" z="0"/>
+                            <rotate angle="0">
+                                <axis x="0" y="1" z="0"/>
+                            </rotate>
+                        </keyframe>
+                        <keyframe time="0.5">
+                            <translate x="0" y="0" z="0"/>
+                            <rotate angle="0.3">
+                                <axis x="0" y="1" z="0"/>
+                            </rotate>
+                        </keyframe>
+                        <keyframe time="1.5">
+                            <translate x="0" y="0" z="0"/>
+                            <rotate angle="-0.3">
+                                <axis x="0" y="1" z="0"/>
+                            </rotate>
+                        </keyframe>
+                        <keyframe time="2.0">
+                            <translate x="0" y="0" z="0"/>
+                            <rotate angle="0">
+                                <axis x="0" y="1" z="0"/>
+                            </rotate>
+                        </keyframe>
+                    </keyframes>
+                </track>
+            </tracks>
+        </animation>
+        <animation name="idle" length="4.0">
+            <tracks>
+                <track bone="Root">
+                    <keyframes>
+                        <keyframe time="0">
+                            <translate x="0" y="0" z="0"/>
+                            <rotate angle="0">
+                                <axis x="0" y="1" z="0"/>
+                            </rotate>
+                            <scale x="1" y="1" z="1"/>
+                        </keyframe>
+                        <keyframe time="2.0">
+                            <translate x="0" y="0.05" z="0"/>
+                            <rotate angle="0.02">
+                                <axis x="0" y="1" z="0"/>
+                            </rotate>
+                            <scale x="1" y="1.01" z="1"/>
+                        </keyframe>
+                        <keyframe time="4.0">
+                            <translate x="0" y="0" z="0"/>
+                            <rotate angle="0">
+                                <axis x="0" y="1" z="0"/>
+                            </rotate>
+                            <scale x="1" y="1" z="1"/>
+                        </keyframe>
+                    </keyframes>
+                </track>
+                <track bone="Chest">
+                    <keyframes>
+                        <keyframe time="0">
+                            <translate x="0" y="0" z="0"/>
+                            <rotate angle="0">
+                                <axis x="1" y="0" z="0"/>
+                            </rotate>
+                        </keyframe>
+                        <keyframe time="2.0">
+                            <translate x="0" y="0.02" z="0.01"/>
+                            <rotate angle="0.05">
+                                <axis x="1" y="0" z="0"/>
+                            </rotate>
+                        </keyframe>
+                        <keyframe time="4.0">
+                            <translate x="0" y="0" z="0"/>
+                            <rotate angle="0">
+                                <axis x="1" y="0" z="0"/>
+                            </rotate>
+                        </keyframe>
+                    </keyframes>
+                </track>
+                <track bone="RightArm">
+                    <keyframes>
+                        <keyframe time="0">
+                            <translate x="0" y="0" z="0"/>
+                            <rotate angle="0">
+                                <axis x="0" y="0" z="1"/>
+                            </rotate>
+                        </keyframe>
+                        <keyframe time="1.0">
+                            <translate x="0" y="0" z="0"/>
+                            <rotate angle="0.1">
+                                <axis x="0" y="0" z="1"/>
+                            </rotate>
+                        </keyframe>
+                        <keyframe time="3.0">
+                            <translate x="0" y="0" z="0"/>
+                            <rotate angle="-0.1">
+                                <axis x="0" y="0" z="1"/>
+                            </rotate>
+                        </keyframe>
+                        <keyframe time="4.0">
+                            <translate x="0" y="0" z="0"/>
+                            <rotate angle="0">
+                                <axis x="0" y="0" z="1"/>
+                            </rotate>
+                        </keyframe>
+                    </keyframes>
+                </track>
+                <track bone="RightHand">
+                    <keyframes>
+                        <keyframe time="0">
+                            <translate x="0" y="0" z="0"/>
+                            <rotate angle="0">
+                                <axis x="0" y="1" z="0"/>
+                            </rotate>
+                        </keyframe>
+                        <keyframe time="2.0">
+                            <translate x="0.01" y="0" z="0"/>
+                            <rotate angle="0.15">
+                                <axis x="0" y="1" z="0"/>
+                            </rotate>
+                        </keyframe>
+                        <keyframe time="4.0">
+                            <translate x="0" y="0" z="0"/>
+                            <rotate angle="0">
+                                <axis x="0" y="1" z="0"/>
+                            </rotate>
+                        </keyframe>
+                    </keyframes>
+                </track>
+            </tracks>
+        </animation>
+        <animation name="jump" length="1.0">
+            <tracks>
+                <track bone="Root">
+                    <keyframes>
+                        <keyframe time="0">
+                            <translate x="0" y="0" z="0"/>
+                            <rotate angle="0">
+                                <axis x="0" y="1" z="0"/>
+                            </rotate>
+                            <scale x="1" y="0.9" z="1"/>
+                        </keyframe>
+                        <keyframe time="0.3">
+                            <translate x="0" y="-0.2" z="0"/>
+                            <rotate angle="0">
+                                <axis x="0" y="1" z="0"/>
+                            </rotate>
+                            <scale x="1.1" y="0.8" z="1.1"/>
+                        </keyframe>
+                        <keyframe time="0.5">
+                            <translate x="0" y="1.5" z="0"/>
+                            <rotate angle="0">
+                                <axis x="0" y="1" z="0"/>
+                            </rotate>
+                            <scale x="0.95" y="1.1" z="0.95"/>
+                        </keyframe>
+                        <keyframe time="0.8">
+                            <translate x="0" y="0.3" z="0"/>
+                            <rotate angle="0">
+                                <axis x="0" y="1" z="0"/>
+                            </rotate>
+                            <scale x="1" y="1" z="1"/>
+                        </keyframe>
+                        <keyframe time="1.0">
+                            <translate x="0" y="0" z="0"/>
+                            <rotate angle="0">
+                                <axis x="0" y="1" z="0"/>
+                            </rotate>
+                            <scale x="1" y="1" z="1"/>
+                        </keyframe>
+                    </keyframes>
+                </track>
+                <track bone="Spine">
+                    <keyframes>
+                        <keyframe time="0">
+                            <translate x="0" y="0" z="0"/>
+                            <rotate angle="0.1">
+                                <axis x="1" y="0" z="0"/>
+                            </rotate>
+                        </keyframe>
+                        <keyframe time="0.3">
+                            <translate x="0" y="0" z="0"/>
+                            <rotate angle="0.3">
+                                <axis x="1" y="0" z="0"/>
+                            </rotate>
+                        </keyframe>
+                        <keyframe time="0.5">
+                            <translate x="0" y="0" z="0"/>
+                            <rotate angle="-0.2">
+                                <axis x="1" y="0" z="0"/>
+                            </rotate>
+                        </keyframe>
+                        <keyframe time="1.0">
+                            <translate x="0" y="0" z="0"/>
+                            <rotate angle="0">
+                                <axis x="1" y="0" z="0"/>
+                            </rotate>
+                        </keyframe>
+                    </keyframes>
+                </track>
+                <track bone="LeftArm">
+                    <keyframes>
+                        <keyframe time="0">
+                            <translate x="0" y="0" z="0"/>
+                            <rotate angle="0">
+                                <axis x="0" y="0" z="1"/>
+                            </rotate>
+                        </keyframe>
+                        <keyframe time="0.5">
+                            <translate x="0" y="0" z="0"/>
+                            <rotate angle="2.0">
+                                <axis x="0" y="0" z="1"/>
+                            </rotate>
+                        </keyframe>
+                        <keyframe time="1.0">
+                            <translate x="0" y="0" z="0"/>
+                            <rotate angle="0">
+                                <axis x="0" y="0" z="1"/>
+                            </rotate>
+                        </keyframe>
+                    </keyframes>
+                </track>
+                <track bone="RightArm">
+                    <keyframes>
+                        <keyframe time="0">
+                            <translate x="0" y="0" z="0"/>
+                            <rotate angle="0">
+                                <axis x="0" y="0" z="1"/>
+                            </rotate>
+                        </keyframe>
+                        <keyframe time="0.5">
+                            <translate x="0" y="0" z="0"/>
+                            <rotate angle="-2.0">
+                                <axis x="0" y="0" z="1"/>
+                            </rotate>
+                        </keyframe>
+                        <keyframe time="1.0">
+                            <translate x="0" y="0" z="0"/>
+                            <rotate angle="0">
+                                <axis x="0" y="0" z="1"/>
+                            </rotate>
+                        </keyframe>
+                    </keyframes>
+                </track>
+            </tracks>
+        </animation>
+    </animations>
+</skeleton>

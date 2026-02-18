@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1">
+<asset><created>2026-01-01</created><modified>2026-01-01</modified></asset>
+<library_geometries>
+  <geometry id="geo" name="ColoredMesh">
+    <mesh>
+      <source id="pos">
+        <float_array id="posa" count="18">
+          0 0 0  1 0 0  1 1 0  0 1 0  0.5 0.5 1  0.5 -0.5 0
+        </float_array>
+        <technique_common><accessor source="#posa" count="6" stride="3">
+          <param name="X" type="float"/><param name="Y" type="float"/><param name="Z" type="float"/>
+        </accessor></technique_common>
+      </source>
+      <source id="nrm">
+        <float_array id="nrma" count="6">0 0 1 0 0 -1</float_array>
+        <technique_common><accessor source="#nrma" count="2" stride="3">
+          <param name="X" type="float"/><param name="Y" type="float"/><param name="Z" type="float"/>
+        </accessor></technique_common>
+      </source>
+      <source id="col0">
+        <float_array id="col0a" count="24">
+          1 0 0 1  0 1 0 1  0 0 1 1  1 1 0 1  0 1 1 1  1 0 1 1
+        </float_array>
+        <technique_common><accessor source="#col0a" count="6" stride="4">
+          <param name="R" type="float"/><param name="G" type="float"/><param name="B" type="float"/><param name="A" type="float"/>
+        </accessor></technique_common>
+      </source>
+      <source id="col1">
+        <float_array id="col1a" count="18">
+          0.5 0 0  0 0.5 0  0 0 0.5  0.5 0.5 0  0 0.5 0.5  0.5 0 0.5
+        </float_array>
+        <technique_common><accessor source="#col1a" count="6" stride="3">
+          <param name="R" type="float"/><param name="G" type="float"/><param name="B" type="float"/>
+        </accessor></technique_common>
+      </source>
+      <vertices id="vt"><input semantic="POSITION" source="#pos"/></vertices>
+      <triangles count="4">
+        <input semantic="VERTEX" source="#vt" offset="0"/>
+        <input semantic="NORMAL" source="#nrm" offset="1"/>
+        <input semantic="COLOR" source="#col0" offset="2" set="0"/>
+        <input semantic="COLOR" source="#col1" offset="2" set="1"/>
+        <p>
+          0 0 0  1 0 1  2 0 2
+          0 0 0  2 0 2  3 0 3
+          0 0 0  1 0 1  4 1 4
+          1 1 1  5 1 5  2 1 2
+        </p>
+      </triangles>
+    </mesh>
+  </geometry>
+</library_geometries>
+<library_visual_scenes>
+  <visual_scene id="Scene" name="Scene">
+    <node id="CN" name="ColorNode" type="NODE">
+      <matrix sid="transform">1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</matrix>
+      <instance_geometry url="#geo"/>
+    </node>
+  </visual_scene>
+</library_visual_scenes>
+<scene><instance_visual_scene url="#Scene"/></scene>
+</COLLADA>

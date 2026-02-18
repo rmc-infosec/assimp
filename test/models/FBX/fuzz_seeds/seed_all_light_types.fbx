@@ -1,0 +1,180 @@
+; FBX 7.4.0 project file
+; ----------------------------------------------------
+
+FBXHeaderExtension:  {
+	FBXHeaderVersion: 1003
+	FBXVersion: 7400
+	Creator: "seed"
+}
+GlobalSettings:  {
+	Version: 1000
+	Properties70:  {
+		P: "UpAxis", "int", "Integer", "",1
+		P: "UpAxisSign", "int", "Integer", "",1
+		P: "FrontAxis", "int", "Integer", "",2
+		P: "FrontAxisSign", "int", "Integer", "",1
+		P: "CoordAxis", "int", "Integer", "",0
+		P: "CoordAxisSign", "int", "Integer", "",1
+		P: "OriginalUpAxis", "int", "Integer", "",1
+		P: "OriginalUpAxisSign", "int", "Integer", "",1
+		P: "UnitScaleFactor", "double", "Number", "",1
+		P: "OriginalUnitScaleFactor", "double", "Number", "",1
+	}
+}
+
+Documents:  {
+	Count: 1
+	Document: 100000, "", "Scene" {
+		Properties70:  {
+			P: "SourceObject", "object", "", ""
+			P: "ActiveAnimStackName", "KString", "", "", ""
+		}
+		RootNode: 0
+	}
+}
+
+References:  {
+}
+
+Definitions:  {
+	Version: 100
+	Count: 3
+	ObjectType: "GlobalSettings" {
+		Count: 1
+	}
+	ObjectType: "NodeAttribute" {
+		Count: 4
+	}
+	ObjectType: "Model" {
+		Count: 4
+		PropertyTemplate: "FbxNode" {
+			Properties70:  {
+				P: "Lcl Translation", "Lcl Translation", "", "A",0,0,0
+				P: "Lcl Rotation", "Lcl Rotation", "", "A",0,0,0
+				P: "Lcl Scaling", "Lcl Scaling", "", "A",1,1,1
+				P: "Visibility", "Visibility", "", "A",1
+			}
+		}
+	}
+}
+
+Objects:  {
+	NodeAttribute: 1100001, "NodeAttribute::PointLightAttr", "Light" {
+		GeometryVersion: 124
+		Properties70:  {
+			P: "LightType", "enum", "", "",0
+			P: "CastLight", "bool", "", "",1
+			P: "Color", "Color", "", "A",1,0.9,0.7
+			P: "Intensity", "Number", "", "A",120
+			P: "DecayType", "enum", "", "",2
+			P: "DecayStart", "double", "Number", "",20
+			P: "CastShadows", "bool", "", "",1
+			P: "ShadowColor", "Color", "", "A",0,0,0
+		}
+	}
+	NodeAttribute: 1100002, "NodeAttribute::DirLightAttr", "Light" {
+		GeometryVersion: 124
+		Properties70:  {
+			P: "LightType", "enum", "", "",1
+			P: "CastLight", "bool", "", "",1
+			P: "Color", "Color", "", "A",0.95,0.95,1
+			P: "Intensity", "Number", "", "A",80
+			P: "CastShadows", "bool", "", "",1
+			P: "ShadowColor", "Color", "", "A",0,0,0
+		}
+	}
+	NodeAttribute: 1100003, "NodeAttribute::SpotLightAttr", "Light" {
+		GeometryVersion: 124
+		Properties70:  {
+			P: "LightType", "enum", "", "",2
+			P: "CastLight", "bool", "", "",1
+			P: "Color", "Color", "", "A",1,1,0.9
+			P: "Intensity", "Number", "", "A",200
+			P: "DecayType", "enum", "", "",2
+			P: "DecayStart", "double", "Number", "",35
+			P: "InnerAngle", "Number", "", "A",25
+			P: "OuterAngle", "Number", "", "A",55
+			P: "CastShadows", "bool", "", "",1
+			P: "ShadowColor", "Color", "", "A",0,0,0
+		}
+	}
+	NodeAttribute: 1100004, "NodeAttribute::AreaLightAttr", "Light" {
+		GeometryVersion: 124
+		Properties70:  {
+			P: "LightType", "enum", "", "",3
+			P: "CastLight", "bool", "", "",1
+			P: "Color", "Color", "", "A",1,1,1
+			P: "Intensity", "Number", "", "A",100
+			P: "DecayType", "enum", "", "",2
+			P: "DecayStart", "double", "Number", "",15
+			P: "AreaLightShape", "enum", "", "",0
+			P: "CastShadows", "bool", "", "",1
+			P: "ShadowColor", "Color", "", "A",0,0,0
+		}
+	}
+	Model: 3000001, "Model::PointLight", "Light" {
+		Version: 232
+		Properties70:  {
+			P: "Lcl Translation", "Lcl Translation", "", "A",3,5,0
+			P: "DefaultAttributeIndex", "int", "Integer", "",0
+		}
+		Shading: Y
+		Culling: "CullingOff"
+	}
+	Model: 3000002, "Model::DirLight", "Light" {
+		Version: 232
+		Properties70:  {
+			P: "Lcl Translation", "Lcl Translation", "", "A",0,10,0
+			P: "Lcl Rotation", "Lcl Rotation", "", "A",-90,0,0
+			P: "DefaultAttributeIndex", "int", "Integer", "",0
+		}
+		Shading: Y
+		Culling: "CullingOff"
+	}
+	Model: 3000003, "Model::SpotLight", "Light" {
+		Version: 232
+		Properties70:  {
+			P: "Lcl Translation", "Lcl Translation", "", "A",0,8,-3
+			P: "Lcl Rotation", "Lcl Rotation", "", "A",-45,0,0
+			P: "DefaultAttributeIndex", "int", "Integer", "",0
+		}
+		Shading: Y
+		Culling: "CullingOff"
+	}
+	Model: 3000004, "Model::AreaLight", "Light" {
+		Version: 232
+		Properties70:  {
+			P: "Lcl Translation", "Lcl Translation", "", "A",-5,4,2
+			P: "Lcl Rotation", "Lcl Rotation", "", "A",-30,15,0
+			P: "DefaultAttributeIndex", "int", "Integer", "",0
+		}
+		Shading: Y
+		Culling: "CullingOff"
+	}
+}
+
+Connections:  {
+	;Model::PointLight, Model::RootNode
+	C: "OO",3000001,0
+
+	;Model::DirLight, Model::RootNode
+	C: "OO",3000002,0
+
+	;Model::SpotLight, Model::RootNode
+	C: "OO",3000003,0
+
+	;Model::AreaLight, Model::RootNode
+	C: "OO",3000004,0
+
+	;NodeAttribute::PointLightAttr, Model::PointLight
+	C: "OO",1100001,3000001
+
+	;NodeAttribute::DirLightAttr, Model::DirLight
+	C: "OO",1100002,3000002
+
+	;NodeAttribute::SpotLightAttr, Model::SpotLight
+	C: "OO",1100003,3000003
+
+	;NodeAttribute::AreaLightAttr, Model::AreaLight
+	C: "OO",1100004,3000004
+}

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1">
+<asset><up_axis>Z_UP</up_axis></asset>
+<library_images>
+<image id="i1"><init_from>d.png</init_from></image>
+<image id="i2"><init_from>s.png</init_from></image>
+</library_images>
+<library_effects>
+<effect id="fx">
+<profile_COMMON>
+<newparam sid="s1"><surface type="2D"><init_from>i1</init_from></surface></newparam>
+<newparam sid="d"><sampler2D><source>s1</source></sampler2D></newparam>
+<newparam sid="s2"><surface type="2D"><init_from>i2</init_from></surface></newparam>
+<newparam sid="s"><sampler2D><source>s2</source></sampler2D></newparam>
+<technique sid="common">
+<phong>
+<diffuse>
+<texture texture="d" texcoord="T">
+<extra>
+<technique profile="MAYA">
+<wrapU sid="wrapU" type="bool">1</wrapU>
+<wrapV sid="wrapV" type="bool">1</wrapV>
+<mirrorU sid="mirrorU" type="bool">1</mirrorU>
+<mirrorV sid="mirrorV" type="bool">0</mirrorV>
+<repeatU sid="repeatU" type="float">2.0</repeatU>
+<repeatV sid="repeatV" type="float">3.0</repeatV>
+<offsetU sid="offsetU" type="float">0.5</offsetU>
+<offsetV sid="offsetV" type="float">0.25</offsetV>
+<rotateUV sid="rotateUV" type="float">45.0</rotateUV>
+<blend_mode>ADD</blend_mode>
+</technique>
+<technique profile="OKINO">
+<weighting>0.8</weighting>
+<mix_with_previous_layer>1</mix_with_previous_layer>
+</technique>
+</extra>
+</texture>
+</diffuse>
+<specular>
+<texture texture="s" texcoord="T">
+<extra>
+<technique profile="MAYA">
+<wrapU sid="wrapU" type="bool">0</wrapU>
+<wrapV sid="wrapV" type="bool">0</wrapV>
+<mirrorU sid="mirrorU" type="bool">0</mirrorU>
+<mirrorV sid="mirrorV" type="bool">1</mirrorV>
+<repeatU sid="repeatU" type="float">1.0</repeatU>
+<repeatV sid="repeatV" type="float">1.0</repeatV>
+<offsetU sid="offsetU" type="float">0.0</offsetU>
+<offsetV sid="offsetV" type="float">0.0</offsetV>
+<rotateUV sid="rotateUV" type="float">0.0</rotateUV>
+<blend_mode>MULTIPLY</blend_mode>
+</technique>
+<technique profile="MAX3D">
+<amount>0.7</amount>
+</technique>
+</extra>
+</texture>
+</specular>
+<shininess><float>50</float></shininess>
+</phong>
+</technique>
+</profile_COMMON>
+</effect>
+</library_effects>
+<library_materials>
+<material id="m"><instance_effect url="#fx"/></material>
+</library_materials>
+<library_geometries>
+<geometry id="g"><mesh>
+<source id="p"><float_array id="a" count="9">0 0 0 1 0 0 0 1 0</float_array>
+<technique_common><accessor source="#a" count="3" stride="3">
+<param name="X" type="float"/><param name="Y" type="float"/><param name="Z" type="float"/>
+</accessor></technique_common></source>
+<source id="u"><float_array id="b" count="6">0 0 1 0 0 1</float_array>
+<technique_common><accessor source="#b" count="3" stride="2">
+<param name="S" type="float"/><param name="T" type="float"/>
+</accessor></technique_common></source>
+<vertices id="v"><input semantic="POSITION" source="#p"/></vertices>
+<triangles count="1" material="m">
+<input semantic="VERTEX" source="#v" offset="0"/>
+<input semantic="TEXCOORD" source="#u" offset="1" set="0"/>
+<p>0 0 1 1 2 2</p>
+</triangles>
+</mesh></geometry>
+</library_geometries>
+<library_visual_scenes>
+<visual_scene id="S"><node id="N" type="NODE">
+<instance_geometry url="#g"><bind_material><technique_common>
+<instance_material symbol="m" target="#m">
+<bind_vertex_input semantic="T" input_semantic="TEXCOORD" input_set="0"/>
+</instance_material>
+</technique_common></bind_material></instance_geometry>
+</node></visual_scene>
+</library_visual_scenes>
+<scene><instance_visual_scene url="#S"/></scene>
+</COLLADA>

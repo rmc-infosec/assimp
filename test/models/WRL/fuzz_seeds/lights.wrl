@@ -1,0 +1,44 @@
+#VRML V2.0 utf8
+
+Group {
+  children [
+    DirectionalLight {
+      direction 0 -1 -1
+      color 1 1 1
+      intensity 0.8
+      ambientIntensity 0.2
+      on TRUE
+    }
+    PointLight {
+      location 3 3 3
+      color 1 0.5 0
+      intensity 1.0
+      ambientIntensity 0.1
+      attenuation 1 0 0
+      radius 10
+      on TRUE
+    }
+    SpotLight {
+      location 0 5 0
+      direction 0 -1 0
+      color 0 0 1
+      intensity 1.0
+      ambientIntensity 0.0
+      attenuation 1 0 0
+      beamWidth 0.5
+      cutOffAngle 0.78
+      radius 20
+      on TRUE
+    }
+    Shape {
+      geometry Sphere { radius 1 }
+      appearance Appearance {
+        material Material {
+          diffuseColor 0.8 0.8 0.8
+          specularColor 1 1 1
+          shininess 0.9
+        }
+      }
+    }
+  ]
+}

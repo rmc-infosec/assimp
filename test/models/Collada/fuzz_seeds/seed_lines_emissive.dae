@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1">
+  <asset><created>2025-01-01</created><modified>2025-01-01</modified></asset>
+  <library_materials>
+    <material id="emissive_mat" name="EmissiveMat">
+      <instance_effect url="#emissive_fx"/>
+    </material>
+    <material id="transparent_mat" name="TransparentMat">
+      <instance_effect url="#transparent_fx"/>
+    </material>
+  </library_materials>
+  <library_effects>
+    <effect id="emissive_fx">
+      <profile_COMMON>
+        <technique sid="common">
+          <phong>
+            <emission><color>0.5 0.3 0.1 1</color></emission>
+            <diffuse><color>0.8 0.2 0.1 1</color></diffuse>
+            <specular><color>1 1 1 1</color></specular>
+            <shininess><float>25.0</float></shininess>
+          </phong>
+        </technique>
+      </profile_COMMON>
+    </effect>
+    <effect id="transparent_fx">
+      <profile_COMMON>
+        <technique sid="common">
+          <phong>
+            <diffuse><color>0.5 0.5 0.8 1</color></diffuse>
+            <transparent opaque="A_ONE"><color>1 1 1 0.5</color></transparent>
+            <transparency><float>0.5</float></transparency>
+          </phong>
+        </technique>
+      </profile_COMMON>
+    </effect>
+  </library_effects>
+  <library_geometries>
+    <geometry id="tri_mesh" name="TriMesh">
+      <mesh>
+        <source id="tri_pos">
+          <float_array id="tri_pos_arr" count="12">-1 0 -1 1 0 -1 1 0 1 -1 0 1</float_array>
+          <technique_common><accessor source="#tri_pos_arr" count="4" stride="3">
+            <param name="X" type="float"/><param name="Y" type="float"/><param name="Z" type="float"/>
+          </accessor></technique_common>
+        </source>
+        <source id="tri_norm">
+          <float_array id="tri_norm_arr" count="12">0 1 0 0 1 0 0 1 0 0 1 0</float_array>
+          <technique_common><accessor source="#tri_norm_arr" count="4" stride="3">
+            <param name="X" type="float"/><param name="Y" type="float"/><param name="Z" type="float"/>
+          </accessor></technique_common>
+        </source>
+        <source id="tri_uv0">
+          <float_array id="tri_uv0_arr" count="8">0 0 1 0 1 1 0 1</float_array>
+          <technique_common><accessor source="#tri_uv0_arr" count="4" stride="2">
+            <param name="S" type="float"/><param name="T" type="float"/>
+          </accessor></technique_common>
+        </source>
+        <source id="tri_uv1">
+          <float_array id="tri_uv1_arr" count="8">0.5 0 1 0.5 0.5 1 0 0.5</float_array>
+          <technique_common><accessor source="#tri_uv1_arr" count="4" stride="2">
+            <param name="S" type="float"/><param name="T" type="float"/>
+          </accessor></technique_common>
+        </source>
+        <source id="tri_col">
+          <float_array id="tri_col_arr" count="16">1 0 0 1 0 1 0 1 0 0 1 1 1 1 0 1</float_array>
+          <technique_common><accessor source="#tri_col_arr" count="4" stride="4">
+            <param name="R" type="float"/><param name="G" type="float"/><param name="B" type="float"/><param name="A" type="float"/>
+          </accessor></technique_common>
+        </source>
+        <vertices id="tri_verts"><input semantic="POSITION" source="#tri_pos"/></vertices>
+        <triangles material="emissive_mat" count="2">
+          <input semantic="VERTEX" source="#tri_verts" offset="0"/>
+          <input semantic="NORMAL" source="#tri_norm" offset="0"/>
+          <input semantic="TEXCOORD" source="#tri_uv0" offset="0" set="0"/>
+          <input semantic="TEXCOORD" source="#tri_uv1" offset="0" set="1"/>
+          <input semantic="COLOR" source="#tri_col" offset="0" set="0"/>
+          <p>0 1 2 0 2 3</p>
+        </triangles>
+      </mesh>
+    </geometry>
+    <geometry id="line_mesh" name="LineMesh">
+      <mesh>
+        <source id="line_pos">
+          <float_array id="line_pos_arr" count="12">0 0 0 1 0 0 1 1 0 0 1 0</float_array>
+          <technique_common><accessor source="#line_pos_arr" count="4" stride="3">
+            <param name="X" type="float"/><param name="Y" type="float"/><param name="Z" type="float"/>
+          </accessor></technique_common>
+        </source>
+        <source id="line_col">
+          <float_array id="line_col_arr" count="16">1 0 0 1 0 1 0 1 0 0 1 1 1 1 1 1</float_array>
+          <technique_common><accessor source="#line_col_arr" count="4" stride="4">
+            <param name="R" type="float"/><param name="G" type="float"/><param name="B" type="float"/><param name="A" type="float"/>
+          </accessor></technique_common>
+        </source>
+        <vertices id="line_verts"><input semantic="POSITION" source="#line_pos"/></vertices>
+        <lines material="transparent_mat" count="3">
+          <input semantic="VERTEX" source="#line_verts" offset="0"/>
+          <input semantic="COLOR" source="#line_col" offset="0" set="0"/>
+          <p>0 1 1 2 2 3</p>
+        </lines>
+      </mesh>
+    </geometry>
+  </library_geometries>
+  <library_lights>
+    <light id="spot_light" name="SpotLight">
+      <technique_common>
+        <spot>
+          <color>1 0.9 0.8</color>
+          <constant_attenuation>1.0</constant_attenuation>
+          <linear_attenuation>0.01</linear_attenuation>
+          <quadratic_attenuation>0.001</quadratic_attenuation>
+          <falloff_angle>45.0</falloff_angle>
+          <falloff_exponent>2.0</falloff_exponent>
+        </spot>
+      </technique_common>
+    </light>
+    <light id="ambient_light" name="AmbientLight">
+      <technique_common>
+        <ambient><color>0.2 0.2 0.3</color></ambient>
+      </technique_common>
+    </light>
+  </library_lights>
+  <library_visual_scenes>
+    <visual_scene id="scene" name="Scene">
+      <node id="tri_node" name="TriNode" type="NODE">
+        <instance_geometry url="#tri_mesh">
+          <bind_material><technique_common>
+            <instance_material symbol="emissive_mat" target="#emissive_mat"/>
+          </technique_common></bind_material>
+        </instance_geometry>
+      </node>
+      <node id="line_node" name="LineNode" type="NODE">
+        <translate>2 0 0</translate>
+        <instance_geometry url="#line_mesh">
+          <bind_material><technique_common>
+            <instance_material symbol="transparent_mat" target="#transparent_mat"/>
+          </technique_common></bind_material>
+        </instance_geometry>
+      </node>
+      <node id="spot_node" name="SpotNode" type="NODE">
+        <translate>0 5 0</translate>
+        <rotate>1 0 0 -90</rotate>
+        <instance_light url="#spot_light"/>
+      </node>
+      <node id="ambient_node" name="AmbientNode" type="NODE">
+        <instance_light url="#ambient_light"/>
+      </node>
+    </visual_scene>
+  </library_visual_scenes>
+  <scene><instance_visual_scene url="#scene"/></scene>
+</COLLADA>

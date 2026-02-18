@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1">
+<asset><created>2026-01-01</created><modified>2026-01-01</modified></asset>
+<library_geometries>
+  <geometry id="tri" name="Tri">
+    <mesh>
+      <source id="tp"><float_array id="tpa" count="9">0 0 0 1 0 0 0.5 1 0</float_array>
+        <technique_common><accessor source="#tpa" count="3" stride="3">
+          <param name="X" type="float"/><param name="Y" type="float"/><param name="Z" type="float"/>
+        </accessor></technique_common></source>
+      <vertices id="tv"><input semantic="POSITION" source="#tp"/></vertices>
+      <triangles count="1"><input semantic="VERTEX" source="#tv" offset="0"/>
+        <p>0 1 2</p></triangles>
+    </mesh>
+  </geometry>
+</library_geometries>
+<library_animations>
+  <!-- Large angle delta >= 180 degrees between consecutive keys triggers sub-sampling -->
+  <animation id="bigrot" name="BigRotation">
+    <source id="brt"><float_array id="brta" count="3">0 1 2</float_array>
+      <technique_common><accessor source="#brta" count="3" stride="1">
+        <param name="TIME" type="float"/>
+      </accessor></technique_common></source>
+    <source id="brv"><float_array id="brva" count="3">0 270 540</float_array>
+      <technique_common><accessor source="#brva" count="3" stride="1">
+        <param name="ANGLE" type="float"/>
+      </accessor></technique_common></source>
+    <sampler id="brs">
+      <input semantic="INPUT" source="#brt"/>
+      <input semantic="OUTPUT" source="#brv"/>
+    </sampler>
+    <channel source="#brs" target="RNode/rotZ.ANGLE"/>
+  </animation>
+  <!-- Simultaneous translate animation on same node -->
+  <animation id="slide" name="Slide">
+    <source id="slt"><float_array id="slta" count="3">0 1 2</float_array>
+      <technique_common><accessor source="#slta" count="3" stride="1">
+        <param name="TIME" type="float"/>
+      </accessor></technique_common></source>
+    <source id="slv"><float_array id="slva" count="9">0 0 0 5 0 0 10 0 0</float_array>
+      <technique_common><accessor source="#slva" count="3" stride="3">
+        <param name="X" type="float"/><param name="Y" type="float"/><param name="Z" type="float"/>
+      </accessor></technique_common></source>
+    <sampler id="sls">
+      <input semantic="INPUT" source="#slt"/>
+      <input semantic="OUTPUT" source="#slv"/>
+    </sampler>
+    <channel source="#sls" target="RNode/translate"/>
+  </animation>
+  <!-- Scale animation on same node -->
+  <animation id="pulse" name="Pulse">
+    <source id="pst"><float_array id="psta" count="4">0 0.5 1.5 2</float_array>
+      <technique_common><accessor source="#psta" count="4" stride="1">
+        <param name="TIME" type="float"/>
+      </accessor></technique_common></source>
+    <source id="psv"><float_array id="psva" count="12">1 1 1 2 2 2 0.5 0.5 0.5 1 1 1</float_array>
+      <technique_common><accessor source="#psva" count="4" stride="3">
+        <param name="X" type="float"/><param name="Y" type="float"/><param name="Z" type="float"/>
+      </accessor></technique_common></source>
+    <sampler id="pss">
+      <input semantic="INPUT" source="#pst"/>
+      <input semantic="OUTPUT" source="#psv"/>
+    </sampler>
+    <channel source="#pss" target="RNode/scale"/>
+  </animation>
+</library_animations>
+<library_visual_scenes>
+  <visual_scene id="Scene" name="Scene">
+    <node id="RNode" name="RNode" type="NODE">
+      <translate sid="translate">0 0 0</translate>
+      <rotate sid="rotZ">0 0 1 0</rotate>
+      <scale sid="scale">1 1 1</scale>
+      <instance_geometry url="#tri"/>
+    </node>
+  </visual_scene>
+</library_visual_scenes>
+<scene><instance_visual_scene url="#Scene"/></scene>
+</COLLADA>

@@ -1,0 +1,6 @@
+l_leg,models/players/test/lower_default.tga
+u_torso,models/players/test/upper_default.tga
+h_head,models/players/test/head_default.tga
+tag_torso,
+tag_head,
+l_weapon,models/weapons/test/weapon.tga

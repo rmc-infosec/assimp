@@ -1,0 +1,101 @@
+{
+  "asset": {"version": "2.0", "generator": "assimp-fuzz-seeds"},
+  "scene": 0,
+  "scenes": [{"nodes": [0]}],
+  "nodes": [{"mesh": 0, "name": "MorphTangentNode"}],
+  "meshes": [{
+    "name": "MorphTangentMesh",
+    "primitives": [{
+      "attributes": {"POSITION": 0, "NORMAL": 1, "TANGENT": 2},
+      "indices": 3,
+      "targets": [
+        {"POSITION": 4, "NORMAL": 5, "TANGENT": 6},
+        {"POSITION": 7, "NORMAL": 8, "TANGENT": 9}
+      ]
+    }],
+    "weights": [0.5, 0.3],
+    "extras": {
+      "targetNames": ["BulgeTarget", "TwistTarget"]
+    }
+  }],
+  "accessors": [
+    {
+      "bufferView": 0, "componentType": 5126, "count": 3, "type": "VEC3",
+      "min": [0.0, 0.0, 0.0], "max": [1.0, 1.0, 0.0]
+    },
+    {
+      "bufferView": 1, "componentType": 5126, "count": 3, "type": "VEC3",
+      "min": [0.0, 0.0, 1.0], "max": [0.0, 0.0, 1.0]
+    },
+    {
+      "bufferView": 2, "componentType": 5126, "count": 3, "type": "VEC4",
+      "min": [1.0, 0.0, 0.0, 1.0], "max": [1.0, 0.0, 0.0, 1.0]
+    },
+    {
+      "bufferView": 3, "componentType": 5123, "count": 3, "type": "SCALAR"
+    },
+    {
+      "bufferView": 4, "componentType": 5126, "count": 3, "type": "VEC3",
+      "min": [0.1, 0.0, 0.0], "max": [0.1, 0.0, 0.0]
+    },
+    {
+      "bufferView": 5, "componentType": 5126, "count": 3, "type": "VEC3",
+      "min": [0.0, 0.1, 0.0], "max": [0.0, 0.1, 0.0]
+    },
+    {
+      "bufferView": 6, "componentType": 5126, "count": 3, "type": "VEC3",
+      "min": [0.0, 0.0, 0.1], "max": [0.0, 0.0, 0.1]
+    },
+    {
+      "bufferView": 7, "componentType": 5126, "count": 3, "type": "VEC3",
+      "min": [0.0, 0.2, 0.0], "max": [0.0, 0.2, 0.0]
+    },
+    {
+      "bufferView": 8, "componentType": 5126, "count": 3, "type": "VEC3",
+      "min": [0.0, 0.0, 0.2], "max": [0.0, 0.0, 0.2]
+    },
+    {
+      "bufferView": 9, "componentType": 5126, "count": 3, "type": "VEC3",
+      "min": [0.2, 0.0, 0.0], "max": [0.2, 0.0, 0.0]
+    },
+    {
+      "bufferView": 10, "componentType": 5126, "count": 3, "type": "SCALAR",
+      "min": [0.0], "max": [1.0]
+    },
+    {
+      "bufferView": 11, "componentType": 5126, "count": 6, "type": "SCALAR",
+      "min": [0.0], "max": [1.0]
+    }
+  ],
+  "bufferViews": [
+    {"buffer": 0, "byteOffset": 0, "byteLength": 36, "target": 34962},
+    {"buffer": 0, "byteOffset": 36, "byteLength": 36, "target": 34962},
+    {"buffer": 0, "byteOffset": 72, "byteLength": 48, "target": 34962},
+    {"buffer": 0, "byteOffset": 120, "byteLength": 6, "target": 34963},
+    {"buffer": 0, "byteOffset": 128, "byteLength": 36, "target": 34962},
+    {"buffer": 0, "byteOffset": 164, "byteLength": 36, "target": 34962},
+    {"buffer": 0, "byteOffset": 200, "byteLength": 36, "target": 34962},
+    {"buffer": 0, "byteOffset": 236, "byteLength": 36, "target": 34962},
+    {"buffer": 0, "byteOffset": 272, "byteLength": 36, "target": 34962},
+    {"buffer": 0, "byteOffset": 308, "byteLength": 36, "target": 34962},
+    {"buffer": 0, "byteOffset": 344, "byteLength": 12},
+    {"buffer": 0, "byteOffset": 356, "byteLength": 24}
+  ],
+  "buffers": [{
+    "uri": "data:application/octet-stream;base64,AAAAAAAAAAAAAAAAAACAPwAAAAAAAAAAAAAAPwAAgD8AAAAAAAAAAAAAAAAAAIA/AAAAAAAAAAAAAIA/AAAAAAAAAAAAAIA/AACAPwAAAAAAAAAAAACAPwAAgD8AAAAAAAAAAAAAgD8AAIA/AAAAAAAAAAAAAIA/AAABAAIAAADNzMw9AAAAAAAAAADNzMw9AAAAAAAAAADNzMw9AAAAAAAAAAAAAAAAzczMPQAAAAAAAAAAzczMPQAAAAAAAAAAzczMPQAAAAAAAAAAAAAAAM3MzD0AAAAAAAAAAM3MzD0AAAAAAAAAAM3MzD0AAAAAzcxMPgAAAAAAAAAAzcxMPgAAAAAAAAAAzcxMPgAAAAAAAAAAAAAAAM3MTD4AAAAAAAAAAM3MTD4AAAAAAAAAAM3MTD7NzEw+AAAAAAAAAADNzEw+AAAAAAAAAADNzEw+AAAAAAAAAAAAAAAAAAAAPwAAgD8AAAAAAAAAAAAAgD8AAAA/AAAAAAAAgD8=",
+    "byteLength": 380
+  }],
+  "animations": [{
+    "name": "MorphWeightAnim",
+    "channels": [{
+      "sampler": 0,
+      "target": {"node": 0, "path": "weights"}
+    }],
+    "samplers": [{
+      "input": 10,
+      "output": 11,
+      "interpolation": "LINEAR"
+    }]
+  }],
+  "materials": [{"name": "DefaultMat"}]
+}

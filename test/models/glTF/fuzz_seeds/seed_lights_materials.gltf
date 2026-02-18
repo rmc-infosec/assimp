@@ -1,0 +1,54 @@
+{
+  "asset": {"generator":"seed","version":"1.0","copyright":"t","profile":{"api":"WebGL","version":"1.0.3"},"premultipliedAlpha":true},
+  "extensionsUsed": ["KHR_materials_common"],
+  "scene": "s0",
+  "scenes": {"s0": {"nodes": ["n0","n1","n2","n3","n4"]}},
+  "nodes": {
+    "n0": {"meshes":["m0"],"name":"Mesh","translation":[0,0,0],"scale":[1,1,1],"rotation":[0,0,0,1]},
+    "n1": {"name":"Pt","translation":[1,2,3],"extensions":{"KHR_materials_common":{"light":"lp"}}},
+    "n2": {"name":"Dir","matrix":[1,0,0,0,0,1,0,0,0,0,1,0,0,5,0,1],"extensions":{"KHR_materials_common":{"light":"ld"}}},
+    "n3": {"name":"Sp","extensions":{"KHR_materials_common":{"light":"ls"}}},
+    "n4": {"name":"Am","extensions":{"KHR_materials_common":{"light":"la"}}}
+  },
+  "meshes": {
+    "m0": {"primitives":[{"attributes":{"POSITION":"ap","NORMAL":"an"},"indices":"ai","material":"mb","mode":4}]}
+  },
+  "accessors": {
+    "ap": {"bufferView":"bp","byteOffset":0,"componentType":5126,"count":3,"type":"VEC3"},
+    "an": {"bufferView":"bn","byteOffset":0,"componentType":5126,"count":3,"type":"VEC3"},
+    "ai": {"bufferView":"bi","byteOffset":0,"componentType":5123,"count":3,"type":"SCALAR"}
+  },
+  "bufferViews": {
+    "bp": {"buffer":"b0","byteOffset":0,"byteLength":36},
+    "bn": {"buffer":"b0","byteOffset":36,"byteLength":36},
+    "bi": {"buffer":"b0","byteOffset":72,"byteLength":6}
+  },
+  "buffers": {
+    "b0": {"uri":"data:application/octet-stream;base64,AAAAAAAAAAAAAAAAAACAPwAAAAAAAAAAAAAAAAAAgD8AAAAAAAAAAAAAAAAAAIA/AAAAAAAAAAAAAIA/AAAAAAAAAAAAAIA/AAABAAIA","byteLength":78}
+  },
+  "materials": {
+    "mb": {
+      "values":{"ambient":[0.1,0.1,0.1,1],"diffuse":[0.8,0.2,0.1,1],"specular":[1,1,1,1],"shininess":64,"transparency":0.5},
+      "extensions":{"KHR_materials_common":{"technique":"BLINN","values":{"ambient":[0.1,0.1,0.1,1],"diffuse":[0.8,0.2,0.1,1],"specular":[1,1,1,1],"shininess":64,"doubleSided":true,"transparent":true,"transparency":0.5}}}
+    },
+    "mp": {
+      "extensions":{"KHR_materials_common":{"technique":"PHONG","values":{"diffuse":[0.2,0.8,0.2,1],"specular":[0.5,0.5,0.5,1],"shininess":128,"doubleSided":false,"transparent":false,"transparency":1}}}
+    },
+    "ml": {
+      "extensions":{"KHR_materials_common":{"technique":"LAMBERT","values":{"diffuse":[0.5,0.5,0.8,1],"doubleSided":true,"transparent":false}}}
+    },
+    "mc": {
+      "extensions":{"KHR_materials_common":{"technique":"CONSTANT","values":{"ambient":[0.3,0.3,0.3,1],"transparent":true,"transparency":0.8}}}
+    }
+  },
+  "extensions": {
+    "KHR_materials_common": {
+      "lights": {
+        "lp": {"type":"point","point":{"color":[1,0.9,0.8],"constantAttenuation":1,"linearAttenuation":0.1,"quadraticAttenuation":0.01,"distance":50}},
+        "ld": {"type":"directional","directional":{"color":[1,1,1]}},
+        "ls": {"type":"spot","spot":{"color":[1,0.8,0.6],"constantAttenuation":1,"linearAttenuation":0.05,"quadraticAttenuation":0.005,"distance":100,"falloffAngle":0.785,"falloffExponent":2}},
+        "la": {"type":"ambient","ambient":{"color":[0.2,0.2,0.2]}}
+      }
+    }
+  }
+}

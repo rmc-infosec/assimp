@@ -1,0 +1,31 @@
+#VRML V2.0 utf8
+
+Shape {
+  geometry IndexedFaceSet {
+    solid FALSE
+    ccw TRUE
+    convex TRUE
+    creaseAngle 3.14
+    colorPerVertex TRUE
+    normalPerVertex TRUE
+    coord Coordinate {
+      point [ 0 0 0, 2 0 0, 2 2 0, 0 2 0 ]
+    }
+    coordIndex [ 0 1 2 3 -1 ]
+    color Color {
+      color [ 1 0 0, 0 1 0, 0 0 1, 1 1 0 ]
+    }
+    colorIndex [ 0 1 2 3 -1 ]
+    normal Normal {
+      vector [ 0 0 1, 0 0 1, 0 0 1, 0 0 1 ]
+    }
+    normalIndex [ 0 1 2 3 -1 ]
+    texCoord TextureCoordinate {
+      point [ 0 0, 1 0, 1 1, 0 1 ]
+    }
+    texCoordIndex [ 0 1 2 3 -1 ]
+  }
+  appearance Appearance {
+    material Material { diffuseColor 1 1 1 }
+  }
+}

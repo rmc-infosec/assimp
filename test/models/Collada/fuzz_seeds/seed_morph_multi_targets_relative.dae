@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1">
+<asset><created>2026-01-01</created><modified>2026-01-01</modified></asset>
+<library_geometries>
+  <geometry id="baseMesh" name="Base">
+    <mesh>
+      <source id="bp"><float_array id="bpa" count="12">0 0 0 1 0 0 1 1 0 0 1 0</float_array>
+        <technique_common><accessor source="#bpa" count="4" stride="3">
+          <param name="X" type="float"/><param name="Y" type="float"/><param name="Z" type="float"/>
+        </accessor></technique_common></source>
+      <vertices id="bv"><input semantic="POSITION" source="#bp"/></vertices>
+      <triangles count="2"><input semantic="VERTEX" source="#bv" offset="0"/>
+        <p>0 1 2 0 2 3</p></triangles>
+    </mesh>
+  </geometry>
+  <geometry id="tgt1" name="Target1">
+    <mesh>
+      <source id="t1p"><float_array id="t1a" count="12">0 0 0.5 1 0 0.5 1 1 0.5 0 1 0.5</float_array>
+        <technique_common><accessor source="#t1a" count="4" stride="3">
+          <param name="X" type="float"/><param name="Y" type="float"/><param name="Z" type="float"/>
+        </accessor></technique_common></source>
+      <vertices id="t1v"><input semantic="POSITION" source="#t1p"/></vertices>
+      <triangles count="2"><input semantic="VERTEX" source="#t1v" offset="0"/>
+        <p>0 1 2 0 2 3</p></triangles>
+    </mesh>
+  </geometry>
+  <geometry id="tgt2" name="Target2">
+    <mesh>
+      <source id="t2p"><float_array id="t2a" count="12">0.2 0 0 1.2 0 0 1.2 1.5 0 0.2 1.5 0</float_array>
+        <technique_common><accessor source="#t2a" count="4" stride="3">
+          <param name="X" type="float"/><param name="Y" type="float"/><param name="Z" type="float"/>
+        </accessor></technique_common></source>
+      <vertices id="t2v"><input semantic="POSITION" source="#t2p"/></vertices>
+      <triangles count="2"><input semantic="VERTEX" source="#t2v" offset="0"/>
+        <p>0 1 2 0 2 3</p></triangles>
+    </mesh>
+  </geometry>
+  <geometry id="tgt3" name="Target3">
+    <mesh>
+      <source id="t3p"><float_array id="t3a" count="12">0 0.3 0 1 0.3 0 1 1.3 0 0 1.3 0</float_array>
+        <technique_common><accessor source="#t3a" count="4" stride="3">
+          <param name="X" type="float"/><param name="Y" type="float"/><param name="Z" type="float"/>
+        </accessor></technique_common></source>
+      <vertices id="t3v"><input semantic="POSITION" source="#t3p"/></vertices>
+      <triangles count="2"><input semantic="VERTEX" source="#t3v" offset="0"/>
+        <p>0 1 2 0 2 3</p></triangles>
+    </mesh>
+  </geometry>
+  <geometry id="tgt4" name="Target4">
+    <mesh>
+      <source id="t4p"><float_array id="t4a" count="12">-0.1 0 0 0.9 0 0 0.9 0.8 0 -0.1 0.8 0</float_array>
+        <technique_common><accessor source="#t4a" count="4" stride="3">
+          <param name="X" type="float"/><param name="Y" type="float"/><param name="Z" type="float"/>
+        </accessor></technique_common></source>
+      <vertices id="t4v"><input semantic="POSITION" source="#t4p"/></vertices>
+      <triangles count="2"><input semantic="VERTEX" source="#t4v" offset="0"/>
+        <p>0 1 2 0 2 3</p></triangles>
+    </mesh>
+  </geometry>
+</library_geometries>
+<library_controllers>
+  <controller id="morphCtrl">
+    <morph source="#baseMesh" method="RELATIVE">
+      <source id="mt"><IDREF_array id="mta" count="4">tgt1 tgt2 tgt3 tgt4</IDREF_array>
+        <technique_common><accessor source="#mta" count="4" stride="1">
+          <param name="MORPH_TARGET" type="IDREF"/>
+        </accessor></technique_common></source>
+      <source id="mw"><float_array id="mwa" count="4">0.3 0.2 0.4 0.1</float_array>
+        <technique_common><accessor source="#mwa" count="4" stride="1">
+          <param name="MORPH_WEIGHT" type="float"/>
+        </accessor></technique_common></source>
+      <targets>
+        <input semantic="MORPH_TARGET" source="#mt"/>
+        <input semantic="MORPH_WEIGHT" source="#mw"/>
+      </targets>
+    </morph>
+  </controller>
+</library_controllers>
+<library_animations>
+  <animation id="mw0" name="MW0">
+    <source id="m0t"><float_array id="m0ta" count="4">0 0.33 0.66 1</float_array>
+      <technique_common><accessor source="#m0ta" count="4" stride="1">
+        <param name="TIME" type="float"/>
+      </accessor></technique_common></source>
+    <source id="m0v"><float_array id="m0va" count="4">0 0.5 0.8 0.2</float_array>
+      <technique_common><accessor source="#m0va" count="4" stride="1">
+        <param name="VALUE" type="float"/>
+      </accessor></technique_common></source>
+    <sampler id="m0s">
+      <input semantic="INPUT" source="#m0t"/>
+      <input semantic="OUTPUT" source="#m0v"/>
+    </sampler>
+    <channel source="#m0s" target="MNode/morph-weights(0)"/>
+  </animation>
+  <animation id="mw1" name="MW1">
+    <source id="m1t"><float_array id="m1ta" count="4">0 0.33 0.66 1</float_array>
+      <technique_common><accessor source="#m1ta" count="4" stride="1">
+        <param name="TIME" type="float"/>
+      </accessor></technique_common></source>
+    <source id="m1v"><float_array id="m1va" count="4">0.3 0.1 0.7 0.4</float_array>
+      <technique_common><accessor source="#m1va" count="4" stride="1">
+        <param name="VALUE" type="float"/>
+      </accessor></technique_common></source>
+    <sampler id="m1s">
+      <input semantic="INPUT" source="#m1t"/>
+      <input semantic="OUTPUT" source="#m1v"/>
+    </sampler>
+    <channel source="#m1s" target="MNode/morph-weights(1)"/>
+  </animation>
+  <animation id="mw2" name="MW2">
+    <source id="m2t"><float_array id="m2ta" count="4">0 0.33 0.66 1</float_array>
+      <technique_common><accessor source="#m2ta" count="4" stride="1">
+        <param name="TIME" type="float"/>
+      </accessor></technique_common></source>
+    <source id="m2v"><float_array id="m2va" count="4">0.4 0.6 0.2 0.1</float_array>
+      <technique_common><accessor source="#m2va" count="4" stride="1">
+        <param name="VALUE" type="float"/>
+      </accessor></technique_common></source>
+    <sampler id="m2s">
+      <input semantic="INPUT" source="#m2t"/>
+      <input semantic="OUTPUT" source="#m2v"/>
+    </sampler>
+    <channel source="#m2s" target="MNode/morph-weights(2)"/>
+  </animation>
+  <animation id="mw3" name="MW3">
+    <source id="m3t"><float_array id="m3ta" count="4">0 0.33 0.66 1</float_array>
+      <technique_common><accessor source="#m3ta" count="4" stride="1">
+        <param name="TIME" type="float"/>
+      </accessor></technique_common></source>
+    <source id="m3v"><float_array id="m3va" count="4">0.1 0.3 0.5 0.9</float_array>
+      <technique_common><accessor source="#m3va" count="4" stride="1">
+        <param name="VALUE" type="float"/>
+      </accessor></technique_common></source>
+    <sampler id="m3s">
+      <input semantic="INPUT" source="#m3t"/>
+      <input semantic="OUTPUT" source="#m3v"/>
+    </sampler>
+    <channel source="#m3s" target="MNode/morph-weights(3)"/>
+  </animation>
+</library_animations>
+<library_visual_scenes>
+  <visual_scene id="Scene" name="Scene">
+    <node id="MNode" name="MNode" type="NODE">
+      <matrix sid="transform">1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</matrix>
+      <instance_controller url="#morphCtrl"/>
+    </node>
+  </visual_scene>
+</library_visual_scenes>
+<scene><instance_visual_scene url="#Scene"/></scene>
+</COLLADA>

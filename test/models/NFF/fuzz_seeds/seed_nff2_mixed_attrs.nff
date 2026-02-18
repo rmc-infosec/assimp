@@ -1,0 +1,36 @@
+nff
+version 3.1
+viewpos 5 10 20
+viewdir -0.2 -0.5 -1
+MixedVerts
+6
+0 0 0 0xRR0000
+1 0 0 norm 1 0 0
+0 1 0 uv 0 1
+1 1 0 0x00FF00 norm 0 0 1 uv 1 1
+0 0 1 0xFF00FF norm 0 0 1
+1 0 1 uv 0.5 0.5
+4
+3 0 1 2
+3 1 3 2
+3 0 4 1
+3 4 5 1
+FaceAttrs
+4
+-3 0 -3
+-1 0 -3
+-1 2 -3
+-3 2 -3
+4
+3 0 1 2 both 0xFF0000
+3 0 2 3 0xABC both
+3 0 1 3 _v__wall.bmp
+3 1 2 3 _u__ceil.tga both 0x00FF00
+QuadFaces
+4
+3 0 0 0xAABBCC norm 0 1 0 uv 0 0
+5 0 0 0xDDEEFF norm 0 1 0 uv 2 0
+5 0 4 0x112233 norm 0 1 0 uv 2 2
+3 0 4 0x445566 norm 0 1 0 uv 0 2
+1
+4 0 1 2 3 both

@@ -1,0 +1,36 @@
+#VRML V2.0 utf8
+
+NavigationInfo { type [ "EXAMINE" ] headlight TRUE }
+DEF MainView Viewpoint {
+  position 0 2 10
+  description "Main"
+}
+DirectionalLight { direction 0 -1 -0.5 intensity 0.8 }
+DEF Root Transform {
+  children [
+    DEF Table Shape {
+      appearance Appearance {
+        material Material { diffuseColor 0.6 0.3 0.1 }
+      }
+      geometry Box { size 3 0.1 2 }
+    }
+    Transform {
+      translation 0 0.5 0
+      children [
+        DEF Vase Shape {
+          appearance Appearance {
+            material Material {
+              diffuseColor 0.8 0.8 0.9
+              transparency 0.1
+            }
+          }
+          geometry Cylinder { height 0.8 radius 0.2 }
+        }
+      ]
+    }
+    Transform {
+      translation 1 0.1 0
+      children [ USE Vase ]
+    }
+  ]
+}

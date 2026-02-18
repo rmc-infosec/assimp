@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<X3D profile="Full" version="3.3">
+<head>
+  <meta name="title" content="Interpolator test"/>
+</head>
+<Scene>
+  <!-- TimeSensors -->
+  <TimeSensor DEF="TS1" cycleInterval="2.0"/>
+  <TimeSensor DEF="TS2" cycleInterval="5.0"/>
+  <TimeSensor DEF="TS3" cycleInterval="1.0"/>
+  <!-- PositionInterpolator -->
+  <PositionInterpolator DEF="PI" key="0 0.5 1" keyValue="0 0 0, 1 2 0, 0 0 0"/>
+  <!-- OrientationInterpolator -->
+  <OrientationInterpolator DEF="OI" key="0 0.5 1" keyValue="0 1 0 0, 0 1 0 3.14, 0 1 0 6.28"/>
+  <!-- ScalarInterpolator -->
+  <ScalarInterpolator DEF="SI" key="0 0.5 1" keyValue="0 1 0"/>
+  <!-- ColorInterpolator -->
+  <ColorInterpolator DEF="CI" key="0 0.33 0.66 1" keyValue="1 0 0, 0 1 0, 0 0 1, 1 0 0"/>
+  <!-- CoordinateInterpolator -->
+  <CoordinateInterpolator DEF="COORDI" key="0 1" keyValue="0 0 0, 1 0 0, 0 1 0, 0 0 0, 2 0 0, 0 2 0"/>
+  <!-- NormalInterpolator -->
+  <NormalInterpolator DEF="NI" key="0 1" keyValue="0 0 1, 0 1 0, 1 0 0, 0 0 -1, 0 -1 0, -1 0 0"/>
+  <!-- ROUTE elements connecting timesensors to interpolators -->
+  <ROUTE fromNode="TS1" fromField="fraction_changed" toNode="PI" toField="set_fraction"/>
+  <ROUTE fromNode="TS1" fromField="fraction_changed" toNode="OI" toField="set_fraction"/>
+  <ROUTE fromNode="TS2" fromField="fraction_changed" toNode="SI" toField="set_fraction"/>
+  <ROUTE fromNode="TS2" fromField="fraction_changed" toNode="CI" toField="set_fraction"/>
+  <ROUTE fromNode="TS3" fromField="fraction_changed" toNode="COORDI" toField="set_fraction"/>
+  <ROUTE fromNode="TS3" fromField="fraction_changed" toNode="NI" toField="set_fraction"/>
+  <!-- Transform with DEF for route target -->
+  <Transform DEF="T1" translation="0 0 0">
+    <Shape DEF="S1">
+      <Appearance DEF="A1">
+        <Material DEF="M1" diffuseColor="0.5 0.5 0.5" shininess="0.8" transparency="0.1" specularColor="1 1 1"/>
+        <ImageTexture url="tex.png" repeatS="true" repeatT="false"/>
+        <TextureTransform center="0.5 0.5" rotation="0.785" scale="2 2" translation="0 0"/>
+      </Appearance>
+      <IndexedFaceSet coordIndex="0 1 2 3 -1" normalPerVertex="true" ccw="true" solid="true" colorPerVertex="false" normalIndex="0 -1" texCoordIndex="0 1 2 3 -1">
+        <Coordinate DEF="C1" point="0 0 0, 1 0 0, 1 1 0, 0 1 0"/>
+        <Normal vector="0 0 1"/>
+        <TextureCoordinate point="0 0, 1 0, 1 1, 0 1"/>
+        <Color color="0.8 0.2 0.2"/>
+      </IndexedFaceSet>
+    </Shape>
+  </Transform>
+  <!-- ROUTE from interpolators to transform -->
+  <ROUTE fromNode="PI" fromField="value_changed" toNode="T1" toField="set_translation"/>
+  <ROUTE fromNode="OI" fromField="value_changed" toNode="T1" toField="set_rotation"/>
+  <!-- USE/DEF test: reuse the same shape -->
+  <Transform translation="3 0 0">
+    <Shape USE="S1"/>
+  </Transform>
+  <!-- Group with nested transform -->
+  <Group DEF="G1">
+    <Transform translation="-3 0 0" rotation="0 0 1 0.5" scale="0.5 0.5 0.5">
+      <Shape>
+        <Appearance USE="A1"/>
+        <Box size="1 1 1"/>
+      </Shape>
+    </Transform>
+    <DirectionalLight direction="0 -1 0" color="1 1 1" intensity="0.8" ambientIntensity="0.2"/>
+    <PointLight location="2 3 0" color="1 0.8 0.6" intensity="0.5" radius="10" attenuation="1 0.1 0"/>
+    <SpotLight location="0 5 0" direction="0 -1 0" color="1 1 1" cutOffAngle="0.785" beamWidth="0.3"/>
+  </Group>
+  <!-- Switch node to test choice logic -->
+  <Switch whichChoice="0">
+    <Shape>
+      <Sphere radius="0.5"/>
+    </Shape>
+    <Shape>
+      <Cone height="1" bottomRadius="0.5"/>
+    </Shape>
+  </Switch>
+  <!-- StaticGroup -->
+  <StaticGroup>
+    <Shape>
+      <Cylinder height="1" radius="0.3"/>
+    </Shape>
+  </StaticGroup>
+  <!-- Metadata nodes -->
+  <MetadataBoolean name="flag" value="true"/>
+  <MetadataDouble name="precision" value="3.14159"/>
+  <MetadataFloat name="scale" value="1.5"/>
+  <MetadataInteger name="count" value="42"/>
+  <MetadataString name="label" value="test"/>
+  <MetadataSet name="params">
+    <MetadataFloat name="inner_val" value="2.0"/>
+  </MetadataSet>
+</Scene>
+</X3D>

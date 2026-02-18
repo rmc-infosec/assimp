@@ -1,0 +1,118 @@
+<skeleton blendmode="average">
+<bones>
+<bone id="0" name="Root">
+<position x="0" y="0" z="0"/>
+<rotation angle="0"><axis x="1" y="0" z="0"/></rotation>
+<scale factor="1.0"/>
+</bone>
+<bone id="1" name="Spine">
+<position x="0" y="1" z="0"/>
+<rotation angle="0"><axis x="1" y="0" z="0"/></rotation>
+<scale x="1" y="1" z="1"/>
+</bone>
+<bone id="2" name="ArmUp">
+<position x="-1" y="0.5" z="0"/>
+<rotation angle="0.5"><axis x="0" y="0" z="1"/></rotation>
+</bone>
+<bone id="3" name="ArmLo">
+<position x="-1" y="0" z="0"/>
+<rotation angle="0.3"><axis x="0" y="0" z="1"/></rotation>
+<scale factor="0.9"/>
+</bone>
+</bones>
+<bonehierarchy>
+<boneparent bone="Spine" parent="Root"/>
+<boneparent bone="ArmUp" parent="Spine"/>
+<boneparent bone="ArmLo" parent="ArmUp"/>
+</bonehierarchy>
+<animations>
+<animation name="Walk" length="2.0">
+<tracks>
+<track bone="Root">
+<keyframes>
+<keyframe time="0">
+<translate x="0" y="0" z="0"/>
+<rotate angle="0"><axis x="0" y="1" z="0"/></rotate>
+<scale x="1" y="1" z="1"/>
+</keyframe>
+<keyframe time="1.0">
+<translate x="0" y="0.1" z="1"/>
+<rotate angle="0.1"><axis x="0" y="1" z="0"/></rotate>
+</keyframe>
+<keyframe time="2.0">
+<translate x="0" y="0" z="2"/>
+<rotate angle="0"><axis x="0" y="1" z="0"/></rotate>
+</keyframe>
+</keyframes>
+</track>
+<track bone="Spine">
+<keyframes>
+<keyframe time="0">
+<translate x="0" y="0" z="0"/>
+<rotate angle="0"><axis x="1" y="0" z="0"/></rotate>
+</keyframe>
+<keyframe time="1.0">
+<translate x="0" y="0.05" z="0"/>
+<rotate angle="0.15"><axis x="1" y="0" z="0"/></rotate>
+</keyframe>
+<keyframe time="2.0">
+<translate x="0" y="0" z="0"/>
+<rotate angle="0"><axis x="1" y="0" z="0"/></rotate>
+</keyframe>
+</keyframes>
+</track>
+<track bone="ArmUp">
+<keyframes>
+<keyframe time="0">
+<translate x="0" y="0" z="0"/>
+<rotate angle="0.5"><axis x="0" y="0" z="1"/></rotate>
+</keyframe>
+<keyframe time="1.0">
+<translate x="0" y="0" z="0"/>
+<rotate angle="-0.5"><axis x="0" y="0" z="1"/></rotate>
+</keyframe>
+<keyframe time="2.0">
+<translate x="0" y="0" z="0"/>
+<rotate angle="0.5"><axis x="0" y="0" z="1"/></rotate>
+</keyframe>
+</keyframes>
+</track>
+<track bone="ArmLo">
+<keyframes>
+<keyframe time="0">
+<translate x="0" y="0" z="0"/>
+<rotate angle="0.3"><axis x="0" y="0" z="1"/></rotate>
+<scale x="0.9" y="0.9" z="0.9"/>
+</keyframe>
+<keyframe time="1.0">
+<translate x="0" y="0" z="0"/>
+<rotate angle="-0.2"><axis x="0" y="0" z="1"/></rotate>
+<scale x="1.1" y="1.1" z="1.1"/>
+</keyframe>
+<keyframe time="2.0">
+<translate x="0" y="0" z="0"/>
+<rotate angle="0.3"><axis x="0" y="0" z="1"/></rotate>
+<scale x="0.9" y="0.9" z="0.9"/>
+</keyframe>
+</keyframes>
+</track>
+</tracks>
+</animation>
+<animation name="Idle" length="1.0">
+<tracks>
+<track bone="Spine">
+<keyframes>
+<keyframe time="0">
+<translate x="0" y="0" z="0"/>
+<rotate angle="0"><axis x="1" y="0" z="0"/></rotate>
+</keyframe>
+<keyframe time="1.0">
+<translate x="0" y="0.02" z="0"/>
+<rotate angle="0.02"><axis x="1" y="0" z="0"/></rotate>
+</keyframe>
+</keyframes>
+</track>
+</tracks>
+</animation>
+</animations>
+</skeleton>

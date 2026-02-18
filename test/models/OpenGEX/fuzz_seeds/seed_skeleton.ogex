@@ -1,0 +1,201 @@
+Metric (key = "distance") {float {1.0}}
+Metric (key = "angle") {float {1.0}}
+Metric (key = "time") {float {1.0}}
+Metric (key = "up") {string {"z"}}
+
+Node $armature
+{
+    Name {string {"Armature"}}
+
+    Transform %xform_armature
+    {
+        float[16]
+        {
+            {1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1}
+        }
+    }
+
+    BoneNode $bone_root
+    {
+        Name {string {"Root"}}
+
+        Transform %xform_root
+        {
+            float[16]
+            {
+                {1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1}
+            }
+        }
+
+        BoneNode $bone_spine
+        {
+            Name {string {"Spine"}}
+
+            Transform %xform_spine
+            {
+                float[16]
+                {
+                    {1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 1.0, 0, 1}
+                }
+            }
+
+            BoneNode $bone_head
+            {
+                Name {string {"Head"}}
+
+                Transform %xform_head
+                {
+                    float[16]
+                    {
+                        {1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0.5, 0, 1}
+                    }
+                }
+
+                Animation
+                {
+                    Track (target = %xform_head)
+                    {
+                        Time
+                        {
+                            Key {float {0.0, 0.5, 1.0}}
+                        }
+
+                        Value
+                        {
+                            Key
+                            {
+                                float[16]
+                                {
+                                    {1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0.5, 0, 1},
+                                    {0.966, 0, 0.259, 0, 0, 1, 0, 0, -0.259, 0, 0.966, 0, 0, 0.5, 0, 1},
+                                    {1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0.5, 0, 1}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            BoneNode $bone_left_arm
+            {
+                Name {string {"LeftArm"}}
+
+                Transform %xform_larm
+                {
+                    float[16]
+                    {
+                        {0, 0, -1, 0, 0, 1, 0, 0, 1, 0, 0, 0, -0.5, 0.8, 0, 1}
+                    }
+                }
+
+                BoneNode $bone_left_hand
+                {
+                    Name {string {"LeftHand"}}
+
+                    Transform %xform_lhand
+                    {
+                        float[16]
+                        {
+                            {1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, -0.8, 1}
+                        }
+                    }
+                }
+            }
+
+            BoneNode $bone_right_arm
+            {
+                Name {string {"RightArm"}}
+
+                Transform %xform_rarm
+                {
+                    float[16]
+                    {
+                        {0, 0, 1, 0, 0, 1, 0, 0, -1, 0, 0, 0, 0.5, 0.8, 0, 1}
+                    }
+                }
+
+                BoneNode $bone_right_hand
+                {
+                    Name {string {"RightHand"}}
+
+                    Transform %xform_rhand
+                    {
+                        float[16]
+                        {
+                            {1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0.8, 1}
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+GeometryNode $geonode1
+{
+    Name {string {"CharBody"}}
+    ObjectRef {ref {$geometry1}}
+    MaterialRef {ref {$material1}}
+
+    Transform
+    {
+        float[16]
+        {
+            {1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1}
+        }
+    }
+}
+
+GeometryObject $geometry1
+{
+    Mesh (primitive = "triangles")
+    {
+        VertexArray (attrib = "position")
+        {
+            float[3]
+            {
+                {-0.3, 0, -0.3}, {0.3, 0, -0.3}, {0.3, 2, -0.3},
+                {-0.3, 2, -0.3}, {-0.3, 0, 0.3}, {0.3, 0, 0.3},
+                {0.3, 2, 0.3}, {-0.3, 2, 0.3}
+            }
+        }
+
+        VertexArray (attrib = "normal")
+        {
+            float[3]
+            {
+                {0, 0, -1}, {0, 0, -1}, {0, 0, -1}, {0, 0, -1},
+                {0, 0, 1}, {0, 0, 1}, {0, 0, 1}, {0, 0, 1}
+            }
+        }
+
+        VertexArray (attrib = "texcoord")
+        {
+            float[2]
+            {
+                {0, 0}, {1, 0}, {1, 1}, {0, 1},
+                {0, 0}, {1, 0}, {1, 1}, {0, 1}
+            }
+        }
+
+        IndexArray
+        {
+            unsigned_int32[3]
+            {
+                {0, 1, 2}, {0, 2, 3}, {4, 5, 6}, {4, 6, 7},
+                {0, 4, 7}, {0, 7, 3}, {1, 5, 6}, {1, 6, 2}
+            }
+        }
+    }
+}
+
+Material $material1
+{
+    Name {string {"SkinMat"}}
+    Color (attrib = "diffuse") {float[3] {{0.85, 0.65, 0.5}}}
+    Color (attrib = "specular") {float[3] {{0.3, 0.3, 0.3}}}
+    Texture (attrib = "diffuse")
+    {
+        string {"textures/skin_diffuse.png"}
+    }
+}

@@ -1,0 +1,111 @@
+Á# Rich OBJ with multiple groups, objects, materials, smoothing, and all vertex types
+o RichObject
+g Group1
+s 1
+usemtl RichMat1
+v -1.0 -1.0  1.0
+v  1.0 -1.0  1.0
+v  1.0  1.0  1.0
+v -1.0  1.0  1.0
+v -1.0 -1.0 -1.0
+v  1.0 -1.0 -1.0
+v  1.0  1.0 -1.0
+v -1.0  1.0 -1.0
+vn  0.0  0.0  1.0
+vn  0.0  0.0 -1.0
+vn  1.0  0.0  0.0
+vn -1.0  0.0  0.0
+vn  0.0  1.0  0.0
+vn  0.0 -1.0  0.0
+vt 0.0 0.0
+vt 1.0 0.0
+vt 1.0 1.0
+vt 0.0 1.0
+vt 0.5 0.5
+f 1/1/1 2/2/1 3/3/1 4/4/1
+f 5/1/2 8/2/2 7/3/2 6/4/2
+g Group2
+s 2
+usemtl RichMat2
+f 2/1/3 6/2/3 7/3/3 3/4/3
+f 1/1/4 4/2/4 8/3/4 5/4/4
+g Group3
+s off
+usemtl RichMat3
+f 4/1/5 3/2/5 7/3/5 8/4/5
+f 1/1/6 5/2/6 6/3/6 2/4/6
+# Lines and points to exercise SortByPType
+l 1 2 3 4
+p 1 2 3
+# Rich material library exercising all ObjFileMtlImporter branches
+
+# Material 1: Full traditional + PBR properties
+newmtl RichMat1
+Ka 0.2 0.2 0.2
+Kd 0.8 0.2 0.1
+Ks 1.0 1.0 1.0
+Ke 0.1 0.05 0.0
+Ns 100.0
+Ni 1.5
+d 0.9
+Tr 0.1
+Tf 0.5 0.5 0.5
+illum 2
+Pm 0.5
+Pr 0.3
+Ps 0.1 0.2 0.3
+Pc 0.8
+Pcr 0.5
+Pct 0.3
+aniso 0.5
+anisor 0.3
+map_Kd texture_diffuse.png
+map_Ka texture_ambient.png
+map_Ks texture_specular.png
+map_Ns texture_shininess.png
+map_d texture_alpha.png
+map_Ke texture_emissive.png
+bump bump_map.png
+map_bump -bm 2.5 bump_map2.png
+map_Kn normal_v1.png
+norm normal_v2.png
+disp displacement.png
+map_disp displacement2.png
+map_Pm metallic.png
+map_Pr roughness.png
+map_Ps sheen.png
+refl -type sphere env_sphere.png
+
+# Material 2: Texture options - exercises getTextureOption branches
+newmtl RichMat2
+Kd 0.1 0.8 0.2
+Ks 0.5 0.5 0.5
+Ns 50.0
+d 1.0
+illum 5
+map_Kd -s 2.0 2.0 1.0 -o 0.5 0.0 0.0 -t 0.1 0.1 0.1 tiled_diffuse.png
+map_Ks -blendu on -blendv on -boost 2.0 specular_opts.png
+map_bump -bm 3.0 -clamp on -mm 0 1 bump_clamped.png
+map_d -texres 512 -imfchan r opacity_opts.png
+refl -type cube_top cube_top.png
+refl -type cube_bottom cube_bottom.png
+refl -type cube_front cube_front.png
+refl -type cube_back cube_back.png
+refl -type cube_left cube_left.png
+refl -type cube_right cube_right.png
+
+# Material 3: Disney/PBR keywords (lowercase branch coverage)
+newmtl RichMat3
+Kd 0.5 0.5 0.5
+d 1.0
+illum 2
+roughness 0.4
+metallic 0.8
+subsurface 0.1
+specularTint 0.2
+sheen 0.15
+sheenTint 0.3
+clearcoat 0.5
+clearcoatGloss 0.8
+ao 0.95
+map_emissive emissive_alt.png

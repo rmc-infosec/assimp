@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<X3D profile="Interchange" version="3.3">
+  <Scene>
+    <!-- IndexedTriangleFanSet: two fans with Color, colorPerVertex="true" normalPerVertex="true" -->
+    <Shape>
+      <Appearance><Material diffuseColor="0.7 0.3 0.3"/></Appearance>
+      <IndexedTriangleFanSet index="0 1 2 3 -1 4 5 6 7 -1" ccw="true" colorPerVertex="true" normalPerVertex="true" solid="false">
+        <Coordinate point="0 0 0, 1 0 0, 0.7 0.7 0, 0 1 0, 3 0 0, 4 0 0, 3.7 0.7 0, 3 1 0"/>
+        <Color color="1 0 0, 0 1 0, 0 0 1, 1 1 0, 0 1 1, 1 0 1, 0.5 0.5 0, 0 0.5 0.5"/>
+        <Normal vector="0 0 1, 0 0 1, 0 0 1, 0 0 1, 0 0 1, 0 0 1, 0 0 1, 0 0 1"/>
+      </IndexedTriangleFanSet>
+    </Shape>
+
+    <!-- IndexedTriangleFanSet: ccw="false" colorPerVertex="false" with ColorRGBA -->
+    <Shape>
+      <Appearance><Material diffuseColor="0.3 0.7 0.3"/></Appearance>
+      <IndexedTriangleFanSet index="0 1 2 3 4 -1" ccw="false" colorPerVertex="false" normalPerVertex="false" solid="true">
+        <Coordinate point="0 0 1, 1 0 1, 1 1 1, 0 1 1, -0.5 0.5 1"/>
+        <ColorRGBA color="1 0 0 1, 0 1 0 0.8, 0 0 1 0.6"/>
+        <Normal vector="0 0 -1, 0 0 -1, 0 0 -1"/>
+      </IndexedTriangleFanSet>
+    </Shape>
+
+    <!-- IndexedTriangleStripSet: one strip with Normal, colorPerVertex="true" normalPerVertex="true" -->
+    <Shape>
+      <Appearance><Material diffuseColor="0.3 0.3 0.7"/></Appearance>
+      <IndexedTriangleStripSet index="0 1 2 3 4 -1" ccw="true" colorPerVertex="true" normalPerVertex="true" solid="false">
+        <Coordinate point="0 0 0, 0 1 0, 1 0 0, 1 1 0, 2 0 0"/>
+        <Normal vector="0 0 1, 0 0 1, 0 0 1, 0 0 1, 0 0 1"/>
+        <Color color="1 0 0, 0 1 0, 0 0 1, 1 1 0, 0 1 1"/>
+      </IndexedTriangleStripSet>
+    </Shape>
+
+    <!-- IndexedTriangleStripSet: two strips, ccw="false" normalPerVertex="false" colorPerVertex="false" -->
+    <Shape>
+      <Appearance><Material diffuseColor="0.7 0.7 0.3"/></Appearance>
+      <IndexedTriangleStripSet index="0 1 2 3 -1 4 5 6 7 8 -1" ccw="false" colorPerVertex="false" normalPerVertex="false" solid="true">
+        <Coordinate point="0 0 2, 0 1 2, 1 0 2, 1 1 2, 3 0 2, 3 1 2, 4 0 2, 4 1 2, 5 0 2"/>
+        <Normal vector="0 0 -1, 0 0 -1, 0 0 -1, 0 0 -1, 0 0 -1"/>
+        <Color color="1 0 0, 0.5 0.5 0, 0 0 1, 0 1 0, 1 0 1"/>
+      </IndexedTriangleStripSet>
+    </Shape>
+
+    <!-- IndexedTriangleFanSet: with TextureCoordinate -->
+    <Shape>
+      <Appearance><Material diffuseColor="0.5 0.5 0.5"/></Appearance>
+      <IndexedTriangleFanSet index="0 1 2 3 -1" ccw="true" colorPerVertex="true" normalPerVertex="true" solid="false">
+        <Coordinate point="0 0 3, 1 0 3, 0.7 0.7 3, 0 1 3"/>
+        <TextureCoordinate point="0.5 0.5, 1 0, 1 1, 0 1"/>
+        <Normal vector="0 0 1, 0 0 1, 0 0 1, 0 0 1"/>
+      </IndexedTriangleFanSet>
+    </Shape>
+
+    <!-- IndexedTriangleStripSet: with TextureCoordinate -->
+    <Shape>
+      <Appearance><Material diffuseColor="0.6 0.4 0.6"/></Appearance>
+      <IndexedTriangleStripSet index="0 1 2 3 -1" ccw="true" colorPerVertex="true" normalPerVertex="true" solid="false">
+        <Coordinate point="0 0 4, 0 1 4, 1 0 4, 1 1 4"/>
+        <TextureCoordinate point="0 0, 0 1, 1 0, 1 1"/>
+        <Normal vector="0 0 1, 0 0 1, 0 0 1, 0 0 1"/>
+        <ColorRGBA color="1 0 0 1, 0 1 0 1, 0 0 1 1, 1 1 0 1"/>
+      </IndexedTriangleStripSet>
+    </Shape>
+  </Scene>
+</X3D>

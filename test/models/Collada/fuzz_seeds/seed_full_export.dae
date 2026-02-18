@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="utf-8"?>
+<COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1">
+<asset><created>2026-01-01</created><modified>2026-01-01</modified></asset>
+<library_images>
+  <image id="diffTex"><init_from>diffuse.png</init_from></image>
+  <image id="specTex"><init_from>specular.png</init_from></image>
+  <image id="normTex"><init_from>normal.png</init_from></image>
+</library_images>
+<library_effects>
+  <effect id="fx1">
+    <profile_COMMON>
+      <newparam sid="diffSurf"><surface type="2D"><init_from>diffTex</init_from></surface></newparam>
+      <newparam sid="diffSamp"><sampler2D><source>diffSurf</source></sampler2D></newparam>
+      <newparam sid="specSurf"><surface type="2D"><init_from>specTex</init_from></surface></newparam>
+      <newparam sid="specSamp"><sampler2D><source>specSurf</source></sampler2D></newparam>
+      <newparam sid="normSurf"><surface type="2D"><init_from>normTex</init_from></surface></newparam>
+      <newparam sid="normSamp"><sampler2D><source>normSurf</source></sampler2D></newparam>
+      <technique sid="common">
+        <phong>
+          <ambient><color>0.1 0.1 0.1 1</color></ambient>
+          <diffuse><texture texture="diffSamp" texcoord="UV0"/></diffuse>
+          <specular><texture texture="specSamp" texcoord="UV0"/></specular>
+          <shininess><float>25</float></shininess>
+          <transparency><float>0.9</float></transparency>
+          <index_of_refraction><float>1.5</float></index_of_refraction>
+        </phong>
+        <extra><technique profile="bump"><bump><texture texture="normSamp" texcoord="UV0"/></bump></technique></extra>
+      </technique>
+    </profile_COMMON>
+  </effect>
+</library_effects>
+<library_materials>
+  <material id="mat1" name="ExportMat"><instance_effect url="#fx1"/></material>
+</library_materials>
+<library_lights>
+  <light id="ptLight" name="PointLight1">
+    <technique_common><point>
+      <color>1 0.9 0.8</color>
+      <constant_attenuation>1</constant_attenuation>
+      <linear_attenuation>0.01</linear_attenuation>
+      <quadratic_attenuation>0.001</quadratic_attenuation>
+    </point></technique_common>
+  </light>
+  <light id="spotLight" name="SpotLight1">
+    <technique_common><spot>
+      <color>1 1 0.9</color>
+      <constant_attenuation>1</constant_attenuation>
+      <linear_attenuation>0.02</linear_attenuation>
+      <quadratic_attenuation>0.002</quadratic_attenuation>
+      <falloff_angle>45</falloff_angle>
+      <falloff_exponent>2</falloff_exponent>
+    </spot></technique_common>
+  </light>
+  <light id="dirLight" name="DirLight1">
+    <technique_common><directional>
+      <color>0.8 0.8 1</color>
+    </directional></technique_common>
+  </light>
+  <light id="ambLight" name="AmbLight1">
+    <technique_common><ambient>
+      <color>0.3 0.3 0.35</color>
+    </ambient></technique_common>
+  </light>
+</library_lights>
+<library_geometries>
+  <geometry id="meshGeo" name="SkinnedMesh">
+    <mesh>
+      <source id="pos">
+        <float_array id="posa" count="24">0 0 0 1 0 0 1 1 0 0 1 0 0 2 0 1 2 0 0 3 0 1 3 0</float_array>
+        <technique_common><accessor source="#posa" count="8" stride="3">
+          <param name="X" type="float"/><param name="Y" type="float"/><param name="Z" type="float"/>
+        </accessor></technique_common>
+      </source>
+      <source id="nrm">
+        <float_array id="nrma" count="3">0 0 1</float_array>
+        <technique_common><accessor source="#nrma" count="1" stride="3">
+          <param name="X" type="float"/><param name="Y" type="float"/><param name="Z" type="float"/>
+        </accessor></technique_common>
+      </source>
+      <source id="uv0">
+        <float_array id="uv0a" count="16">0 0 1 0 1 1 0 1 0 0 1 0 0 1 1 1</float_array>
+        <technique_common><accessor source="#uv0a" count="8" stride="2">
+          <param name="S" type="float"/><param name="T" type="float"/>
+        </accessor></technique_common>
+      </source>
+      <vertices id="verts"><input semantic="POSITION" source="#pos"/></vertices>
+      <triangles count="8" material="matSym">
+        <input semantic="VERTEX" source="#verts" offset="0"/>
+        <input semantic="NORMAL" source="#nrm" offset="1"/>
+        <input semantic="TEXCOORD" source="#uv0" offset="0" set="0"/>
+        <p>0 0 1 0 2 0 0 0 2 0 3 0 2 0 3 0 4 0 2 0 4 0 5 0 4 0 5 0 6 0 4 0 6 0 7 0 1 0 5 0 7 0 0 0 3 0 6 0</p>
+      </triangles>
+    </mesh>
+  </geometry>
+</library_geometries>
+<library_controllers>
+  <controller id="skinCtrl">
+    <skin source="#meshGeo">
+      <bind_shape_matrix>1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</bind_shape_matrix>
+      <source id="jnames">
+        <Name_array id="jna" count="3">Root Mid Tip</Name_array>
+        <technique_common><accessor source="#jna" count="3" stride="1">
+          <param name="JOINT" type="name"/>
+        </accessor></technique_common>
+      </source>
+      <source id="ibmats">
+        <float_array id="ibma" count="48">
+          1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1
+          1 0 0 0 0 1 0 -1 0 0 1 0 0 0 0 1
+          1 0 0 0 0 1 0 -2 0 0 1 0 0 0 0 1
+        </float_array>
+        <technique_common><accessor source="#ibma" count="3" stride="16">
+          <param name="TRANSFORM" type="float4x4"/>
+        </accessor></technique_common>
+      </source>
+      <source id="wts">
+        <float_array id="wtsa" count="4">1.0 0.5 0.7 0.3</float_array>
+        <technique_common><accessor source="#wtsa" count="4" stride="1">
+          <param name="WEIGHT" type="float"/>
+        </accessor></technique_common>
+      </source>
+      <joints>
+        <input semantic="JOINT" source="#jnames"/>
+        <input semantic="INV_BIND_MATRIX" source="#ibmats"/>
+      </joints>
+      <vertex_weights count="8">
+        <input semantic="JOINT" source="#jnames" offset="0"/>
+        <input semantic="WEIGHT" source="#wts" offset="1"/>
+        <vcount>1 1 2 2 2 2 1 1</vcount>
+        <v>0 0 0 0 0 1 1 1 0 2 1 1 1 1 1 2 1 2 2 3 2 0 2 0</v>
+      </vertex_weights>
+    </skin>
+  </controller>
+</library_controllers>
+<library_animations>
+  <animation id="animTrans" name="TranslateAnim">
+    <source id="ttime">
+      <float_array id="tta" count="3">0 0.5 1</float_array>
+      <technique_common><accessor source="#tta" count="3" stride="1">
+        <param name="TIME" type="float"/>
+      </accessor></technique_common>
+    </source>
+    <source id="tval">
+      <float_array id="tva" count="9">0 0 0 2 1 0 0 0 0</float_array>
+      <technique_common><accessor source="#tva" count="3" stride="3">
+        <param name="X" type="float"/><param name="Y" type="float"/><param name="Z" type="float"/>
+      </accessor></technique_common>
+    </source>
+    <source id="tinterp">
+      <Name_array id="tia" count="3">LINEAR LINEAR LINEAR</Name_array>
+      <technique_common><accessor source="#tia" count="3" stride="1">
+        <param name="INTERPOLATION" type="name"/>
+      </accessor></technique_common>
+    </source>
+    <sampler id="tsamp">
+      <input semantic="INPUT" source="#ttime"/>
+      <input semantic="OUTPUT" source="#tval"/>
+      <input semantic="INTERPOLATION" source="#tinterp"/>
+    </sampler>
+    <channel source="#tsamp" target="Mid/translate"/>
+  </animation>
+  <animation id="animRot" name="RotateAnim">
+    <source id="rtime">
+      <float_array id="rta" count="3">0 0.5 1</float_array>
+      <technique_common><accessor source="#rta" count="3" stride="1">
+        <param name="TIME" type="float"/>
+      </accessor></technique_common>
+    </source>
+    <source id="rval">
+      <float_array id="rva" count="12">1 0 0 0 1 0 0 45 1 0 0 90</float_array>
+      <technique_common><accessor source="#rva" count="3" stride="4">
+        <param name="X" type="float"/><param name="Y" type="float"/><param name="Z" type="float"/><param name="ANGLE" type="float"/>
+      </accessor></technique_common>
+    </source>
+    <sampler id="rsamp">
+      <input semantic="INPUT" source="#rtime"/>
+      <input semantic="OUTPUT" source="#rval"/>
+    </sampler>
+    <channel source="#rsamp" target="Mid/rotateX"/>
+  </animation>
+  <animation id="animScale" name="ScaleAnim">
+    <source id="stime">
+      <float_array id="sta" count="3">0 0.5 1</float_array>
+      <technique_common><accessor source="#sta" count="3" stride="1">
+        <param name="TIME" type="float"/>
+      </accessor></technique_common>
+    </source>
+    <source id="sval">
+      <float_array id="sva" count="9">1 1 1 2 2 2 1 1 1</float_array>
+      <technique_common><accessor source="#sva" count="3" stride="3">
+        <param name="X" type="float"/><param name="Y" type="float"/><param name="Z" type="float"/>
+      </accessor></technique_common>
+    </source>
+    <sampler id="ssamp">
+      <input semantic="INPUT" source="#stime"/>
+      <input semantic="OUTPUT" source="#sval"/>
+    </sampler>
+    <channel source="#ssamp" target="Tip/scale"/>
+  </animation>
+</library_animations>
+<library_visual_scenes>
+  <visual_scene id="Scene" name="Scene">
+    <node id="Root" sid="Root" name="Root" type="JOINT">
+      <matrix sid="transform">1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</matrix>
+      <node id="Mid" sid="Mid" name="Mid" type="JOINT">
+        <translate sid="translate">0 1 0</translate>
+        <rotate sid="rotateX">1 0 0 0</rotate>
+        <scale sid="scale">1 1 1</scale>
+        <node id="Tip" sid="Tip" name="Tip" type="JOINT">
+          <translate sid="translate">0 1 0</translate>
+          <scale sid="scale">1 1 1</scale>
+        </node>
+      </node>
+    </node>
+    <node id="SkinNode" name="SkinNode" type="NODE">
+      <matrix sid="transform">1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</matrix>
+      <instance_controller url="#skinCtrl">
+        <skeleton>#Root</skeleton>
+        <bind_material><technique_common>
+          <instance_material symbol="matSym" target="#mat1"/>
+        </technique_common></bind_material>
+      </instance_controller>
+    </node>
+    <node id="PointLightNode" name="PointLight1" type="NODE">
+      <translate>2 3 4</translate>
+      <instance_light url="#ptLight"/>
+    </node>
+    <node id="SpotLightNode" name="SpotLight1" type="NODE">
+      <translate>0 5 0</translate>
+      <rotate>1 0 0 -90</rotate>
+      <instance_light url="#spotLight"/>
+    </node>
+    <node id="DirLightNode" name="DirLight1" type="NODE">
+      <translate>0 10 0</translate>
+      <instance_light url="#dirLight"/>
+    </node>
+    <node id="AmbLightNode" name="AmbLight1" type="NODE">
+      <instance_light url="#ambLight"/>
+      <node id="ChildOfAmb" name="ChildOfAmb" type="NODE">
+        <translate>1 0 0</translate>
+        <node id="DeepChild" name="DeepChild" type="NODE">
+          <translate>0 1 0</translate>
+        </node>
+      </node>
+    </node>
+  </visual_scene>
+</library_visual_scenes>
+<scene><instance_visual_scene url="#Scene"/></scene>
+</COLLADA>

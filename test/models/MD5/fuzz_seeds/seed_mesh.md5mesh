@@ -1,0 +1,67 @@
+MD5Version 10
+commandline "mesh models/char/char.ma -dest models/char/char.md5mesh"
+
+numJoints 5
+numMeshes 2
+
+joints {
+	"origin" -1 ( 0.0 0.0 0.0 ) ( 0.0 0.0 0.0 )
+	"spine" 0 ( 0.0 0.0 32.0 ) ( -0.5 0.5 -0.5 )
+	"chest" 1 ( 0.0 0.0 48.0 ) ( -0.7071 0.0 0.0 )
+	"arm_l" 2 ( 8.0 0.0 48.0 ) ( 0.0 0.7071 0.0 )
+	"arm_r" 2 ( -8.0 0.0 48.0 ) ( 0.0 -0.7071 0.0 )
+}
+
+mesh {
+	shader "textures/char_body"
+
+	numverts 8
+	vert 0 ( 0.0 0.0 ) 0 2
+	vert 1 ( 1.0 0.0 ) 2 2
+	vert 2 ( 1.0 1.0 ) 4 1
+	vert 3 ( 0.0 1.0 ) 5 1
+	vert 4 ( 0.5 0.0 ) 6 2
+	vert 5 ( 0.5 0.5 ) 8 1
+	vert 6 ( 0.25 0.75 ) 9 2
+	vert 7 ( 0.75 0.25 ) 11 1
+
+	numtris 4
+	tri 0 0 1 2
+	tri 1 0 2 3
+	tri 2 4 5 6
+	tri 3 4 6 7
+
+	numweights 12
+	weight 0 0 0.5 ( 1.0 0.0 0.0 )
+	weight 1 1 0.5 ( 1.0 0.0 -32.0 )
+	weight 2 0 0.5 ( -1.0 0.0 0.0 )
+	weight 3 1 0.5 ( -1.0 0.0 -32.0 )
+	weight 4 1 0.6 ( 0.0 1.0 -32.0 )
+	weight 5 2 1.0 ( 0.0 -1.0 0.0 )
+	weight 6 2 0.4 ( 0.0 0.0 1.0 )
+	weight 7 3 0.6 ( 2.0 0.0 0.0 )
+	weight 8 3 1.0 ( 0.0 2.0 0.0 )
+	weight 9 2 0.3 ( -1.0 -1.0 0.0 )
+	weight 10 4 0.7 ( 1.0 1.0 0.0 )
+	weight 11 4 1.0 ( 0.0 0.0 -2.0 )
+}
+
+mesh {
+	shader "textures/char_head.tga"
+
+	numverts 4
+	vert 0 ( 0.0 0.0 ) 0 1
+	vert 1 ( 1.0 0.0 ) 1 1
+	vert 2 ( 1.0 1.0 ) 2 1
+	vert 3 ( 0.0 1.0 ) 3 1
+
+	numtris 2
+	tri 0 0 1 2
+	tri 1 0 2 3
+
+	numweights 4
+	weight 0 2 1.0 ( 0.0 -2.0 8.0 )
+	weight 1 2 1.0 ( 2.0 -2.0 8.0 )
+	weight 2 2 1.0 ( 2.0 2.0 8.0 )
+	weight 3 2 1.0 ( 0.0 2.0 8.0 )
+}

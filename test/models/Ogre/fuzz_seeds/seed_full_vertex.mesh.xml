@@ -1,0 +1,38 @@
+<mesh>
+  <submeshes>
+    <submesh material="FullMat" usesharedvertices="false" operationtype="triangle_list">
+      <faces count="2">
+        <face v1="0" v2="1" v3="2"/>
+        <face v1="2" v2="3" v3="0"/>
+      </faces>
+      <geometry vertexcount="4">
+        <vertexbuffer positions="true" normals="true" tangents="true" texture_coords="2">
+          <vertex>
+            <position x="-1" y="-1" z="0"/>
+            <normal x="0" y="0" z="1"/>
+            <tangent x="1" y="0" z="0"/>
+            <texcoord u="0" v="0"/>
+          </vertex>
+          <vertex>
+            <position x="1" y="-1" z="0"/>
+            <normal x="0" y="0" z="1"/>
+            <tangent x="1" y="0" z="0"/>
+            <texcoord u="1" v="0"/>
+          </vertex>
+          <vertex>
+            <position x="1" y="1" z="0"/>
+            <normal x="0" y="0" z="1"/>
+            <tangent x="1" y="0" z="0"/>
+            <texcoord u="1" v="1"/>
+          </vertex>
+          <vertex>
+            <position x="-1" y="1" z="0"/>
+            <normal x="0" y="0" z="1"/>
+            <tangent x="1" y="0" z="0"/>
+            <texcoord u="0" v="1"/>
+          </vertex>
+        </vertexbuffer>
+      </geometry>
+    </submesh>
+  </submeshes>
+</mesh>
