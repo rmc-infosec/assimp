@@ -51,6 +51,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <cstdio>
 #include <cstdlib>
 #include <gtest/gtest.h>
+#include <cstring>
 
 #if defined(_MSC_VER) || defined(__MINGW64__) || defined(__MINGW32__)
 #   define TMP_PATH "./"
@@ -84,7 +85,20 @@ inline FILE* MakeTmpFile(char* tmplate, size_t len, std::string &tmpName) {
 }
 #elif defined(__GNUC__) || defined(__clang__)
 inline FILE *MakeTmpFile(char *tmplate, size_t len, std::string &tmpName) {
+    const std::string originalTemplate(tmplate);
     auto fd = mkstemp(tmplate);
+    if (fd == -1) {
+        const auto separator = originalTemplate.find_last_of('/');
+        if (separator != std::string::npos && separator + 1 < originalTemplate.size()) {
+            std::string fallbackPath = std::string("/tmp/");
+            fallbackPath += originalTemplate.substr(separator + 1);
+            if (fallbackPath.size() <= len) {
+                std::strcpy(tmplate, fallbackPath.c_str());
+                fd = mkstemp(tmplate);
+            }
+        }
+    }
+
     EXPECT_NE(-1, fd);
     if(fd == -1) {
         return nullptr;
