@@ -256,7 +256,8 @@ void X3DImporter::ParseFile(XmlParser &theParser) {
 
 bool X3DImporter::CanRead(const std::string &pFile, IOSystem * /*pIOHandler*/, bool checkSig) const {
     if (checkSig) {
-        if (GetExtension(pFile) == "x3d")
+        const std::string ext = GetExtension(pFile);
+        if (ext == "x3d" || ext == "wrl" || ext == "x3db" || ext == "x3dv")
             return true;
     }
 

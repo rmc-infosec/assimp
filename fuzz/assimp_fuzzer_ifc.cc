@@ -44,18 +44,45 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 using namespace Assimp;
 
 extern "C" int LLVMFuzzerTestOneInput(const uint8_t *data, size_t dataSize) {
-    if (dataSize > 1024 * 1024 || dataSize < 4) {
+    if (!AssimpFuzz::IsValidSize(dataSize, "ifc")) {
         return 0;
     }
 
+    const uint32_t hash = AssimpFuzz::HashBytes(data, dataSize);
     Importer importer;
     // Force IFC format
     if (!AssimpFuzz::ForceFormat(importer, "ifc")) {
         return 0;
     }
 
+    AssimpFuzz::ApplyImporterConfigs(importer, data, dataSize);
+
     unsigned int flags = AssimpFuzz::GetProcessingFlags(data, dataSize);
     importer.ReadFileFromMemory(data, dataSize, flags, "ifc");
+
+    // Alternate pass for IFC-specific import switches and tessellation settings.
+    Importer importerAlt;
+    if (!AssimpFuzz::ForceFormat(importerAlt, "ifc")) {
+        return 0;
+    }
+    AssimpFuzz::ApplyImporterConfigs(importerAlt, data, dataSize);
+    importerAlt.SetPropertyBool(AI_CONFIG_IMPORT_IFC_SKIP_SPACE_REPRESENTATIONS, (hash & 0x01u) == 0u);
+    importerAlt.SetPropertyBool(AI_CONFIG_IMPORT_IFC_CUSTOM_TRIANGULATION, (hash & 0x02u) == 0u);
+    importerAlt.SetPropertyFloat(AI_CONFIG_IMPORT_IFC_SMOOTHING_ANGLE, 5.0f + static_cast<float>((hash >> 8) % 171u));
+    importerAlt.SetPropertyInteger(AI_CONFIG_IMPORT_IFC_CYLINDRICAL_TESSELLATION, 4 + static_cast<int>((hash >> 16) % 44u));
+
+    unsigned int altFlags = flags ^ (aiProcess_Triangulate
+            | aiProcess_GenNormals
+            | aiProcess_GenUVCoords
+            | aiProcess_OptimizeMeshes
+            | aiProcess_GlobalScale);
+    if ((altFlags & aiProcess_GenSmoothNormals) && (altFlags & aiProcess_GenNormals)) {
+        altFlags &= ~aiProcess_GenNormals;
+    }
+    if ((altFlags & aiProcess_OptimizeGraph) && (altFlags & aiProcess_PreTransformVertices)) {
+        altFlags &= ~aiProcess_OptimizeGraph;
+    }
+    importerAlt.ReadFileFromMemory(data, dataSize, altFlags, "ifc");
 
     return 0;
 }

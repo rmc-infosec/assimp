@@ -257,6 +257,12 @@ void IRRImporter::CopyMaterial(std::vector<aiMaterial *> &materials,
 
     mesh->mMaterialIndex = (unsigned int)materials.size();
     materials.push_back(inmaterials[0].first);
+    inmaterials[0].first = nullptr;
+    for (size_t i = 1; i < inmaterials.size(); ++i) {
+        delete inmaterials[i].first;
+        inmaterials[i].first = nullptr;
+    }
+    inmaterials.clear();
 }
 
 // ------------------------------------------------------------------------------------------------
@@ -644,6 +650,7 @@ void IRRImporter::GenerateGraph(Node *root, aiNode *rootOut, aiScene *scene,
 
             std::pair<aiMaterial *, unsigned int> &src = root->materials[i];
             localScene->mMaterials[i] = src.first;
+            src.first = nullptr; // ownership transferred
         }
 
         // NOTE: Each mesh should have exactly one material assigned,
@@ -754,8 +761,10 @@ void IRRImporter::GenerateGraph(Node *root, aiNode *rootOut, aiScene *scene,
 
         // copy those materials and generate 6 meshes for our new sky-box
         materials.reserve(materials.size() + 6);
-        for (unsigned int i = 0; i < 6; ++i)
+        for (unsigned int i = 0; i < 6; ++i) {
             materials.insert(materials.end(), root->materials[i].first);
+            root->materials[i].first = nullptr; // ownership transferred
+        }
 
         BuildSkybox(meshes, materials);
 

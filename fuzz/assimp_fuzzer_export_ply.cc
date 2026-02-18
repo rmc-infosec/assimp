@@ -49,15 +49,17 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 using namespace Assimp;
 
 extern "C" int LLVMFuzzerTestOneInput(const uint8_t *data, size_t dataSize) {
-    if (dataSize > 1024 * 1024 || dataSize < 4) {
+    if (!AssimpFuzz::IsValidSize(dataSize)) {
         return 0;
     }
 
     Importer importer;
-    unsigned int importFlags = AssimpFuzz::GetProcessingFlags(data, dataSize);
+    AssimpFuzz::ApplyImporterConfigs(importer, data, dataSize);
+    AssimpFuzz::ForceEnableAllImportFeatures(importer);
+    unsigned int importFlags = AssimpFuzz::GetImportFlagsForExport(data, dataSize);
 
     // Try to import the fuzzed data as any format
-    const aiScene *scene = importer.ReadFileFromMemory(data, dataSize, importFlags);
+    const aiScene *scene = AssimpFuzz::ImportWithHints(importer, data, dataSize, importFlags);
     if (!scene || !scene->mRootNode) {
         return 0;
     }
@@ -72,6 +74,7 @@ extern "C" int LLVMFuzzerTestOneInput(const uint8_t *data, size_t dataSize) {
 
     // Re-import the exported data to test round-trip
     Importer importer2;
+    AssimpFuzz::ApplyImporterConfigs(importer2, data, dataSize);
     importer2.ReadFileFromMemory(blob->data, blob->size, importFlags, "exported.ply");
 
     return 0;

@@ -50,6 +50,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <assimp/SkeletonMeshBuilder.h>
 #include <assimp/Importer.hpp>
 #include <assimp/IOSystem.hpp>
+#include <assimp/MemoryIOWrapper.h>
+#include <assimp/config.h>
 #include <assimp/scene.h>
 #include <assimp/DefaultLogger.hpp>
 #include <assimp/importerdesc.h>
@@ -78,6 +80,20 @@ static constexpr aiImporterDesc desc = {
     0,
     "smd vta"
 };
+
+static constexpr size_t kMaxNumericTokenLength = 64;
+static constexpr size_t kMaxTextureNameLength = 1024;
+static constexpr size_t kMaxAnimationFiles = 256;
+
+static bool IsNumericTokenTooLong(const char *start, const char *end, size_t limit) {
+    size_t len = 0;
+    for (const char *cur = start; cur < end && !IsSpaceOrNewLine(*cur); ++cur) {
+        if (++len > limit) {
+            return true;
+        }
+    }
+    return false;
+}
 
 // ------------------------------------------------------------------------------------------------
 // Constructor to be privately used by Importer
@@ -120,6 +136,8 @@ void SMDImporter::SetupProperties(const Importer* pImp) {
 
     bLoadAnimationList = pImp->GetPropertyBool(AI_CONFIG_IMPORT_SMD_LOAD_ANIMATION_LIST, true);
     noSkeletonMesh = pImp->GetPropertyBool(AI_CONFIG_IMPORT_NO_SKELETON_MESHES, false);
+    const int maxTriangles = pImp->GetPropertyInteger(AI_CONFIG_PP_SLM_TRIANGLE_LIMIT, AI_SLM_DEFAULT_MAX_TRIANGLES);
+    configMaxTriangles = maxTriangles > 0 ? static_cast<size_t>(maxTriangles) : 0;
 }
 
 // ------------------------------------------------------------------------------------------------
@@ -535,6 +553,10 @@ void SMDImporter::GetAnimationFileList(const std::string &pFile, IOSystem* pIOHa
     auto name = DefaultIOSystem::completeBaseName(pFile);
     auto path = base + "/" + name + "_animation.txt";
 
+    if (base.compare(0, AI_MEMORYIO_MAGIC_FILENAME_LENGTH, AI_MEMORYIO_MAGIC_FILENAME) == 0) {
+        return;
+    }
+
     std::unique_ptr<IOStream> file(pIOHandler->Open(path.c_str(), "rb"));
     if (file == nullptr) {
         return;
@@ -560,6 +582,10 @@ void SMDImporter::GetAnimationFileList(const std::string &pFile, IOSystem* pIOHa
 
     tok1 = strtok_s(&buf[0], "\r\n", &context1);
     while (tok1 != nullptr) {
+        if (outList.size() >= kMaxAnimationFiles) {
+            ASSIMP_LOG_WARN("SMD: Animation list too large, truncating");
+            break;
+        }
         tok2 = strtok_s(tok1, " \t", &context2);
         if (tok2) {
             char *p = tok2;
@@ -693,6 +719,7 @@ void SMDImporter::ReadSmd(const std::string &pFile, IOSystem* pIOHandler) {
 
     // Reserve enough space for ... hm ... 10 textures
     aszTextures.reserve(10);
+    textureIndexMap.reserve(10);
 
     // Reserve enough space for ... hm ... 1000 triangles
     asTriangles.reserve(1000);
@@ -701,6 +728,7 @@ void SMDImporter::ReadSmd(const std::string &pFile, IOSystem* pIOHandler) {
     asBones.reserve(20);
 
     aszTextures.clear();
+    textureIndexMap.clear();
     asTriangles.clear();
     asBones.clear();
 
@@ -710,17 +738,17 @@ void SMDImporter::ReadSmd(const std::string &pFile, IOSystem* pIOHandler) {
 
 // ------------------------------------------------------------------------------------------------
 unsigned int SMDImporter::GetTextureIndex(const std::string& filename) {
-    unsigned int iIndex = 0;
-    for (std::vector<std::string>::const_iterator
-            i =  aszTextures.begin();
-            i != aszTextures.end();++i,++iIndex) {
-        // case-insensitive ... it's a path
-        if (0 == ASSIMP_stricmp ( filename.c_str(),(*i).c_str())) {
-            return iIndex;
-        }
+    const std::string key = ai_stdStrToLower(filename);
+    const auto it = textureIndexMap.find(key);
+    if (it != textureIndexMap.end()) {
+        return it->second;
     }
-    iIndex = (unsigned int)aszTextures.size();
+    if (aszTextures.size() >= AI_MAX_ALLOC(std::string)) {
+        throw DeadlyImportError("SMD: Too many textures, aborting parse");
+    }
+    const unsigned int iIndex = static_cast<unsigned int>(aszTextures.size());
     aszTextures.push_back(filename);
+    textureIndexMap.emplace(key, iIndex);
     return iIndex;
 }
 
@@ -733,7 +761,12 @@ void SMDImporter::ParseNodesSection(const char* szCurrent, const char** szCurren
             szCurrent += 4;
             break;
         }
+        const char *section_start = szCurrent;
         ParseNodeInfo(szCurrent,&szCurrent, end);
+        if (szCurrent == section_start) {
+            ASSIMP_LOG_WARN("SMD: node parse made no progress, aborting section to avoid infinite loop");
+            break;
+        }
     }
     SkipSpacesAndLineEnd(szCurrent, &szCurrent, end);
     *szCurrentOut = szCurrent;
@@ -753,7 +786,12 @@ void SMDImporter::ParseTrianglesSection(const char *szCurrent, const char **szCu
         if (TokenMatch(szCurrent,"end",3)) {
             break;
         }
+        const char *section_start = szCurrent;
         ParseTriangle(szCurrent,&szCurrent, end);
+        if (szCurrent == section_start) {
+            ASSIMP_LOG_WARN("SMD: triangle parse made no progress, aborting section to avoid infinite loop");
+            break;
+        }
     }
     SkipSpacesAndLineEnd(szCurrent,&szCurrent, end);
     *szCurrentOut = szCurrent;
@@ -766,6 +804,7 @@ void SMDImporter::ParseVASection(const char *szCurrent, const char **szCurrentOu
         if (!SkipSpacesAndLineEnd(szCurrent,&szCurrent, end)) {
             break;
         }
+        const char *section_start = szCurrent;
 
         // "end\n" - Ends the "vertexanimation" section
         if (TokenMatch(szCurrent,"end",3)) {
@@ -783,12 +822,19 @@ void SMDImporter::ParseVASection(const char *szCurrent, const char **szCurrentOu
             SkipLine(szCurrent,&szCurrent, end);
         } else {
             if(0 == iCurIndex) {
+                if (configMaxTriangles > 0 && asTriangles.size() >= configMaxTriangles) {
+                    throw DeadlyImportError("SMD: Triangle limit exceeded, aborting parse");
+                }
                 asTriangles.emplace_back();
             }
             if (++iCurIndex == 3) {
                 iCurIndex = 0;
             }
             ParseVertex(szCurrent,&szCurrent, end, asTriangles.back().avVertices[iCurIndex],true);
+        }
+        if (szCurrent == section_start) {
+            ASSIMP_LOG_WARN("SMD: vertex animation parse made no progress, aborting section to avoid infinite loop");
+            break;
         }
     }
 
@@ -809,6 +855,7 @@ void SMDImporter::ParseSkeletonSection(const char *szCurrent, const char **szCur
         if (!SkipSpacesAndLineEnd(szCurrent,&szCurrent, end)) {
             break;
         }
+        const char *section_start = szCurrent;
 
         // "end\n" - Ends the skeleton section
         if (TokenMatch(szCurrent,"end",3)) {
@@ -823,6 +870,10 @@ void SMDImporter::ParseSkeletonSection(const char *szCurrent, const char **szCur
             SkipLine(szCurrent, &szCurrent, end);
         } else {
             ParseSkeletonElement(szCurrent, &szCurrent, end, iTime);
+        }
+        if (szCurrent == section_start) {
+            ASSIMP_LOG_WARN("SMD: skeleton parse made no progress, aborting section to avoid infinite loop");
+            break;
         }
     }
     *szCurrentOut = szCurrent;
@@ -846,6 +897,9 @@ void SMDImporter::ParseNodeInfo(const char *szCurrent, const char **szCurrentOut
         LogErrorNoThrow("Invalid bone number while parsing bone index");
         SMDI_PARSE_RETURN;
     }
+    if (iBone >= AI_MAX_ALLOC(SMD::Bone)) {
+        throw DeadlyImportError("SMD: Bone index exceeds supported limits");
+    }
     // add our bone to the list
     if (iBone >= asBones.size()) {
         asBones.resize(iBone+1);
@@ -863,6 +917,10 @@ void SMDImporter::ParseNodeInfo(const char *szCurrent, const char **szCurrentOut
 
     const char* szEnd = szCurrent;
     for ( ;; ) {
+        if (szEnd >= end) {
+            LogErrorNoThrow("Unexpected EOF/EOL while parsing bone name");
+            SMDI_PARSE_RETURN;
+        }
         if (bQuota && '\"' == *szEnd) {
             iBone = (unsigned int)(szEnd - szCurrent);
             ++szEnd;
@@ -870,9 +928,6 @@ void SMDImporter::ParseNodeInfo(const char *szCurrent, const char **szCurrentOut
         } else if (!bQuota && IsSpaceOrNewLine(*szEnd)) {
             iBone = (unsigned int)(szEnd - szCurrent);
             break;
-        } else if (!(*szEnd)) {
-            LogErrorNoThrow("Unexpected EOF/EOL while parsing bone name");
-            SMDI_PARSE_RETURN;
         }
         ++szEnd;
     }
@@ -906,6 +961,10 @@ void SMDImporter::ParseSkeletonElement(const char *szCurrent, const char **szCur
     }
     SMD::Bone& bone = asBones[iBone];
 
+    if (bone.sAnim.asKeys.size() >= AI_MAX_ALLOC(SMD::Bone::Animation::MatrixKey)) {
+        LogErrorNoThrow("SMD: Too many animation keys");
+        SMDI_PARSE_RETURN;
+    }
     bone.sAnim.asKeys.emplace_back();
     SMD::Bone::Animation::MatrixKey& key = bone.sAnim.asKeys.back();
 
@@ -951,6 +1010,12 @@ void SMDImporter::ParseSkeletonElement(const char *szCurrent, const char **szCur
 // ------------------------------------------------------------------------------------------------
 // Parse a triangle
 void SMDImporter::ParseTriangle(const char *szCurrent, const char **szCurrentOut, const char *end) {
+    if (configMaxTriangles > 0 && asTriangles.size() >= configMaxTriangles) {
+        throw DeadlyImportError("SMD: Triangle limit exceeded, aborting parse");
+    }
+    if (asTriangles.size() >= AI_MAX_ALLOC(SMD::Face)) {
+        throw DeadlyImportError("SMD: Too many triangles, aborting parse");
+    }
     asTriangles.emplace_back();
     SMD::Face& face = asTriangles.back();
 
@@ -961,7 +1026,18 @@ void SMDImporter::ParseTriangle(const char *szCurrent, const char **szCurrentOut
 
     // read the texture file name
     const char* szLast = szCurrent;
-    while (!IsSpaceOrNewLine(*++szCurrent));
+    size_t texture_len = 0;
+    while (szCurrent < end && !IsSpaceOrNewLine(*szCurrent)) {
+        if (++texture_len > kMaxTextureNameLength) {
+            LogErrorNoThrow("SMD: Texture name too long while parsing triangle");
+            SMDI_PARSE_RETURN;
+        }
+        ++szCurrent;
+    }
+    if (szCurrent >= end) {
+        LogErrorNoThrow("Unexpected EOF/EOL while parsing triangle texture name");
+        SMDI_PARSE_RETURN;
+    }
 
     // ... and get the index that belongs to this file name
     face.iTexture = GetTextureIndex(std::string(szLast,(uintptr_t)szCurrent-(uintptr_t)szLast));
@@ -981,6 +1057,10 @@ bool SMDImporter::ParseFloat(const char *szCurrent, const char **szCurrentOut, c
     if (!SkipSpaces(&szCurrent, end)) {
         return false;
     }
+    if (IsNumericTokenTooLong(szCurrent, end, kMaxNumericTokenLength)) {
+        LogErrorNoThrow("Numeric token too long while parsing float");
+        return false;
+    }
 
     *szCurrentOut = fast_atoreal_move(szCurrent,out);
     return true;
@@ -992,6 +1072,10 @@ bool SMDImporter::ParseUnsignedInt(const char *szCurrent, const char **szCurrent
     if(!SkipSpaces(&szCurrent, end)) {
         return false;
     }
+    if (IsNumericTokenTooLong(szCurrent, end, kMaxNumericTokenLength)) {
+        LogErrorNoThrow("Numeric token too long while parsing unsigned int");
+        return false;
+    }
 
     out = strtoul10(szCurrent,szCurrentOut);
     return true;
@@ -1001,6 +1085,10 @@ bool SMDImporter::ParseUnsignedInt(const char *szCurrent, const char **szCurrent
 // Parse a signed int
 bool SMDImporter::ParseSignedInt(const char *szCurrent, const char **szCurrentOut, const char *end, int &out) {
     if(!SkipSpaces(&szCurrent, end)) {
+        return false;
+    }
+    if (IsNumericTokenTooLong(szCurrent, end, kMaxNumericTokenLength)) {
+        LogErrorNoThrow("Numeric token too long while parsing int");
         return false;
     }
 
@@ -1063,6 +1151,11 @@ void SMDImporter::ParseVertex(const char* szCurrent,
     // all elements from now are fully optional, we don't need them
     unsigned int iSize = 0;
     if(!ParseUnsignedInt(szCurrent, &szCurrent, end, iSize)) {
+        SMDI_PARSE_RETURN;
+    }
+    using BoneLink = std::pair<unsigned int, float>;
+    if (iSize > AI_MAX_ALLOC(BoneLink)) {
+        LogErrorNoThrow("SMD: Too many vertex weights");
         SMDI_PARSE_RETURN;
     }
     vertex.aiBoneLinks.resize(iSize,std::pair<unsigned int, float>(0,0.0f));

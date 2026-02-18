@@ -1,7 +1,8 @@
 # GLB/glTF binary format dictionary
 # Magic bytes: 'g'=0x67, 'l'=0x6c, 'T'=0x54, 'F'=0x46
 "glTF"
-"\x67\x6c\x54\x46"  # glTF magic (ASCII "glTF")
+"\x67\x6c\x54\x46"
+# glTF magic (ASCII "glTF")
 
 # JSON keywords
 "asset"

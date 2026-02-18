@@ -267,10 +267,23 @@ static void ReadUVs(SIBMesh *mesh, StreamReaderLE *stream) {
             throw DeadlyImportError("Invalid face index.");
 
         uint32_t pos = mesh->faceStart[faceIdx];
+        if (pos >= mesh->idx.size())
+            throw DeadlyImportError("Invalid face start offset.");
+
+        uint32_t storedPoints = mesh->idx[pos];
+        if (numPoints > storedPoints)
+            throw DeadlyImportError("Invalid UV point count.");
+
+        size_t faceEnd = static_cast<size_t>(pos) + 1 + static_cast<size_t>(storedPoints) * N;
+        if (faceEnd > mesh->idx.size())
+            throw DeadlyImportError("Invalid face index data.");
+
         uint32_t *idx = &mesh->idx[pos + 1];
 
         for (uint32_t n = 0; n < numPoints; n++, idx += N) {
             uint32_t id = idx[UV];
+            if (id >= mesh->uv.size())
+                throw DeadlyImportError("UV index is out of range.");
             mesh->uv[id].x = stream->GetF4();
             mesh->uv[id].y = stream->GetF4();
         }

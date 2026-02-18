@@ -647,7 +647,7 @@ void glTFExporter::ExportMeshes()
 		/************** Texture coordinates **************/
         for (int i = 0; i < AI_MAX_NUMBER_OF_TEXTURECOORDS; ++i) {
             // Flip UV y coords
-            if (aim -> mNumUVComponents[i] > 1) {
+            if (aim->mTextureCoords[i] && aim->mNumUVComponents[i] > 1) {
                 for (unsigned int j = 0; j < aim->mNumVertices; ++j) {
                     aim->mTextureCoords[i][j].y = 1 - aim->mTextureCoords[i][j].y;
                 }

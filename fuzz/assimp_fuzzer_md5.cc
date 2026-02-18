@@ -44,7 +44,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 using namespace Assimp;
 
 extern "C" int LLVMFuzzerTestOneInput(const uint8_t *data, size_t dataSize) {
-    if (dataSize > 1024 * 1024 || dataSize < 4) {
+    if (!AssimpFuzz::IsValidSize(dataSize, "md5mesh")) {
         return 0;
     }
 
@@ -53,6 +53,8 @@ extern "C" int LLVMFuzzerTestOneInput(const uint8_t *data, size_t dataSize) {
     if (!AssimpFuzz::ForceFormat(importer, "md5mesh")) {
         return 0;
     }
+
+    AssimpFuzz::ApplyImporterConfigs(importer, data, dataSize);
 
     unsigned int flags = AssimpFuzz::GetProcessingFlags(data, dataSize);
     importer.ReadFileFromMemory(data, dataSize, flags, "md5mesh");

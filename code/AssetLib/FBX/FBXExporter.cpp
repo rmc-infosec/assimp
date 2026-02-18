@@ -1230,6 +1230,9 @@ void FBXExporter::WriteObjects () {
           // uvs, if any
           for (size_t uvi = 0; uvi < m->GetNumUVChannels(); uvi++) {
             const auto nc = m->mNumUVComponents[uvi];
+            if (nc == 0 || !m->mTextureCoords[uvi]) {
+                continue;
+            }
             if (nc > 2) {
                 // FBX only supports 2-channel UV maps...
                 // or at least i'm not sure how to indicate a different number
@@ -2549,7 +2552,8 @@ void add_meta(FBX::Node& fbx_node, const aiNode* node){
         case AI_UINT64:{
             //use string to add uint64
             uint64_t val = *static_cast<uint64_t *>(entry->mData);
-            fbx_node.AddP70string(key.C_Str(), std::to_string(val).c_str());
+            const std::string value_string = std::to_string(val);
+            fbx_node.AddP70string(key.C_Str(), value_string);
             break;
         }
         case AI_FLOAT:{

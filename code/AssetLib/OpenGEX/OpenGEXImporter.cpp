@@ -51,6 +51,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <assimp/importerdesc.h>
 #include <assimp/scene.h>
 #include <openddlparser/OpenDDLParser.h>
+#include <limits>
 
 static constexpr aiImporterDesc desc = {
     "Open Game Engine Exchange",
@@ -288,6 +289,17 @@ bool OpenGEXImporter::CanRead(const std::string &file, IOSystem *pIOHandler, boo
 
 //------------------------------------------------------------------------------------------------
 void OpenGEXImporter::InternReadFile(const std::string &filename, aiScene *pScene, IOSystem *pIOHandler) {
+    struct ImporterStateGuard {
+        OpenGEXImporter *self;
+        bool success;
+        explicit ImporterStateGuard(OpenGEXImporter *owner) : self(owner), success(false) {}
+        ~ImporterStateGuard() {
+            if (self) {
+                self->clearImporterState(success);
+            }
+        }
+    } stateGuard(this);
+
     // open source file
     std::unique_ptr<IOStream> file(pIOHandler->Open(filename, "rb"));
     if (!file) {
@@ -315,6 +327,8 @@ void OpenGEXImporter::InternReadFile(const std::string &filename, aiScene *pScen
     copyMaterials(pScene);
     resolveReferences();
     createNodeTree(pScene);
+
+    stateGuard.success = true;
 }
 
 //------------------------------------------------------------------------------------------------
@@ -686,10 +700,10 @@ void OpenGEXImporter::handleTransformNode(ODDLParser::DDLNode *node, aiScene * /
 
 //------------------------------------------------------------------------------------------------
 void OpenGEXImporter::handleMeshNode(ODDLParser::DDLNode *node, aiScene *pScene) {
-    m_currentMesh = new aiMesh;
+    resetCurrentVertices();
+    std::unique_ptr<aiMesh> mesh(new aiMesh);
+    m_currentMesh = mesh.get();
     const size_t meshidx(m_meshCache.size());
-    // ownership is transferred but a reference remains in m_currentMesh
-    m_meshCache.emplace_back(m_currentMesh);
 
     Property *prop = node->getProperties();
     if (nullptr != prop) {
@@ -711,6 +725,9 @@ void OpenGEXImporter::handleMeshNode(ODDLParser::DDLNode *node, aiScene *pScene)
     }
 
     handleNodes(node, pScene);
+
+    // Only cache the mesh once all child nodes have been processed.
+    m_meshCache.emplace_back(std::move(mesh));
 
     DDLNode *parent(node->getParent());
     if (nullptr != parent) {
@@ -802,12 +819,11 @@ static size_t countDataArrayListItems(DataArrayList *vaList) {
         return numItems;
     }
 
-    DataArrayList *next(vaList);
-    while (nullptr != next) {
-        if (nullptr != vaList->m_dataList) {
-            numItems++;
+    for (DataArrayList *next = vaList; next != nullptr; next = next->m_next) {
+        if (nullptr == next->m_dataList) {
+            throw DeadlyImportError("OpenGEX: Empty vertex array entry");
         }
-        next = next->m_next;
+        ++numItems;
     }
 
     return numItems;
@@ -816,6 +832,12 @@ static size_t countDataArrayListItems(DataArrayList *vaList) {
 //------------------------------------------------------------------------------------------------
 static void copyVectorArray(size_t numItems, DataArrayList *vaList, aiVector3D *vectorArray) {
     for (size_t i = 0; i < numItems; i++) {
+        if (nullptr == vaList) {
+            throw DeadlyImportError("OpenGEX: Vertex array list ended early");
+        }
+        if (nullptr == vaList->m_dataList) {
+            throw DeadlyImportError("OpenGEX: Empty vertex array entry");
+        }
         Value *next(vaList->m_dataList);
         fillVector3(&vectorArray[i], next);
         vaList = vaList->m_next;
@@ -825,9 +847,48 @@ static void copyVectorArray(size_t numItems, DataArrayList *vaList, aiVector3D *
 //------------------------------------------------------------------------------------------------
 static void copyColor4DArray(size_t numItems, DataArrayList *vaList, aiColor4D *colArray) {
     for (size_t i = 0; i < numItems; i++) {
+        if (nullptr == vaList) {
+            throw DeadlyImportError("OpenGEX: Vertex color list ended early");
+        }
+        if (nullptr == vaList->m_dataList) {
+            throw DeadlyImportError("OpenGEX: Empty vertex color entry");
+        }
         Value *next(vaList->m_dataList);
         fillColor4(&colArray[i], next);
+        vaList = vaList->m_next;
     }
+}
+
+//------------------------------------------------------------------------------------------------
+static void resetMeshGeometry(aiMesh *mesh) {
+    if (!mesh) {
+        return;
+    }
+
+    delete[] mesh->mVertices;
+    mesh->mVertices = nullptr;
+    delete[] mesh->mNormals;
+    mesh->mNormals = nullptr;
+    delete[] mesh->mTangents;
+    mesh->mTangents = nullptr;
+    delete[] mesh->mBitangents;
+    mesh->mBitangents = nullptr;
+
+    for (unsigned int i = 0; i < AI_MAX_NUMBER_OF_COLOR_SETS; ++i) {
+        delete[] mesh->mColors[i];
+        mesh->mColors[i] = nullptr;
+    }
+
+    for (unsigned int i = 0; i < AI_MAX_NUMBER_OF_TEXTURECOORDS; ++i) {
+        delete[] mesh->mTextureCoords[i];
+        mesh->mTextureCoords[i] = nullptr;
+        mesh->mNumUVComponents[i] = 0;
+    }
+
+    delete[] mesh->mFaces;
+    mesh->mFaces = nullptr;
+    mesh->mNumFaces = 0;
+    mesh->mNumVertices = 0;
 }
 
 //------------------------------------------------------------------------------------------------
@@ -856,6 +917,8 @@ void OpenGEXImporter::handleVertexArrayNode(ODDLParser::DDLNode *node, aiScene *
             m_currentVertices.m_vertices.resize(numItems);
             copyVectorArray(numItems, vaList, m_currentVertices.m_vertices.data());
         } else if (Color == attribType) {
+            delete[] m_currentVertices.m_colors;
+            m_currentVertices.m_colors = nullptr;
             m_currentVertices.m_numColors = numItems;
             m_currentVertices.m_colors = new aiColor4D[numItems];
             copyColor4DArray(numItems, vaList, m_currentVertices.m_colors);
@@ -863,6 +926,8 @@ void OpenGEXImporter::handleVertexArrayNode(ODDLParser::DDLNode *node, aiScene *
             m_currentVertices.m_normals.resize(numItems);
             copyVectorArray(numItems, vaList, m_currentVertices.m_normals.data());
         } else if (TexCoord == attribType) {
+            delete[] m_currentVertices.m_textureCoords[0];
+            m_currentVertices.m_textureCoords[0] = nullptr;
             m_currentVertices.m_numUVComps[0] = numItems;
             m_currentVertices.m_textureCoords[0] = new aiVector3D[numItems];
             copyVectorArray(numItems, vaList, m_currentVertices.m_textureCoords[0]);
@@ -880,19 +945,50 @@ void OpenGEXImporter::handleIndexArrayNode(ODDLParser::DDLNode *node, aiScene * 
         throw DeadlyImportError("No current mesh for index data found.");
     }
 
+    if (m_currentMesh->mFaces || m_currentMesh->mVertices || m_currentMesh->mNormals ||
+            m_currentMesh->mColors[0] || m_currentMesh->mTextureCoords[0]) {
+        resetMeshGeometry(m_currentMesh);
+    }
+
     DataArrayList *vaList = node->getDataArrayList();
     if (nullptr == vaList) {
         return;
     }
 
-    const size_t numItems(countDataArrayListItems(vaList));
-    m_currentMesh->mNumFaces = static_cast<unsigned int>(numItems);
-    m_currentMesh->mFaces = new aiFace[numItems];
-    m_currentMesh->mNumVertices = static_cast<unsigned int>(numItems * 3);
+    size_t numFaces = 0;
+    size_t totalIndices = 0;
+    for (DataArrayList *cur = vaList; cur != nullptr; cur = cur->m_next) {
+        if (nullptr == cur->m_dataList || cur->m_numItems == 0) {
+            throw DeadlyImportError("OpenGEX: Empty index array entry");
+        }
+        if (cur->m_numItems > AI_MAX_FACE_INDICES) {
+            throw DeadlyImportError("OpenGEX: Face index count exceeds limits");
+        }
+        if (numFaces >= AI_MAX_FACES) {
+            throw DeadlyImportError("OpenGEX: Too many faces in index array");
+        }
+        if (totalIndices > (std::numeric_limits<size_t>::max() - cur->m_numItems)) {
+            throw DeadlyImportError("OpenGEX: Index count overflow");
+        }
+        totalIndices += cur->m_numItems;
+        ++numFaces;
+    }
+
+    if (numFaces > AI_MAX_ALLOC(aiFace) || totalIndices > AI_MAX_ALLOC(aiVector3D)) {
+        throw DeadlyImportError("OpenGEX: Index array exceeds allocation limits");
+    }
+    if (numFaces > std::numeric_limits<unsigned int>::max() ||
+            totalIndices > std::numeric_limits<unsigned int>::max()) {
+        throw DeadlyImportError("OpenGEX: Index array exceeds mesh limits");
+    }
+
+    m_currentMesh->mNumFaces = static_cast<unsigned int>(numFaces);
+    m_currentMesh->mFaces = new aiFace[numFaces];
+    m_currentMesh->mNumVertices = static_cast<unsigned int>(totalIndices);
     m_currentMesh->mVertices = new aiVector3D[m_currentMesh->mNumVertices];
     bool hasColors(false);
     if (m_currentVertices.m_numColors > 0) {
-        m_currentMesh->mColors[0] = new aiColor4D[m_currentVertices.m_numColors];
+        m_currentMesh->mColors[0] = new aiColor4D[m_currentMesh->mNumVertices];
         hasColors = true;
     }
     bool hasNormalCoords(false);
@@ -906,13 +1002,19 @@ void OpenGEXImporter::handleIndexArrayNode(ODDLParser::DDLNode *node, aiScene * 
         hasTexCoords = true;
     }
 
-    unsigned int index(0);
+    size_t index(0);
     for (size_t i = 0; i < m_currentMesh->mNumFaces; i++) {
+        if (nullptr == vaList) {
+            throw DeadlyImportError("OpenGEX: Index array list ended early");
+        }
         aiFace &current(m_currentMesh->mFaces[i]);
-        current.mNumIndices = 3;
+        current.mNumIndices = static_cast<unsigned int>(vaList->m_numItems);
         current.mIndices = new unsigned int[current.mNumIndices];
         Value *next(vaList->m_dataList);
         for (size_t indices = 0; indices < current.mNumIndices; indices++) {
+            if (nullptr == next) {
+                throw DeadlyImportError("OpenGEX: Not enough indices in index array");
+            }
             int idx = -1;
             if (next->m_type == Value::ValueType::ddl_unsigned_int16) {
                 idx = next->getUnsignedInt16();
@@ -920,23 +1022,36 @@ void OpenGEXImporter::handleIndexArrayNode(ODDLParser::DDLNode *node, aiScene * 
                 idx = next->getUnsignedInt32();
             }
             
-            ai_assert(static_cast<size_t>(idx) <= m_currentVertices.m_vertices.size());
-            ai_assert(index < m_currentMesh->mNumVertices);
+            if (idx < 0 || static_cast<size_t>(idx) >= m_currentVertices.m_vertices.size()) {
+                throw DeadlyImportError("OpenGEX: Invalid vertex index in index array");
+            }
+            if (index >= totalIndices) {
+                throw DeadlyImportError("OpenGEX: Index array exceeds mesh vertex count");
+            }
             aiVector3D &pos = (m_currentVertices.m_vertices[idx]);
             m_currentMesh->mVertices[index].Set(pos.x, pos.y, pos.z);
             if (hasColors) {
+                if (static_cast<size_t>(idx) >= m_currentVertices.m_numColors) {
+                    throw DeadlyImportError("OpenGEX: Invalid color index in index array");
+                }
                 aiColor4D &col = m_currentVertices.m_colors[idx];
                 m_currentMesh->mColors[0][index] = col;
             }
             if (hasNormalCoords) {
+                if (static_cast<size_t>(idx) >= m_currentVertices.m_normals.size()) {
+                    throw DeadlyImportError("OpenGEX: Invalid normal index in index array");
+                }
                 aiVector3D &normal = (m_currentVertices.m_normals[idx]);
                 m_currentMesh->mNormals[index].Set(normal.x, normal.y, normal.z);
             }
             if (hasTexCoords) {
+                if (static_cast<size_t>(idx) >= m_currentVertices.m_numUVComps[0]) {
+                    throw DeadlyImportError("OpenGEX: Invalid texcoord index in index array");
+                }
                 aiVector3D &tex = (m_currentVertices.m_textureCoords[0][idx]);
                 m_currentMesh->mTextureCoords[0][index].Set(tex.x, tex.y, tex.z);
             }
-            current.mIndices[indices] = index;
+            current.mIndices[indices] = static_cast<unsigned int>(index);
             index++;
 
             next = next->m_next;
@@ -1309,6 +1424,59 @@ aiNode *OpenGEXImporter::top() const {
 //------------------------------------------------------------------------------------------------
 void OpenGEXImporter::clearNodeStack() {
     m_nodeStack.clear();
+}
+
+//------------------------------------------------------------------------------------------------
+void OpenGEXImporter::resetCurrentVertices() {
+    m_currentVertices.m_vertices.clear();
+    m_currentVertices.m_normals.clear();
+
+    delete[] m_currentVertices.m_colors;
+    m_currentVertices.m_colors = nullptr;
+    m_currentVertices.m_numColors = 0;
+
+    for (unsigned int i = 0; i < AI_MAX_NUMBER_OF_TEXTURECOORDS; ++i) {
+        delete[] m_currentVertices.m_textureCoords[i];
+        m_currentVertices.m_textureCoords[i] = nullptr;
+        m_currentVertices.m_numUVComps[i] = 0;
+    }
+}
+
+//------------------------------------------------------------------------------------------------
+void OpenGEXImporter::clearImporterState(bool success) {
+    resetCurrentVertices();
+
+    m_ctx = nullptr;
+    m_root = nullptr;
+    m_currentNode = nullptr;
+    m_currentMesh = nullptr;
+    m_currentMaterial = nullptr;
+    m_currentLight = nullptr;
+    m_currentCamera = nullptr;
+    m_tokenType = 0;
+
+    m_meshCache.clear();
+    m_mesh2refMap.clear();
+    m_material2refMap.clear();
+    m_nodeChildMap.clear();
+    m_nodeStack.clear();
+    m_unresolvedRefStack.clear();
+
+    if (!success) {
+        for (aiMaterial *material : m_materialCache) {
+            delete material;
+        }
+        for (aiCamera *camera : m_cameraCache) {
+            delete camera;
+        }
+        for (aiLight *light : m_lightCache) {
+            delete light;
+        }
+    }
+
+    m_materialCache.clear();
+    m_cameraCache.clear();
+    m_lightCache.clear();
 }
 
 //------------------------------------------------------------------------------------------------

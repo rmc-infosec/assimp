@@ -57,7 +57,10 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <assimp/DefaultLogger.hpp>
 #include <assimp/Importer.hpp>
 
-#include <numeric>
+#include <cstdlib>
+#include <limits>
+#include <string>
+#include <vector>
 
 namespace Assimp {
 
@@ -213,6 +216,14 @@ void ColladaLoader::InternReadFile(const std::string &pFile, aiScene *pScene, IO
     }
 
     StoreSceneMeshes(pScene);
+
+    // Free morph target meshes - their data was already copied into aiAnimMesh
+    // objects during CreateMesh, so the originals are no longer needed.
+    for (aiMesh *m : mTargetMeshes) {
+        delete m;
+    }
+    mTargetMeshes.clear();
+
     StoreSceneMaterials(pScene);
     StoreSceneTextures(pScene);
     StoreSceneLights(pScene);
@@ -603,9 +614,33 @@ aiMesh *ColladaLoader::CreateMesh(const ColladaParser &pParser, const Mesh *pSrc
         return dstMesh.release();
     }
 
+    if (pStartFace > pSrcMesh->mFaceSize.size() ||
+            pSubMesh.mNumFaces > pSrcMesh->mFaceSize.size() - pStartFace) {
+        return dstMesh.release();
+    }
+
     // count the vertices addressed by its faces
-    const size_t numVertices = std::accumulate(pSrcMesh->mFaceSize.begin() + pStartFace,
-            pSrcMesh->mFaceSize.begin() + pStartFace + pSubMesh.mNumFaces, size_t(0));
+    size_t numVertices = 0;
+    for (size_t a = 0; a < pSubMesh.mNumFaces; ++a) {
+        const size_t faceSize = pSrcMesh->mFaceSize[pStartFace + a];
+        if (faceSize > std::numeric_limits<size_t>::max() - numVertices) {
+            return dstMesh.release();
+        }
+        numVertices += faceSize;
+    }
+
+    if (numVertices == 0) {
+        return dstMesh.release();
+    }
+
+    if (pStartVertex > pSrcMesh->mPositions.size() ||
+            numVertices > pSrcMesh->mPositions.size() - pStartVertex) {
+        return dstMesh.release();
+    }
+
+    if (numVertices > static_cast<size_t>(std::numeric_limits<unsigned int>::max())) {
+        return dstMesh.release();
+    }
 
     // copy positions
     dstMesh->mNumVertices = static_cast<unsigned int>(numVertices);
@@ -615,26 +650,30 @@ aiMesh *ColladaLoader::CreateMesh(const ColladaParser &pParser, const Mesh *pSrc
     // normals, if given. HACK: (thom) Due to the glorious Collada spec we never
     // know if we have the same number of normals as there are positions. So we
     // also ignore any vertex attribute if it has a different count
-    if (pSrcMesh->mNormals.size() >= pStartVertex + numVertices) {
+    if (pStartVertex <= pSrcMesh->mNormals.size() &&
+            numVertices <= pSrcMesh->mNormals.size() - pStartVertex) {
         dstMesh->mNormals = new aiVector3D[numVertices];
         std::copy(pSrcMesh->mNormals.begin() + pStartVertex, pSrcMesh->mNormals.begin() + pStartVertex + numVertices, dstMesh->mNormals);
     }
 
     // tangents, if given.
-    if (pSrcMesh->mTangents.size() >= pStartVertex + numVertices) {
+    if (pStartVertex <= pSrcMesh->mTangents.size() &&
+            numVertices <= pSrcMesh->mTangents.size() - pStartVertex) {
         dstMesh->mTangents = new aiVector3D[numVertices];
         std::copy(pSrcMesh->mTangents.begin() + pStartVertex, pSrcMesh->mTangents.begin() + pStartVertex + numVertices, dstMesh->mTangents);
     }
 
     // bi-tangents, if given.
-    if (pSrcMesh->mBitangents.size() >= pStartVertex + numVertices) {
+    if (pStartVertex <= pSrcMesh->mBitangents.size() &&
+            numVertices <= pSrcMesh->mBitangents.size() - pStartVertex) {
         dstMesh->mBitangents = new aiVector3D[numVertices];
         std::copy(pSrcMesh->mBitangents.begin() + pStartVertex, pSrcMesh->mBitangents.begin() + pStartVertex + numVertices, dstMesh->mBitangents);
     }
 
     // same for texture coords, as many as we have
     for (size_t a = 0; a < AI_MAX_NUMBER_OF_TEXTURECOORDS; ++a) {
-        if (pSrcMesh->mTexCoords[a].size() >= pStartVertex + numVertices) {
+        if (pStartVertex <= pSrcMesh->mTexCoords[a].size() &&
+                numVertices <= pSrcMesh->mTexCoords[a].size() - pStartVertex) {
             dstMesh->mTextureCoords[a] = new aiVector3D[numVertices];
             for (size_t b = 0; b < numVertices; ++b) {
                 dstMesh->mTextureCoords[a][b] = pSrcMesh->mTexCoords[a][pStartVertex + b];
@@ -646,7 +685,8 @@ aiMesh *ColladaLoader::CreateMesh(const ColladaParser &pParser, const Mesh *pSrc
 
     // same for vertex colors, as many as we have. again the same packing to avoid empty slots
     for (size_t a = 0, real = 0; a < AI_MAX_NUMBER_OF_COLOR_SETS; ++a) {
-        if (pSrcMesh->mColors[a].size() >= pStartVertex + numVertices) {
+        if (pStartVertex <= pSrcMesh->mColors[a].size() &&
+                numVertices <= pSrcMesh->mColors[a].size() - pStartVertex) {
             dstMesh->mColors[real] = new aiColor4D[numVertices];
             std::copy(pSrcMesh->mColors[a].begin() + pStartVertex, pSrcMesh->mColors[a].begin() + pStartVertex + numVertices, dstMesh->mColors[real]);
             ++real;
@@ -1267,6 +1307,11 @@ void ColladaLoader::CreateAnimation(aiScene *pScene, const ColladaParser &pParse
             ai_real time = startTime;
             while (true) {
                 for (ChannelEntry & e : entries) {
+                    // skip morph weight channels - they are handled separately below
+                    if (e.mTransformIndex == SIZE_MAX) {
+                        continue;
+                    }
+
                     // find the keyframe behind the current point in time
                     size_t pos = 0;
                     ai_real postTime = 0.0;
@@ -1328,7 +1373,7 @@ void ColladaLoader::CreateAnimation(aiScene *pScene, const ColladaParser &pParse
                     // https://github.com/assimp/assimp/issues/458
                     // Sub-sample axis-angle channels if the delta between two consecutive
                     // key-frame angles is >= 180 degrees.
-                    if (transforms[channelElement.mTransformIndex].mType == TF_ROTATE && channelElement.mSubElement == 3 && pos > 0 && pos < channelElement.mTimeAccessor->mCount) {
+                    if (channelElement.mTransformIndex != SIZE_MAX && transforms[channelElement.mTransformIndex].mType == TF_ROTATE && channelElement.mSubElement == 3 && pos > 0 && pos < channelElement.mTimeAccessor->mCount) {
                         const ai_real cur_key_angle = ReadFloat(*channelElement.mValueAccessor, *channelElement.mValueData, pos, 0);
                         const ai_real last_key_angle = ReadFloat(*channelElement.mValueAccessor, *channelElement.mValueData, pos - 1, 0);
                         const ai_real cur_key_time = ReadFloat(*channelElement.mTimeAccessor, *channelElement.mTimeData, pos, 0);

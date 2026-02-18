@@ -2,7 +2,7 @@
 # Magic
 "BLENDER"
 "BLENDERv"
-"\x1f\x8b"  # gzip magic (compressed blend)
+"\x1f\x8b"
 
 # Block codes
 "REND"

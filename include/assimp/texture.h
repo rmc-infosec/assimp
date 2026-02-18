@@ -210,7 +210,14 @@ struct aiTexture {
 
     // Destruction
     ~aiTexture () {
-        delete[] pcData;
+        if (!pcData) {
+            return;
+        }
+        if (mHeight == 0) {
+            delete[] reinterpret_cast<unsigned char *>(pcData);
+        } else {
+            delete[] pcData;
+        }
     }
 #endif
 };

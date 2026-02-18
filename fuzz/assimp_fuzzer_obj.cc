@@ -45,7 +45,7 @@ using namespace Assimp;
 
 extern "C" int LLVMFuzzerTestOneInput(const uint8_t *data, size_t dataSize) {
     // Limit input size to 1MB
-    if (dataSize > 1024 * 1024 || dataSize < 4) {
+    if (!AssimpFuzz::IsValidSize(dataSize, "obj")) {
         return 0;
     }
 
@@ -54,6 +54,8 @@ extern "C" int LLVMFuzzerTestOneInput(const uint8_t *data, size_t dataSize) {
     if (!AssimpFuzz::ForceFormat(importer, "obj")) {
         return 0;
     }
+
+    AssimpFuzz::ApplyImporterConfigs(importer, data, dataSize);
 
     unsigned int flags = AssimpFuzz::GetProcessingFlags(data, dataSize);
     // We pass "obj" hint as well, though only OBJ loader is registered now.

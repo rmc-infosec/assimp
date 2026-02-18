@@ -52,6 +52,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <assimp/SceneCombiner.h>
 #include <assimp/StringUtils.h>
 #include <assimp/anim.h>
+#include <assimp/material.h>
 
 namespace Assimp {
 
@@ -155,6 +156,15 @@ private:
 
             // reserve space for up to 5 children
             children.reserve(5);
+        }
+
+        ~Node() {
+            for (auto &material : materials) {
+                delete material.first;
+            }
+            for (Node *child : children) {
+                delete child;
+            }
         }
 
         // Transformation of the node

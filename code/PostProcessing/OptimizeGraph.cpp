@@ -51,6 +51,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <assimp/Exceptional.h>
 #include <assimp/SceneCombiner.h>
 #include <stdio.h>
+#include <memory>
 
 using namespace Assimp;
 
@@ -289,42 +290,41 @@ void OptimizeGraphProcess::Execute(aiScene *pScene) {
 		locked.insert(AI_OG_GETKEY(lgh->mName));
 	}
 
-	// Insert a dummy master node and make it read-only
-	aiNode *dummy_root = new aiNode(AI_RESERVED_NODE_NAME);
-	locked.insert(AI_OG_GETKEY(dummy_root->mName));
+		// Insert a dummy master node and make it read-only
+		std::unique_ptr<aiNode> dummy_root(new aiNode(AI_RESERVED_NODE_NAME));
+		locked.insert(AI_OG_GETKEY(dummy_root->mName));
 
-	const aiString prev = pScene->mRootNode->mName;
-	pScene->mRootNode->mParent = dummy_root;
+		const aiString prev = pScene->mRootNode->mName;
+		pScene->mRootNode->mParent = dummy_root.get();
 
-	dummy_root->mChildren = new aiNode *[dummy_root->mNumChildren = 1];
-	dummy_root->mChildren[0] = pScene->mRootNode;
+		dummy_root->mChildren = new aiNode *[dummy_root->mNumChildren = 1];
+		dummy_root->mChildren[0] = pScene->mRootNode;
 
 	// Do our recursive processing of scenegraph nodes. For each node collect
 	// a fully new list of children and allow their children to place themselves
 	// on the same hierarchy layer as their parents.
 	std::list<aiNode *> nodes;
-	CollectNewChildren(dummy_root, nodes);
+		CollectNewChildren(dummy_root.get(), nodes);
 
 	ai_assert(nodes.size() == 1);
 
-	if (dummy_root->mNumChildren == 0) {
-		pScene->mRootNode = nullptr;
-		throw DeadlyImportError("After optimizing the scene graph, no data remains");
-	}
+		if (dummy_root->mNumChildren == 0) {
+			pScene->mRootNode = nullptr;
+			throw DeadlyImportError("After optimizing the scene graph, no data remains");
+		}
 
-	if (dummy_root->mNumChildren > 1) {
-		pScene->mRootNode = dummy_root;
+		if (dummy_root->mNumChildren > 1) {
+			pScene->mRootNode = dummy_root.release();
 
-		// Keep the dummy node but assign the name of the old root node to it
-		pScene->mRootNode->mName = prev;
-	} else {
+			// Keep the dummy node but assign the name of the old root node to it
+			pScene->mRootNode->mName = prev;
+		} else {
 
-		// Remove the dummy root node again.
-		pScene->mRootNode = dummy_root->mChildren[0];
+			// Remove the dummy root node again.
+			pScene->mRootNode = dummy_root->mChildren[0];
 
-		dummy_root->mChildren[0] = nullptr;
-		delete dummy_root;
-	}
+			dummy_root->mChildren[0] = nullptr;
+		}
 
 	pScene->mRootNode->mParent = nullptr;
 	if (!DefaultLogger::isNullLogger()) {

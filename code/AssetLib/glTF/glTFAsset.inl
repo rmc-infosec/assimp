@@ -46,6 +46,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 // Header files, Assimp
 #include <assimp/DefaultLogger.hpp>
 #include <assimp/Base64.hpp>
+#include <memory>
 
 #ifdef ASSIMP_IMPORTER_GLTF_USE_OPEN3DGC
 // Header files, Open3DGC.
@@ -129,11 +130,11 @@ Ref<T> LazyDict<T>::Get(const char *id) {
     }
 
     // create an instance of the given type
-    T *inst = new T();
+    std::unique_ptr<T> inst(new T());
     inst->id = id;
     ReadMember(obj->value, "name", inst->name);
     inst->Read(obj->value, mAsset);
-    return Add(inst);
+    return Add(inst.release());
 }
 
 template <class T>
@@ -195,13 +196,15 @@ inline void Buffer::Read(Value &obj, Asset &r) {
     if (ParseDataURI(uri, it->GetStringLength(), dataURI)) {
         if (dataURI.base64) {
             uint8_t *data = nullptr;
-            this->byteLength = Base64::Decode(dataURI.data, dataURI.dataLength, data);
-            this->mData.reset(data, std::default_delete<uint8_t[]>());
+            const size_t decodedLength = Base64::Decode(dataURI.data, dataURI.dataLength, data);
+            std::unique_ptr<uint8_t[]> decoded(data);
+            this->byteLength = decodedLength;
 
-            if (statedLength > 0 && this->byteLength != statedLength) {
+            if (statedLength > 0 && decodedLength != statedLength) {
                 throw DeadlyImportError("GLTF: buffer \"", id, "\", expected ", ai_to_string(statedLength),
                         " bytes, but found ", ai_to_string(dataURI.dataLength));
             }
+            this->mData.reset(decoded.release(), std::default_delete<uint8_t[]>());
         } else { // assume raw data
             if (statedLength != dataURI.dataLength) {
                 throw DeadlyImportError("GLTF: buffer \"", id, "\", expected ", ai_to_string(statedLength),
@@ -514,8 +517,10 @@ inline void Image::Read(Value &obj, Asset &r) {
                 mimeType = dataURI.mediaType;
                 if (dataURI.base64) {
                     uint8_t *ptr = nullptr;
-                    mDataLength = Base64::Decode(dataURI.data, dataURI.dataLength, ptr);
-                    mData.reset(ptr);
+                    const size_t decodedLength = Base64::Decode(dataURI.data, dataURI.dataLength, ptr);
+                    std::unique_ptr<uint8_t[]> decoded(ptr);
+                    mDataLength = decodedLength;
+                    mData = std::move(decoded);
                 }
             } else {
                 this->uri = uristr;
@@ -1143,6 +1148,21 @@ inline void Asset::ReadBinaryHeader(IOStream &stream) {
 
     AI_SWAP4(header.length);
     AI_SWAP4(header.sceneLength);
+
+    const size_t fileSize = stream.FileSize();
+    const size_t headerSize = sizeof(GLB_Header);
+    if (fileSize < headerSize) {
+        throw DeadlyImportError("GLTF: File too small for GLB header");
+    }
+    if (static_cast<size_t>(header.length) < headerSize) {
+        throw DeadlyImportError("GLTF: Invalid GLB length");
+    }
+    if (static_cast<size_t>(header.length) > fileSize) {
+        throw DeadlyImportError("GLTF: Declared GLB length exceeds file size");
+    }
+    if (static_cast<size_t>(header.sceneLength) > static_cast<size_t>(header.length) - headerSize) {
+        throw DeadlyImportError("GLTF: JSON chunk length exceeds GLB length");
+    }
 
     static_assert(std::numeric_limits<uint32_t>::max() <= std::numeric_limits<size_t>::max(), "size_t must be at least 32bits");
     mSceneLength = static_cast<size_t>(header.sceneLength); // Can't be larger than 4GB (max. uint32_t)

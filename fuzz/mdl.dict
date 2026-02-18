@@ -1,10 +1,10 @@
 # MDL (Quake/Half-Life) format dictionary
 # Magic bytes
-"IDPO"  # Quake MDL
-"IDP2"  # Quake 2 MD2
-"IDST"  # Half-Life MDL
-"IDSQ"  # Half-Life sequence
-"\x2c\x00\x00\x00"  # MDL version 6
+"IDPO"
+"IDP2"
+"IDST"
+"IDSQ"
+"\x2c\x00\x00\x00"
 
 # HL MDL sections
 "$modelname"

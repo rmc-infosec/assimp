@@ -900,7 +900,7 @@ void ColladaParser::ReadController(XmlNode &node, Collada::Controller &controlle
         } else if (currentName == "vertex_weights") {
             ReadControllerWeights(currentNode, controller);
         } else if (currentName == "targets") {
-            for (XmlNode currentChildNode = node.first_child(); currentNode; currentNode = currentNode.next_sibling()) {
+            for (XmlNode currentChildNode = currentNode.first_child(); currentChildNode; currentChildNode = currentChildNode.next_sibling()) {
                 const std::string &currentChildName = currentChildNode.name();
                 if (currentChildName == "input") {
                     const char *semantics = currentChildNode.attribute("semantic").as_string();
@@ -2381,8 +2381,7 @@ aiMatrix4x4 ColladaParser::CalculateResultTransform(const std::vector<Transform>
             break;
         }
         case TF_SKEW:
-            // TODO: (thom)
-            ai_assert(false);
+            // TODO: (thom) - skew transform not implemented, skip
             break;
         case TF_MATRIX: {
             aiMatrix4x4 mat(tf.f[0], tf.f[1], tf.f[2], tf.f[3], tf.f[4], tf.f[5], tf.f[6], tf.f[7],

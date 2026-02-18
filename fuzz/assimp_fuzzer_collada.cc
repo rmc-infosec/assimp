@@ -44,18 +44,44 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 using namespace Assimp;
 
 extern "C" int LLVMFuzzerTestOneInput(const uint8_t *data, size_t dataSize) {
-    if (dataSize > 1024 * 1024 || dataSize < 4) {
+    if (!AssimpFuzz::IsValidSize(dataSize, "dae")) {
         return 0;
     }
 
+    const uint32_t hash = AssimpFuzz::HashBytes(data, dataSize);
     Importer importer;
     // Force Collada format (dae)
     if (!AssimpFuzz::ForceFormat(importer, "dae")) {
         return 0;
     }
 
+    AssimpFuzz::ApplyImporterConfigs(importer, data, dataSize);
+
     unsigned int flags = AssimpFuzz::GetProcessingFlags(data, dataSize);
     importer.ReadFileFromMemory(data, dataSize, flags, "dae");
+
+    // Alternate pass to exercise Collada parser branches behind opposite knobs.
+    Importer importerAlt;
+    if (!AssimpFuzz::ForceFormat(importerAlt, "dae")) {
+        return 0;
+    }
+    AssimpFuzz::ApplyImporterConfigs(importerAlt, data, dataSize);
+    importerAlt.SetPropertyBool(AI_CONFIG_IMPORT_COLLADA_IGNORE_UP_DIRECTION, (hash & 0x01u) == 0u);
+    importerAlt.SetPropertyBool(AI_CONFIG_IMPORT_COLLADA_IGNORE_UNIT_SIZE, (hash & 0x02u) == 0u);
+    importerAlt.SetPropertyBool(AI_CONFIG_IMPORT_COLLADA_USE_COLLADA_NAMES, (hash & 0x04u) == 0u);
+
+    unsigned int altFlags = flags ^ (aiProcess_Triangulate
+            | aiProcess_GenNormals
+            | aiProcess_GenUVCoords
+            | aiProcess_FindDegenerates
+            | aiProcess_GlobalScale);
+    if ((altFlags & aiProcess_GenSmoothNormals) && (altFlags & aiProcess_GenNormals)) {
+        altFlags &= ~aiProcess_GenNormals;
+    }
+    if ((altFlags & aiProcess_OptimizeGraph) && (altFlags & aiProcess_PreTransformVertices)) {
+        altFlags &= ~aiProcess_OptimizeGraph;
+    }
+    importerAlt.ReadFileFromMemory(data, dataSize, altFlags, "dae");
 
     return 0;
 }
