@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1">
+  <asset><created>2024-01-01</created><modified>2024-01-01</modified></asset>
+  <library_effects>
+    <effect id="effect0">
+      <profile_COMMON>
+        <technique sid="common">
+          <phong>
+            <diffuse><color>0.8 0.2 0.2 1</color></diffuse>
+            <specular><color>1 1 1 1</color></specular>
+            <shininess><float>50</float></shininess>
+          </phong>
+        </technique>
+      </profile_COMMON>
+    </effect>
+    <effect id="effect1">
+      <profile_COMMON>
+        <technique sid="common">
+          <lambert>
+            <diffuse><color>0.2 0.8 0.2 1</color></diffuse>
+            <ambient><color>0.1 0.1 0.1 1</color></ambient>
+          </lambert>
+        </technique>
+      </profile_COMMON>
+    </effect>
+  </library_effects>
+  <library_materials>
+    <material id="material0" name="RedPhong"><instance_effect url="#effect0"/></material>
+    <material id="material1" name="GreenLambert"><instance_effect url="#effect1"/></material>
+  </library_materials>
+  <library_geometries>
+    <geometry id="mesh0" name="Cube">
+      <mesh>
+        <source id="mesh0-positions">
+          <float_array id="mesh0-positions-array" count="24">-1 -1 -1 1 -1 -1 1 1 -1 -1 1 -1 -1 -1 1 1 -1 1 1 1 1 -1 1 1</float_array>
+          <technique_common>
+            <accessor source="#mesh0-positions-array" count="8" stride="3">
+              <param name="X" type="float"/><param name="Y" type="float"/><param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="mesh0-normals">
+          <float_array id="mesh0-normals-array" count="18">0 0 -1 0 0 1 0 -1 0 1 0 0 0 1 0 -1 0 0</float_array>
+          <technique_common>
+            <accessor source="#mesh0-normals-array" count="6" stride="3">
+              <param name="X" type="float"/><param name="Y" type="float"/><param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <vertices id="mesh0-vertices"><input semantic="POSITION" source="#mesh0-positions"/></vertices>
+        <triangles material="material0" count="4">
+          <input semantic="VERTEX" source="#mesh0-vertices" offset="0"/>
+          <input semantic="NORMAL" source="#mesh0-normals" offset="1"/>
+          <p>0 0 1 0 2 0 0 0 2 0 3 0 4 1 6 1 5 1 4 1 7 1 6 1</p>
+        </triangles>
+        <triangles material="material1" count="4">
+          <input semantic="VERTEX" source="#mesh0-vertices" offset="0"/>
+          <input semantic="NORMAL" source="#mesh0-normals" offset="1"/>
+          <p>0 2 4 2 1 2 1 2 4 2 5 2 2 4 7 4 3 4 2 4 6 4 7 4</p>
+        </triangles>
+      </mesh>
+    </geometry>
+  </library_geometries>
+  <library_visual_scenes>
+    <visual_scene id="Scene" name="Scene">
+      <node id="CubeNode" name="CubeNode" type="NODE">
+        <matrix sid="transform">1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</matrix>
+        <instance_geometry url="#mesh0">
+          <bind_material>
+            <technique_common>
+              <instance_material symbol="material0" target="#material0"/>
+              <instance_material symbol="material1" target="#material1"/>
+            </technique_common>
+          </bind_material>
+        </instance_geometry>
+      </node>
+    </visual_scene>
+  </library_visual_scenes>
+  <scene><instance_visual_scene url="#Scene"/></scene>
+</COLLADA>

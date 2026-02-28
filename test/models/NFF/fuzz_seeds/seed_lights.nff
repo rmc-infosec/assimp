@@ -1,0 +1,30 @@
+
+# Multiple light sources with varying colors and intensities
+from 0 0 15
+at 0 0 0
+up 0 1 0
+angle 45
+resolution 512 512
+
+# white light with default intensity
+l 5 5 5
+
+# red light with intensity
+l -5 5 5 2.0 1 0 0
+
+# green light
+l 0 10 0 1.5 0 1 0
+
+# blue light with low intensity
+l 5 -5 5 0.5 0 0 1
+
+# bright white overhead
+l 0 20 0 3.0 1 1 1
+
+# a surface to illuminate
+f 0.8 0.8 0.8 0.9 0.1 10 0 1
+p 4
+-5 -1 -5
+5 -1 -5
+5 -1 5
+-5 -1 5

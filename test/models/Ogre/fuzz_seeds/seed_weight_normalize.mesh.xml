@@ -1,0 +1,26 @@
+<mesh>
+  <submeshes>
+    <submesh material="SkinMat" usesharedvertices="false" operationtype="triangle_list">
+      <faces count="1">
+        <face v1="0" v2="1" v3="2"/>
+      </faces>
+      <geometry vertexcount="3">
+        <vertexbuffer positions="true">
+          <vertex><position x="0" y="0" z="0"/></vertex>
+          <vertex><position x="1" y="0" z="0"/></vertex>
+          <vertex><position x="0.5" y="1" z="0"/></vertex>
+        </vertexbuffer>
+      </geometry>
+      <boneassignments>
+        <vertexboneassignment vertexindex="0" boneindex="0" weight="0.3"/>
+        <vertexboneassignment vertexindex="0" boneindex="1" weight="0.2"/>
+        <vertexboneassignment vertexindex="1" boneindex="0" weight="0.8"/>
+        <vertexboneassignment vertexindex="1" boneindex="1" weight="0.8"/>
+        <vertexboneassignment vertexindex="2" boneindex="0" weight="0.1"/>
+        <vertexboneassignment vertexindex="2" boneindex="1" weight="0.1"/>
+        <vertexboneassignment vertexindex="2" boneindex="2" weight="0.1"/>
+      </boneassignments>
+    </submesh>
+  </submeshes>
+  <skeletonlink name="normalize_test.skeleton.xml"/>
+</mesh>

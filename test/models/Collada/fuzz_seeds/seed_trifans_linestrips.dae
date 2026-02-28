@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1">
+<asset><created>2026-01-01</created></asset>
+<library_geometries>
+<geometry id="fg"><mesh>
+<source id="fp"><float_array id="fa" count="21">0 0 0 1 0 0 1 1 0 0 1 0 -1 1 0 -1 0 0 0 -1 0</float_array>
+<technique_common><accessor source="#fa" count="7" stride="3">
+<param name="X" type="float"/><param name="Y" type="float"/><param name="Z" type="float"/>
+</accessor></technique_common></source>
+<source id="fn"><float_array id="na" count="21">0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1 0 0 1</float_array>
+<technique_common><accessor source="#na" count="7" stride="3">
+<param name="X" type="float"/><param name="Y" type="float"/><param name="Z" type="float"/>
+</accessor></technique_common></source>
+<vertices id="fv"><input semantic="POSITION" source="#fp"/></vertices>
+<trifans count="2">
+<input semantic="VERTEX" source="#fv" offset="0"/>
+<input semantic="NORMAL" source="#fn" offset="0"/>
+<p>0 1 2 3 4</p>
+<p>0 4 5 6 1</p>
+</trifans>
+</mesh></geometry>
+<geometry id="sg"><mesh>
+<source id="sp"><float_array id="sa" count="15">0 0 0 1 0 0 2 1 0 3 1 0 4 0 0</float_array>
+<technique_common><accessor source="#sa" count="5" stride="3">
+<param name="X" type="float"/><param name="Y" type="float"/><param name="Z" type="float"/>
+</accessor></technique_common></source>
+<vertices id="sv"><input semantic="POSITION" source="#sp"/></vertices>
+<linestrips count="1">
+<input semantic="VERTEX" source="#sv" offset="0"/>
+<p>0 1 2 3 4</p>
+</linestrips>
+</mesh></geometry>
+<geometry id="lg"><mesh>
+<source id="lp"><float_array id="la" count="12">0 0 0 1 0 0 0 1 0 1 1 0</float_array>
+<technique_common><accessor source="#la" count="4" stride="3">
+<param name="X" type="float"/><param name="Y" type="float"/><param name="Z" type="float"/>
+</accessor></technique_common></source>
+<vertices id="lv"><input semantic="POSITION" source="#lp"/></vertices>
+<lines count="2">
+<input semantic="VERTEX" source="#lv" offset="0"/>
+<p>0 1 2 3</p>
+</lines>
+</mesh></geometry>
+<geometry id="pg"><mesh>
+<source id="pp"><float_array id="pa" count="36">0 0 0 1 0 0 1 1 0 0 1 0 2 0 0 3 0 0 3 1 0 2 1 0 4 0 0 5 0 0 5 1 0 4 1 0</float_array>
+<technique_common><accessor source="#pa" count="12" stride="3">
+<param name="X" type="float"/><param name="Y" type="float"/><param name="Z" type="float"/>
+</accessor></technique_common></source>
+<source id="pn"><float_array id="pb" count="9">0 0 1 0 0 1 0 0 1</float_array>
+<technique_common><accessor source="#pb" count="3" stride="3">
+<param name="X" type="float"/><param name="Y" type="float"/><param name="Z" type="float"/>
+</accessor></technique_common></source>
+<vertices id="pv"><input semantic="POSITION" source="#pp"/></vertices>
+<polylist count="3">
+<input semantic="VERTEX" source="#pv" offset="0"/>
+<input semantic="NORMAL" source="#pn" offset="1"/>
+<vcount>3 4 5</vcount>
+<p>0 0 1 0 2 0 3 1 4 1 5 1 6 1 7 2 8 2 9 2 10 2 11 2</p>
+</polylist>
+</mesh></geometry>
+</library_geometries>
+<library_visual_scenes>
+<visual_scene id="S">
+<node id="A" type="NODE"><instance_geometry url="#fg"/></node>
+<node id="B" type="NODE"><instance_geometry url="#sg"/></node>
+<node id="C" type="NODE"><instance_geometry url="#lg"/></node>
+<node id="D" type="NODE"><instance_geometry url="#pg"/></node>
+</visual_scene>
+</library_visual_scenes>
+<scene><instance_visual_scene url="#S"/></scene>
+</COLLADA>

@@ -1,0 +1,16 @@
+#
+# Minimal Irrlicht scene/mesh dictionary
+#
+"scene"
+"mesh"
+"material"
+"texture"
+"animatedmesh"
+"node"
+"meshbuffer"
+"vertices"
+"indices"
+"color"
+"position"
+"normal"
+"texcoord"

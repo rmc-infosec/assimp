@@ -1,0 +1,120 @@
+{
+  "asset": {
+    "generator": "seed",
+    "version": "1.0"
+  },
+  "scene": "scene0",
+  "scenes": {
+    "scene0": {
+      "nodes": ["node0", "node1"]
+    }
+  },
+  "nodes": {
+    "node0": {
+      "meshes": ["mesh0"],
+      "name": "Mesh0Node",
+      "translation": [0, 0, 0]
+    },
+    "node1": {
+      "meshes": ["mesh1"],
+      "name": "Mesh1Node",
+      "translation": [2, 0, 0]
+    }
+  },
+  "meshes": {
+    "mesh0": {
+      "primitives": [{
+        "attributes": {
+          "POSITION": "acc_pos0"
+        },
+        "indices": "acc_idx0",
+        "material": "mat_red",
+        "mode": 4
+      }]
+    },
+    "mesh1": {
+      "primitives": [{
+        "attributes": {
+          "POSITION": "acc_pos1"
+        },
+        "indices": "acc_idx1",
+        "material": "mat_blue",
+        "mode": 4
+      }]
+    }
+  },
+  "accessors": {
+    "acc_pos0": {
+      "bufferView": "bv_pos0",
+      "byteOffset": 0,
+      "componentType": 5126,
+      "count": 3,
+      "type": "VEC3"
+    },
+    "acc_pos1": {
+      "bufferView": "bv_pos1",
+      "byteOffset": 0,
+      "componentType": 5126,
+      "count": 3,
+      "type": "VEC3"
+    },
+    "acc_idx0": {
+      "bufferView": "bv_idx0",
+      "byteOffset": 0,
+      "componentType": 5123,
+      "count": 3,
+      "type": "SCALAR"
+    },
+    "acc_idx1": {
+      "bufferView": "bv_idx1",
+      "byteOffset": 0,
+      "componentType": 5123,
+      "count": 3,
+      "type": "SCALAR"
+    }
+  },
+  "bufferViews": {
+    "bv_pos0": {
+      "buffer": "buf0",
+      "byteOffset": 0,
+      "byteLength": 36
+    },
+    "bv_pos1": {
+      "buffer": "buf0",
+      "byteOffset": 36,
+      "byteLength": 36
+    },
+    "bv_idx0": {
+      "buffer": "buf0",
+      "byteOffset": 72,
+      "byteLength": 6
+    },
+    "bv_idx1": {
+      "buffer": "buf0",
+      "byteOffset": 78,
+      "byteLength": 6
+    }
+  },
+  "buffers": {
+    "buf0": {
+      "uri": "data:application/octet-stream;base64,AAAAAAAAAAAAAAAAAACAPwAAAAAAAAAAAAAAPwAAgD8AAAAAAAAAQAAAAAAAAAAAAABAQAAAAAAAAAAAAAAgQAAAgD8AAAAAAAABAAIAAAABAAIA",
+      "byteLength": 84
+    }
+  },
+  "materials": {
+    "mat_red": {
+      "values": {
+        "diffuse": [0.9, 0.1, 0.1, 1.0],
+        "specular": [1.0, 1.0, 1.0, 1.0],
+        "shininess": 16.0
+      }
+    },
+    "mat_blue": {
+      "values": {
+        "diffuse": [0.1, 0.1, 0.9, 1.0],
+        "ambient": [0.05, 0.05, 0.2, 1.0],
+        "transparency": 0.8
+      }
+    }
+  }
+}

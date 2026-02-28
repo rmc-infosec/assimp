@@ -1,0 +1,39 @@
+# Multiple lights and detailed camera setup
+from 0 8 20
+at 0 0 0
+up 0 1 0
+angle 60
+resolution 1024 768
+# White light default intensity
+l 10 10 10
+# Red light with explicit intensity and color
+l -10 10 10 2.0 1 0 0
+# Green light
+l 0 15 0 1.5 0 1 0
+# Blue light
+l 10 10 -10 0.8 0 0 1
+# Warm dim light
+l -10 5 -10 0.3 1 0.8 0.6
+# Bright overhead white
+l 0 25 0 5.0 1 1 1
+# Minimal light (position only, no intensity/color)
+l 3 3 3
+# A ground plane to catch shadows
+f 0.7 0.7 0.7 0.9 0.1 5 0 1.0
+p 4
+-10 0 -10
+10 0 -10
+10 0 10
+-10 0 10
+# Red sphere
+f 1 0 0 0.6 0.4 60 0 1.0
+s 0 2 0 1.5
+# Green cylinder
+f 0 1 0 0.5 0.5 40 0 1.0
+c
+3 0 0 0.5
+3 3 0 0.5
+# Blue tetrahedron
+f 0 0 1 0.7 0.3 30 0 1.0
+tess 4
+tet -3 0 0 1 1 1

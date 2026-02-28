@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1">
+<asset><created>2026-01-01</created><modified>2026-01-01</modified></asset>
+<library_effects>
+  <effect id="fx"><profile_COMMON><technique sid="common">
+    <lambert>
+      <diffuse><color>0.8 0.4 0.2 1</color></diffuse>
+      <ambient><color>0.1 0.1 0.1 1</color></ambient>
+    </lambert>
+  </technique></profile_COMMON></effect>
+</library_effects>
+<library_materials>
+  <material id="mat"><instance_effect url="#fx"/></material>
+</library_materials>
+<library_geometries>
+  <geometry id="mixpoly" name="MixedPoly">
+    <mesh>
+      <source id="pos">
+        <float_array id="posa" count="30">
+          0 0 0  1 0 0  1 1 0  0 1 0  0.5 1.5 0
+          2 0 0  3 0 0  3 1 0  2 1 0  2.5 1.5 0
+        </float_array>
+        <technique_common><accessor source="#posa" count="10" stride="3">
+          <param name="X" type="float"/><param name="Y" type="float"/><param name="Z" type="float"/>
+        </accessor></technique_common>
+      </source>
+      <source id="nrm">
+        <float_array id="nrma" count="3">0 0 1</float_array>
+        <technique_common><accessor source="#nrma" count="1" stride="3">
+          <param name="X" type="float"/><param name="Y" type="float"/><param name="Z" type="float"/>
+        </accessor></technique_common>
+      </source>
+      <source id="tan">
+        <float_array id="tana" count="3">1 0 0</float_array>
+        <technique_common><accessor source="#tana" count="1" stride="3">
+          <param name="X" type="float"/><param name="Y" type="float"/><param name="Z" type="float"/>
+        </accessor></technique_common>
+      </source>
+      <source id="bitan">
+        <float_array id="bitana" count="3">0 1 0</float_array>
+        <technique_common><accessor source="#bitana" count="1" stride="3">
+          <param name="X" type="float"/><param name="Y" type="float"/><param name="Z" type="float"/>
+        </accessor></technique_common>
+      </source>
+      <source id="col">
+        <float_array id="cola" count="12">1 0 0 1 0 1 0 1 0 0 1 1</float_array>
+        <technique_common><accessor source="#cola" count="3" stride="4">
+          <param name="R" type="float"/><param name="G" type="float"/><param name="B" type="float"/><param name="A" type="float"/>
+        </accessor></technique_common>
+      </source>
+      <source id="uv0">
+        <float_array id="uv0a" count="20">0 0 1 0 1 1 0 1 0.5 1.5 0 0 1 0 1 1 0 1 0.5 1.5</float_array>
+        <technique_common><accessor source="#uv0a" count="10" stride="2">
+          <param name="S" type="float"/><param name="T" type="float"/>
+        </accessor></technique_common>
+      </source>
+      <vertices id="vt"><input semantic="POSITION" source="#pos"/></vertices>
+      <!-- polylist with mixed tri/quad/pentagon faces, with tangent+bitangent+color -->
+      <polylist count="5" material="mat">
+        <input semantic="VERTEX" source="#vt" offset="0"/>
+        <input semantic="NORMAL" source="#nrm" offset="1"/>
+        <input semantic="TANGENT" source="#tan" offset="1"/>
+        <input semantic="TEXBINORMAL" source="#bitan" offset="1"/>
+        <input semantic="COLOR" source="#col" offset="2"/>
+        <input semantic="TEXCOORD" source="#uv0" offset="3" set="0"/>
+        <vcount>3 4 5 3 3</vcount>
+        <p>
+          0 0 0 0  1 0 1 1  2 0 2 2
+          0 0 0 0  1 0 1 1  2 0 2 2  3 0 0 3
+          0 0 0 0  1 0 1 1  2 0 2 2  3 0 0 3  4 0 1 4
+          5 0 0 5  6 0 1 6  7 0 2 7
+          7 0 2 7  8 0 0 8  9 0 1 9
+        </p>
+      </polylist>
+    </mesh>
+  </geometry>
+</library_geometries>
+<library_visual_scenes>
+  <visual_scene id="Scene" name="Scene">
+    <node id="PolyNode" name="PolyNode" type="NODE">
+      <matrix sid="transform">1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</matrix>
+      <instance_geometry url="#mixpoly">
+        <bind_material><technique_common>
+          <instance_material symbol="mat" target="#mat"/>
+        </technique_common></bind_material>
+      </instance_geometry>
+    </node>
+  </visual_scene>
+</library_visual_scenes>
+<scene><instance_visual_scene url="#Scene"/></scene>
+</COLLADA>

@@ -1,0 +1,41 @@
+<mesh>
+  <sharedgeometry vertexcount="6">
+    <vertexbuffer positions="true" normals="true">
+      <vertex><position x="0" y="0" z="0"/><normal x="0" y="0" z="1"/></vertex>
+      <vertex><position x="1" y="0" z="0"/><normal x="0" y="0" z="1"/></vertex>
+      <vertex><position x="1" y="1" z="0"/><normal x="0" y="0" z="1"/></vertex>
+      <vertex><position x="0" y="1" z="0"/><normal x="0" y="0" z="1"/></vertex>
+      <vertex><position x="2" y="0" z="0"/><normal x="0" y="1" z="0"/></vertex>
+      <vertex><position x="2" y="1" z="0"/><normal x="0" y="1" z="0"/></vertex>
+    </vertexbuffer>
+  </sharedgeometry>
+  <submeshes>
+    <submesh material="MatA" usesharedvertices="true" operationtype="triangle_list">
+      <faces count="2">
+        <face v1="0" v2="1" v3="2"/>
+        <face v1="2" v2="3" v3="0"/>
+      </faces>
+    </submesh>
+    <submesh material="MatB" usesharedvertices="true" operationtype="triangle_list">
+      <faces count="1">
+        <face v1="1" v2="4" v3="5"/>
+      </faces>
+    </submesh>
+    <submesh material="MatC" usesharedvertices="true" operationtype="triangle_list">
+      <faces count="1">
+        <face v1="1" v2="5" v3="2"/>
+      </faces>
+    </submesh>
+  </submeshes>
+  <boneassignments>
+    <vertexboneassignment vertexindex="0" boneindex="0" weight="1.0"/>
+    <vertexboneassignment vertexindex="1" boneindex="0" weight="0.5"/>
+    <vertexboneassignment vertexindex="1" boneindex="1" weight="0.5"/>
+    <vertexboneassignment vertexindex="2" boneindex="1" weight="1.0"/>
+    <vertexboneassignment vertexindex="3" boneindex="0" weight="0.8"/>
+    <vertexboneassignment vertexindex="3" boneindex="1" weight="0.2"/>
+    <vertexboneassignment vertexindex="4" boneindex="1" weight="1.0"/>
+    <vertexboneassignment vertexindex="5" boneindex="1" weight="1.0"/>
+  </boneassignments>
+  <skeletonlink name="seed_skeleton.skeleton.xml"/>
+</mesh>

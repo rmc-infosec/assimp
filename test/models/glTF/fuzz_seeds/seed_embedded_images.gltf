@@ -1,0 +1,130 @@
+{
+  "asset": {
+    "generator": "seed-embedded-images",
+    "version": "1.0"
+  },
+  "extensionsUsed": ["KHR_materials_common"],
+  "scene": "scene0",
+  "scenes": {
+    "scene0": {
+      "nodes": ["mesh_node"]
+    }
+  },
+  "nodes": {
+    "mesh_node": {
+      "meshes": ["mesh0"],
+      "name": "TexturedMesh"
+    }
+  },
+  "meshes": {
+    "mesh0": {
+      "primitives": [{
+        "attributes": {
+          "POSITION": "acc_pos",
+          "TEXCOORD_0": "acc_uv"
+        },
+        "indices": "acc_idx",
+        "material": "mat_png",
+        "mode": 4
+      }, {
+        "attributes": {
+          "POSITION": "acc_pos",
+          "TEXCOORD_0": "acc_uv"
+        },
+        "indices": "acc_idx",
+        "material": "mat_jpg",
+        "mode": 4
+      }]
+    }
+  },
+  "accessors": {
+    "acc_pos": {
+      "bufferView": "bv_pos",
+      "byteOffset": 0,
+      "componentType": 5126,
+      "count": 3,
+      "type": "VEC3"
+    },
+    "acc_uv": {
+      "bufferView": "bv_uv",
+      "byteOffset": 0,
+      "componentType": 5126,
+      "count": 3,
+      "type": "VEC2"
+    },
+    "acc_idx": {
+      "bufferView": "bv_idx",
+      "byteOffset": 0,
+      "componentType": 5123,
+      "count": 3,
+      "type": "SCALAR"
+    }
+  },
+  "bufferViews": {
+    "bv_pos": {
+      "buffer": "buf0",
+      "byteOffset": 0,
+      "byteLength": 36
+    },
+    "bv_uv": {
+      "buffer": "buf0",
+      "byteOffset": 36,
+      "byteLength": 24
+    },
+    "bv_idx": {
+      "buffer": "buf0",
+      "byteOffset": 60,
+      "byteLength": 6
+    }
+  },
+  "buffers": {
+    "buf0": {
+      "uri": "data:application/octet-stream;base64,AAAAAAAAAAAAAAAAAACAPwAAAAAAAAAAAAAAAAAAgD8AAAAAAAAAAAAAAAAAAIA/AAAAAAAAAAAAAIA/AAABAAIA",
+      "byteLength": 66
+    }
+  },
+  "images": {
+    "img_png": {
+      "uri": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAADElEQVR4nGP4z8AAAAMBAQDJ/pLvAAAAAElFTkSuQmCC"
+    },
+    "img_jpg": {
+      "uri": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/wAALCAABAAEBAREA/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/9oACAEBAAA/AHuUEQAAAAD/2Q=="
+    }
+  },
+  "textures": {
+    "tex_png": {
+      "source": "img_png",
+      "sampler": "samp0"
+    },
+    "tex_jpg": {
+      "source": "img_jpg",
+      "sampler": "samp0"
+    }
+  },
+  "samplers": {
+    "samp0": {
+      "magFilter": 9729,
+      "minFilter": 9987,
+      "wrapS": 10497,
+      "wrapT": 10497
+    }
+  },
+  "materials": {
+    "mat_png": {
+      "values": {
+        "diffuse": "tex_png",
+        "specular": [1.0, 1.0, 1.0, 1.0],
+        "shininess": 32.0
+      }
+    },
+    "mat_jpg": {
+      "values": {
+        "diffuse": "tex_jpg",
+        "ambient": [0.1, 0.1, 0.1, 1.0],
+        "specular": [0.5, 0.5, 0.5, 1.0],
+        "shininess": 16.0,
+        "transparency": 0.9
+      }
+    }
+  }
+}

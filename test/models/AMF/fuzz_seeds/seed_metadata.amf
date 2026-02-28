@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<amf unit="meter" version="1.1">
+  <metadata type="name">MetadataSeed</metadata>
+  <metadata type="author">FuzzGen Author</metadata>
+  <metadata type="description">A comprehensive metadata test file</metadata>
+  <metadata type="url">http://example.com/amf</metadata>
+  <metadata type="cad">TestCAD 1.0</metadata>
+  <metadata type="revision">42</metadata>
+  <metadata type="tolerance">0.001</metadata>
+  <metadata type="custom1">CustomValue1</metadata>
+  <metadata type="custom2">CustomValue2</metadata>
+  <material id="1">
+    <metadata type="name">MetaMaterial1</metadata>
+    <metadata type="density">2700</metadata>
+    <metadata type="supplier">TestSupplier</metadata>
+    <color><r>0.7</r><g>0.7</g><b>0.7</b><a>1.0</a></color>
+  </material>
+  <material id="2">
+    <metadata type="name">MetaMaterial2</metadata>
+    <metadata type="density">7800</metadata>
+    <metadata type="elasticity">200e9</metadata>
+    <color><r>0.3</r><g>0.3</g><b>0.9</b><a>1.0</a></color>
+  </material>
+  <object id="1">
+    <metadata type="name">AnnotatedObject</metadata>
+    <metadata type="description">An object with lots of metadata</metadata>
+    <metadata type="part_number">PN-12345</metadata>
+    <metadata type="weight">1.5kg</metadata>
+    <metadata type="material_spec">ISO 9001</metadata>
+    <mesh>
+      <vertices>
+        <vertex><coordinates><x>0</x><y>0</y><z>0</z></coordinates></vertex>
+        <vertex><coordinates><x>1</x><y>0</y><z>0</z></coordinates></vertex>
+        <vertex><coordinates><x>0</x><y>1</y><z>0</z></coordinates></vertex>
+        <vertex><coordinates><x>0</x><y>0</y><z>1</z></coordinates></vertex>
+        <vertex><coordinates><x>1</x><y>1</y><z>0</z></coordinates></vertex>
+        <vertex><coordinates><x>1</x><y>0</y><z>1</z></coordinates></vertex>
+      </vertices>
+      <volume materialid="1">
+        <metadata type="name">AnnotatedVolume1</metadata>
+        <metadata type="process">SLM</metadata>
+        <metadata type="layer_thickness">0.03</metadata>
+        <triangle><v1>0</v1><v2>1</v2><v3>2</v3></triangle>
+        <triangle><v1>0</v1><v2>1</v2><v3>3</v3></triangle>
+      </volume>
+      <volume materialid="2">
+        <metadata type="name">AnnotatedVolume2</metadata>
+        <metadata type="process">FDM</metadata>
+        <triangle><v1>1</v1><v2>4</v2><v3>2</v3></triangle>
+        <triangle><v1>1</v1><v2>5</v2><v3>3</v3></triangle>
+      </volume>
+    </mesh>
+  </object>
+  <object id="2">
+    <metadata type="name">SecondAnnotatedObject</metadata>
+    <metadata type="serial">SN-99999</metadata>
+    <mesh>
+      <vertices>
+        <vertex><coordinates><x>-1</x><y>-1</y><z>0</z></coordinates></vertex>
+        <vertex><coordinates><x>1</x><y>-1</y><z>0</z></coordinates></vertex>
+        <vertex><coordinates><x>0</x><y>1</y><z>0</z></coordinates></vertex>
+      </vertices>
+      <volume>
+        <metadata type="name">SimpleVolume</metadata>
+        <triangle><v1>0</v1><v2>1</v2><v3>2</v3></triangle>
+      </volume>
+    </mesh>
+  </object>
+  <constellation id="1">
+    <metadata type="name">MetaConstellation</metadata>
+    <metadata type="assembly">Assembly1</metadata>
+    <instance objectid="1">
+      <deltax>0</deltax><deltay>0</deltay><deltaz>0</deltaz>
+      <rx>0</rx><ry>0</ry><rz>0</rz>
+    </instance>
+    <instance objectid="2">
+      <deltax>5</deltax><deltay>0</deltay><deltaz>0</deltaz>
+      <rx>0</rx><ry>0</ry><rz>0</rz>
+    </instance>
+  </constellation>
+</amf>

@@ -1,0 +1,122 @@
+{
+  "asset": {
+    "generator": "seed",
+    "version": "1.0",
+    "copyright": "Test"
+  },
+  "scene": "scene0",
+  "scenes": {
+    "scene0": {
+      "nodes": ["node0"]
+    }
+  },
+  "nodes": {
+    "node0": {
+      "meshes": ["mesh0"],
+      "name": "EmbedNode"
+    }
+  },
+  "meshes": {
+    "mesh0": {
+      "primitives": [{
+        "attributes": {
+          "POSITION": "acc_pos",
+          "NORMAL": "acc_norm",
+          "TEXCOORD_0": "acc_tc"
+        },
+        "indices": "acc_idx",
+        "material": "mat0",
+        "mode": 4
+      }]
+    }
+  },
+  "accessors": {
+    "acc_pos": {
+      "bufferView": "bv_pos",
+      "byteOffset": 0,
+      "componentType": 5126,
+      "count": 4,
+      "type": "VEC3"
+    },
+    "acc_norm": {
+      "bufferView": "bv_norm",
+      "byteOffset": 0,
+      "componentType": 5126,
+      "count": 4,
+      "type": "VEC3"
+    },
+    "acc_idx": {
+      "bufferView": "bv_idx",
+      "byteOffset": 0,
+      "componentType": 5123,
+      "count": 6,
+      "type": "SCALAR"
+    },
+    "acc_tc": {
+      "bufferView": "bv_tc",
+      "byteOffset": 0,
+      "componentType": 5126,
+      "count": 4,
+      "type": "VEC2"
+    }
+  },
+  "bufferViews": {
+    "bv_pos": {
+      "buffer": "buf0",
+      "byteOffset": 0,
+      "byteLength": 48
+    },
+    "bv_norm": {
+      "buffer": "buf0",
+      "byteOffset": 48,
+      "byteLength": 48
+    },
+    "bv_idx": {
+      "buffer": "buf0",
+      "byteOffset": 96,
+      "byteLength": 12
+    },
+    "bv_tc": {
+      "buffer": "buf0",
+      "byteOffset": 108,
+      "byteLength": 32
+    }
+  },
+  "buffers": {
+    "buf0": {
+      "uri": "data:application/octet-stream;base64,AAAAAAAAAAAAAAAAAACAPwAAAAAAAAAAAACAPwAAgD8AAAAAAAAAAAAAgD8AAAAAAAAAAAAAAAAAAIA/AAAAAAAAAAAAAIA/AAAAAAAAAAAAAIA/AAAAAAAAAAAAAIA/AAABAAIAAgADAAAAAAAAAAAAAAAAAIA/AAAAAAAAgD8AAIA/AAAAAAAAgD8=",
+      "byteLength": 140
+    }
+  },
+  "materials": {
+    "mat0": {
+      "values": {
+        "diffuse": "tex0",
+        "ambient": [0.2, 0.2, 0.2, 1.0]
+      }
+    }
+  },
+  "textures": {
+    "tex0": {
+      "source": "img0",
+      "sampler": "samp0",
+      "format": 6408,
+      "internalFormat": 6408,
+      "target": 3553,
+      "type": 5121
+    }
+  },
+  "images": {
+    "img0": {
+      "uri": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg=="
+    }
+  },
+  "samplers": {
+    "samp0": {
+      "magFilter": 9729,
+      "minFilter": 9987,
+      "wrapS": 10497,
+      "wrapT": 10497
+    }
+  }
+}

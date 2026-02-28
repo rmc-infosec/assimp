@@ -180,31 +180,39 @@ void MDLImporter::CreateTexture_3DGS_MDL4(const unsigned char *szData,
     const bool bNoRead = *piSkip == UINT_MAX;
 
     // allocate a new texture object
-    aiTexture *pcNew = new aiTexture();
+    auto pcNew = std::unique_ptr<aiTexture>(new aiTexture());
     pcNew->mWidth = pcHeader->skinwidth;
     pcNew->mHeight = pcHeader->skinheight;
 
-    if (bNoRead) pcNew->pcData = bad_texel;
-    ParseTextureColorData(szData, iType, piSkip, pcNew);
+    if (bNoRead) {
+        pcNew->pcData = bad_texel;
+    }
+    try {
+        ParseTextureColorData(szData, iType, piSkip, pcNew.get());
+    } catch (...) {
+        if (bNoRead) {
+            pcNew->pcData = nullptr;
+        }
+        throw;
+    }
 
     // store the texture
     if (!bNoRead) {
         if (!this->pScene->mNumTextures) {
             pScene->mNumTextures = 1;
             pScene->mTextures = new aiTexture *[1];
-            pScene->mTextures[0] = pcNew;
+            pScene->mTextures[0] = pcNew.release();
         } else {
             aiTexture **pc = pScene->mTextures;
             pScene->mTextures = new aiTexture *[pScene->mNumTextures + 1];
             for (unsigned int i = 0; i < this->pScene->mNumTextures; ++i)
                 pScene->mTextures[i] = pc[i];
-            pScene->mTextures[pScene->mNumTextures] = pcNew;
+            pScene->mTextures[pScene->mNumTextures] = pcNew.release();
             pScene->mNumTextures++;
             delete[] pc;
         }
     } else {
         pcNew->pcData = nullptr;
-        delete pcNew;
     }
     return;
 }
@@ -379,7 +387,7 @@ void MDLImporter::CreateTexture_3DGS_MDL5(const unsigned char *szData,
     bool bNoRead = *piSkip == UINT_MAX;
 
     // allocate a new texture object
-    aiTexture *pcNew = new aiTexture();
+    auto pcNew = std::unique_ptr<aiTexture>(new aiTexture());
 
     VALIDATE_FILE_SIZE(szData + 8);
 
@@ -418,7 +426,14 @@ void MDLImporter::CreateTexture_3DGS_MDL5(const unsigned char *szData,
         }
     } else {
         // parse the color data of the texture
-        ParseTextureColorData(szData, iType, piSkip, pcNew);
+        try {
+            ParseTextureColorData(szData, iType, piSkip, pcNew.get());
+        } catch (...) {
+            if (bNoRead) {
+                pcNew->pcData = nullptr;
+            }
+            throw;
+        }
     }
     *piSkip += sizeof(uint32_t) * 2;
 
@@ -427,20 +442,19 @@ void MDLImporter::CreateTexture_3DGS_MDL5(const unsigned char *szData,
         if (!this->pScene->mNumTextures) {
             pScene->mNumTextures = 1;
             pScene->mTextures = new aiTexture *[1];
-            pScene->mTextures[0] = pcNew;
+            pScene->mTextures[0] = pcNew.release();
         } else {
             aiTexture **pc = pScene->mTextures;
             pScene->mTextures = new aiTexture *[pScene->mNumTextures + 1];
             for (unsigned int i = 0; i < pScene->mNumTextures; ++i)
                 this->pScene->mTextures[i] = pc[i];
 
-            pScene->mTextures[pScene->mNumTextures] = pcNew;
+            pScene->mTextures[pScene->mNumTextures] = pcNew.release();
             pScene->mNumTextures++;
             delete[] pc;
         }
     } else {
         pcNew->pcData = nullptr;
-        delete pcNew;
     }
     return;
 }

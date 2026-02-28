@@ -1,0 +1,7 @@
+#VRML V2.0 utf8
+
+EXTERNPROTO Tree [
+  field SFFloat height
+  field SFColor trunkColor
+] "trees.wrl#Tree"
+Tree { height 5.0 trunkColor 0.4 0.2 0.1 }

@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<mesh xmlns="http://irrlicht.sourceforge.net/IRRMESH_09_2007" version="1.0">
+
+  <!-- Buffer 1: standard vertices (pos, normal, color, uv) -->
+  <buffer material="solid" boundingBox="-1 -1 -1 1 1 -0.5">
+    <material Ambient="ff800000" Diffuse="ffff0000" Specular="ffffffff" Emissive="ff000000"
+      Shininess="16" Type="solid" Wireframe="false" Lighting="true"
+      BackfaceCulling="true" Texture1="red_diffuse.png"/>
+    <vertices type="standard" vertexCount="4">
+      -1 -1 -1 0 0 -1 ffff0000 0 1
+      1 -1 -1 0 0 -1 ffff0000 1 1
+      1 1 -1 0 0 -1 ffff0000 1 0
+      -1 1 -1 0 0 -1 ffff0000 0 0
+    </vertices>
+    <indices indexCount="6">0 1 2 0 2 3</indices>
+  </buffer>
+
+  <!-- Buffer 2: lightmap vertices (pos, normal, color, uv1, uv2) -->
+  <buffer material="lightmap" boundingBox="-2 -2 0 2 2 0">
+    <material Ambient="ff404040" Diffuse="ffaaaaaa" Specular="ffffffff" Emissive="ff000000"
+      Shininess="10" Type="lightmap"
+      Texture1="color.png" Texture2="lightmap.png"
+      BilinearFilter1="true" BilinearFilter2="true"
+      Wireframe="false" Lighting="true" BackfaceCulling="true"/>
+    <vertices type="2tcoords" vertexCount="4">
+      -2 -2 0 0 0 -1 ffffffff 0 1 0 1
+      2 -2 0 0 0 -1 ffffffff 1 1 1 1
+      2 2 0 0 0 -1 ffffffff 1 0 1 0
+      -2 2 0 0 0 -1 ffffffff 0 0 0 0
+    </vertices>
+    <indices indexCount="6">0 1 2 0 2 3</indices>
+  </buffer>
+
+  <!-- Buffer 3: tangent vertices (pos, normal, color, uv, tangent, binormal) -->
+  <buffer material="normalmap_solid" boundingBox="-1 -1 1 1 1 1">
+    <material Ambient="ff404040" Diffuse="ff808080" Specular="ffffffff" Emissive="ff000000"
+      Shininess="32" Type="normalmap_solid"
+      Texture1="diffuse.png" Texture2="normal.png"
+      Wireframe="false" Lighting="true" BackfaceCulling="true"/>
+    <vertices type="tangents" vertexCount="4">
+      -1 -1 1 0 0 1 ffffffff 0 1 1 0 0 0 1 0
+      1 -1 1 0 0 1 ffffffff 1 1 1 0 0 0 1 0
+      1 1 1 0 0 1 ffffffff 1 0 1 0 0 0 1 0
+      -1 1 1 0 0 1 ffffffff 0 0 1 0 0 0 1 0
+    </vertices>
+    <indices indexCount="6">0 1 2 0 2 3</indices>
+  </buffer>
+
+  <!-- Buffer 4: another standard buffer with different material type -->
+  <buffer material="transparent_alpha_channel" boundingBox="-0.5 -0.5 -0.5 0.5 0.5 0.5">
+    <material Ambient="ff008000" Diffuse="8800ff00" Specular="ffffffff" Emissive="ff000000"
+      Shininess="8" Type="transparent_alpha_channel"
+      Wireframe="false" Lighting="false" BackfaceCulling="false"/>
+    <vertices type="standard" vertexCount="3">
+      0 0.5 0 0 0 -1 8800ff00 0.5 0
+      -0.5 -0.5 0 0 0 -1 8800ff00 0 1
+      0.5 -0.5 0 0 0 -1 8800ff00 1 1
+    </vertices>
+    <indices indexCount="3">0 1 2</indices>
+  </buffer>
+
+</mesh>

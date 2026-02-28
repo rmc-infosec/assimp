@@ -588,13 +588,15 @@ inline void Buffer::Read(Value &obj, Asset &r) {
     if (ParseDataURI(uri, it->GetStringLength(), dataURI)) {
         if (dataURI.base64) {
             uint8_t *data = nullptr;
-            this->byteLength = Base64::Decode(dataURI.data, dataURI.dataLength, data);
-            this->mData.reset(data, std::default_delete<uint8_t[]>());
+            const size_t decodedLength = Base64::Decode(dataURI.data, dataURI.dataLength, data);
+            std::unique_ptr<uint8_t[]> decoded(data);
+            this->byteLength = decodedLength;
 
-            if (statedLength > 0 && this->byteLength != statedLength) {
+            if (statedLength > 0 && decodedLength != statedLength) {
                 throw DeadlyImportError("GLTF: buffer \"", id, "\", expected ", ai_to_string(statedLength),
                         " bytes, but found ", ai_to_string(dataURI.dataLength));
             }
+            this->mData.reset(decoded.release(), std::default_delete<uint8_t[]>());
         } else { // assume raw data
             if (statedLength != dataURI.dataLength) {
                 throw DeadlyImportError("GLTF: buffer \"", id, "\", expected ", ai_to_string(statedLength),
@@ -1135,8 +1137,10 @@ inline void Image::Read(Value &obj, Asset &r) {
                 mimeType = dataURI.mediaType;
                 if (dataURI.base64) {
                     uint8_t *ptr = nullptr;
-                    mDataLength = Base64::Decode(dataURI.data, dataURI.dataLength, ptr);
-                    mData.reset(ptr);
+                    const size_t decodedLength = Base64::Decode(dataURI.data, dataURI.dataLength, ptr);
+                    std::unique_ptr<uint8_t[]> decoded(ptr);
+                    mDataLength = decodedLength;
+                    mData = std::move(decoded);
                 }
             } else {
                 this->uri = uristr;
@@ -1924,6 +1928,22 @@ inline void Asset::ReadBinaryHeader(IOStream &stream, std::vector<char> &sceneDa
         throw DeadlyImportError("GLTF: Unsupported binary glTF version");
     }
 
+    const size_t fileSize = stream.FileSize();
+    const size_t headerSize = sizeof(GLB_Header);
+    const size_t chunkHeaderSize = sizeof(GLB_Chunk);
+    if (fileSize < headerSize + chunkHeaderSize) {
+        throw DeadlyImportError("GLTF: File too small for GLB header");
+    }
+
+    AI_SWAP4(header.length);
+    const size_t declaredLength = static_cast<size_t>(header.length);
+    if (declaredLength < headerSize + chunkHeaderSize) {
+        throw DeadlyImportError("GLTF: Invalid GLB length");
+    }
+    if (declaredLength > fileSize) {
+        throw DeadlyImportError("GLTF: Declared GLB length exceeds file size");
+    }
+
     GLB_Chunk chunk;
     if (stream.Read(&chunk, sizeof(chunk), 1) != 1) {
         throw DeadlyImportError("GLTF: Unable to read JSON chunk");
@@ -1934,6 +1954,17 @@ inline void Asset::ReadBinaryHeader(IOStream &stream, std::vector<char> &sceneDa
 
     if (chunk.chunkType != ChunkType_JSON) {
         throw DeadlyImportError("GLTF: JSON chunk missing");
+    }
+
+    const size_t jsonOffset = static_cast<size_t>(stream.Tell());
+    if (jsonOffset > declaredLength) {
+        throw DeadlyImportError("GLTF: Invalid JSON chunk offset");
+    }
+    if (static_cast<size_t>(chunk.chunkLength) > declaredLength - jsonOffset) {
+        throw DeadlyImportError("GLTF: JSON chunk length exceeds GLB length");
+    }
+    if (static_cast<size_t>(chunk.chunkLength) > fileSize - jsonOffset) {
+        throw DeadlyImportError("GLTF: JSON chunk length exceeds file size");
     }
 
     // read the scene data, ensure null termination
@@ -1951,7 +1982,6 @@ inline void Asset::ReadBinaryHeader(IOStream &stream, std::vector<char> &sceneDa
         stream.Seek(padding, aiOrigin_CUR);
     }
 
-    AI_SWAP4(header.length);
     mBodyOffset = 12 + 8 + chunk.chunkLength + padding + 8;
     if (header.length >= mBodyOffset) {
         if (stream.Read(&chunk, sizeof(chunk), 1) != 1) {

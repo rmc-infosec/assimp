@@ -1,0 +1,308 @@
+  0
+SECTION
+  2
+HEADER
+  0
+ENDSEC
+  0
+SECTION
+  2
+ENTITIES
+  0
+3DFACE
+  8
+TriLayer
+ 62
+3
+ 10
+0.0
+ 20
+0.0
+ 30
+0.0
+ 11
+10.0
+ 21
+0.0
+ 31
+0.0
+ 12
+5.0
+ 22
+8.66
+ 32
+0.0
+ 13
+5.0
+ 23
+8.66
+ 33
+0.0
+  0
+3DFACE
+  8
+TriLayer
+ 62
+5
+ 10
+0.0
+ 20
+0.0
+ 30
+0.0
+ 11
+5.0
+ 21
+8.66
+ 31
+0.0
+ 12
+-5.0
+ 22
+8.66
+ 32
+0.0
+ 13
+-5.0
+ 23
+8.66
+ 33
+0.0
+  0
+3DFACE
+  8
+QuadLayer
+ 62
+1
+ 10
+0.0
+ 20
+0.0
+ 30
+5.0
+ 11
+10.0
+ 21
+0.0
+ 31
+5.0
+ 12
+10.0
+ 22
+10.0
+ 32
+5.0
+ 13
+0.0
+ 23
+10.0
+ 33
+5.0
+  0
+LINE
+  8
+LineLayer
+ 62
+2
+ 10
+0.0
+ 20
+0.0
+ 30
+0.0
+ 11
+20.0
+ 21
+20.0
+ 31
+20.0
+  0
+POLYLINE
+  8
+PolyLayer
+ 66
+1
+ 70
+64
+ 71
+4
+ 72
+2
+  0
+VERTEX
+  8
+PolyLayer
+ 10
+0.0
+ 20
+0.0
+ 30
+0.0
+ 70
+192
+  0
+VERTEX
+  8
+PolyLayer
+ 10
+10.0
+ 20
+0.0
+ 30
+0.0
+ 70
+192
+  0
+VERTEX
+  8
+PolyLayer
+ 10
+10.0
+ 20
+10.0
+ 30
+0.0
+ 70
+192
+  0
+VERTEX
+  8
+PolyLayer
+ 10
+0.0
+ 20
+10.0
+ 30
+0.0
+ 70
+192
+  0
+VERTEX
+  8
+PolyLayer
+ 70
+128
+ 71
+1
+ 72
+2
+ 73
+3
+  0
+VERTEX
+  8
+PolyLayer
+ 70
+128
+ 71
+3
+ 72
+4
+ 73
+1
+  0
+SEQEND
+  0
+POLYLINE
+  8
+OpenPolyLayer
+ 66
+1
+ 70
+0
+  0
+VERTEX
+  8
+OpenPolyLayer
+ 10
+0.0
+ 20
+0.0
+ 30
+10.0
+  0
+VERTEX
+  8
+OpenPolyLayer
+ 10
+5.0
+ 20
+5.0
+ 30
+10.0
+  0
+VERTEX
+  8
+OpenPolyLayer
+ 10
+10.0
+ 20
+0.0
+ 30
+10.0
+  0
+VERTEX
+  8
+OpenPolyLayer
+ 10
+15.0
+ 20
+5.0
+ 30
+10.0
+  0
+SEQEND
+  0
+POLYLINE
+  8
+ClosedPolyLayer
+ 66
+1
+ 70
+1
+  0
+VERTEX
+  8
+ClosedPolyLayer
+ 10
+-5.0
+ 20
+-5.0
+ 30
+0.0
+  0
+VERTEX
+  8
+ClosedPolyLayer
+ 10
+5.0
+ 20
+-5.0
+ 30
+0.0
+  0
+VERTEX
+  8
+ClosedPolyLayer
+ 10
+5.0
+ 20
+5.0
+ 30
+0.0
+  0
+VERTEX
+  8
+ClosedPolyLayer
+ 10
+-5.0
+ 20
+5.0
+ 30
+0.0
+  0
+SEQEND
+  0
+ENDSEC
+  0
+EOF

@@ -60,6 +60,9 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #ifdef __cplusplus
 #include <unordered_set>
+#endif
+
+#ifdef __cplusplus
 
 extern "C" {
 #endif
@@ -1174,4 +1177,3 @@ struct aiSkeleton {
 #endif //! extern "C"
 
 #endif // AI_MESH_H_INC
-

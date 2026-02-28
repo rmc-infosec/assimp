@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<X3D profile="Interchange" version="3.3">
+  <Scene>
+    <TimeSensor DEF="Timer" cycleInterval="4" loop="true"/>
+    <PositionInterpolator DEF="PosInt" key="0 0.5 1" keyValue="0 0 0, 0 2 0, 0 0 0"/>
+    <OrientationInterpolator DEF="OriInt" key="0 0.5 1" keyValue="0 1 0 0, 0 1 0 3.14, 0 1 0 6.28"/>
+    <ROUTE fromNode="Timer" fromField="fraction_changed" toNode="PosInt" toField="set_fraction"/>
+    <Transform DEF="AnimatedBox" translation="0 0 0">
+      <Shape>
+        <Appearance><Material diffuseColor="1 0.5 0"/></Appearance>
+        <Box size="1 1 1"/>
+      </Shape>
+    </Transform>
+  </Scene>
+</X3D>

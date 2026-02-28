@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mesh>
+  <sharedgeometry vertexcount="8">
+    <vertexbuffer positions="true" normals="true" tangents="true" texture_coords="1">
+      <vertex>
+        <position x="-0.5" y="0" z="-0.5"/>
+        <normal x="-0.577" y="-0.577" z="-0.577"/>
+        <tangent x="1" y="0" z="0"/>
+        <texcoord u="0" v="0"/>
+      </vertex>
+      <vertex>
+        <position x="0.5" y="0" z="-0.5"/>
+        <normal x="0.577" y="-0.577" z="-0.577"/>
+        <tangent x="1" y="0" z="0"/>
+        <texcoord u="1" v="0"/>
+      </vertex>
+      <vertex>
+        <position x="0.5" y="1" z="-0.5"/>
+        <normal x="0.577" y="0.577" z="-0.577"/>
+        <tangent x="1" y="0" z="0"/>
+        <texcoord u="1" v="0.33"/>
+      </vertex>
+      <vertex>
+        <position x="-0.5" y="1" z="-0.5"/>
+        <normal x="-0.577" y="0.577" z="-0.577"/>
+        <tangent x="1" y="0" z="0"/>
+        <texcoord u="0" v="0.33"/>
+      </vertex>
+      <vertex>
+        <position x="-0.5" y="2" z="-0.5"/>
+        <normal x="-0.577" y="0.577" z="-0.577"/>
+        <tangent x="1" y="0" z="0"/>
+        <texcoord u="0" v="0.66"/>
+      </vertex>
+      <vertex>
+        <position x="0.5" y="2" z="-0.5"/>
+        <normal x="0.577" y="0.577" z="-0.577"/>
+        <tangent x="1" y="0" z="0"/>
+        <texcoord u="1" v="0.66"/>
+      </vertex>
+      <vertex>
+        <position x="0.5" y="3" z="-0.5"/>
+        <normal x="0.577" y="0.577" z="-0.577"/>
+        <tangent x="1" y="0" z="0"/>
+        <texcoord u="1" v="1"/>
+      </vertex>
+      <vertex>
+        <position x="-0.5" y="3" z="-0.5"/>
+        <normal x="-0.577" y="0.577" z="-0.577"/>
+        <tangent x="1" y="0" z="0"/>
+        <texcoord u="0" v="1"/>
+      </vertex>
+    </vertexbuffer>
+  </sharedgeometry>
+  <submeshes>
+    <submesh material="LowerBody" usesharedvertices="true" operationtype="triangle_list">
+      <faces count="2">
+        <face v1="0" v2="1" v3="2"/>
+        <face v1="2" v2="3" v3="0"/>
+      </faces>
+    </submesh>
+    <submesh material="UpperBody" usesharedvertices="true" operationtype="triangle_list">
+      <faces count="4">
+        <face v1="2" v2="3" v3="4"/>
+        <face v1="4" v2="5" v3="2"/>
+        <face v1="4" v2="5" v3="6"/>
+        <face v1="6" v2="7" v3="4"/>
+      </faces>
+    </submesh>
+  </submeshes>
+  <boneassignments>
+    <vertexboneassignment vertexindex="0" boneindex="0" weight="1.0"/>
+    <vertexboneassignment vertexindex="1" boneindex="0" weight="1.0"/>
+    <vertexboneassignment vertexindex="2" boneindex="0" weight="0.6"/>
+    <vertexboneassignment vertexindex="2" boneindex="1" weight="0.4"/>
+    <vertexboneassignment vertexindex="3" boneindex="0" weight="0.6"/>
+    <vertexboneassignment vertexindex="3" boneindex="1" weight="0.4"/>
+    <vertexboneassignment vertexindex="4" boneindex="1" weight="0.8"/>
+    <vertexboneassignment vertexindex="4" boneindex="2" weight="0.2"/>
+    <vertexboneassignment vertexindex="5" boneindex="1" weight="0.8"/>
+    <vertexboneassignment vertexindex="5" boneindex="2" weight="0.2"/>
+    <vertexboneassignment vertexindex="6" boneindex="2" weight="1.0"/>
+    <vertexboneassignment vertexindex="7" boneindex="2" weight="1.0"/>
+  </boneassignments>
+  <skeletonlink name="seed_skeleton_anim.skeleton.xml"/>
+</mesh>

@@ -1,0 +1,108 @@
+{
+  "asset": {
+    "generator": "seed",
+    "version": "1.0"
+  },
+  "extensionsUsed": ["KHR_materials_common"],
+  "scene": "scene0",
+  "scenes": {
+    "scene0": {
+      "nodes": ["node0"]
+    }
+  },
+  "nodes": {
+    "node0": {
+      "meshes": ["mesh0"],
+      "name": "MatNode"
+    }
+  },
+  "meshes": {
+    "mesh0": {
+      "primitives": [{
+        "attributes": {
+          "POSITION": "acc_pos",
+          "NORMAL": "acc_norm"
+        },
+        "indices": "acc_idx",
+        "material": "mat_blinn",
+        "mode": 4
+      }]
+    }
+  },
+  "accessors": {
+    "acc_pos": {
+      "bufferView": "bv_pos",
+      "byteOffset": 0,
+      "componentType": 5126,
+      "count": 3,
+      "type": "VEC3"
+    },
+    "acc_norm": {
+      "bufferView": "bv_norm",
+      "byteOffset": 0,
+      "componentType": 5126,
+      "count": 3,
+      "type": "VEC3"
+    },
+    "acc_idx": {
+      "bufferView": "bv_idx",
+      "byteOffset": 0,
+      "componentType": 5123,
+      "count": 3,
+      "type": "SCALAR"
+    }
+  },
+  "bufferViews": {
+    "bv_pos": {
+      "buffer": "buf0",
+      "byteOffset": 0,
+      "byteLength": 36
+    },
+    "bv_norm": {
+      "buffer": "buf0",
+      "byteOffset": 36,
+      "byteLength": 36
+    },
+    "bv_idx": {
+      "buffer": "buf0",
+      "byteOffset": 72,
+      "byteLength": 6
+    }
+  },
+  "buffers": {
+    "buf0": {
+      "uri": "data:application/octet-stream;base64,AAAAAAAAAAAAAAAAAACAPwAAAAAAAAAAAAAAAAAAgD8AAAAAAAAAAAAAAAAAAIA/AAAAAAAAAAAAAIA/AAAAAAAAAAAAAIA/AAABAAIA",
+      "byteLength": 78
+    }
+  },
+  "materials": {
+    "mat_blinn": {
+      "extensions": {
+        "KHR_materials_common": {
+          "technique": "BLINN",
+          "values": {
+            "ambient": [0.1, 0.1, 0.1, 1.0],
+            "diffuse": [0.8, 0.2, 0.1, 1.0],
+            "specular": [1.0, 1.0, 1.0, 1.0],
+            "shininess": 64.0,
+            "transparency": 1.0,
+            "transparent": false,
+            "doubleSided": false
+          }
+        }
+      }
+    }
+  },
+  "extensions": {
+    "KHR_materials_common": {
+      "lights": {
+        "light0": {
+          "type": "directional",
+          "directional": {
+            "color": [1.0, 1.0, 1.0]
+          }
+        }
+      }
+    }
+  }
+}

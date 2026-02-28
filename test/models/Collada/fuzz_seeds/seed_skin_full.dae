@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1">
+<asset><created>2026-01-01</created><modified>2026-01-01</modified></asset>
+<library_geometries>
+  <geometry id="skinGeo" name="SkinMesh">
+    <mesh>
+      <source id="sp">
+        <float_array id="spa" count="18">0 0 0 1 0 0 1 1 0 0 1 0 0 2 0 1 2 0</float_array>
+        <technique_common><accessor source="#spa" count="6" stride="3">
+          <param name="X" type="float"/><param name="Y" type="float"/><param name="Z" type="float"/>
+        </accessor></technique_common>
+      </source>
+      <source id="sn">
+        <float_array id="sna" count="3">0 0 1</float_array>
+        <technique_common><accessor source="#sna" count="1" stride="3">
+          <param name="X" type="float"/><param name="Y" type="float"/><param name="Z" type="float"/>
+        </accessor></technique_common>
+      </source>
+      <vertices id="sv"><input semantic="POSITION" source="#sp"/></vertices>
+      <triangles count="4" material="skinMat">
+        <input semantic="VERTEX" source="#sv" offset="0"/>
+        <input semantic="NORMAL" source="#sn" offset="1"/>
+        <p>0 0 1 0 2 0 0 0 2 0 3 0 3 0 4 0 5 0 3 0 5 0 2 0</p>
+      </triangles>
+    </mesh>
+  </geometry>
+</library_geometries>
+<library_controllers>
+  <controller id="skinCtrl">
+    <skin source="#skinGeo">
+      <bind_shape_matrix>1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</bind_shape_matrix>
+      <source id="jn">
+        <Name_array id="jna" count="3">Root Bone1 Bone2</Name_array>
+        <technique_common><accessor source="#jna" count="3" stride="1">
+          <param name="JOINT" type="name"/>
+        </accessor></technique_common>
+      </source>
+      <source id="ibm">
+        <float_array id="ibma" count="48">
+          1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1
+          1 0 0 0 0 1 0 -1 0 0 1 0 0 0 0 1
+          1 0 0 0 0 1 0 -2 0 0 1 0 0 0 0 1
+        </float_array>
+        <technique_common><accessor source="#ibma" count="3" stride="16">
+          <param name="TRANSFORM" type="float4x4"/>
+        </accessor></technique_common>
+      </source>
+      <source id="sw">
+        <float_array id="swa" count="5">1.0 0.5 0.5 0.7 0.3</float_array>
+        <technique_common><accessor source="#swa" count="5" stride="1">
+          <param name="WEIGHT" type="float"/>
+        </accessor></technique_common>
+      </source>
+      <joints>
+        <input semantic="JOINT" source="#jn"/>
+        <input semantic="INV_BIND_MATRIX" source="#ibm"/>
+      </joints>
+      <vertex_weights count="6">
+        <input semantic="JOINT" source="#jn" offset="0"/>
+        <input semantic="WEIGHT" source="#sw" offset="1"/>
+        <vcount>1 1 2 2 1 1</vcount>
+        <v>0 0 0 0 0 1 1 2 1 1 0 3 2 4 2 4</v>
+      </vertex_weights>
+    </skin>
+  </controller>
+</library_controllers>
+<library_effects>
+  <effect id="fx"><profile_COMMON><technique sid="common">
+    <phong>
+      <diffuse><color>0.6 0.6 0.8 1</color></diffuse>
+      <specular><color>1 1 1 1</color></specular>
+      <shininess><float>20</float></shininess>
+    </phong>
+  </technique></profile_COMMON></effect>
+</library_effects>
+<library_materials>
+  <material id="skinMaterial"><instance_effect url="#fx"/></material>
+</library_materials>
+<library_animations>
+  <animation id="bone1Anim" name="Bone1Rotate">
+    <source id="b1t"><float_array id="b1ta" count="3">0 0.5 1</float_array>
+      <technique_common><accessor source="#b1ta" count="3" stride="1">
+        <param name="TIME" type="float"/>
+      </accessor></technique_common></source>
+    <source id="b1v"><float_array id="b1va" count="12">1 0 0 0 1 0 0 45 1 0 0 90</float_array>
+      <technique_common><accessor source="#b1va" count="3" stride="4">
+        <param name="X" type="float"/><param name="Y" type="float"/><param name="Z" type="float"/><param name="ANGLE" type="float"/>
+      </accessor></technique_common></source>
+    <sampler id="b1s">
+      <input semantic="INPUT" source="#b1t"/>
+      <input semantic="OUTPUT" source="#b1v"/>
+    </sampler>
+    <channel source="#b1s" target="Bone1/rotateX"/>
+  </animation>
+</library_animations>
+<library_visual_scenes>
+  <visual_scene id="Scene" name="Scene">
+    <node id="Root" sid="Root" name="Root" type="JOINT">
+      <matrix sid="transform">1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</matrix>
+      <node id="Bone1" sid="Bone1" name="Bone1" type="JOINT">
+        <translate sid="translate">0 1 0</translate>
+        <rotate sid="rotateX">1 0 0 0</rotate>
+        <node id="Bone2" sid="Bone2" name="Bone2" type="JOINT">
+          <translate sid="translate">0 1 0</translate>
+        </node>
+      </node>
+    </node>
+    <node id="SkinNode" name="SkinNode" type="NODE">
+      <matrix sid="transform">1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</matrix>
+      <instance_controller url="#skinCtrl">
+        <skeleton>#Root</skeleton>
+        <bind_material><technique_common>
+          <instance_material symbol="skinMat" target="#skinMaterial">
+            <bind_vertex_input semantic="UVSet0" input_semantic="TEXCOORD" input_set="0"/>
+          </instance_material>
+        </technique_common></bind_material>
+      </instance_controller>
+    </node>
+  </visual_scene>
+</library_visual_scenes>
+<scene><instance_visual_scene url="#Scene"/></scene>
+</COLLADA>

@@ -1,0 +1,29 @@
+<mesh>
+  <submeshes>
+    <submesh material="GridMat" usesharedvertices="false" operationtype="triangle_list">
+      <faces count="8">
+        <face v1="0" v2="1" v3="5"/>
+        <face v1="0" v2="5" v3="4"/>
+        <face v1="1" v2="2" v3="6"/>
+        <face v1="1" v2="6" v3="5"/>
+        <face v1="2" v2="3" v3="7"/>
+        <face v1="2" v2="7" v3="6"/>
+        <face v1="4" v2="5" v3="8"/>
+        <face v1="5" v2="6" v3="8"/>
+      </faces>
+      <geometry vertexcount="9">
+        <vertexbuffer positions="true" normals="true" texture_coords="1">
+          <vertex><position x="0" y="0" z="0"/><normal x="0" y="0" z="1"/><texcoord u="0" v="0"/></vertex>
+          <vertex><position x="1" y="0" z="0"/><normal x="0" y="0" z="1"/><texcoord u="0.5" v="0"/></vertex>
+          <vertex><position x="2" y="0" z="0"/><normal x="0" y="0" z="1"/><texcoord u="1" v="0"/></vertex>
+          <vertex><position x="3" y="0" z="0"/><normal x="0" y="0" z="1"/><texcoord u="1" v="0"/></vertex>
+          <vertex><position x="0" y="1" z="0"/><normal x="0" y="0" z="1"/><texcoord u="0" v="0.5"/></vertex>
+          <vertex><position x="1" y="1" z="0"/><normal x="0" y="0" z="1"/><texcoord u="0.5" v="0.5"/></vertex>
+          <vertex><position x="2" y="1" z="0"/><normal x="0" y="0" z="1"/><texcoord u="1" v="0.5"/></vertex>
+          <vertex><position x="3" y="1" z="0"/><normal x="0" y="0" z="1"/><texcoord u="1" v="0.5"/></vertex>
+          <vertex><position x="1" y="2" z="0"/><normal x="0" y="0" z="1"/><texcoord u="0.5" v="1"/></vertex>
+        </vertexbuffer>
+      </geometry>
+    </submesh>
+  </submeshes>
+</mesh>

@@ -1,0 +1,25 @@
+# MDL (Quake/Half-Life) format dictionary
+# Magic bytes
+"IDPO"
+"IDP2"
+"IDST"
+"IDSQ"
+"\x2c\x00\x00\x00"
+
+# HL MDL sections
+"$modelname"
+"$cd"
+"$cdtexture"
+"$scale"
+"$root"
+"$bbox"
+"$cbox"
+"$eyeposition"
+"$body"
+"$bodygroup"
+"$controller"
+"$attachment"
+"$hbox"
+"$sequence"
+"$sequencegroup"
+"$texrendermode"

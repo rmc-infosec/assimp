@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1">
+<asset><created>2026</created><modified>2026</modified></asset>
+<library_effects>
+<effect id="rz"><profile_COMMON><technique sid="c">
+<phong>
+<diffuse><color>0.8 0.2 0.2 1</color></diffuse>
+<specular><color>1 1 1 1</color></specular>
+<shininess><float>50</float></shininess>
+<transparent opaque="RGB_ZERO"><color>0.5 0.5 0.5 1</color></transparent>
+<transparency><float>0.7</float></transparency>
+</phong>
+</technique>
+<extra><technique profile="GOOGLEEARTH"><double_sided>1</double_sided></technique>
+<technique profile="MAX3D"><wireframe>0</wireframe><faceted>1</faceted></technique></extra>
+</profile_COMMON></effect>
+<effect id="ro"><profile_COMMON><technique sid="c">
+<blinn>
+<diffuse><color>0.2 0.8 0.2 1</color></diffuse>
+<specular><color>0.5 0.5 0.5 1</color></specular>
+<shininess><float>25</float></shininess>
+<transparent opaque="RGB_ONE"><color>0.8 0.8 0.8 1</color></transparent>
+<transparency><float>0.5</float></transparency>
+</blinn>
+</technique></profile_COMMON></effect>
+<effect id="az"><profile_COMMON><technique sid="c">
+<lambert>
+<diffuse><color>0.2 0.2 0.8 1</color></diffuse>
+<transparent opaque="A_ZERO"><color>1 1 1 0.3</color></transparent>
+<transparency><float>0.8</float></transparency>
+</lambert>
+</technique></profile_COMMON></effect>
+</library_effects>
+<library_materials>
+<material id="rzm"><instance_effect url="#rz"/></material>
+<material id="rom"><instance_effect url="#ro"/></material>
+<material id="azm"><instance_effect url="#az"/></material>
+</library_materials>
+<library_geometries>
+<geometry id="pg" name="PolygonMesh"><mesh>
+<source id="pp"><float_array id="ppa" count="15">0 0 0 2 0 0 2 2 0 1 3 0 0 2 0</float_array>
+<technique_common><accessor source="#ppa" count="5" stride="3">
+<param name="X" type="float"/><param name="Y" type="float"/><param name="Z" type="float"/>
+</accessor></technique_common></source>
+<vertices id="pv"><input semantic="POSITION" source="#pp"/></vertices>
+<polygons count="1" material="rzm">
+<input semantic="VERTEX" source="#pv" offset="0"/>
+<p>0 1 2 3 4</p>
+</polygons>
+</mesh></geometry>
+<geometry id="ts" name="TriStripMesh"><mesh>
+<source id="tp"><float_array id="tpa" count="18">0 0 0 1 0 0 0 1 0 1 1 0 0 2 0 1 2 0</float_array>
+<technique_common><accessor source="#tpa" count="6" stride="3">
+<param name="X" type="float"/><param name="Y" type="float"/><param name="Z" type="float"/>
+</accessor></technique_common></source>
+<vertices id="tv"><input semantic="POSITION" source="#tp"/></vertices>
+<tristrips count="1" material="rom">
+<input semantic="VERTEX" source="#tv" offset="0"/>
+<p>0 1 2 3 4 5</p>
+</tristrips>
+</mesh></geometry>
+<geometry id="mx" name="MixedMesh"><mesh>
+<source id="mp"><float_array id="mpa" count="24">-1 0 -1 1 0 -1 1 0 1 -1 0 1 -1 2 -1 1 2 -1 1 2 1 -1 2 1</float_array>
+<technique_common><accessor source="#mpa" count="8" stride="3">
+<param name="X" type="float"/><param name="Y" type="float"/><param name="Z" type="float"/>
+</accessor></technique_common></source>
+<source id="mc"><float_array id="mca" count="32">1 0 0 1 0 1 0 1 0 0 1 1 1 1 0 1 1 0 1 1 0 1 1 1 0.5 0.5 0.5 1 1 1 1 1</float_array>
+<technique_common><accessor source="#mca" count="8" stride="4">
+<param name="R" type="float"/><param name="G" type="float"/><param name="B" type="float"/><param name="A" type="float"/>
+</accessor></technique_common></source>
+<vertices id="mv"><input semantic="POSITION" source="#mp"/></vertices>
+<triangles count="4" material="azm">
+<input semantic="VERTEX" source="#mv" offset="0"/>
+<input semantic="COLOR" source="#mc" offset="1" set="0"/>
+<p>0 0 1 1 2 2 0 0 2 2 3 3 4 4 5 5 6 6 4 4 6 6 7 7</p>
+</triangles>
+</mesh></geometry>
+</library_geometries>
+<library_visual_scenes>
+<visual_scene id="Scene">
+<node id="PN" type="NODE"><instance_geometry url="#pg">
+<bind_material><technique_common><instance_material symbol="rzm" target="#rzm"/></technique_common></bind_material>
+</instance_geometry></node>
+<node id="SN" type="NODE"><translate>5 0 0</translate><instance_geometry url="#ts">
+<bind_material><technique_common><instance_material symbol="rom" target="#rom"/></technique_common></bind_material>
+</instance_geometry></node>
+<node id="MN" type="NODE"><translate>10 0 0</translate><instance_geometry url="#mx">
+<bind_material><technique_common><instance_material symbol="azm" target="#azm"/></technique_common></bind_material>
+</instance_geometry></node>
+</visual_scene>
+</library_visual_scenes>
+<scene><instance_visual_scene url="#Scene"/></scene>
+</COLLADA>

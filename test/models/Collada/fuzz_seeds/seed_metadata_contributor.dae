@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1">
+<asset>
+  <contributor>
+    <author>John Doe</author>
+    <authoring_tool>TestExporter 2.5</authoring_tool>
+    <comments>Multi-contributor test with camelCase metadata keys</comments>
+    <copyright>Copyright 2026 Test Corp</copyright>
+    <source_data>scene.blend</source_data>
+  </contributor>
+  <contributor>
+    <author>Jane Smith</author>
+    <authoring_tool>AnotherTool 1.0</authoring_tool>
+  </contributor>
+  <created>2026-02-12T10:30:00</created>
+  <modified>2026-02-12T11:00:00</modified>
+  <revision>42</revision>
+  <title>Test Scene Title</title>
+  <subject>Coverage testing</subject>
+  <keywords>test collada fuzz</keywords>
+  <unit meter="0.0254" name="inch"/>
+  <up_axis>Y_UP</up_axis>
+</asset>
+<library_geometries>
+  <geometry id="geo" name="Tri">
+    <mesh>
+      <source id="p"><float_array id="pa" count="9">0 0 0 1 0 0 0.5 1 0</float_array>
+        <technique_common><accessor source="#pa" count="3" stride="3">
+          <param name="X" type="float"/><param name="Y" type="float"/><param name="Z" type="float"/>
+        </accessor></technique_common></source>
+      <vertices id="v"><input semantic="POSITION" source="#p"/></vertices>
+      <triangles count="1"><input semantic="VERTEX" source="#v" offset="0"/>
+        <p>0 1 2</p></triangles>
+    </mesh>
+  </geometry>
+</library_geometries>
+<library_visual_scenes>
+  <visual_scene id="Scene" name="Scene">
+    <node id="node_id" sid="node_sid" name="NodeName" type="NODE">
+      <matrix sid="transform">1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</matrix>
+      <instance_geometry url="#geo"/>
+    </node>
+  </visual_scene>
+</library_visual_scenes>
+<scene><instance_visual_scene url="#Scene"/></scene>
+</COLLADA>

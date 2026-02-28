@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1">
+<asset><created>2026-01-01</created><modified>2026-01-01</modified></asset>
+<library_geometries>
+  <geometry id="geo" name="Box">
+    <mesh>
+      <source id="gp"><float_array id="gpa" count="12">0 0 0 1 0 0 1 1 0 0 1 0</float_array>
+        <technique_common><accessor source="#gpa" count="4" stride="3">
+          <param name="X" type="float"/><param name="Y" type="float"/><param name="Z" type="float"/>
+        </accessor></technique_common></source>
+      <vertices id="gv"><input semantic="POSITION" source="#gp"/></vertices>
+      <triangles count="2"><input semantic="VERTEX" source="#gv" offset="0"/>
+        <p>0 1 2 0 2 3</p></triangles>
+    </mesh>
+  </geometry>
+</library_geometries>
+<library_animations>
+  <animation id="anim_walk" name="Walk">
+    <source id="wt"><float_array id="wta" count="3">0 0.5 1</float_array>
+      <technique_common><accessor source="#wta" count="3" stride="1">
+        <param name="TIME" type="float"/>
+      </accessor></technique_common></source>
+    <source id="wv"><float_array id="wva" count="9">0 0 0 1 0 0 2 0 0</float_array>
+      <technique_common><accessor source="#wva" count="3" stride="3">
+        <param name="X" type="float"/><param name="Y" type="float"/><param name="Z" type="float"/>
+      </accessor></technique_common></source>
+    <sampler id="ws">
+      <input semantic="INPUT" source="#wt"/>
+      <input semantic="OUTPUT" source="#wv"/>
+    </sampler>
+    <channel source="#ws" target="BoxNode/translate"/>
+  </animation>
+  <animation id="anim_run" name="Run">
+    <source id="rt"><float_array id="rta" count="3">0 0.25 0.5</float_array>
+      <technique_common><accessor source="#rta" count="3" stride="1">
+        <param name="TIME" type="float"/>
+      </accessor></technique_common></source>
+    <source id="rv"><float_array id="rva" count="9">0 0 0 2 0 0 4 0 0</float_array>
+      <technique_common><accessor source="#rva" count="3" stride="3">
+        <param name="X" type="float"/><param name="Y" type="float"/><param name="Z" type="float"/>
+      </accessor></technique_common></source>
+    <sampler id="rss">
+      <input semantic="INPUT" source="#rt"/>
+      <input semantic="OUTPUT" source="#rv"/>
+    </sampler>
+    <channel source="#rss" target="BoxNode/translate"/>
+  </animation>
+  <animation id="anim_rotate" name="Spin">
+    <source id="spt"><float_array id="spta" count="3">0 0.5 1</float_array>
+      <technique_common><accessor source="#spta" count="3" stride="1">
+        <param name="TIME" type="float"/>
+      </accessor></technique_common></source>
+    <source id="spv"><float_array id="spva" count="12">0 0 1 0 0 0 1 90 0 0 1 180</float_array>
+      <technique_common><accessor source="#spva" count="3" stride="4">
+        <param name="X" type="float"/><param name="Y" type="float"/><param name="Z" type="float"/><param name="ANGLE" type="float"/>
+      </accessor></technique_common></source>
+    <sampler id="sps">
+      <input semantic="INPUT" source="#spt"/>
+      <input semantic="OUTPUT" source="#spv"/>
+    </sampler>
+    <channel source="#sps" target="BoxNode/rotateZ"/>
+  </animation>
+</library_animations>
+<library_animation_clips name="WalkClip">
+  <instance_animation url="#anim_walk"/>
+  <instance_animation url="#anim_rotate"/>
+</library_animation_clips>
+<library_animation_clips name="RunClip">
+  <instance_animation url="#anim_run"/>
+</library_animation_clips>
+<library_visual_scenes>
+  <visual_scene id="Scene" name="Scene">
+    <node id="BoxNode" name="BoxNode" type="NODE">
+      <translate sid="translate">0 0 0</translate>
+      <rotate sid="rotateZ">0 0 1 0</rotate>
+      <matrix sid="transform">1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</matrix>
+      <instance_geometry url="#geo"/>
+    </node>
+  </visual_scene>
+</library_visual_scenes>
+<scene><instance_visual_scene url="#Scene"/></scene>
+</COLLADA>

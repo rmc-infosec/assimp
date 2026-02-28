@@ -1,0 +1,46 @@
+# NFF1 - multiple polygons sharing same material (triggers mesh merging)
+from 0 5 10
+at 0 0 0
+up 0 1 0
+angle 45
+resolution 512 512
+l 5 5 5 1.0 1 1 1
+# Same material used for multiple polygons - they should merge
+f 0.8 0.2 0.2 0.7 0.3 20 0 1.0
+p 3
+-1 0 0
+1 0 0
+0 1 0
+p 4
+-2 -2 -1
+2 -2 -1
+2 2 -1
+-2 2 -1
+p 3
+0 0 2
+2 0 2
+1 2 2
+# Different material - separate mesh
+f 0.2 0.8 0.2 0.6 0.4 30 0 1.0
+pp 3
+-3 0 0 0 1 0
+3 0 0 0 1 0
+0 2 0 0 1 0
+# Same green material for second pp - should merge with above
+pp 4
+-4 -1 3 0 0 1
+4 -1 3 0 0 1
+4 1 3 0 0 1
+-4 1 3 0 0 1
+# Third material for tpp
+f 0.2 0.2 0.8 0.5 0.5 40 0 1.0
+tpp 3
+0 0 -3 0 0 1 0.5 0
+2 0 -3 0 0 1 1 0
+1 2 -3 0 0 1 0.5 1
+# Same blue material for tpp - should merge
+tpp 4
+-5 0 -5 0 1 0 0 0
+5 0 -5 0 1 0 1 0
+5 0 5 0 1 0 1 1
+-5 0 5 0 1 0 0 1

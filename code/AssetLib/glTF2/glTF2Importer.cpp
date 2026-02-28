@@ -748,14 +748,25 @@ void glTF2Importer::ImportMeshes(glTF2::Asset &r) {
 
                 case PrimitiveMode_LINE_LOOP:
                 case PrimitiveMode_LINE_STRIP: {
+                    if (count < 2) {
+                        ASSIMP_LOG_WARN("Not enough indices for line primitives.");
+                        break;
+                    }
+                    const unsigned int firstIndex = indexBuffer[0];
                     nFaces = count - ((prim.mode == PrimitiveMode_LINE_STRIP) ? 1 : 0);
+                    if (nFaces == 0) {
+                        ASSIMP_LOG_WARN("No faces to generate for line primitives.");
+                        break;
+                    }
                     facePtr = faces = new aiFace[nFaces];
-                    SetFaceAndAdvance2(facePtr, aim->mNumVertices, indexBuffer[0], indexBuffer[1]);
+                    SetFaceAndAdvance2(facePtr, aim->mNumVertices, firstIndex, indexBuffer[1]);
                     for (unsigned int i = 2; i < count; ++i) {
                         SetFaceAndAdvance2(facePtr, aim->mNumVertices, indexBuffer[i - 1], indexBuffer[i]);
                     }
                     if (prim.mode == PrimitiveMode_LINE_LOOP) { // close the loop
-                        SetFaceAndAdvance2(facePtr, aim->mNumVertices, indexBuffer[static_cast<int>(count) - 1], faces[0].mIndices[0]);
+                        if (facePtr != nullptr) {
+                            SetFaceAndAdvance2(facePtr, aim->mNumVertices, indexBuffer[static_cast<int>(count) - 1], firstIndex);
+                        }
                     }
                     break;
                 }
@@ -826,14 +837,24 @@ void glTF2Importer::ImportMeshes(glTF2::Asset &r) {
 
                 case PrimitiveMode_LINE_LOOP:
                 case PrimitiveMode_LINE_STRIP: {
+                    if (count < 2) {
+                        ASSIMP_LOG_WARN("Not enough indices for line primitives.");
+                        break;
+                    }
                     nFaces = count - ((prim.mode == PrimitiveMode_LINE_STRIP) ? 1 : 0);
+                    if (nFaces == 0) {
+                        ASSIMP_LOG_WARN("No faces to generate for line primitives.");
+                        break;
+                    }
                     facePtr = faces = new aiFace[nFaces];
                     SetFaceAndAdvance2(facePtr, aim->mNumVertices, 0, 1);
                     for (unsigned int i = 2; i < count; ++i) {
                         SetFaceAndAdvance2(facePtr, aim->mNumVertices, i - 1, i);
                     }
                     if (prim.mode == PrimitiveMode_LINE_LOOP) { // close the loop
-                        SetFaceAndAdvance2(facePtr, aim->mNumVertices, count - 1, 0);
+                        if (facePtr != nullptr) {
+                            SetFaceAndAdvance2(facePtr, aim->mNumVertices, count - 1, 0);
+                        }
                     }
                     break;
                 }
@@ -1132,6 +1153,9 @@ void ParseExtras(aiMetadata* metadata, const Extras& extras) {
 }
 
 aiNode *glTF2Importer::ImportNode(glTF2::Asset &r, glTF2::Ref<glTF2::Node> &ptr) {
+    if (!ptr) {
+        throw DeadlyImportError("GLTF: Invalid node reference");
+    }
     Node &node = *ptr;
 
     aiNode *ainode = new aiNode(GetNodeName(node));
@@ -1199,7 +1223,12 @@ aiNode *glTF2Importer::ImportNode(glTF2::Asset &r, glTF2::Ref<glTF2::Node> &ptr)
                     // mapping which makes things doubly-slow.
 
                     mat4 *pbindMatrices = nullptr;
-                    node.skin->inverseBindMatrices->ExtractData(pbindMatrices, nullptr);
+                    const size_t bindCount = node.skin->inverseBindMatrices->ExtractData(pbindMatrices, nullptr);
+                    if (bindCount < numBones) {
+                        delete[] pbindMatrices;
+                        throw DeadlyImportError("GLTF: Not enough inverse bind matrices for skin ",
+                                getContextForErrorMessages(node.skin->id, node.skin->name));
+                    }
 
                     for (uint32_t i = 0; i < numBones; ++i) {
                         const std::vector<aiVertexWeight> &weights = weighting[i];

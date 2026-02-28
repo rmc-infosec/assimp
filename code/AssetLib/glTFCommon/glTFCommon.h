@@ -393,11 +393,13 @@ inline Value *FindMember(Value &val, const char *id) {
 
 template <int N>
 inline void throwUnexpectedTypeError(const char (&expectedTypeName)[N], const char *memberId, const char *context, const char *extraContext) {
-    std::string fullContext = context;
-    if (extraContext && (strlen(extraContext) > 0)) {
+    const char *safeMemberId = memberId ? memberId : "<null>";
+    const char *safeContext = context ? context : "<null>";
+    std::string fullContext = safeContext;
+    if (extraContext && extraContext[0] != '\0') {
         fullContext = fullContext + " (" + extraContext + ")";
     }
-    throw DeadlyImportError("Member \"", memberId, "\" was not of type \"", expectedTypeName, "\" when reading ", fullContext);
+    throw DeadlyImportError("Member \"", safeMemberId, "\" was not of type \"", expectedTypeName, "\" when reading ", fullContext);
 }
 
 // Look-up functions with type checks. Context and extra context help the user identify the problem if there's an error.
@@ -467,7 +469,13 @@ inline Value *FindObjectInContext(Value &val, const char * memberId, const char 
         return nullptr;
     }
     if (!it->value.IsObject()) {
-        ASSIMP_LOG_ERROR("Member \"", memberId, "\" was not of type \"", context, "\" when reading ", extraContext);
+        const char *safeMemberId = memberId ? memberId : "<null>";
+        const char *safeContext = context ? context : "<null>";
+        if (extraContext && extraContext[0] != '\0') {
+            ASSIMP_LOG_ERROR("Member \"", safeMemberId, "\" was not of type \"", safeContext, "\" when reading ", extraContext);
+        } else {
+            ASSIMP_LOG_ERROR("Member \"", safeMemberId, "\" was not of type \"", safeContext, "\"");
+        }
         return nullptr;
    }
     return &it->value;

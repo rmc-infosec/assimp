@@ -1,0 +1,180 @@
+LWSC
+5
+FirstFrame 0
+LastFrame 150
+FrameStep 1
+PreviewFirstFrame 0
+PreviewLastFrame 150
+PreviewFrameStep 1
+CurrentFrame 0
+FramesPerSecond 30
+AmbientColor 255 255 255
+AmbientIntensity 0.25
+AddNullObject 10000000 TCBObject
+ShowObject 7 5
+ObjectMotion
+NumChannels 9
+Channel 0
+{ Envelope
+  3
+  Key 0.0 0 0 1.0 0.5 0.5 0 0
+  Key 10.0 1.5 0 0.8 0.3 0.7 0 0
+  Key 0.0 3.0 0 1.0 0.5 0.5 0 0
+  Behaviors 1 1
+}
+Channel 1
+{ Envelope
+  2
+  Key 0.0 0 0 1.0 0.5 0.5 0 0
+  Key 5.0 2.0 0 1.0 0.5 0.5 0 0
+  Behaviors 2 2
+}
+Channel 2
+{ Envelope
+  1
+  Key 0.0 0 3 0 0 0 0
+}
+Channel 3
+{ Envelope
+  4
+  Key 0.0 0.0 0 1.0 0.5 0.5 0 0
+  Key 1.5708 0.5 0 1.0 0.5 0.5 0 0
+  Key 3.14159 1.0 0 1.0 0.5 0.5 0 0
+  Key 0.0 1.5 0 1.0 0.5 0.5 0 0
+  Behaviors 1 1
+}
+Channel 4
+{ Envelope
+  1
+  Key 0.0 0 3 0 0 0 0
+}
+Channel 5
+{ Envelope
+  1
+  Key 0.0 0 3 0 0 0 0
+}
+Channel 6
+{ Envelope
+  2
+  Key 1.0 0 3 0 0 0 0
+  Key 2.0 2.0 3 0 0 0 0
+  Behaviors 0 0
+}
+Channel 7
+{ Envelope
+  2
+  Key 1.0 0 3 0 0 0 0
+  Key 2.0 2.0 3 0 0 0 0
+  Behaviors 0 0
+}
+Channel 8
+{ Envelope
+  2
+  Key 1.0 0 3 0 0 0 0
+  Key 2.0 2.0 3 0 0 0 0
+  Behaviors 0 0
+}
+AddNullObject 10000001 HermiteObject
+ShowObject 7 5
+ObjectMotion
+NumChannels 9
+Channel 0
+{ Envelope
+  2
+  Key 0.0 0 1 0.5 0.5 0.5 0.5 0.5
+  Key 5.0 2.0 1 0.5 0.5 0.5 0.5 0.5
+  Behaviors 1 1
+}
+Channel 1
+{ Envelope
+  2
+  Key 0.0 0 2 0.5 0.5 0.5 0.5 0.5
+  Key 3.0 2.0 2 0.5 0.5 0.5 0.5 0.5
+  Behaviors 1 1
+}
+Channel 2
+{ Envelope
+  1
+  Key 0.0 0 4 0 0 0 0
+}
+Channel 3
+{ Envelope
+  1
+  Key 0.0 0 3 0 0 0 0
+}
+Channel 4
+{ Envelope
+  1
+  Key 0.0 0 3 0 0 0 0
+}
+Channel 5
+{ Envelope
+  1
+  Key 0.0 0 3 0 0 0 0
+}
+Channel 6
+{ Envelope
+  1
+  Key 1.0 0 3 0 0 0 0
+}
+Channel 7
+{ Envelope
+  1
+  Key 1.0 0 3 0 0 0 0
+}
+Channel 8
+{ Envelope
+  1
+  Key 1.0 0 3 0 0 0 0
+}
+AddNullObject 10000002 Bez2Object
+ShowObject 7 5
+ObjectMotion
+NumChannels 9
+Channel 0
+{ Envelope
+  2
+  Key 0.0 0 5 0.5 0.5 0.5 0.5
+  Key 8.0 3.0 5 0.5 0.5 0.5 0.5
+  Behaviors 0 0
+}
+Channel 1
+{ Envelope
+  1
+  Key 0.0 0 3 0 0 0 0
+}
+Channel 2
+{ Envelope
+  1
+  Key 0.0 0 3 0 0 0 0
+}
+Channel 3
+{ Envelope
+  1
+  Key 0.0 0 3 0 0 0 0
+}
+Channel 4
+{ Envelope
+  1
+  Key 0.0 0 3 0 0 0 0
+}
+Channel 5
+{ Envelope
+  1
+  Key 0.0 0 3 0 0 0 0
+}
+Channel 6
+{ Envelope
+  1
+  Key 1.0 0 3 0 0 0 0
+}
+Channel 7
+{ Envelope
+  1
+  Key 1.0 0 3 0 0 0 0
+}
+Channel 8
+{ Envelope
+  1
+  Key 1.0 0 3 0 0 0 0
+}

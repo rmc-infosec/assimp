@@ -1,0 +1,19 @@
+# SMD (Valve Studiomdl Data) dictionary
+
+# Header
+"version 1"
+"version"
+
+# Section keywords
+"nodes"
+"skeleton"
+"triangles"
+"vertexanimation"
+"end"
+"time"
+
+# Common tokens
+"root"
+"bone"
+"material"
+"idle"

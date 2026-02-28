@@ -1,0 +1,279 @@
+LWSC
+5
+FirstFrame 0
+LastFrame 60
+FrameStep 1
+PreviewFirstFrame 0
+PreviewLastFrame 60
+PreviewFrameStep 1
+CurrentFrame 0
+FramesPerSecond 30
+AmbientColor 128 128 128
+AmbientIntensity 0.1
+AddNullObject 10000000 SceneRoot
+ShowObject 7 5
+ObjectMotion
+NumChannels 9
+Channel 0
+{ Envelope
+  1
+  Key 0.0 0 0 0 0 0 0
+}
+Channel 1
+{ Envelope
+  1
+  Key 0.0 0 0 0 0 0 0
+}
+Channel 2
+{ Envelope
+  1
+  Key 0.0 0 0 0 0 0 0
+}
+Channel 3
+{ Envelope
+  1
+  Key 0.0 0 0 0 0 0 0
+}
+Channel 4
+{ Envelope
+  1
+  Key 0.0 0 0 0 0 0 0
+}
+Channel 5
+{ Envelope
+  1
+  Key 0.0 0 0 0 0 0 0
+}
+Channel 6
+{ Envelope
+  1
+  Key 1.0 0 0 0 0 0 0
+}
+Channel 7
+{ Envelope
+  1
+  Key 1.0 0 0 0 0 0 0
+}
+Channel 8
+{ Envelope
+  1
+  Key 1.0 0 0 0 0 0 0
+}
+AddLight 20000000
+LightName PointLight
+LightType 0
+LightColor 255 255 200
+LightIntensity 1.0
+LightFalloffType 2
+ShowLight 7 5
+LightMotion
+NumChannels 9
+Channel 0
+{ Envelope
+  1
+  Key 3.0 0 0 0 0 0 0
+}
+Channel 1
+{ Envelope
+  1
+  Key 5.0 0 0 0 0 0 0
+}
+Channel 2
+{ Envelope
+  1
+  Key -3.0 0 0 0 0 0 0
+}
+Channel 3
+{ Envelope
+  1
+  Key 0.0 0 0 0 0 0 0
+}
+Channel 4
+{ Envelope
+  1
+  Key 0.0 0 0 0 0 0 0
+}
+Channel 5
+{ Envelope
+  1
+  Key 0.0 0 0 0 0 0 0
+}
+Channel 6
+{ Envelope
+  1
+  Key 1.0 0 0 0 0 0 0
+}
+Channel 7
+{ Envelope
+  1
+  Key 1.0 0 0 0 0 0 0
+}
+Channel 8
+{ Envelope
+  1
+  Key 1.0 0 0 0 0 0 0
+}
+AddLight 20000001
+LightName DirectionalLight
+LightType 1
+LightColor 255 255 255
+LightIntensity 0.8
+LightFalloffType 0
+ShowLight 7 5
+LightMotion
+NumChannels 9
+Channel 0
+{ Envelope
+  1
+  Key 0.0 0 0 0 0 0 0
+}
+Channel 1
+{ Envelope
+  1
+  Key 10.0 0 0 0 0 0 0
+}
+Channel 2
+{ Envelope
+  1
+  Key 0.0 0 0 0 0 0 0
+}
+Channel 3
+{ Envelope
+  1
+  Key 0.7854 0 0 0 0 0 0
+}
+Channel 4
+{ Envelope
+  1
+  Key 0.0 0 0 0 0 0 0
+}
+Channel 5
+{ Envelope
+  1
+  Key 0.0 0 0 0 0 0 0
+}
+Channel 6
+{ Envelope
+  1
+  Key 1.0 0 0 0 0 0 0
+}
+Channel 7
+{ Envelope
+  1
+  Key 1.0 0 0 0 0 0 0
+}
+Channel 8
+{ Envelope
+  1
+  Key 1.0 0 0 0 0 0 0
+}
+AddLight 20000002
+LightName SpotLight
+LightType 2
+LightColor 255 200 150
+LightIntensity 1.5
+LightConeAngle 30.0
+LightEdgeAngle 5.0
+LightFalloffType 1
+ShowLight 7 5
+LightMotion
+NumChannels 9
+Channel 0
+{ Envelope
+  1
+  Key 0.0 0 0 0 0 0 0
+}
+Channel 1
+{ Envelope
+  1
+  Key 8.0 0 0 0 0 0 0
+}
+Channel 2
+{ Envelope
+  1
+  Key 0.0 0 0 0 0 0 0
+}
+Channel 3
+{ Envelope
+  1
+  Key 0.0 0 0 0 0 0 0
+}
+Channel 4
+{ Envelope
+  1
+  Key 0.0 0 0 0 0 0 0
+}
+Channel 5
+{ Envelope
+  1
+  Key 0.0 0 0 0 0 0 0
+}
+Channel 6
+{ Envelope
+  1
+  Key 1.0 0 0 0 0 0 0
+}
+Channel 7
+{ Envelope
+  1
+  Key 1.0 0 0 0 0 0 0
+}
+Channel 8
+{ Envelope
+  1
+  Key 1.0 0 0 0 0 0 0
+}
+AddLight 20000003
+LightName AmbientFill
+LightType 0
+LightColor 100 100 255
+LightIntensity 0.3
+LightFalloffType 0
+ShowLight 7 5
+LightMotion
+NumChannels 9
+Channel 0
+{ Envelope
+  1
+  Key -5.0 0 0 0 0 0 0
+}
+Channel 1
+{ Envelope
+  1
+  Key 3.0 0 0 0 0 0 0
+}
+Channel 2
+{ Envelope
+  1
+  Key 5.0 0 0 0 0 0 0
+}
+Channel 3
+{ Envelope
+  1
+  Key 0.0 0 0 0 0 0 0
+}
+Channel 4
+{ Envelope
+  1
+  Key 0.0 0 0 0 0 0 0
+}
+Channel 5
+{ Envelope
+  1
+  Key 0.0 0 0 0 0 0 0
+}
+Channel 6
+{ Envelope
+  1
+  Key 1.0 0 0 0 0 0 0
+}
+Channel 7
+{ Envelope
+  1
+  Key 1.0 0 0 0 0 0 0
+}
+Channel 8
+{ Envelope
+  1
+  Key 1.0 0 0 0 0 0 0
+}

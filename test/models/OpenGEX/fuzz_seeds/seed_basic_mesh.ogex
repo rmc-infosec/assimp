@@ -1,0 +1,63 @@
+Metric (key = "distance") {float {1.0}}
+Metric (key = "angle") {float {1.0}}
+Metric (key = "time") {float {1.0}}
+Metric (key = "up") {string {"z"}}
+
+GeometryNode $node1
+{
+    Name {string {"Triangle"}}
+    ObjectRef {ref {$geometry1}}
+    MaterialRef {ref {$material1}}
+
+    Transform
+    {
+        float[16]
+        {
+            {1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1}
+        }
+    }
+}
+
+GeometryObject $geometry1
+{
+    Mesh (primitive = "triangles")
+    {
+        VertexArray (attrib = "position")
+        {
+            float[3]
+            {
+                {0, 0, 0}, {1, 0, 0}, {0, 1, 0}, {1, 1, 0}
+            }
+        }
+
+        VertexArray (attrib = "normal")
+        {
+            float[3]
+            {
+                {0, 0, 1}, {0, 0, 1}, {0, 0, 1}, {0, 0, 1}
+            }
+        }
+
+        VertexArray (attrib = "texcoord")
+        {
+            float[2]
+            {
+                {0, 0}, {1, 0}, {0, 1}, {1, 1}
+            }
+        }
+
+        IndexArray
+        {
+            unsigned_int32[3]
+            {
+                {0, 1, 2}, {1, 3, 2}
+            }
+        }
+    }
+}
+
+Material $material1
+{
+    Name {string {"BasicMat"}}
+    Color (attrib = "diffuse") {float[3] {{0.8, 0.2, 0.2}}}
+}

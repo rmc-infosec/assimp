@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1">
+  <asset><created>2024-01-01</created><modified>2024-01-01</modified></asset>
+  <library_lights>
+    <light id="PointLight" name="PointLight">
+      <technique_common>
+        <point>
+          <color>1 0.9 0.8</color>
+          <constant_attenuation>1</constant_attenuation>
+          <linear_attenuation>0.01</linear_attenuation>
+          <quadratic_attenuation>0.001</quadratic_attenuation>
+        </point>
+      </technique_common>
+    </light>
+    <light id="DirLight" name="DirLight">
+      <technique_common>
+        <directional><color>1 1 1</color></directional>
+      </technique_common>
+    </light>
+    <light id="SpotLight" name="SpotLight">
+      <technique_common>
+        <spot>
+          <color>0 1 0.5</color>
+          <constant_attenuation>1</constant_attenuation>
+          <linear_attenuation>0</linear_attenuation>
+          <quadratic_attenuation>0.01</quadratic_attenuation>
+          <falloff_angle>45</falloff_angle>
+          <falloff_exponent>2</falloff_exponent>
+        </spot>
+      </technique_common>
+    </light>
+    <light id="AmbLight" name="AmbLight">
+      <technique_common>
+        <ambient><color>0.2 0.2 0.3</color></ambient>
+      </technique_common>
+    </light>
+  </library_lights>
+  <library_geometries>
+    <geometry id="Mesh" name="Mesh">
+      <mesh>
+        <source id="pos"><float_array id="pos-arr" count="9">0 0 0 1 0 0 0.5 1 0</float_array>
+          <technique_common><accessor source="#pos-arr" count="3" stride="3">
+            <param name="X" type="float"/><param name="Y" type="float"/><param name="Z" type="float"/>
+          </accessor></technique_common></source>
+        <vertices id="verts"><input semantic="POSITION" source="#pos"/></vertices>
+        <triangles count="1"><input semantic="VERTEX" source="#verts" offset="0"/><p>0 1 2</p></triangles>
+      </mesh>
+    </geometry>
+  </library_geometries>
+  <library_visual_scenes>
+    <visual_scene id="Scene" name="Scene">
+      <node id="MeshNode" type="NODE"><instance_geometry url="#Mesh"/></node>
+      <node id="PtLightNode" type="NODE">
+        <translate>2 3 2</translate>
+        <instance_light url="#PointLight"/>
+      </node>
+      <node id="DirLightNode" type="NODE">
+        <rotate>1 0 0 -45</rotate>
+        <instance_light url="#DirLight"/>
+      </node>
+      <node id="SpotLightNode" type="NODE">
+        <translate>0 5 0</translate>
+        <rotate>1 0 0 -90</rotate>
+        <instance_light url="#SpotLight"/>
+      </node>
+      <node id="AmbLightNode" type="NODE">
+        <instance_light url="#AmbLight"/>
+      </node>
+    </visual_scene>
+  </library_visual_scenes>
+  <scene><instance_visual_scene url="#Scene"/></scene>
+</COLLADA>

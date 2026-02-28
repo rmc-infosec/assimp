@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1">
+  <asset><created>2024-01-01</created><modified>2024-01-01</modified></asset>
+  <library_cameras>
+    <camera id="PerspCamera" name="PerspCamera">
+      <optics><technique_common>
+        <perspective>
+          <xfov>60</xfov><yfov>45</yfov>
+          <znear>0.1</znear><zfar>1000</zfar>
+        </perspective>
+      </technique_common></optics>
+    </camera>
+    <camera id="OrthoCamera" name="OrthoCamera">
+      <optics><technique_common>
+        <orthographic>
+          <xmag>5</xmag><ymag>5</ymag>
+          <znear>0.01</znear><zfar>500</zfar>
+        </orthographic>
+      </technique_common></optics>
+    </camera>
+  </library_cameras>
+  <library_geometries>
+    <geometry id="Mesh" name="Mesh">
+      <mesh>
+        <source id="pos"><float_array id="pos-arr" count="9">0 0 0 1 0 0 0.5 1 0</float_array>
+          <technique_common><accessor source="#pos-arr" count="3" stride="3">
+            <param name="X" type="float"/><param name="Y" type="float"/><param name="Z" type="float"/>
+          </accessor></technique_common></source>
+        <vertices id="verts"><input semantic="POSITION" source="#pos"/></vertices>
+        <triangles count="1"><input semantic="VERTEX" source="#verts" offset="0"/>
+          <p>0 1 2</p></triangles>
+      </mesh>
+    </geometry>
+  </library_geometries>
+  <library_visual_scenes>
+    <visual_scene id="Scene" name="Scene">
+      <node id="MeshNode" name="MeshNode" type="NODE">
+        <instance_geometry url="#Mesh"/>
+      </node>
+      <node id="CamNode1" name="CamNode1" type="NODE">
+        <translate>0 0 5</translate>
+        <instance_camera url="#PerspCamera"/>
+      </node>
+      <node id="CamNode2" name="CamNode2" type="NODE">
+        <translate>5 0 0</translate>
+        <rotate>0 1 0 90</rotate>
+        <instance_camera url="#OrthoCamera"/>
+      </node>
+    </visual_scene>
+  </library_visual_scenes>
+  <scene><instance_visual_scene url="#Scene"/></scene>
+</COLLADA>

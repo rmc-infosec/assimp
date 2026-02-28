@@ -1,0 +1,157 @@
+<?xml version="1.0"?>
+<irr_scene>
+  <attributes>
+    <string name="Name" value="root"/>
+    <vector3d name="Position" value="0, 0, 0"/>
+    <vector3d name="Rotation" value="0, 0, 0"/>
+    <vector3d name="Scale" value="1, 1, 1"/>
+  </attributes>
+
+  <node type="light">
+    <attributes>
+      <string name="Name" value="PointLight"/>
+      <enum name="LightType" value="Point"/>
+      <colorf name="AmbientColor" value="0.1, 0.1, 0.1, 1"/>
+      <colorf name="DiffuseColor" value="1, 0.9, 0.8, 1"/>
+      <colorf name="SpecularColor" value="1, 1, 1, 1"/>
+      <float name="Attenuation" value="0.01"/>
+      <float name="Radius" value="100"/>
+      <vector3d name="Position" value="10, 20, 10"/>
+      <vector3d name="Rotation" value="0, 0, 0"/>
+      <vector3d name="Scale" value="1, 1, 1"/>
+    </attributes>
+    <animators>
+      <attributes>
+        <string name="Type" value="flyCircle"/>
+        <vector3d name="Center" value="0, 10, 0"/>
+        <float name="Radius" value="50"/>
+        <float name="Speed" value="0.002"/>
+      </attributes>
+    </animators>
+  </node>
+
+  <node type="light">
+    <attributes>
+      <string name="Name" value="SpotLight"/>
+      <enum name="LightType" value="Spot"/>
+      <colorf name="DiffuseColor" value="1, 1, 0.5, 1"/>
+      <float name="Attenuation" value="0.005"/>
+      <float name="OuterCone" value="45"/>
+      <float name="InnerCone" value="30"/>
+      <float name="Radius" value="200"/>
+      <vector3d name="Position" value="0, 30, 0"/>
+      <vector3d name="Rotation" value="-90, 0, 0"/>
+      <vector3d name="Scale" value="1, 1, 1"/>
+    </attributes>
+  </node>
+
+  <node type="light">
+    <attributes>
+      <string name="Name" value="DirLight"/>
+      <enum name="LightType" value="Directional"/>
+      <colorf name="DiffuseColor" value="0.8, 0.8, 1, 1"/>
+      <vector3d name="Position" value="0, 0, 0"/>
+      <vector3d name="Rotation" value="45, 30, 0"/>
+      <vector3d name="Scale" value="1, 1, 1"/>
+    </attributes>
+  </node>
+
+  <node type="camera">
+    <attributes>
+      <string name="Name" value="MainCam"/>
+      <vector3d name="Position" value="0, 5, -20"/>
+      <vector3d name="Target" value="0, 0, 0"/>
+      <vector3d name="UpVector" value="0, 1, 0"/>
+      <float name="Fovy" value="60"/>
+      <float name="Aspect" value="1.333"/>
+      <float name="ZNear" value="1"/>
+      <float name="ZFar" value="1000"/>
+      <vector3d name="Rotation" value="0, 0, 0"/>
+      <vector3d name="Scale" value="1, 1, 1"/>
+    </attributes>
+    <animators>
+      <attributes>
+        <string name="Type" value="flyStraight"/>
+        <vector3d name="Start" value="0, 5, -20"/>
+        <vector3d name="End" value="0, 5, 20"/>
+        <int name="TimeForWay" value="5000"/>
+        <bool name="Loop" value="true"/>
+      </attributes>
+    </animators>
+  </node>
+
+  <node type="empty">
+    <attributes>
+      <string name="Name" value="EmptyParent"/>
+      <vector3d name="Position" value="5, 0, 0"/>
+      <vector3d name="Rotation" value="0, 45, 0"/>
+      <vector3d name="Scale" value="2, 2, 2"/>
+    </attributes>
+    <animators>
+      <attributes>
+        <string name="Type" value="rotation"/>
+        <vector3d name="Rotation" value="0, 0.5, 0"/>
+      </attributes>
+    </animators>
+
+    <node type="cube">
+      <attributes>
+        <string name="Name" value="ChildCube"/>
+        <float name="Size" value="5"/>
+        <vector3d name="Position" value="0, 0, 0"/>
+        <vector3d name="Rotation" value="0, 0, 0"/>
+        <vector3d name="Scale" value="1, 1, 1"/>
+      </attributes>
+      <materials>
+        <attributes>
+          <enum name="Type" value="solid"/>
+          <color name="Diffuse" value="ffff0000"/>
+        </attributes>
+      </materials>
+    </node>
+
+    <node type="sphere">
+      <attributes>
+        <string name="Name" value="ChildSphere"/>
+        <float name="Radius" value="3"/>
+        <int name="PolyCountX" value="16"/>
+        <int name="PolyCountY" value="16"/>
+        <vector3d name="Position" value="10, 0, 0"/>
+        <vector3d name="Rotation" value="0, 0, 0"/>
+        <vector3d name="Scale" value="1, 1, 1"/>
+      </attributes>
+      <materials>
+        <attributes>
+          <enum name="Type" value="solid"/>
+          <color name="Diffuse" value="ff00ff00"/>
+        </attributes>
+      </materials>
+    </node>
+  </node>
+
+  <node type="empty">
+    <attributes>
+      <string name="Name" value="AnimEmpty"/>
+      <vector3d name="Position" value="0, 0, 0"/>
+      <vector3d name="Rotation" value="0, 0, 0"/>
+      <vector3d name="Scale" value="1, 1, 1"/>
+    </attributes>
+    <animators>
+      <attributes>
+        <string name="Type" value="followSpline"/>
+        <float name="Speed" value="1"/>
+        <bool name="Tightness" value="false"/>
+        <vector3d name="Point0" value="0, 0, 0"/>
+        <vector3d name="Point1" value="10, 5, 0"/>
+        <vector3d name="Point2" value="10, 5, 10"/>
+        <vector3d name="Point3" value="0, 0, 10"/>
+      </attributes>
+    </animators>
+    <animators>
+      <attributes>
+        <string name="Type" value="deletion"/>
+        <int name="TimeMs" value="10000"/>
+      </attributes>
+    </animators>
+  </node>
+</irr_scene>

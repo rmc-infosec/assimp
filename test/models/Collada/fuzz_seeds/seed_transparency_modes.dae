@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1">
+<asset><created>2026-01-01</created><modified>2026-01-01</modified></asset>
+<library_images>
+  <image id="img0"><init_from>glass.png</init_from></image>
+</library_images>
+<library_effects>
+  <!-- RGB_ZERO opaque mode -->
+  <effect id="fx_rgbzero">
+    <profile_COMMON>
+      <newparam sid="surf"><surface type="2D"><init_from>img0</init_from></surface></newparam>
+      <newparam sid="samp"><sampler2D><source>surf</source></sampler2D></newparam>
+      <technique sid="common">
+        <phong>
+          <diffuse><color>0.8 0.8 0.8 1</color></diffuse>
+          <specular><color>1 1 1 1</color></specular>
+          <shininess><float>32</float></shininess>
+          <transparent opaque="RGB_ZERO">
+            <texture texture="samp" texcoord="UV0"/>
+          </transparent>
+          <transparency><float>0.7</float></transparency>
+        </phong>
+      </technique>
+    </profile_COMMON>
+  </effect>
+  <!-- RGB_ONE opaque mode -->
+  <effect id="fx_rgbone">
+    <profile_COMMON>
+      <technique sid="common">
+        <lambert>
+          <diffuse><color>0.5 0.5 1 1</color></diffuse>
+          <transparent opaque="RGB_ONE">
+            <color>0.8 0.8 0.8 1</color>
+          </transparent>
+          <transparency><float>0.5</float></transparency>
+        </lambert>
+      </technique>
+    </profile_COMMON>
+  </effect>
+  <!-- A_ZERO mode (inverts transparency) -->
+  <effect id="fx_azero">
+    <profile_COMMON>
+      <technique sid="common">
+        <constant>
+          <emission><color>0.2 0.2 0.2 1</color></emission>
+          <transparent opaque="A_ZERO">
+            <color>1 1 1 0.6</color>
+          </transparent>
+          <transparency><float>0.9</float></transparency>
+        </constant>
+      </technique>
+    </profile_COMMON>
+  </effect>
+  <!-- A_ONE mode (default) with reflective texture -->
+  <effect id="fx_aone">
+    <profile_COMMON>
+      <newparam sid="rsurf"><surface type="2D"><init_from>img0</init_from></surface></newparam>
+      <newparam sid="rsamp"><sampler2D><source>rsurf</source></sampler2D></newparam>
+      <technique sid="common">
+        <phong>
+          <diffuse><color>0.3 0.3 0.3 1</color></diffuse>
+          <specular><color>1 1 1 1</color></specular>
+          <shininess><float>100</float></shininess>
+          <reflective>
+            <texture texture="rsamp" texcoord="UV0"/>
+          </reflective>
+          <reflectivity><float>0.8</float></reflectivity>
+          <transparent opaque="A_ONE">
+            <color>1 1 1 0.5</color>
+          </transparent>
+          <transparency><float>0.4</float></transparency>
+        </phong>
+      </technique>
+    </profile_COMMON>
+  </effect>
+</library_effects>
+<library_materials>
+  <material id="matRGBZ" name="RGBZero"><instance_effect url="#fx_rgbzero"/></material>
+  <material id="matRGBO" name="RGBOne"><instance_effect url="#fx_rgbone"/></material>
+  <material id="matAZ" name="AZero"><instance_effect url="#fx_azero"/></material>
+  <material id="matAO" name="AOne"><instance_effect url="#fx_aone"/></material>
+</library_materials>
+<library_geometries>
+  <geometry id="quad" name="Quad">
+    <mesh>
+      <source id="qp"><float_array id="qpa" count="12">-1 0 -1 1 0 -1 1 0 1 -1 0 1</float_array>
+        <technique_common><accessor source="#qpa" count="4" stride="3">
+          <param name="X" type="float"/><param name="Y" type="float"/><param name="Z" type="float"/>
+        </accessor></technique_common></source>
+      <source id="quv"><float_array id="quva" count="8">0 0 1 0 1 1 0 1</float_array>
+        <technique_common><accessor source="#quva" count="4" stride="2">
+          <param name="S" type="float"/><param name="T" type="float"/>
+        </accessor></technique_common></source>
+      <vertices id="qv"><input semantic="POSITION" source="#qp"/></vertices>
+      <triangles count="2" material="m0">
+        <input semantic="VERTEX" source="#qv" offset="0"/>
+        <input semantic="TEXCOORD" source="#quv" offset="1" set="0"/>
+        <p>0 0 1 1 2 2 0 0 2 2 3 3</p>
+      </triangles>
+    </mesh>
+  </geometry>
+</library_geometries>
+<library_visual_scenes>
+  <visual_scene id="Scene" name="Scene">
+    <node id="N1" name="RGBZ" type="NODE">
+      <translate sid="translate">-3 0 0</translate>
+      <instance_geometry url="#quad">
+        <bind_material><technique_common>
+          <instance_material symbol="m0" target="#matRGBZ"/>
+        </technique_common></bind_material>
+      </instance_geometry>
+    </node>
+    <node id="N2" name="RGBO" type="NODE">
+      <translate sid="translate">-1 0 0</translate>
+      <instance_geometry url="#quad">
+        <bind_material><technique_common>
+          <instance_material symbol="m0" target="#matRGBO"/>
+        </technique_common></bind_material>
+      </instance_geometry>
+    </node>
+    <node id="N3" name="AZ" type="NODE">
+      <translate sid="translate">1 0 0</translate>
+      <instance_geometry url="#quad">
+        <bind_material><technique_common>
+          <instance_material symbol="m0" target="#matAZ"/>
+        </technique_common></bind_material>
+      </instance_geometry>
+    </node>
+    <node id="N4" name="AO" type="NODE">
+      <translate sid="translate">3 0 0</translate>
+      <instance_geometry url="#quad">
+        <bind_material><technique_common>
+          <instance_material symbol="m0" target="#matAO"/>
+        </technique_common></bind_material>
+      </instance_geometry>
+    </node>
+  </visual_scene>
+</library_visual_scenes>
+<scene><instance_visual_scene url="#Scene"/></scene>
+</COLLADA>

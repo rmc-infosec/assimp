@@ -1,0 +1,18 @@
+# NFF1 - exercises unsupported IDs (pb, pn, pnn) plus comments
+# This comment has content after the hash
+from 0 0 10
+at 0 0 0
+up 0 1 0
+angle 45
+resolution 320 240
+l 5 5 5
+# another comment with text to trigger ASSIMP_LOG_INFO
+f 0.5 0.5 0.5 0.5 0.5 20 0 1.0
+pb 4
+pn 3
+pnn 5
+# Need at least one mesh to avoid "No meshes loaded" error
+p 3
+-1 -1 0
+1 -1 0
+0 1 0

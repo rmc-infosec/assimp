@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1">
+  <asset><created>2024-01-01</created><modified>2024-01-01</modified></asset>
+  <library_effects>
+    <effect id="red-fx">
+      <profile_COMMON>
+        <technique sid="common">
+          <phong><diffuse><color>0.8 0.1 0.1 1</color></diffuse><specular><color>0.3 0.3 0.3 1</color></specular><shininess><float>32</float></shininess></phong>
+        </technique>
+      </profile_COMMON>
+    </effect>
+    <effect id="blue-fx">
+      <profile_COMMON>
+        <technique sid="common">
+          <phong><diffuse><color>0.1 0.1 0.8 1</color></diffuse><specular><color>0.3 0.3 0.3 1</color></specular><shininess><float>32</float></shininess></phong>
+        </technique>
+      </profile_COMMON>
+    </effect>
+  </library_effects>
+  <library_materials>
+    <material id="red-mat" name="RedMat"><instance_effect url="#red-fx"/></material>
+    <material id="blue-mat" name="BlueMat"><instance_effect url="#blue-fx"/></material>
+  </library_materials>
+  <library_geometries>
+    <geometry id="tri-geo" name="Triangle">
+      <mesh>
+        <source id="tri-pos">
+          <float_array id="tri-pos-array" count="9">0 0 0 1 0 0 0.5 1 0</float_array>
+          <technique_common>
+            <accessor source="#tri-pos-array" count="3" stride="3">
+              <param name="X" type="float"/><param name="Y" type="float"/><param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <vertices id="tri-vtx"><input semantic="POSITION" source="#tri-pos"/></vertices>
+        <triangles count="1" material="mat-slot">
+          <input semantic="VERTEX" source="#tri-vtx" offset="0"/>
+          <p>0 1 2</p>
+        </triangles>
+      </mesh>
+    </geometry>
+    <geometry id="quad-geo" name="Quad">
+      <mesh>
+        <source id="quad-pos">
+          <float_array id="quad-pos-array" count="12">-1 -1 0 1 -1 0 1 1 0 -1 1 0</float_array>
+          <technique_common>
+            <accessor source="#quad-pos-array" count="4" stride="3">
+              <param name="X" type="float"/><param name="Y" type="float"/><param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <vertices id="quad-vtx"><input semantic="POSITION" source="#quad-pos"/></vertices>
+        <triangles count="2" material="mat-slot">
+          <input semantic="VERTEX" source="#quad-vtx" offset="0"/>
+          <p>0 1 2 0 2 3</p>
+        </triangles>
+      </mesh>
+    </geometry>
+  </library_geometries>
+  <library_visual_scenes>
+    <visual_scene id="Scene" name="Scene">
+      <node id="Inst1" name="Instance1" type="NODE">
+        <translate>0 0 0</translate>
+        <instance_geometry url="#tri-geo">
+          <bind_material><technique_common>
+            <instance_material symbol="mat-slot" target="#red-mat"/>
+          </technique_common></bind_material>
+        </instance_geometry>
+      </node>
+      <node id="Inst2" name="Instance2" type="NODE">
+        <translate>3 0 0</translate>
+        <instance_geometry url="#tri-geo">
+          <bind_material><technique_common>
+            <instance_material symbol="mat-slot" target="#blue-mat"/>
+          </technique_common></bind_material>
+        </instance_geometry>
+      </node>
+      <node id="Inst3" name="Instance3" type="NODE">
+        <translate>0 3 0</translate>
+        <rotate>0 0 1 45</rotate>
+        <instance_geometry url="#tri-geo">
+          <bind_material><technique_common>
+            <instance_material symbol="mat-slot" target="#red-mat"/>
+          </technique_common></bind_material>
+        </instance_geometry>
+      </node>
+      <node id="QuadInst1" name="QuadInstance1" type="NODE">
+        <translate>-3 0 0</translate>
+        <scale>0.5 0.5 0.5</scale>
+        <instance_geometry url="#quad-geo">
+          <bind_material><technique_common>
+            <instance_material symbol="mat-slot" target="#blue-mat"/>
+          </technique_common></bind_material>
+        </instance_geometry>
+      </node>
+      <node id="QuadInst2" name="QuadInstance2" type="NODE">
+        <translate>-3 3 0</translate>
+        <instance_geometry url="#quad-geo">
+          <bind_material><technique_common>
+            <instance_material symbol="mat-slot" target="#red-mat"/>
+          </technique_common></bind_material>
+        </instance_geometry>
+      </node>
+    </visual_scene>
+  </library_visual_scenes>
+  <scene><instance_visual_scene url="#Scene"/></scene>
+</COLLADA>

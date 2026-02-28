@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<X3D profile="Interchange" version="3.3">
+  <head>
+    <meta name="title" content="Fuzzing Seed"/>
+    <meta name="creator" content="generate_x3d_seeds.py"/>
+    <meta name="description" content="Metadata test seed"/>
+  </head>
+  <Scene>
+    <Shape>
+      <Appearance><Material diffuseColor="0.5 0.5 0.5"/></Appearance>
+      <Box size="1 1 1"/>
+    </Shape>
+  </Scene>
+</X3D>

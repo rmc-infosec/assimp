@@ -1,0 +1,19 @@
+# MTL file for extended features
+newmtl Material1
+Ka 0.2 0.2 0.2
+Kd 0.8 0.2 0.1
+Ks 1.0 1.0 1.0
+Ns 25.0
+d 0.9
+illum 2
+
+newmtl Material2
+Ka 0.1 0.1 0.3
+Kd 0.2 0.5 0.8
+Ks 0.5 0.5 0.5
+Ns 10.0
+Tr 0.3
+illum 4
+Ke 0.3 0.1 0.0
+Tf 0.9 0.9 0.9
+Ni 1.5

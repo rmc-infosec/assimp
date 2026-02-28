@@ -1,0 +1,152 @@
+{
+  "asset": {
+    "generator": "seed",
+    "version": "1.0"
+  },
+  "scene": "scene0",
+  "scenes": {
+    "scene0": {
+      "nodes": ["root_node"]
+    }
+  },
+  "nodes": {
+    "root_node": {
+      "children": ["mesh_node", "joint0"],
+      "name": "Root"
+    },
+    "mesh_node": {
+      "meshes": ["mesh0"],
+      "skin": "skin0",
+      "skeletons": ["joint0"],
+      "name": "SkinnedMesh"
+    },
+    "joint0": {
+      "jointName": "joint0",
+      "children": ["joint1"],
+      "name": "Joint0",
+      "translation": [0, 0, 0]
+    },
+    "joint1": {
+      "jointName": "joint1",
+      "children": ["joint2"],
+      "name": "Joint1",
+      "translation": [0, 1, 0]
+    },
+    "joint2": {
+      "jointName": "joint2",
+      "name": "Joint2",
+      "translation": [0, 1, 0]
+    }
+  },
+  "meshes": {
+    "mesh0": {
+      "primitives": [{
+        "attributes": {
+          "POSITION": "acc_pos",
+          "NORMAL": "acc_norm",
+          "JOINT": "acc_joint",
+          "WEIGHT": "acc_weight"
+        },
+        "indices": "acc_idx",
+        "material": "mat0",
+        "mode": 4
+      }]
+    }
+  },
+  "skins": {
+    "skin0": {
+      "bindShapeMatrix": [1,0,0,0, 0,1,0,0, 0,0,1,0, 0,0,0,1],
+      "inverseBindMatrices": "acc_ibm",
+      "jointNames": ["joint0", "joint1", "joint2"]
+    }
+  },
+  "accessors": {
+    "acc_pos": {
+      "bufferView": "bv_pos",
+      "byteOffset": 0,
+      "componentType": 5126,
+      "count": 4,
+      "type": "VEC3"
+    },
+    "acc_norm": {
+      "bufferView": "bv_norm",
+      "byteOffset": 0,
+      "componentType": 5126,
+      "count": 4,
+      "type": "VEC3"
+    },
+    "acc_idx": {
+      "bufferView": "bv_idx",
+      "byteOffset": 0,
+      "componentType": 5123,
+      "count": 6,
+      "type": "SCALAR"
+    },
+    "acc_joint": {
+      "bufferView": "bv_joint",
+      "byteOffset": 0,
+      "componentType": 5126,
+      "count": 4,
+      "type": "VEC4"
+    },
+    "acc_weight": {
+      "bufferView": "bv_weight",
+      "byteOffset": 0,
+      "componentType": 5126,
+      "count": 4,
+      "type": "VEC4"
+    },
+    "acc_ibm": {
+      "bufferView": "bv_ibm",
+      "byteOffset": 0,
+      "componentType": 5126,
+      "count": 3,
+      "type": "MAT4"
+    }
+  },
+  "bufferViews": {
+    "bv_pos": {
+      "buffer": "buf0",
+      "byteOffset": 0,
+      "byteLength": 48
+    },
+    "bv_norm": {
+      "buffer": "buf0",
+      "byteOffset": 48,
+      "byteLength": 48
+    },
+    "bv_idx": {
+      "buffer": "buf0",
+      "byteOffset": 96,
+      "byteLength": 12
+    },
+    "bv_joint": {
+      "buffer": "buf0",
+      "byteOffset": 108,
+      "byteLength": 64
+    },
+    "bv_weight": {
+      "buffer": "buf0",
+      "byteOffset": 172,
+      "byteLength": 64
+    },
+    "bv_ibm": {
+      "buffer": "buf0",
+      "byteOffset": 236,
+      "byteLength": 192
+    }
+  },
+  "buffers": {
+    "buf0": {
+      "uri": "data:application/octet-stream;base64,AAAAAAAAAAAAAAAAAACAPwAAAAAAAAAAAACAPwAAgD8AAAAAAAAAAAAAgD8AAAAAAAAAAAAAAAAAAIA/AAAAAAAAAAAAAIA/AAAAAAAAAAAAAIA/AAAAAAAAAAAAAIA/AAABAAIAAgADAAAAAAAAAAAAgD8AAAAAAAAAAAAAAAAAAIA/AAAAAAAAAAAAAIA/AAAAQAAAAAAAAAAAAACAPwAAAEAAAAAAAAAAAM3MTD/NzEw+AAAAAAAAAAAAAAA/AAAAPwAAAAAAAAAAMzMzP5qZmT4AAAAAAAAAAGZmZj/NzMw9AAAAAAAAAAAAAIA/AAAAAAAAAAAAAAAAAAAAAAAAgD8AAAAAAAAAAAAAAAAAAAAAAACAPwAAAAAAAAAAAAAAAAAAAAAAAIA/AACAPwAAAAAAAAAAAAAAAAAAAAAAAIA/AAAAAAAAAAAAAAAAAAAAAAAAgD8AAAAAAAAAAAAAAAAAAAAAAACAPwAAgD8AAAAAAAAAAAAAAAAAAAAAAACAPwAAAAAAAAAAAAAAAAAAAAAAAIA/AAAAAAAAAAAAAAAAAAAAAAAAgD8=",
+      "byteLength": 428
+    }
+  },
+  "materials": {
+    "mat0": {
+      "values": {
+        "diffuse": [0.7, 0.7, 0.9, 1.0]
+      }
+    }
+  }
+}

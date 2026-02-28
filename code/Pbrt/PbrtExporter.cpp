@@ -904,8 +904,7 @@ void PbrtExporter::WriteMesh(aiMesh* mesh) {
     // Texture Coords (if present)
     // Find the first set of 2D texture coordinates..
     for (int i = 0; i < AI_MAX_NUMBER_OF_TEXTURECOORDS; ++i) {
-        if (mesh->mNumUVComponents[i] == 2) {
-            // assert(mesh->mTextureCoords[i] != nullptr);
+        if (mesh->mNumUVComponents[i] == 2 && mesh->mTextureCoords[i]) {
             aiVector3D* uv = mesh->mTextureCoords[i];
             mOutput << "    \"point2 uv\" [";
             for (unsigned int j = 0; j < mesh->mNumVertices; ++j) {

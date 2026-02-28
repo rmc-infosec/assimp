@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1">
+  <asset><created>2024-01-01</created><modified>2024-01-01</modified></asset>
+  <library_geometries>
+    <geometry id="fans" name="TriFanMesh">
+      <mesh>
+        <source id="fan-pos">
+          <float_array id="fan-pos-array" count="15">0 0 0 1 0 0 1 1 0 0 1 0 -1 0 0</float_array>
+          <technique_common>
+            <accessor source="#fan-pos-array" count="5" stride="3">
+              <param name="X" type="float"/><param name="Y" type="float"/><param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <vertices id="fan-vtx"><input semantic="POSITION" source="#fan-pos"/></vertices>
+        <trifans count="1">
+          <input semantic="VERTEX" source="#fan-vtx" offset="0"/>
+          <p>0 1 2 3 4</p>
+        </trifans>
+      </mesh>
+    </geometry>
+    <geometry id="lines" name="LineStripMesh">
+      <mesh>
+        <source id="line-pos">
+          <float_array id="line-pos-array" count="12">0 0 0 1 0 0 2 1 0 3 0 0</float_array>
+          <technique_common>
+            <accessor source="#line-pos-array" count="4" stride="3">
+              <param name="X" type="float"/><param name="Y" type="float"/><param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <vertices id="line-vtx"><input semantic="POSITION" source="#line-pos"/></vertices>
+        <linestrips count="1">
+          <input semantic="VERTEX" source="#line-vtx" offset="0"/>
+          <p>0 1 2 3</p>
+        </linestrips>
+      </mesh>
+    </geometry>
+    <geometry id="poly" name="PolylistMesh">
+      <mesh>
+        <source id="poly-pos">
+          <float_array id="poly-pos-array" count="18">0 0 0 1 0 0 1 1 0 0 1 0 2 0 0 2 1 0</float_array>
+          <technique_common>
+            <accessor source="#poly-pos-array" count="6" stride="3">
+              <param name="X" type="float"/><param name="Y" type="float"/><param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <vertices id="poly-vtx"><input semantic="POSITION" source="#poly-pos"/></vertices>
+        <polylist count="2">
+          <input semantic="VERTEX" source="#poly-vtx" offset="0"/>
+          <vcount>3 4</vcount>
+          <p>0 1 2 1 4 5 2</p>
+        </polylist>
+      </mesh>
+    </geometry>
+  </library_geometries>
+  <library_visual_scenes>
+    <visual_scene id="Scene">
+      <node id="FanNode" type="NODE"><instance_geometry url="#fans"/></node>
+      <node id="LineNode" type="NODE"><instance_geometry url="#lines"/></node>
+      <node id="PolyNode" type="NODE"><instance_geometry url="#poly"/></node>
+    </visual_scene>
+  </library_visual_scenes>
+  <scene><instance_visual_scene url="#Scene"/></scene>
+</COLLADA>

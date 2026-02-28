@@ -1,0 +1,16 @@
+#VRML V2.0 utf8
+
+Shape {
+  geometry Text {
+    string [ "Line1" "Line2" ]
+    fontStyle FontStyle {
+      family [ "SANS" ]
+      style "ITALIC"
+      size 0.8
+      justify [ "BEGIN" "FIRST" ]
+    }
+  }
+  appearance Appearance {
+    material Material { diffuseColor 1 1 1 }
+  }
+}

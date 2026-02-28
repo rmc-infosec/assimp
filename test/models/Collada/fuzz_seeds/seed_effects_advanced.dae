@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="utf-8"?>
+<COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1">
+  <asset>
+    <created>2024-01-01</created>
+    <modified>2024-01-01</modified>
+  </asset>
+  <library_images>
+    <image id="DiffTex" name="DiffTex">
+      <init_from>texture.png</init_from>
+    </image>
+    <image id="BumpTex" name="BumpTex">
+      <init_from>bump.png</init_from>
+    </image>
+  </library_images>
+  <library_effects>
+    <effect id="PhongAdvFX">
+      <profile_COMMON>
+        <newparam sid="DiffSurface">
+          <surface type="2D">
+            <init_from>DiffTex</init_from>
+          </surface>
+        </newparam>
+        <newparam sid="DiffSampler">
+          <sampler2D>
+            <source>DiffSurface</source>
+          </sampler2D>
+        </newparam>
+        <newparam sid="BumpSurface">
+          <surface type="2D">
+            <init_from>BumpTex</init_from>
+          </surface>
+        </newparam>
+        <newparam sid="BumpSampler">
+          <sampler2D>
+            <source>BumpSurface</source>
+          </sampler2D>
+        </newparam>
+        <technique sid="common">
+          <phong>
+            <emission>
+              <color>0.05 0.05 0.05 1.0</color>
+            </emission>
+            <ambient>
+              <color>0.15 0.15 0.15 1.0</color>
+            </ambient>
+            <diffuse>
+              <texture texture="DiffSampler" texcoord="UVMap">
+                <extra>
+                  <technique profile="MAYA">
+                    <wrapU>1</wrapU>
+                    <wrapV>1</wrapV>
+                    <mirrorU>0</mirrorU>
+                    <mirrorV>0</mirrorV>
+                    <repeatU>2.0</repeatU>
+                    <repeatV>2.0</repeatV>
+                    <offsetU>0.1</offsetU>
+                    <offsetV>0.2</offsetV>
+                    <rotateUV>45.0</rotateUV>
+                    <blend_mode>MULTIPLY</blend_mode>
+                  </technique>
+                  <technique profile="OKINO">
+                    <weighting>0.8</weighting>
+                    <mix_with_previous_layer>0.5</mix_with_previous_layer>
+                  </technique>
+                  <technique profile="MAX3D">
+                    <amount>0.9</amount>
+                  </technique>
+                </extra>
+              </texture>
+            </diffuse>
+            <specular>
+              <color>1.0 1.0 1.0 1.0</color>
+            </specular>
+            <shininess>
+              <float>64.0</float>
+            </shininess>
+            <reflective>
+              <color>0.3 0.3 0.3 1.0</color>
+            </reflective>
+            <reflectivity>
+              <float>0.25</float>
+            </reflectivity>
+            <transparent opaque="RGB_ZERO">
+              <color>0.0 0.0 0.0 1.0</color>
+            </transparent>
+            <transparency>
+              <float>0.9</float>
+            </transparency>
+            <index_of_refraction>
+              <float>1.52</float>
+            </index_of_refraction>
+          </phong>
+        </technique>
+        <extra>
+          <technique>
+            <bump>
+              <texture texture="BumpSampler" texcoord="UVMap"/>
+            </bump>
+          </technique>
+        </extra>
+        <extra>
+          <technique profile="GOOGLEEARTH">
+            <double_sided>1</double_sided>
+          </technique>
+          <technique profile="MAX3D">
+            <wireframe>0</wireframe>
+            <faceted>0</faceted>
+          </technique>
+        </extra>
+      </profile_COMMON>
+    </effect>
+    <effect id="LambertFX">
+      <profile_COMMON>
+        <technique sid="common">
+          <lambert>
+            <emission>
+              <color>0.0 0.0 0.0 1.0</color>
+            </emission>
+            <ambient>
+              <color>0.1 0.1 0.1 1.0</color>
+            </ambient>
+            <diffuse>
+              <color>0.6 0.3 0.1 1.0</color>
+            </diffuse>
+            <transparent opaque="A_ZERO">
+              <color>1.0 1.0 1.0 0.8</color>
+            </transparent>
+            <transparency>
+              <float>0.8</float>
+            </transparency>
+          </lambert>
+        </technique>
+      </profile_COMMON>
+    </effect>
+    <effect id="BlinnFX">
+      <profile_COMMON>
+        <technique sid="common">
+          <blinn>
+            <emission>
+              <color>0.02 0.02 0.02 1.0</color>
+            </emission>
+            <ambient>
+              <color>0.2 0.2 0.2 1.0</color>
+            </ambient>
+            <diffuse>
+              <color>0.1 0.5 0.8 1.0</color>
+            </diffuse>
+            <specular>
+              <color>0.9 0.9 0.9 1.0</color>
+            </specular>
+            <shininess>
+              <float>32.0</float>
+            </shininess>
+            <reflective>
+              <color>0.1 0.1 0.1 1.0</color>
+            </reflective>
+            <reflectivity>
+              <float>0.1</float>
+            </reflectivity>
+            <transparent opaque="A_ONE">
+              <color>1.0 1.0 1.0 1.0</color>
+            </transparent>
+            <transparency>
+              <float>1.0</float>
+            </transparency>
+            <index_of_refraction>
+              <float>1.33</float>
+            </index_of_refraction>
+          </blinn>
+        </technique>
+      </profile_COMMON>
+    </effect>
+  </library_effects>
+  <library_materials>
+    <material id="PhongAdvMat" name="PhongAdvMat">
+      <instance_effect url="#PhongAdvFX"/>
+    </material>
+    <material id="LambertMat" name="LambertMat">
+      <instance_effect url="#LambertFX"/>
+    </material>
+    <material id="BlinnMat" name="BlinnMat">
+      <instance_effect url="#BlinnFX"/>
+    </material>
+  </library_materials>
+  <library_geometries>
+    <geometry id="Plane" name="Plane">
+      <mesh>
+        <source id="plane-pos">
+          <float_array id="plane-pos-arr" count="12">-1 0 -1  1 0 -1  1 0 1  -1 0 1</float_array>
+          <technique_common>
+            <accessor source="#plane-pos-arr" count="4" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="plane-uv">
+          <float_array id="plane-uv-arr" count="8">0 0  1 0  1 1  0 1</float_array>
+          <technique_common>
+            <accessor source="#plane-uv-arr" count="4" stride="2">
+              <param name="S" type="float"/>
+              <param name="T" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <vertices id="plane-verts">
+          <input semantic="POSITION" source="#plane-pos"/>
+        </vertices>
+        <triangles count="2" material="phong_group">
+          <input semantic="VERTEX" source="#plane-verts" offset="0"/>
+          <input semantic="TEXCOORD" source="#plane-uv" offset="1" set="0"/>
+          <p>0 0  1 1  2 2  0 0  2 2  3 3</p>
+        </triangles>
+      </mesh>
+    </geometry>
+  </library_geometries>
+  <library_visual_scenes>
+    <visual_scene id="Scene" name="Scene">
+      <node id="PlaneNode" name="PlaneNode" type="NODE">
+        <instance_geometry url="#Plane">
+          <bind_material>
+            <technique_common>
+              <instance_material symbol="phong_group" target="#PhongAdvMat">
+                <bind_vertex_input semantic="UVMap" input_semantic="2" input_set="0"/>
+              </instance_material>
+            </technique_common>
+          </bind_material>
+        </instance_geometry>
+      </node>
+    </visual_scene>
+  </library_visual_scenes>
+  <scene>
+    <instance_visual_scene url="#Scene"/>
+  </scene>
+</COLLADA>

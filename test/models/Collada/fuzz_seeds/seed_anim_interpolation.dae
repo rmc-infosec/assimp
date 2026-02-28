@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1">
+  <asset><created>2024-01-01</created><modified>2024-01-01</modified></asset>
+  <library_geometries>
+    <geometry id="box">
+      <mesh>
+        <source id="box-pos">
+          <float_array id="box-pos-array" count="9">0 0 0 1 0 0 0 1 0</float_array>
+          <technique_common>
+            <accessor source="#box-pos-array" count="3" stride="3">
+              <param name="X" type="float"/><param name="Y" type="float"/><param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <vertices id="box-vtx"><input semantic="POSITION" source="#box-pos"/></vertices>
+        <triangles count="1">
+          <input semantic="VERTEX" source="#box-vtx" offset="0"/>
+          <p>0 1 2</p>
+        </triangles>
+      </mesh>
+    </geometry>
+  </library_geometries>
+  <library_animations>
+    <animation id="bezier-anim">
+      <source id="bz-input">
+        <float_array id="bz-input-array" count="3">0 0.5 1</float_array>
+        <technique_common>
+          <accessor source="#bz-input-array" count="3" stride="1">
+            <param name="TIME" type="float"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <source id="bz-output">
+        <float_array id="bz-output-array" count="3">0 5 10</float_array>
+        <technique_common>
+          <accessor source="#bz-output-array" count="3" stride="1">
+            <param name="VALUE" type="float"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <source id="bz-interp">
+        <Name_array id="bz-interp-array" count="3">BEZIER BEZIER BEZIER</Name_array>
+        <technique_common>
+          <accessor source="#bz-interp-array" count="3" stride="1">
+            <param name="INTERPOLATION" type="name"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <source id="bz-intangent">
+        <float_array id="bz-intangent-array" count="6">0 0 0.4 3 0.9 8</float_array>
+        <technique_common>
+          <accessor source="#bz-intangent-array" count="3" stride="2">
+            <param name="X" type="float"/><param name="Y" type="float"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <source id="bz-outtangent">
+        <float_array id="bz-outtangent-array" count="6">0.1 2 0.6 7 1 10</float_array>
+        <technique_common>
+          <accessor source="#bz-outtangent-array" count="3" stride="2">
+            <param name="X" type="float"/><param name="Y" type="float"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <sampler id="bz-sampler">
+        <input semantic="INPUT" source="#bz-input"/>
+        <input semantic="OUTPUT" source="#bz-output"/>
+        <input semantic="INTERPOLATION" source="#bz-interp"/>
+        <input semantic="IN_TANGENT" source="#bz-intangent"/>
+        <input semantic="OUT_TANGENT" source="#bz-outtangent"/>
+      </sampler>
+      <channel source="#bz-sampler" target="BoxNode/translate.X"/>
+    </animation>
+    <animation id="step-anim">
+      <source id="st-input">
+        <float_array id="st-input-array" count="2">0 1</float_array>
+        <technique_common>
+          <accessor source="#st-input-array" count="2" stride="1">
+            <param name="TIME" type="float"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <source id="st-output">
+        <float_array id="st-output-array" count="2">0 90</float_array>
+        <technique_common>
+          <accessor source="#st-output-array" count="2" stride="1">
+            <param name="ANGLE" type="float"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <source id="st-interp">
+        <Name_array id="st-interp-array" count="2">STEP STEP</Name_array>
+        <technique_common>
+          <accessor source="#st-interp-array" count="2" stride="1">
+            <param name="INTERPOLATION" type="name"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <sampler id="st-sampler">
+        <input semantic="INPUT" source="#st-input"/>
+        <input semantic="OUTPUT" source="#st-output"/>
+        <input semantic="INTERPOLATION" source="#st-interp"/>
+      </sampler>
+      <channel source="#st-sampler" target="BoxNode/rotateY.ANGLE"/>
+    </animation>
+  </library_animations>
+  <library_visual_scenes>
+    <visual_scene id="Scene">
+      <node id="BoxNode" name="BoxNode" type="NODE">
+        <translate sid="translate">0 0 0</translate>
+        <rotate sid="rotateY">0 1 0 0</rotate>
+        <instance_geometry url="#box"/>
+      </node>
+    </visual_scene>
+  </library_visual_scenes>
+  <scene><instance_visual_scene url="#Scene"/></scene>
+</COLLADA>

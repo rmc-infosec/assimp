@@ -1,0 +1,31 @@
+
+# Polygon patches (pp) with normals
+from 0 5 10
+at 0 0 0
+up 0 1 0
+angle 45
+resolution 512 512
+
+l 5 10 5
+
+# smooth shaded triangle patch
+f 0.8 0.2 0.2 0.7 0.3 40 0 1
+pp 3
+-2 0 0  0 0 1
+2 0 0  0 0 1
+0 2 0  0 0.707 0.707
+
+# another patch - quad
+f 0.2 0.8 0.2 0.6 0.4 30 0 1
+pp 4
+-3 -2 -2  0 0 1
+3 -2 -2  0 0 1
+3 2 -2  0 0.5 0.866
+-3 2 -2  0 0.5 0.866
+
+# simple polygon for comparison
+f 0.2 0.2 0.8 0.5 0.5 20 0 1
+p 3
+-1 -3 1
+1 -3 1
+0 -2 2

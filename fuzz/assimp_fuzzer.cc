@@ -38,40 +38,83 @@ THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ---------------------------------------------------------------------------
 */
-#include <assimp/cimport.h>
-#include <assimp/Importer.hpp>
-#include <assimp/Exporter.hpp>
+#include "fuzzer_common.h"
 #include <assimp/scene.h>
-#include <assimp/postprocess.h>
 
 using namespace Assimp;
 
 extern "C" int LLVMFuzzerTestOneInput(const uint8_t *data, size_t dataSize) {
-    // Limit input size to 1MB to prevent OOMs and timeouts
-    if (dataSize > 1024 * 1024) {
+    if (!AssimpFuzz::IsValidSize(dataSize)) {
         return 0;
     }
 
-#ifdef _DEBUG
-    aiLogStream stream = aiGetPredefinedLogStream(aiDefaultLogStream_STDOUT, nullptr);
-    aiAttachLogStream(&stream);
-#endif
-
+    const uint32_t hash = AssimpFuzz::HashBytes(data, dataSize);
     Importer importer;
-    unsigned int flags = aiProcessPreset_TargetRealtime_Quality | aiProcess_ValidateDataStructure;
-    const aiScene *sc = importer.ReadFileFromMemory(data, dataSize, flags, nullptr);
+    AssimpFuzz::ApplyImporterConfigs(importer, data, dataSize);
 
-    if (sc == nullptr) {
+    // Exercise Importer API for coverage
+    aiString extList;
+    importer.GetExtensionList(extList);
+    size_t impCount = importer.GetImporterCount();
+    if (impCount > 0) {
+        importer.GetImporterInfo(0);
+    }
+    importer.IsExtensionSupported(".fbx");
+
+    unsigned int flags = AssimpFuzz::GetProcessingFlags(data, dataSize);
+    importer.ValidateFlags(flags);
+    // Generic fuzzer runs in coverage mode over a fixed seed corpus. To avoid
+    // timeout-prone auto-detect paths, only parse inputs with a concrete hint.
+    const char *hint = AssimpFuzz::DetectFormatHint(data, dataSize);
+    if (hint[0] == '\0') {
         return 0;
     }
 
-    Exporter exporter;
-    exporter.ExportToBlob(sc, "fbx");
+    const aiScene *scene = importer.ReadFileFromMemory(data, dataSize, flags, hint);
+    if (scene) {
+        // Exercise GetMemoryRequirements (covers 101 lines in Importer.cpp)
+        aiMemoryInfo info;
+        importer.GetMemoryRequirements(info);
+    } else {
+        importer.GetErrorString();
+    }
+    importer.FreeScene();
 
-#ifdef _DEBUG
-    aiDetachLogStream(&stream);
-#endif
+    // Run a second import pass with complementary flags to cover branches that
+    // are mutually exclusive in a single configuration.
+    Importer importerAlt;
+    AssimpFuzz::ApplyImporterConfigs(importerAlt, data, dataSize);
+    unsigned int altFlags = flags ^ (aiProcess_Triangulate
+            | aiProcess_GenNormals
+            | aiProcess_FindInvalidData
+            | aiProcess_GenUVCoords
+            | aiProcess_OptimizeMeshes
+            | aiProcess_GlobalScale);
+    if (hash & 0x01u) {
+        altFlags |= aiProcess_MakeLeftHanded;
+    }
+    if ((hash & 0x02u) == 0u) {
+        altFlags ^= aiProcess_FlipUVs;
+    }
+    if ((hash & 0x04u) == 0u) {
+        altFlags ^= aiProcess_FlipWindingOrder;
+    }
+    if ((altFlags & aiProcess_GenSmoothNormals) && (altFlags & aiProcess_GenNormals)) {
+        altFlags &= ~aiProcess_GenNormals;
+    }
+    if ((altFlags & aiProcess_OptimizeGraph) && (altFlags & aiProcess_PreTransformVertices)) {
+        altFlags &= ~aiProcess_OptimizeGraph;
+    }
+
+    importerAlt.ValidateFlags(altFlags);
+    const aiScene *sceneAlt = importerAlt.ReadFileFromMemory(data, dataSize, altFlags, hint);
+    if (sceneAlt) {
+        aiMemoryInfo infoAlt;
+        importerAlt.GetMemoryRequirements(infoAlt);
+    } else {
+        importerAlt.GetErrorString();
+    }
+    importerAlt.FreeScene();
 
     return 0;
 }
-

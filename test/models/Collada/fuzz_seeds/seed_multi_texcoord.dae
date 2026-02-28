@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1">
+  <asset>
+    <created>2026-01-01</created>
+    <modified>2026-01-01</modified>
+  </asset>
+  <library_images>
+    <image id="diffuse-img"><init_from>diffuse.png</init_from></image>
+    <image id="lightmap-img"><init_from>lightmap.png</init_from></image>
+  </library_images>
+  <library_effects>
+    <effect id="multitex-fx">
+      <profile_COMMON>
+        <newparam sid="diffuse-surface">
+          <surface type="2D"><init_from>diffuse-img</init_from></surface>
+        </newparam>
+        <newparam sid="diffuse-sampler">
+          <sampler2D><source>diffuse-surface</source></sampler2D>
+        </newparam>
+        <newparam sid="lightmap-surface">
+          <surface type="2D"><init_from>lightmap-img</init_from></surface>
+        </newparam>
+        <newparam sid="lightmap-sampler">
+          <sampler2D><source>lightmap-surface</source></sampler2D>
+        </newparam>
+        <technique sid="common">
+          <phong>
+            <diffuse>
+              <texture texture="diffuse-sampler" texcoord="UVSet0"/>
+            </diffuse>
+            <ambient>
+              <texture texture="lightmap-sampler" texcoord="UVSet1"/>
+            </ambient>
+            <specular><color>0.5 0.5 0.5 1</color></specular>
+            <shininess><float>32</float></shininess>
+          </phong>
+        </technique>
+      </profile_COMMON>
+    </effect>
+  </library_effects>
+  <library_materials>
+    <material id="multitex-mat" name="MultiTexMaterial">
+      <instance_effect url="#multitex-fx"/>
+    </material>
+  </library_materials>
+  <library_geometries>
+    <geometry id="quad-geo" name="MultiTexQuad">
+      <mesh>
+        <source id="quad-pos">
+          <float_array id="quad-pos-array" count="18">
+            -1 0 -1  1 0 -1  1 0 1  -1 0 1  0 0.5 0  0 0 0
+          </float_array>
+          <technique_common>
+            <accessor source="#quad-pos-array" count="6" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="quad-normals">
+          <float_array id="quad-normals-array" count="9">0 1 0 0 1 0 0 0.7 0.7</float_array>
+          <technique_common>
+            <accessor source="#quad-normals-array" count="3" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="quad-uv0">
+          <float_array id="quad-uv0-array" count="12">0 0 1 0 1 1 0 1 0.5 0.5 0.5 0</float_array>
+          <technique_common>
+            <accessor source="#quad-uv0-array" count="6" stride="2">
+              <param name="S" type="float"/>
+              <param name="T" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="quad-uv1">
+          <float_array id="quad-uv1-array" count="12">0 0 2 0 2 2 0 2 1 1 1 0</float_array>
+          <technique_common>
+            <accessor source="#quad-uv1-array" count="6" stride="2">
+              <param name="S" type="float"/>
+              <param name="T" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <vertices id="quad-vtx">
+          <input semantic="POSITION" source="#quad-pos"/>
+        </vertices>
+        <triangles count="4" material="multitex-mat">
+          <input semantic="VERTEX" source="#quad-vtx" offset="0"/>
+          <input semantic="NORMAL" source="#quad-normals" offset="1"/>
+          <input semantic="TEXCOORD" source="#quad-uv0" offset="2" set="0"/>
+          <input semantic="TEXCOORD" source="#quad-uv1" offset="3" set="1"/>
+          <p>
+            0 0 0 0  1 0 1 1  2 0 2 2
+            0 0 0 0  2 0 2 2  3 0 3 3
+            0 1 0 0  1 1 1 1  4 2 4 4
+            2 1 2 2  3 1 3 3  5 2 5 5
+          </p>
+        </triangles>
+      </mesh>
+    </geometry>
+  </library_geometries>
+  <library_visual_scenes>
+    <visual_scene id="Scene" name="Scene">
+      <node id="QuadNode" name="QuadNode" type="NODE">
+        <matrix sid="transform">1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</matrix>
+        <instance_geometry url="#quad-geo">
+          <bind_material>
+            <technique_common>
+              <instance_material symbol="multitex-mat" target="#multitex-mat">
+                <bind_vertex_input semantic="UVSet0" input_semantic="TEXCOORD" input_set="0"/>
+                <bind_vertex_input semantic="UVSet1" input_semantic="TEXCOORD" input_set="1"/>
+              </instance_material>
+            </technique_common>
+          </bind_material>
+        </instance_geometry>
+      </node>
+    </visual_scene>
+  </library_visual_scenes>
+  <scene>
+    <instance_visual_scene url="#Scene"/>
+  </scene>
+</COLLADA>

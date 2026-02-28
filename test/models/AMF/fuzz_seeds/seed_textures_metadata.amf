@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<amf unit="meter" version="1.1">
+  <metadata type="name">TexMetaTest</metadata>
+  <metadata type="author">CovGen</metadata>
+  <metadata type="description">Texture coord paths</metadata>
+  <metadata type="cad">TestCAD</metadata>
+  <metadata type="tolerance">0.01</metadata>
+  <texture id="t1" width="2" height="2" depth="1" tiled="true" type="grayscale">AQIDBA==</texture>
+  <texture id="t2" width="2" height="2" depth="1" tiled="false" type="grayscale">/P37+w==</texture>
+  <texture id="t3" width="2" height="2" depth="1" tiled="true" type="grayscale">QEBgYA==</texture>
+  <material id="m1">
+    <color><r>0.5</r><g>0.5</g><b>0.5</b><a>1</a></color>
+  </material>
+  <object id="1">
+    <metadata type="name">TexObj</metadata>
+    <mesh>
+      <vertices>
+        <vertex><coordinates><x>0</x><y>0</y><z>0</z></coordinates></vertex>
+        <vertex><coordinates><x>1</x><y>0</y><z>0</z></coordinates></vertex>
+        <vertex><coordinates><x>.5</x><y>1</y><z>0</z></coordinates></vertex>
+        <vertex><coordinates><x>0</x><y>0</y><z>1</z></coordinates></vertex>
+        <vertex><coordinates><x>1</x><y>0</y><z>1</z></coordinates></vertex>
+        <vertex><coordinates><x>.5</x><y>1</y><z>1</z></coordinates></vertex>
+      </vertices>
+      <volume>
+        <triangle>
+          <v1>0</v1><v2>1</v2><v3>2</v3>
+          <texmap rtexid="t1" gtexid="t2" btexid="t3" atexid="t1">
+            <utex1>0</utex1><utex2>1</utex2><utex3>.5</utex3>
+            <vtex1>0</vtex1><vtex2>0</vtex2><vtex3>1</vtex3>
+          </texmap>
+        </triangle>
+        <triangle>
+          <v1>0</v1><v2>1</v2><v3>3</v3>
+          <texmap rtexid="t1" gtexid="t2" btexid="t3" atexid="t1">
+            <utex1>.2</utex1><utex2>.8</utex2><utex3>.5</utex3>
+            <vtex1>.1</vtex1><vtex2>.1</vtex2><vtex3>.9</vtex3>
+          </texmap>
+        </triangle>
+        <triangle>
+          <v1>1</v1><v2>2</v2><v3>3</v3>
+          <texmap rtexid="t1" gtexid="t2" btexid="t3" atexid="t1">
+            <utex1>0</utex1><utex2>1</utex2><utex3>0</utex3>
+            <vtex1>0</vtex1><vtex2>1</vtex2><vtex3>0</vtex3>
+          </texmap>
+        </triangle>
+        <triangle>
+          <v1>3</v1><v2>4</v2><v3>5</v3>
+          <texmap rtexid="t1" gtexid="t2" btexid="t3" atexid="t1">
+            <utex1>0</utex1><utex2>1</utex2><utex3>.5</utex3>
+            <vtex1>0</vtex1><vtex2>0</vtex2><vtex3>1</vtex3>
+          </texmap>
+        </triangle>
+      </volume>
+      <volume>
+        <triangle>
+          <v1>0</v1><v2>2</v2><v3>5</v3>
+          <texmap rtexid="t2" gtexid="t3" btexid="t1">
+            <utex1>0</utex1><utex2>1</utex2><utex3>.5</utex3>
+            <vtex1>0</vtex1><vtex2>0</vtex2><vtex3>1</vtex3>
+          </texmap>
+        </triangle>
+        <triangle>
+          <v1>0</v1><v2>5</v2><v3>3</v3>
+          <texmap rtexid="t2" gtexid="t3" btexid="t1">
+            <utex1>.3</utex1><utex2>.7</utex2><utex3>.1</utex3>
+            <vtex1>.2</vtex1><vtex2>.8</vtex2><vtex3>.5</vtex3>
+          </texmap>
+        </triangle>
+      </volume>
+    </mesh>
+  </object>
+  <object id="2">
+    <mesh>
+      <vertices>
+        <vertex>
+          <coordinates><x>5</x><y>0</y><z>0</z></coordinates>
+          <color><r>1</r><g>0</g><b>0</b><a>1</a></color>
+        </vertex>
+        <vertex>
+          <coordinates><x>6</x><y>0</y><z>0</z></coordinates>
+          <color><r>0</r><g>1</g><b>0</b><a>1</a></color>
+        </vertex>
+        <vertex>
+          <coordinates><x>5.5</x><y>1</y><z>0</z></coordinates>
+          <color><r>0</r><g>0</g><b>1</b><a>1</a></color>
+        </vertex>
+        <vertex><coordinates><x>5.5</x><y>.5</y><z>1</z></coordinates></vertex>
+      </vertices>
+      <volume materialid="m1">
+        <triangle>
+          <v1>0</v1><v2>1</v2><v3>2</v3>
+          <color><r>0.8</r><g>0.2</g><b>0.8</b><a>1</a></color>
+        </triangle>
+        <triangle><v1>0</v1><v2>1</v2><v3>3</v3></triangle>
+        <triangle><v1>1</v1><v2>2</v2><v3>3</v3></triangle>
+      </volume>
+    </mesh>
+  </object>
+</amf>

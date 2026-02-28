@@ -1,0 +1,128 @@
+{
+  "asset": {
+    "generator": "seed",
+    "version": "1.0",
+    "premultipliedAlpha": true
+  },
+  "scene": "scene0",
+  "scenes": {
+    "scene0": {
+      "nodes": ["node0"]
+    }
+  },
+  "nodes": {
+    "node0": {
+      "meshes": ["mesh0"],
+      "name": "TechNode"
+    }
+  },
+  "meshes": {
+    "mesh0": {
+      "primitives": [{
+        "attributes": {
+          "POSITION": "acc_pos"
+        },
+        "indices": "acc_idx",
+        "material": "mat0",
+        "mode": 4
+      }]
+    }
+  },
+  "accessors": {
+    "acc_pos": {
+      "bufferView": "bv_pos",
+      "byteOffset": 0,
+      "componentType": 5126,
+      "count": 3,
+      "type": "VEC3"
+    },
+    "acc_idx": {
+      "bufferView": "bv_idx",
+      "byteOffset": 0,
+      "componentType": 5123,
+      "count": 3,
+      "type": "SCALAR"
+    }
+  },
+  "bufferViews": {
+    "bv_pos": {
+      "buffer": "buf0",
+      "byteOffset": 0,
+      "byteLength": 36
+    },
+    "bv_idx": {
+      "buffer": "buf0",
+      "byteOffset": 36,
+      "byteLength": 6
+    }
+  },
+  "buffers": {
+    "buf0": {
+      "uri": "data:application/octet-stream;base64,AAAAAAAAAAAAAAAAAACAPwAAAAAAAAAAAAAAAAAAgD8AAAAAAAABAAIA",
+      "byteLength": 42
+    }
+  },
+  "materials": {
+    "mat0": {
+      "technique": "tech0",
+      "values": {
+        "diffuse": [0.5, 0.5, 0.8, 1.0],
+        "ambient": [0.1, 0.1, 0.1, 1.0]
+      }
+    }
+  },
+  "techniques": {
+    "tech0": {
+      "parameters": {
+        "position": {
+          "semantic": "POSITION",
+          "type": 35665
+        },
+        "modelViewMatrix": {
+          "semantic": "MODELVIEW",
+          "type": 35676
+        },
+        "projectionMatrix": {
+          "semantic": "PROJECTION",
+          "type": 35676
+        },
+        "normalMatrix": {
+          "semantic": "MODELVIEWINVERSE",
+          "type": 35675
+        },
+        "diffuse": {
+          "type": 35666
+        }
+      },
+      "program": "prog0",
+      "attributes": {
+        "a_position": "position"
+      },
+      "uniforms": {
+        "u_modelView": "modelViewMatrix",
+        "u_projection": "projectionMatrix",
+        "u_diffuse": "diffuse"
+      },
+      "states": {
+        "enable": [2929, 2884]
+      }
+    }
+  },
+  "programs": {
+    "prog0": {
+      "vertexShader": "vs0",
+      "fragmentShader": "fs0",
+      "attributes": ["a_position"]
+    }
+  },
+  "shaders": {
+    "vs0": {
+      "type": 35633,
+      "uri": "data:text/plain;base64,dm9pZCBtYWluKCl7fQ=="
+    },
+    "fs0": {
+      "type": 35632,
+      "uri": "data:text/plain;base64,dm9pZCBtYWluKCl7fQ=="
+    }
+  }
+}

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1">
+  <asset><created>2024-01-01</created><modified>2024-01-01</modified></asset>
+  <library_images>
+    <image id="diffuse-img" name="DiffuseImage">
+      <init_from>texture.png</init_from>
+    </image>
+    <image id="normal-img" name="NormalImage">
+      <init_from>normal.png</init_from>
+    </image>
+  </library_images>
+  <library_effects>
+    <effect id="complex-fx">
+      <profile_COMMON>
+        <newparam sid="diffuse-surface">
+          <surface type="2D"><init_from>diffuse-img</init_from></surface>
+        </newparam>
+        <newparam sid="diffuse-sampler">
+          <sampler2D><source>diffuse-surface</source></sampler2D>
+        </newparam>
+        <newparam sid="normal-surface">
+          <surface type="2D"><init_from>normal-img</init_from></surface>
+        </newparam>
+        <newparam sid="normal-sampler">
+          <sampler2D><source>normal-surface</source></sampler2D>
+        </newparam>
+        <technique sid="common">
+          <phong>
+            <emission><color>0 0 0 1</color></emission>
+            <ambient><color>0.1 0.1 0.1 1</color></ambient>
+            <diffuse><texture texture="diffuse-sampler" texcoord="UVMap"/></diffuse>
+            <specular><color>0.5 0.5 0.5 1</color></specular>
+            <shininess><float>32</float></shininess>
+            <reflective><color>0.1 0.1 0.1 1</color></reflective>
+            <reflectivity><float>0.1</float></reflectivity>
+            <transparent opaque="A_ONE"><color>1 1 1 1</color></transparent>
+            <transparency><float>1</float></transparency>
+            <index_of_refraction><float>1.5</float></index_of_refraction>
+          </phong>
+        </technique>
+        <extra>
+          <technique profile="OpenCOLLADA">
+            <bump><texture texture="normal-sampler" texcoord="UVMap"/></bump>
+          </technique>
+        </extra>
+      </profile_COMMON>
+    </effect>
+    <effect id="simple-fx">
+      <profile_COMMON>
+        <technique sid="common">
+          <lambert>
+            <emission><color>0.1 0 0 1</color></emission>
+            <ambient><color>0.2 0.2 0.2 1</color></ambient>
+            <diffuse><color>0.8 0.2 0.2 1</color></diffuse>
+          </lambert>
+        </technique>
+      </profile_COMMON>
+    </effect>
+  </library_effects>
+  <library_materials>
+    <material id="complex-mat" name="ComplexMaterial"><instance_effect url="#complex-fx"/></material>
+    <material id="simple-mat" name="SimpleMaterial"><instance_effect url="#simple-fx"/></material>
+  </library_materials>
+  <library_geometries>
+    <geometry id="plane" name="Plane">
+      <mesh>
+        <source id="plane-pos">
+          <float_array id="plane-pos-array" count="12">-1 0 -1 1 0 -1 1 0 1 -1 0 1</float_array>
+          <technique_common>
+            <accessor source="#plane-pos-array" count="4" stride="3">
+              <param name="X" type="float"/><param name="Y" type="float"/><param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="plane-uv">
+          <float_array id="plane-uv-array" count="8">0 0 1 0 1 1 0 1</float_array>
+          <technique_common>
+            <accessor source="#plane-uv-array" count="4" stride="2">
+              <param name="S" type="float"/><param name="T" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="plane-normals">
+          <float_array id="plane-normals-array" count="3">0 1 0</float_array>
+          <technique_common>
+            <accessor source="#plane-normals-array" count="1" stride="3">
+              <param name="X" type="float"/><param name="Y" type="float"/><param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <vertices id="plane-vtx"><input semantic="POSITION" source="#plane-pos"/></vertices>
+        <triangles count="2" material="complex-mat">
+          <input semantic="VERTEX" source="#plane-vtx" offset="0"/>
+          <input semantic="NORMAL" source="#plane-normals" offset="1"/>
+          <input semantic="TEXCOORD" source="#plane-uv" offset="2" set="0"/>
+          <p>0 0 0 1 0 1 2 0 2 0 0 0 2 0 2 3 0 3</p>
+        </triangles>
+      </mesh>
+    </geometry>
+  </library_geometries>
+  <library_visual_scenes>
+    <visual_scene id="Scene" name="Scene">
+      <node id="PlaneNode" name="PlaneNode" type="NODE">
+        <instance_geometry url="#plane">
+          <bind_material>
+            <technique_common>
+              <instance_material symbol="complex-mat" target="#complex-mat">
+                <bind_vertex_input semantic="UVMap" input_semantic="TEXCOORD" input_set="0"/>
+              </instance_material>
+            </technique_common>
+          </bind_material>
+        </instance_geometry>
+      </node>
+    </visual_scene>
+  </library_visual_scenes>
+  <scene><instance_visual_scene url="#Scene"/></scene>
+</COLLADA>

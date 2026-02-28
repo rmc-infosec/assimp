@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1">
+<asset><created>2026-01-01</created><modified>2026-01-01</modified></asset>
+<library_geometries>
+  <geometry id="stripGeo" name="TriStrip">
+    <mesh>
+      <source id="sp">
+        <float_array id="spa" count="21">
+          0 0 0  1 0 0  0.5 1 0  1.5 1 0  1 2 0  2 2 0  1.5 3 0
+        </float_array>
+        <technique_common><accessor source="#spa" count="7" stride="3">
+          <param name="X" type="float"/><param name="Y" type="float"/><param name="Z" type="float"/>
+        </accessor></technique_common>
+      </source>
+      <source id="sn">
+        <float_array id="sna" count="3">0 0 1</float_array>
+        <technique_common><accessor source="#sna" count="1" stride="3">
+          <param name="X" type="float"/><param name="Y" type="float"/><param name="Z" type="float"/>
+        </accessor></technique_common>
+      </source>
+      <source id="suv">
+        <float_array id="suva" count="14">0 0 1 0 0.5 1 1.5 1 1 2 2 2 1.5 3</float_array>
+        <technique_common><accessor source="#suva" count="7" stride="2">
+          <param name="S" type="float"/><param name="T" type="float"/>
+        </accessor></technique_common>
+      </source>
+      <vertices id="sv"><input semantic="POSITION" source="#sp"/></vertices>
+      <tristrips count="5">
+        <input semantic="VERTEX" source="#sv" offset="0"/>
+        <input semantic="NORMAL" source="#sn" offset="1"/>
+        <input semantic="TEXCOORD" source="#suv" offset="2" set="0"/>
+        <p>0 0 0 1 0 1 2 0 2 3 0 3 4 0 4 5 0 5 6 0 6</p>
+      </tristrips>
+    </mesh>
+  </geometry>
+  <geometry id="lineGeo" name="Lines">
+    <mesh>
+      <source id="lp">
+        <float_array id="lpa" count="12">0 0 0 1 0 0 1 1 0 0 1 0</float_array>
+        <technique_common><accessor source="#lpa" count="4" stride="3">
+          <param name="X" type="float"/><param name="Y" type="float"/><param name="Z" type="float"/>
+        </accessor></technique_common>
+      </source>
+      <vertices id="lv"><input semantic="POSITION" source="#lp"/></vertices>
+      <lines count="2">
+        <input semantic="VERTEX" source="#lv" offset="0"/>
+        <p>0 1 2 3</p>
+      </lines>
+    </mesh>
+  </geometry>
+  <geometry id="lstripGeo" name="LineStrip">
+    <mesh>
+      <source id="lsp">
+        <float_array id="lspa" count="15">0 0 0 1 0 0 1 1 0 0 1 0 0 0 0</float_array>
+        <technique_common><accessor source="#lspa" count="5" stride="3">
+          <param name="X" type="float"/><param name="Y" type="float"/><param name="Z" type="float"/>
+        </accessor></technique_common>
+      </source>
+      <vertices id="lsv"><input semantic="POSITION" source="#lsp"/></vertices>
+      <linestrips count="4">
+        <input semantic="VERTEX" source="#lsv" offset="0"/>
+        <p>0 1 2 3 4</p>
+      </linestrips>
+    </mesh>
+  </geometry>
+</library_geometries>
+<library_visual_scenes>
+  <visual_scene id="Scene" name="Scene">
+    <node id="StripNode" name="StripNode" type="NODE">
+      <translate sid="translate">0 0 0</translate>
+      <instance_geometry url="#stripGeo"/>
+    </node>
+    <node id="LineNode" name="LineNode" type="NODE">
+      <translate sid="translate">3 0 0</translate>
+      <instance_geometry url="#lineGeo"/>
+    </node>
+    <node id="LStripNode" name="LStripNode" type="NODE">
+      <translate sid="translate">6 0 0</translate>
+      <instance_geometry url="#lstripGeo"/>
+    </node>
+  </visual_scene>
+</library_visual_scenes>
+<scene><instance_visual_scene url="#Scene"/></scene>
+</COLLADA>

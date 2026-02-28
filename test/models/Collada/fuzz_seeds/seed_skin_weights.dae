@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1">
+<asset><created>2026-01-01</created><modified>2026-01-01</modified></asset>
+<library_effects>
+  <effect id="eff"><profile_COMMON><technique sid="common">
+    <phong><diffuse><color>0.6 0.6 0.8 1</color></diffuse></phong>
+  </technique></profile_COMMON></effect>
+</library_effects>
+<library_materials>
+  <material id="smat" name="SM"><instance_effect url="#eff"/></material>
+</library_materials>
+<library_geometries>
+  <geometry id="arm" name="Arm">
+    <mesh>
+      <source id="ap"><float_array id="apa" count="18">-0.5 0 0 0.5 0 0 0.5 1 0 -0.5 1 0 0.5 2 0 -0.5 2 0</float_array>
+        <technique_common><accessor source="#apa" count="6" stride="3">
+          <param name="X" type="float"/><param name="Y" type="float"/><param name="Z" type="float"/>
+        </accessor></technique_common></source>
+      <source id="an"><float_array id="ana" count="3">0 0 1</float_array>
+        <technique_common><accessor source="#ana" count="1" stride="3">
+          <param name="X" type="float"/><param name="Y" type="float"/><param name="Z" type="float"/>
+        </accessor></technique_common></source>
+      <vertices id="av"><input semantic="POSITION" source="#ap"/></vertices>
+      <triangles material="smsym" count="4"><input semantic="VERTEX" source="#av" offset="0"/>
+        <input semantic="NORMAL" source="#an" offset="1"/>
+        <p>0 0 1 0 2 0 0 0 2 0 3 0 3 0 2 0 4 0 3 0 4 0 5 0</p></triangles>
+    </mesh>
+  </geometry>
+</library_geometries>
+<library_controllers>
+  <controller id="sc" name="SC">
+    <skin source="#arm">
+      <bind_shape_matrix>1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</bind_shape_matrix>
+      <source id="sj"><Name_array id="sja" count="3">Root Mid Tip</Name_array>
+        <technique_common><accessor source="#sja" count="3" stride="1">
+          <param name="JOINT" type="name"/>
+        </accessor></technique_common></source>
+      <source id="sb"><float_array id="sba" count="48">1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 1 0 0 0 0 1 0 -1 0 0 1 0 0 0 0 1 1 0 0 0 0 1 0 -2 0 0 1 0 0 0 0 1</float_array>
+        <technique_common><accessor source="#sba" count="3" stride="16">
+          <param name="TRANSFORM" type="float4x4"/>
+        </accessor></technique_common></source>
+      <source id="sw"><float_array id="swa" count="6">1 0.7 0.3 0.5 0.5 1</float_array>
+        <technique_common><accessor source="#swa" count="6" stride="1">
+          <param name="WEIGHT" type="float"/>
+        </accessor></technique_common></source>
+      <joints>
+        <input semantic="JOINT" source="#sj"/>
+        <input semantic="INV_BIND_MATRIX" source="#sb"/>
+      </joints>
+      <vertex_weights count="6">
+        <input semantic="JOINT" source="#sj" offset="0"/>
+        <input semantic="WEIGHT" source="#sw" offset="1"/>
+        <vcount>1 1 2 2 2 1</vcount>
+        <v>0 0 0 0 0 1 1 2 0 3 1 4 1 4 2 5</v>
+      </vertex_weights>
+    </skin>
+  </controller>
+</library_controllers>
+<library_animations>
+  <animation id="ja" name="JA">
+    <source id="ji"><float_array id="jia" count="3">0 0.5 1</float_array>
+      <technique_common><accessor source="#jia" count="3" stride="1">
+        <param name="TIME" type="float"/>
+      </accessor></technique_common></source>
+    <source id="jo"><float_array id="joa" count="48">1 0 0 0 0 1 0 1 0 0 1 0 0 0 0 1 0.866 -0.5 0 0 0.5 0.866 0 1 0 0 1 0 0 0 0 1 0.5 -0.866 0 0 0.866 0.5 0 1 0 0 1 0 0 0 0 1</float_array>
+      <technique_common><accessor source="#joa" count="3" stride="16">
+        <param name="TRANSFORM" type="float4x4"/>
+      </accessor></technique_common></source>
+    <source id="jp"><Name_array id="jpa" count="3">LINEAR LINEAR LINEAR</Name_array>
+      <technique_common><accessor source="#jpa" count="3" stride="1">
+        <param name="INTERPOLATION" type="name"/>
+      </accessor></technique_common></source>
+    <sampler id="js">
+      <input semantic="INPUT" source="#ji"/>
+      <input semantic="OUTPUT" source="#jo"/>
+      <input semantic="INTERPOLATION" source="#jp"/>
+    </sampler>
+    <channel source="#js" target="Mid/transform"/>
+  </animation>
+</library_animations>
+<library_visual_scenes>
+  <visual_scene id="Scene" name="Scene">
+    <node id="Armature" name="Armature" type="NODE">
+      <matrix sid="transform">1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</matrix>
+      <node id="Root" name="Root" sid="Root" type="JOINT">
+        <matrix sid="transform">1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</matrix>
+        <node id="Mid" name="Mid" sid="Mid" type="JOINT">
+          <matrix sid="transform">1 0 0 0 0 1 0 1 0 0 1 0 0 0 0 1</matrix>
+          <node id="Tip" name="Tip" sid="Tip" type="JOINT">
+            <matrix sid="transform">1 0 0 0 0 1 0 1 0 0 1 0 0 0 0 1</matrix>
+          </node>
+        </node>
+      </node>
+    </node>
+    <node id="AN" name="AN" type="NODE">
+      <matrix sid="transform">1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</matrix>
+      <instance_controller url="#sc">
+        <skeleton>#Root</skeleton>
+        <bind_material><technique_common>
+          <instance_material symbol="smsym" target="#smat"/>
+        </technique_common></bind_material>
+      </instance_controller>
+    </node>
+  </visual_scene>
+</library_visual_scenes>
+<scene><instance_visual_scene url="#Scene"/></scene>
+</COLLADA>

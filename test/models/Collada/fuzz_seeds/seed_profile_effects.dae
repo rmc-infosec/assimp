@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="utf-8"?>
+<COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1">
+  <asset>
+    <created>2026-01-01</created>
+    <modified>2026-01-01</modified>
+  </asset>
+  <library_images>
+    <image id="diffuse-img" name="DiffuseImage">
+      <init_from>diffuse_texture.png</init_from>
+    </image>
+    <image id="specular-img" name="SpecularImage">
+      <init_from>specular_texture.png</init_from>
+    </image>
+    <image id="emission-img" name="EmissionImage">
+      <init_from>emission_texture.png</init_from>
+    </image>
+    <image id="bump-img" name="BumpImage">
+      <init_from>bump_texture.png</init_from>
+    </image>
+    <image id="reflect-img" name="ReflectImage">
+      <init_from>reflect_texture.png</init_from>
+    </image>
+  </library_images>
+  <library_effects>
+    <effect id="phong-fx">
+      <profile_COMMON>
+        <newparam sid="diffuse-surface">
+          <surface type="2D"><init_from>diffuse-img</init_from></surface>
+        </newparam>
+        <newparam sid="diffuse-sampler">
+          <sampler2D>
+            <source>diffuse-surface</source>
+            <wrap_s>WRAP</wrap_s>
+            <wrap_t>WRAP</wrap_t>
+            <minfilter>LINEAR_MIPMAP_LINEAR</minfilter>
+            <magfilter>LINEAR</magfilter>
+          </sampler2D>
+        </newparam>
+        <newparam sid="specular-surface">
+          <surface type="2D"><init_from>specular-img</init_from></surface>
+        </newparam>
+        <newparam sid="specular-sampler">
+          <sampler2D><source>specular-surface</source></sampler2D>
+        </newparam>
+        <newparam sid="emission-surface">
+          <surface type="2D"><init_from>emission-img</init_from></surface>
+        </newparam>
+        <newparam sid="emission-sampler">
+          <sampler2D><source>emission-surface</source></sampler2D>
+        </newparam>
+        <newparam sid="bump-surface">
+          <surface type="2D"><init_from>bump-img</init_from></surface>
+        </newparam>
+        <newparam sid="bump-sampler">
+          <sampler2D><source>bump-surface</source></sampler2D>
+        </newparam>
+        <newparam sid="reflect-surface">
+          <surface type="2D"><init_from>reflect-img</init_from></surface>
+        </newparam>
+        <newparam sid="reflect-sampler">
+          <sampler2D><source>reflect-surface</source></sampler2D>
+        </newparam>
+        <technique sid="common">
+          <phong>
+            <emission>
+              <texture texture="emission-sampler" texcoord="UVMap"/>
+            </emission>
+            <ambient>
+              <color>0.1 0.1 0.1 1</color>
+            </ambient>
+            <diffuse>
+              <texture texture="diffuse-sampler" texcoord="UVMap"/>
+            </diffuse>
+            <specular>
+              <texture texture="specular-sampler" texcoord="UVMap"/>
+            </specular>
+            <shininess>
+              <float>64</float>
+            </shininess>
+            <reflective>
+              <texture texture="reflect-sampler" texcoord="UVMap"/>
+            </reflective>
+            <reflectivity>
+              <float>0.3</float>
+            </reflectivity>
+            <transparent opaque="A_ONE">
+              <color>1 1 1 1</color>
+            </transparent>
+            <transparency>
+              <float>1</float>
+            </transparency>
+            <index_of_refraction>
+              <float>1.5</float>
+            </index_of_refraction>
+          </phong>
+        </technique>
+        <extra>
+          <technique profile="OpenCOLLADA">
+            <bump>
+              <texture texture="bump-sampler" texcoord="UVMap"/>
+            </bump>
+          </technique>
+        </extra>
+      </profile_COMMON>
+    </effect>
+    <effect id="blinn-fx">
+      <profile_COMMON>
+        <technique sid="common">
+          <blinn>
+            <emission><color>0 0 0 1</color></emission>
+            <ambient><color>0.2 0.2 0.2 1</color></ambient>
+            <diffuse><color>0.6 0.1 0.1 1</color></diffuse>
+            <specular><color>0.9 0.9 0.9 1</color></specular>
+            <shininess><float>25</float></shininess>
+          </blinn>
+        </technique>
+      </profile_COMMON>
+    </effect>
+    <effect id="lambert-fx">
+      <profile_COMMON>
+        <technique sid="common">
+          <lambert>
+            <emission><color>0.05 0.05 0.0 1</color></emission>
+            <ambient><color>0.15 0.15 0.15 1</color></ambient>
+            <diffuse><color>0.2 0.8 0.2 1</color></diffuse>
+          </lambert>
+        </technique>
+      </profile_COMMON>
+    </effect>
+    <effect id="constant-fx">
+      <profile_COMMON>
+        <technique sid="common">
+          <constant>
+            <emission><color>1.0 0.5 0.0 1</color></emission>
+            <reflective><color>0 0 0 1</color></reflective>
+            <reflectivity><float>0</float></reflectivity>
+          </constant>
+        </technique>
+      </profile_COMMON>
+    </effect>
+  </library_effects>
+  <library_materials>
+    <material id="phong-mat" name="PhongMaterial">
+      <instance_effect url="#phong-fx"/>
+    </material>
+    <material id="blinn-mat" name="BlinnMaterial">
+      <instance_effect url="#blinn-fx"/>
+    </material>
+    <material id="lambert-mat" name="LambertMaterial">
+      <instance_effect url="#lambert-fx"/>
+    </material>
+    <material id="constant-mat" name="ConstantMaterial">
+      <instance_effect url="#constant-fx"/>
+    </material>
+  </library_materials>
+  <library_geometries>
+    <geometry id="cube-geo" name="Cube">
+      <mesh>
+        <source id="cube-pos">
+          <float_array id="cube-pos-array" count="24">
+            -1 -1 -1  1 -1 -1  1 1 -1  -1 1 -1
+            -1 -1 1   1 -1 1   1 1 1   -1 1 1
+          </float_array>
+          <technique_common>
+            <accessor source="#cube-pos-array" count="8" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="cube-normals">
+          <float_array id="cube-normals-array" count="18">
+            0 0 -1  0 0 1  0 -1 0  1 0 0  0 1 0  -1 0 0
+          </float_array>
+          <technique_common>
+            <accessor source="#cube-normals-array" count="6" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="cube-uv">
+          <float_array id="cube-uv-array" count="8">0 0 1 0 1 1 0 1</float_array>
+          <technique_common>
+            <accessor source="#cube-uv-array" count="4" stride="2">
+              <param name="S" type="float"/>
+              <param name="T" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <vertices id="cube-vtx">
+          <input semantic="POSITION" source="#cube-pos"/>
+        </vertices>
+        <triangles count="4" material="phong-mat">
+          <input semantic="VERTEX" source="#cube-vtx" offset="0"/>
+          <input semantic="NORMAL" source="#cube-normals" offset="1"/>
+          <input semantic="TEXCOORD" source="#cube-uv" offset="2" set="0"/>
+          <p>
+            0 0 0  1 0 1  2 0 2
+            0 0 0  2 0 2  3 0 3
+            4 1 0  5 1 1  6 1 2
+            4 1 0  6 1 2  7 1 3
+          </p>
+        </triangles>
+      </mesh>
+    </geometry>
+    <geometry id="plane-geo" name="Plane">
+      <mesh>
+        <source id="plane-pos">
+          <float_array id="plane-pos-array" count="12">-2 0 -2 2 0 -2 2 0 2 -2 0 2</float_array>
+          <technique_common>
+            <accessor source="#plane-pos-array" count="4" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <vertices id="plane-vtx">
+          <input semantic="POSITION" source="#plane-pos"/>
+        </vertices>
+        <triangles count="2" material="lambert-mat">
+          <input semantic="VERTEX" source="#plane-vtx" offset="0"/>
+          <p>0 1 2 0 2 3</p>
+        </triangles>
+      </mesh>
+    </geometry>
+  </library_geometries>
+  <library_visual_scenes>
+    <visual_scene id="Scene" name="Scene">
+      <node id="CubeNode" name="CubeNode" type="NODE">
+        <translate>0 1 0</translate>
+        <instance_geometry url="#cube-geo">
+          <bind_material>
+            <technique_common>
+              <instance_material symbol="phong-mat" target="#phong-mat">
+                <bind_vertex_input semantic="UVMap" input_semantic="TEXCOORD" input_set="0"/>
+              </instance_material>
+            </technique_common>
+          </bind_material>
+        </instance_geometry>
+      </node>
+      <node id="PlaneNode" name="PlaneNode" type="NODE">
+        <instance_geometry url="#plane-geo">
+          <bind_material>
+            <technique_common>
+              <instance_material symbol="lambert-mat" target="#lambert-mat"/>
+            </technique_common>
+          </bind_material>
+        </instance_geometry>
+      </node>
+    </visual_scene>
+  </library_visual_scenes>
+  <scene>
+    <instance_visual_scene url="#Scene"/>
+  </scene>
+</COLLADA>

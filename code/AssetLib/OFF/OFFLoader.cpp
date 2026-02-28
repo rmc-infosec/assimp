@@ -54,6 +54,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <assimp/scene.h>
 #include <assimp/DefaultLogger.hpp>
 #include <assimp/importerdesc.h>
+#include <limits>
 
 namespace Assimp {
 
@@ -151,7 +152,11 @@ void OFFImporter::InternReadFile(const std::string &pFile, aiScene *pScene, IOSy
         }
     }
     if (hasDimension) {
-        dimensions = strtoul10(car, &car);
+        const uint64_t dims64 = strtoul10_64(car, &car);
+        if (dims64 > std::numeric_limits<unsigned int>::max()) {
+            throw DeadlyImportError("OFF: Dimension count too large");
+        }
+        dimensions = static_cast<unsigned int>(dims64);
         NextToken(&car, end);
     }
     if (dimensions > 3) {
@@ -159,18 +164,36 @@ void OFFImporter::InternReadFile(const std::string &pFile, aiScene *pScene, IOSy
     }
 
     NextToken(&car, end);
-    const unsigned int numVertices = strtoul10(car, &car);
+    const uint64_t numVertices64 = strtoul10_64(car, &car);
     NextToken(&car, end);
-    const unsigned int numFaces = strtoul10(car, &car);
+    const uint64_t numFaces64 = strtoul10_64(car, &car);
     NextToken(&car, end);
-    strtoul10(car, &car); // skip edge count
+    strtoul10_64(car, &car); // skip edge count
     NextToken(&car, end);
+
+    if (numVertices64 > std::numeric_limits<unsigned int>::max()) {
+        throw DeadlyImportError("OFF: Vertex count too large");
+    }
+    if (numFaces64 > std::numeric_limits<unsigned int>::max()) {
+        throw DeadlyImportError("OFF: Face count too large");
+    }
+    const unsigned int numVertices = static_cast<unsigned int>(numVertices64);
+    const unsigned int numFaces = static_cast<unsigned int>(numFaces64);
 
     if (!numVertices) {
         throw DeadlyImportError("OFF: There are no valid vertices");
     }
     if (!numFaces) {
         throw DeadlyImportError("OFF: There are no valid faces");
+    }
+    if (numVertices > AI_MAX_ALLOC(aiVector3D)) {
+        throw DeadlyImportError("OFF: Too many vertices");
+    }
+    if (numFaces > AI_MAX_ALLOC(aiFace)) {
+        throw DeadlyImportError("OFF: Too many faces");
+    }
+    if (hasColors && numVertices > AI_MAX_ALLOC(aiColor4D)) {
+        throw DeadlyImportError("OFF: Too many vertex colors");
     }
 
     pScene->mNumMeshes = 1;

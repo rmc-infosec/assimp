@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1">
+<asset><created>2026-01-01</created><modified>2026-01-01</modified></asset>
+<library_cameras>
+  <!-- Camera with xfov + yfov + no aspect => computed aspect -->
+  <camera id="cam1" name="XYFovCam">
+    <optics><technique_common>
+      <perspective>
+        <xfov>60</xfov>
+        <yfov>45</yfov>
+        <znear>0.1</znear>
+        <zfar>1000</zfar>
+      </perspective>
+    </technique_common></optics>
+  </camera>
+  <!-- Camera with only yfov + aspect => computed xfov -->
+  <camera id="cam2" name="YFovAspectCam">
+    <optics><technique_common>
+      <perspective>
+        <yfov>60</yfov>
+        <aspect_ratio>1.777</aspect_ratio>
+        <znear>0.5</znear>
+        <zfar>500</zfar>
+      </perspective>
+    </technique_common></optics>
+  </camera>
+  <!-- Camera with xfov + aspect => no need to compute -->
+  <camera id="cam3" name="XFovAspectCam">
+    <optics><technique_common>
+      <perspective>
+        <xfov>90</xfov>
+        <aspect_ratio>1.333</aspect_ratio>
+        <znear>1</znear>
+        <zfar>100</zfar>
+      </perspective>
+    </technique_common></optics>
+  </camera>
+  <!-- Orthographic camera -->
+  <camera id="cam4" name="OrthoCam">
+    <optics><technique_common>
+      <orthographic>
+        <xmag>10</xmag>
+        <ymag>7.5</ymag>
+        <aspect_ratio>1.333</aspect_ratio>
+        <znear>0.1</znear>
+        <zfar>200</zfar>
+      </orthographic>
+    </technique_common></optics>
+  </camera>
+</library_cameras>
+<library_geometries>
+  <geometry id="geo" name="Tri">
+    <mesh>
+      <source id="p"><float_array id="pa" count="9">0 0 0 1 0 0 0.5 1 0</float_array>
+        <technique_common><accessor source="#pa" count="3" stride="3">
+          <param name="X" type="float"/><param name="Y" type="float"/><param name="Z" type="float"/>
+        </accessor></technique_common></source>
+      <vertices id="v"><input semantic="POSITION" source="#p"/></vertices>
+      <triangles count="1"><input semantic="VERTEX" source="#v" offset="0"/>
+        <p>0 1 2</p></triangles>
+    </mesh>
+  </geometry>
+</library_geometries>
+<library_visual_scenes>
+  <visual_scene id="Scene" name="Scene">
+    <node id="CamNode1" name="CamNode1" type="NODE">
+      <translate sid="translate">0 0 5</translate>
+      <instance_camera url="#cam1"/>
+    </node>
+    <node id="CamNode2" name="CamNode2" type="NODE">
+      <translate sid="translate">5 0 5</translate>
+      <instance_camera url="#cam2"/>
+    </node>
+    <node id="CamNode3" name="CamNode3" type="NODE">
+      <translate sid="translate">-5 0 5</translate>
+      <instance_camera url="#cam3"/>
+    </node>
+    <node id="CamNode4" name="CamNode4" type="NODE">
+      <translate sid="translate">0 10 0</translate>
+      <instance_camera url="#cam4"/>
+    </node>
+    <node id="GeoNode" name="GeoNode" type="NODE">
+      <instance_geometry url="#geo"/>
+    </node>
+    <evaluate_scene>
+      <render camera_node="#CamNode1"/>
+    </evaluate_scene>
+  </visual_scene>
+</library_visual_scenes>
+<scene><instance_visual_scene url="#Scene"/></scene>
+</COLLADA>

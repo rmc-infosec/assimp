@@ -1,0 +1,148 @@
+Metric (key = "distance") {float {1.0}}
+Metric (key = "angle") {float {1.0}}
+Metric (key = "time") {float {1.0}}
+Metric (key = "up") {string {"z"}}
+
+Node $node1
+{
+    Name {string {"Armature"}}
+
+    Transform %transform
+    {
+        float[16]
+        {
+            {1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1}
+        }
+    }
+
+    BoneNode $bone1
+    {
+        Name {string {"Bone"}}
+
+        Transform %transform
+        {
+            float[16]
+            {
+                {1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, -1, 1}
+            }
+        }
+
+        Animation
+        {
+            Track (target = %transform)
+            {
+                Time
+                {
+                    Key {float {0.0, 0.5, 1.0}}
+                }
+
+                Value
+                {
+                    Key
+                    {
+                        float[16]
+                        {
+                            {1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, -1, 1},
+                            {0.707, 0.707, 0, 0, -0.707, 0.707, 0, 0, 0, 0, 1, 0, 0, 0, -1, 1},
+                            {0, 1, 0, 0, -1, 0, 0, 0, 0, 0, 1, 0, 0, 0, -1, 1}
+                        }
+                    }
+                }
+            }
+        }
+
+        BoneNode $bone2
+        {
+            Name {string {"Bone.001"}}
+
+            Transform %transform
+            {
+                float[16]
+                {
+                    {1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 1, 0, 1}
+                }
+            }
+
+            Animation
+            {
+                Track (target = %transform)
+                {
+                    Time
+                    {
+                        Key {float {0.0, 0.25, 0.5, 0.75, 1.0}}
+                    }
+
+                    Value
+                    {
+                        Key
+                        {
+                            float[16]
+                            {
+                                {1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 1, 0, 1},
+                                {1, 0, 0, 0, 0, 0.924, 0.383, 0, 0, -0.383, 0.924, 0, 0, 1, 0, 1},
+                                {1, 0, 0, 0, 0, 0.707, 0.707, 0, 0, -0.707, 0.707, 0, 0, 1, 0, 1},
+                                {1, 0, 0, 0, 0, 0.924, 0.383, 0, 0, -0.383, 0.924, 0, 0, 1, 0, 1},
+                                {1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 1, 0, 1}
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+GeometryNode $geonode1
+{
+    Name {string {"SkinnedCube"}}
+    ObjectRef {ref {$geometry1}}
+    MaterialRef {ref {$material1}}
+
+    Transform
+    {
+        float[16]
+        {
+            {1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1}
+        }
+    }
+}
+
+GeometryObject $geometry1
+{
+    Mesh (primitive = "triangles")
+    {
+        VertexArray (attrib = "position")
+        {
+            float[3]
+            {
+                {-0.5, 0, -0.5}, {0.5, 0, -0.5}, {0.5, 2, -0.5},
+                {-0.5, 2, -0.5}, {-0.5, 0, 0.5}, {0.5, 0, 0.5},
+                {0.5, 2, 0.5}, {-0.5, 2, 0.5}
+            }
+        }
+
+        VertexArray (attrib = "normal")
+        {
+            float[3]
+            {
+                {0, 0, -1}, {0, 0, -1}, {0, 0, -1},
+                {0, 0, -1}, {0, 0, 1}, {0, 0, 1},
+                {0, 0, 1}, {0, 0, 1}
+            }
+        }
+
+        IndexArray
+        {
+            unsigned_int32[3]
+            {
+                {0, 1, 2}, {0, 2, 3}, {4, 5, 6}, {4, 6, 7}
+            }
+        }
+    }
+}
+
+Material $material1
+{
+    Name {string {"BoneMat"}}
+    Color (attrib = "diffuse") {float[3] {{0.4, 0.6, 0.8}}}
+}

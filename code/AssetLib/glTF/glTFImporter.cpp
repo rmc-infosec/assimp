@@ -154,16 +154,58 @@ const aiImporterDesc *glTFImporter::GetInfo() const {
 }
 
 bool glTFImporter::CanRead(const std::string &pFile, IOSystem *pIOHandler, bool /* checkSig */) const {
-    Asset asset(pIOHandler);
-    try {
-        asset.Load(pFile,
-                   CheckMagicToken(
-                       pIOHandler, pFile, AI_GLB_MAGIC_NUMBER, 1, 0,
-                       static_cast<unsigned int>(strlen(AI_GLB_MAGIC_NUMBER))));
-        return asset.asset;
-    } catch (...) {
+    if (!pIOHandler) {
         return false;
     }
+
+    std::unique_ptr<IOStream> stream(pIOHandler->Open(pFile));
+    if (!stream) {
+        return false;
+    }
+
+    const size_t fileSize = stream->FileSize();
+    if (fileSize < 2) {
+        return false;
+    }
+
+    // Check GLB header first. Only accept version 1 here.
+    if (fileSize >= sizeof(GLB_Header)) {
+        GLB_Header header;
+        if (stream->Read(&header, sizeof(header), 1) == 1) {
+            if (strncmp(reinterpret_cast<char *>(header.magic), AI_GLB_MAGIC_NUMBER, sizeof(header.magic)) == 0) {
+                AI_SWAP4(header.version);
+                AI_SWAP4(header.sceneFormat);
+                return header.version == 1 && header.sceneFormat == SceneFormat_JSON;
+            }
+        }
+    }
+
+    // Fallback to JSON parse for text .gltf files.
+    stream->Seek(0, aiOrigin_SET);
+    std::vector<char> sceneData(fileSize + 1);
+    sceneData[fileSize] = '\0';
+    if (stream->Read(sceneData.data(), 1, fileSize) != fileSize) {
+        return false;
+    }
+
+    glTFCommon::Document doc;
+    doc.ParseInsitu(sceneData.data());
+    if (doc.HasParseError() || !doc.IsObject()) {
+        return false;
+    }
+
+    auto assetIt = doc.FindMember("asset");
+    if (assetIt == doc.MemberEnd() || !assetIt->value.IsObject()) {
+        return false;
+    }
+
+    auto versionIt = assetIt->value.FindMember("version");
+    if (versionIt == assetIt->value.MemberEnd() || !versionIt->value.IsString()) {
+        return false;
+    }
+
+    const char *version = versionIt->value.GetString();
+    return version && version[0] == '1';
 }
  
 void glTFImporter::ImportMaterials(Asset &r) const {
@@ -351,7 +393,7 @@ void glTFImporter::ImportMeshes(Asset &r) {
                     faces = new aiFace[nFaces];
                     SetFace(faces[0], data.GetUInt(0), data.GetUInt(1), data.GetUInt(2));
                     for (unsigned int i = 3; i < count; ++i) {
-                        SetFace(faces[i - 2], faces[i - 1].mIndices[1], faces[i - 1].mIndices[2], data.GetUInt(i));
+                        SetFace(faces[i - 2], faces[i - 3].mIndices[1], faces[i - 3].mIndices[2], data.GetUInt(i));
                     }
                     break;
                 }
@@ -360,7 +402,7 @@ void glTFImporter::ImportMeshes(Asset &r) {
                     faces = new aiFace[nFaces];
                     SetFace(faces[0], data.GetUInt(0), data.GetUInt(1), data.GetUInt(2));
                     for (unsigned int i = 3; i < count; ++i) {
-                        SetFace(faces[i - 2], faces[0].mIndices[0], faces[i - 1].mIndices[2], data.GetUInt(i));
+                        SetFace(faces[i - 2], faces[0].mIndices[0], faces[i - 3].mIndices[2], data.GetUInt(i));
                     }
                     break;
                 }
@@ -423,7 +465,7 @@ void glTFImporter::ImportMeshes(Asset &r) {
                     faces = new aiFace[nFaces];
                     SetFace(faces[0], 0, 1, 2);
                     for (unsigned int i = 3; i < count; ++i) {
-                        SetFace(faces[i - 2], faces[i - 1].mIndices[1], faces[i - 1].mIndices[2], i);
+                        SetFace(faces[i - 2], faces[i - 3].mIndices[1], faces[i - 3].mIndices[2], i);
                     }
                     break;
                 }
@@ -432,7 +474,7 @@ void glTFImporter::ImportMeshes(Asset &r) {
                     faces = new aiFace[nFaces];
                     SetFace(faces[0], 0, 1, 2);
                     for (unsigned int i = 3; i < count; ++i) {
-                        SetFace(faces[i - 2], faces[0].mIndices[0], faces[i - 1].mIndices[2], i);
+                        SetFace(faces[i - 2], faces[0].mIndices[0], faces[i - 3].mIndices[2], i);
                     }
                     break;
                 }

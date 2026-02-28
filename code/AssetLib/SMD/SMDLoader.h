@@ -54,6 +54,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <assimp/anim.h>
 #include <assimp/material.h>
 
+#include <unordered_map>
 #include <vector>
 
 struct aiNode;
@@ -343,6 +344,9 @@ private:
     /** Configuration option: frame to be loaded */
     unsigned int configFrameID;
 
+    /** Configuration option: maximum number of triangles to parse (0 = unlimited). */
+    size_t configMaxTriangles = 0;
+
     /** Buffer to hold the loaded file */
     std::vector<char> mBuffer;
     char *mEnd;
@@ -358,6 +362,7 @@ private:
     /** Array of textures found in the file
      */
     std::vector<std::string> aszTextures;
+    std::unordered_map<std::string, unsigned int> textureIndexMap;
 
     /** Array of triangles found in the file
      */

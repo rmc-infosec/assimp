@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1">
+<asset><created>2026-01-01</created><modified>2026-01-01</modified></asset>
+<library_geometries>
+  <geometry id="tri" name="Tri">
+    <mesh>
+      <source id="tp"><float_array id="tpa" count="9">0 0 0 1 0 0 0.5 1 0</float_array>
+        <technique_common><accessor source="#tpa" count="3" stride="3">
+          <param name="X" type="float"/><param name="Y" type="float"/><param name="Z" type="float"/>
+        </accessor></technique_common></source>
+      <vertices id="tv"><input semantic="POSITION" source="#tp"/></vertices>
+      <triangles count="1"><input semantic="VERTEX" source="#tv" offset="0"/>
+        <p>0 1 2</p></triangles>
+    </mesh>
+  </geometry>
+</library_geometries>
+<library_animations>
+  <animation id="la" name="LookAtAnim">
+    <source id="lt"><float_array id="lta" count="3">0 0.5 1</float_array>
+      <technique_common><accessor source="#lta" count="3" stride="1">
+        <param name="TIME" type="float"/>
+      </accessor></technique_common></source>
+    <source id="lv"><float_array id="lva" count="27">
+      0 0 5 0 0 0 0 1 0
+      2 0 5 0 0 0 0 1 0
+      4 0 5 0 0 0 0 1 0
+    </float_array>
+      <technique_common><accessor source="#lva" count="3" stride="9">
+        <param name="X" type="float"/><param name="Y" type="float"/><param name="Z" type="float"/>
+        <param name="X" type="float"/><param name="Y" type="float"/><param name="Z" type="float"/>
+        <param name="X" type="float"/><param name="Y" type="float"/><param name="Z" type="float"/>
+      </accessor></technique_common></source>
+    <sampler id="ls">
+      <input semantic="INPUT" source="#lt"/>
+      <input semantic="OUTPUT" source="#lv"/>
+    </sampler>
+    <channel source="#ls" target="CamNode/lookAt"/>
+  </animation>
+</library_animations>
+<library_visual_scenes>
+  <visual_scene id="Scene" name="Scene">
+    <node id="CamNode" name="CamNode" type="NODE">
+      <!-- lookat: eye(0,0,5) target(0,0,0) up(0,1,0) -->
+      <lookat sid="lookAt">0 0 5 0 0 0 0 1 0</lookat>
+      <instance_geometry url="#tri"/>
+    </node>
+    <node id="Child1" name="Child1" type="NODE">
+      <translate sid="pos">1 2 3</translate>
+      <scale sid="scl">2 2 2</scale>
+      <instance_geometry url="#tri"/>
+    </node>
+  </visual_scene>
+</library_visual_scenes>
+<scene><instance_visual_scene url="#Scene"/></scene>
+</COLLADA>

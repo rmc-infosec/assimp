@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<irr_scene>
+  <attributes>
+    <string name="Name" value="root"/>
+  </attributes>
+  <node type="empty">
+    <attributes>
+      <string name="Name" value="Parent"/>
+      <vector3d name="Position" value="0, 0, 0"/>
+      <vector3d name="Rotation" value="0, 45, 0"/>
+      <vector3d name="Scale" value="1, 1, 1"/>
+    </attributes>
+    <node type="mesh">
+      <attributes>
+        <string name="Name" value="Child1"/>
+        <string name="Mesh" value="box.irrmesh"/>
+        <vector3d name="Position" value="2, 0, 0"/>
+        <vector3d name="Rotation" value="0, 0, 0"/>
+        <vector3d name="Scale" value="0.5, 0.5, 0.5"/>
+      </attributes>
+      <node type="mesh">
+        <attributes>
+          <string name="Name" value="Grandchild"/>
+          <string name="Mesh" value="box.irrmesh"/>
+          <vector3d name="Position" value="1, 0, 0"/>
+          <vector3d name="Rotation" value="0, 0, 30"/>
+          <vector3d name="Scale" value="0.3, 0.3, 0.3"/>
+        </attributes>
+      </node>
+    </node>
+    <node type="mesh">
+      <attributes>
+        <string name="Name" value="Child2"/>
+        <string name="Mesh" value="sphere.irrmesh"/>
+        <vector3d name="Position" value="-2, 0, 0"/>
+        <vector3d name="Rotation" value="0, 0, 0"/>
+        <vector3d name="Scale" value="0.5, 0.5, 0.5"/>
+      </attributes>
+    </node>
+  </node>
+  <node type="light">
+    <attributes>
+      <string name="Name" value="SpotLight"/>
+      <vector3d name="Position" value="0, 5, -5"/>
+      <enum name="LightType" value="Spot"/>
+      <colorf name="DiffuseColor" value="1, 1, 0.8, 1"/>
+      <float name="Radius" value="50"/>
+      <float name="OuterCone" value="45"/>
+      <float name="InnerCone" value="30"/>
+      <float name="Falloff" value="2"/>
+    </attributes>
+  </node>
+  <node type="camera">
+    <attributes>
+      <string name="Name" value="OrthoCamera"/>
+      <vector3d name="Position" value="0, 10, 0"/>
+      <vector3d name="Target" value="0, 0, 0"/>
+      <vector3d name="UpVector" value="0, 0, 1"/>
+      <float name="Fovy" value="0.785"/>
+      <float name="ZNear" value="0.1"/>
+      <float name="ZFar" value="1000"/>
+      <bool name="Orthogonal" value="true"/>
+    </attributes>
+  </node>
+</irr_scene>

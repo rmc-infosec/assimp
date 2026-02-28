@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1">
+<asset><created>2026</created><modified>2026</modified></asset>
+<library_geometries>
+<geometry id="g"><mesh>
+<source id="gp"><float_array id="gpa" count="9">0 0 0 1 0 0 0 1 0</float_array>
+<technique_common><accessor source="#gpa" count="3" stride="3">
+<param name="X" type="float"/><param name="Y" type="float"/><param name="Z" type="float"/>
+</accessor></technique_common></source>
+<vertices id="gv"><input semantic="POSITION" source="#gp"/></vertices>
+<triangles count="1"><input semantic="VERTEX" source="#gv" offset="0"/><p>0 1 2</p></triangles>
+</mesh></geometry>
+</library_geometries>
+<library_animations>
+<animation id="atx">
+<source id="xt"><float_array id="xta" count="3">0 1 2</float_array>
+<technique_common><accessor source="#xta" count="3" stride="1"><param name="TIME" type="float"/></accessor></technique_common></source>
+<source id="xv"><float_array id="xva" count="3">0 5 0</float_array>
+<technique_common><accessor source="#xva" count="3" stride="1"><param name="VALUE" type="float"/></accessor></technique_common></source>
+<source id="xi"><Name_array id="xia" count="3">LINEAR LINEAR LINEAR</Name_array>
+<technique_common><accessor source="#xia" count="3" stride="1"><param name="INTERPOLATION" type="name"/></accessor></technique_common></source>
+<sampler id="xs"><input semantic="INPUT" source="#xt"/><input semantic="OUTPUT" source="#xv"/><input semantic="INTERPOLATION" source="#xi"/></sampler>
+<channel source="#xs" target="NA/translate.X"/>
+</animation>
+<animation id="aty">
+<source id="yt"><float_array id="yta" count="3">0 1 2</float_array>
+<technique_common><accessor source="#yta" count="3" stride="1"><param name="TIME" type="float"/></accessor></technique_common></source>
+<source id="yv"><float_array id="yva" count="3">0 3 0</float_array>
+<technique_common><accessor source="#yva" count="3" stride="1"><param name="VALUE" type="float"/></accessor></technique_common></source>
+<source id="yi"><Name_array id="yia" count="3">LINEAR LINEAR LINEAR</Name_array>
+<technique_common><accessor source="#yia" count="3" stride="1"><param name="INTERPOLATION" type="name"/></accessor></technique_common></source>
+<sampler id="ys"><input semantic="INPUT" source="#yt"/><input semantic="OUTPUT" source="#yv"/><input semantic="INTERPOLATION" source="#yi"/></sampler>
+<channel source="#ys" target="NA/translate.Y"/>
+</animation>
+<animation id="arz">
+<source id="rt"><float_array id="rta" count="3">0 1 2</float_array>
+<technique_common><accessor source="#rta" count="3" stride="1"><param name="TIME" type="float"/></accessor></technique_common></source>
+<source id="rv"><float_array id="rva" count="3">0 270 0</float_array>
+<technique_common><accessor source="#rva" count="3" stride="1"><param name="ANGLE" type="float"/></accessor></technique_common></source>
+<source id="ri"><Name_array id="ria" count="3">LINEAR LINEAR LINEAR</Name_array>
+<technique_common><accessor source="#ria" count="3" stride="1"><param name="INTERPOLATION" type="name"/></accessor></technique_common></source>
+<sampler id="rs"><input semantic="INPUT" source="#rt"/><input semantic="OUTPUT" source="#rv"/><input semantic="INTERPOLATION" source="#ri"/></sampler>
+<channel source="#rs" target="NA/rotateZ.ANGLE"/>
+</animation>
+<animation id="am">
+<source id="mmt"><float_array id="mmta" count="2">0 1</float_array>
+<technique_common><accessor source="#mmta" count="2" stride="1"><param name="TIME" type="float"/></accessor></technique_common></source>
+<source id="mmv"><float_array id="mmva" count="2">0 5</float_array>
+<technique_common><accessor source="#mmva" count="2" stride="1"><param name="VALUE" type="float"/></accessor></technique_common></source>
+<source id="mmi"><Name_array id="mmia" count="2">LINEAR LINEAR</Name_array>
+<technique_common><accessor source="#mmia" count="2" stride="1"><param name="INTERPOLATION" type="name"/></accessor></technique_common></source>
+<sampler id="mms"><input semantic="INPUT" source="#mmt"/><input semantic="OUTPUT" source="#mmv"/><input semantic="INTERPOLATION" source="#mmi"/></sampler>
+<channel source="#mms" target="NB/matrix(3)(0)"/>
+</animation>
+</library_animations>
+<library_animation_clips>
+<animation_clip id="c1" name="WalkCycle">
+<instance_animation url="#atx"/>
+<instance_animation url="#aty"/>
+<instance_animation url="#arz"/>
+</animation_clip>
+<animation_clip id="c2" name="MatClip">
+<instance_animation url="#am"/>
+</animation_clip>
+</library_animation_clips>
+<library_visual_scenes>
+<visual_scene id="Scene">
+<node id="NA" name="NA" type="NODE">
+<translate sid="translate">0 0 0</translate>
+<rotate sid="rotateZ">0 0 1 0</rotate>
+<instance_geometry url="#g"/>
+</node>
+<node id="NB" name="NB" type="NODE">
+<matrix sid="matrix">1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</matrix>
+<instance_geometry url="#g"/>
+</node>
+</visual_scene>
+</library_visual_scenes>
+<scene><instance_visual_scene url="#Scene"/></scene>
+</COLLADA>

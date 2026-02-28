@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1">
+  <asset>
+    <created>2025-01-01</created>
+    <modified>2025-01-01</modified>
+    <unit name="kilometer" meter="1000"/>
+    <up_axis>X_UP</up_axis>
+  </asset>
+  <library_geometries>
+    <geometry id="quad-mesh" name="QuadMesh">
+      <mesh>
+        <source id="quad-pos">
+          <float_array id="quad-pos-arr" count="12">0 0 0 1 0 0 1 1 0 0 1 0</float_array>
+          <technique_common>
+            <accessor source="#quad-pos-arr" count="4" stride="3">
+              <param name="X" type="float"/><param name="Y" type="float"/><param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <vertices id="quad-verts"><input semantic="POSITION" source="#quad-pos"/></vertices>
+        <triangles count="2">
+          <input semantic="VERTEX" source="#quad-verts" offset="0"/>
+          <p>0 1 2 0 2 3</p>
+        </triangles>
+      </mesh>
+    </geometry>
+  </library_geometries>
+  <library_animations>
+    <animation id="anim-translate" name="TranslateAnim">
+      <source id="anim-input">
+        <float_array id="anim-input-arr" count="3">0.0 0.5 1.0</float_array>
+        <technique_common>
+          <accessor source="#anim-input-arr" count="3" stride="1">
+            <param name="TIME" type="float"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <source id="anim-output">
+        <float_array id="anim-output-arr" count="9">0 0 0 1 2 3 0 0 0</float_array>
+        <technique_common>
+          <accessor source="#anim-output-arr" count="3" stride="3">
+            <param name="X" type="float"/><param name="Y" type="float"/><param name="Z" type="float"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <source id="anim-interp">
+        <Name_array id="anim-interp-arr" count="3">LINEAR LINEAR LINEAR</Name_array>
+        <technique_common>
+          <accessor source="#anim-interp-arr" count="3" stride="1">
+            <param name="INTERPOLATION" type="name"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <sampler id="anim-sampler">
+        <input semantic="INPUT" source="#anim-input"/>
+        <input semantic="OUTPUT" source="#anim-output"/>
+        <input semantic="INTERPOLATION" source="#anim-interp"/>
+      </sampler>
+      <channel source="#anim-sampler" target="QuadNode/translate"/>
+    </animation>
+  </library_animations>
+  <library_visual_scenes>
+    <visual_scene id="Scene" name="Scene">
+      <node id="QuadNode" name="QuadNode" type="NODE">
+        <translate sid="translate">0 0 0</translate>
+        <instance_geometry url="#quad-mesh"/>
+      </node>
+    </visual_scene>
+  </library_visual_scenes>
+  <scene><instance_visual_scene url="#Scene"/></scene>
+</COLLADA>

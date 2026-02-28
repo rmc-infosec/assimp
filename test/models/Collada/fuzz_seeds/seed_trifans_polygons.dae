@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1">
+  <asset>
+    <created>2026-02-13T00:00:00</created>
+    <modified>2026-02-13T00:00:00</modified>
+  </asset>
+
+  <library_geometries>
+    <geometry id="trifans-mesh" name="trifans">
+      <mesh>
+        <source id="trifans-positions">
+          <float_array id="trifans-positions-array" count="15">
+            0 0 0
+            1 0 0
+            1 1 0
+            0 1 0
+            -1 0 0
+          </float_array>
+          <technique_common>
+            <accessor source="#trifans-positions-array" count="5" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+
+        <source id="trifans-normals">
+          <float_array id="trifans-normals-array" count="15">
+            0 0 1
+            0 0 1
+            0 0 1
+            0 0 1
+            0 0 1
+          </float_array>
+          <technique_common>
+            <accessor source="#trifans-normals-array" count="5" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+
+        <vertices id="trifans-vertices">
+          <input semantic="POSITION" source="#trifans-positions"/>
+        </vertices>
+
+        <trifans count="1" material="material0">
+          <input semantic="VERTEX" source="#trifans-vertices" offset="0"/>
+          <input semantic="NORMAL" source="#trifans-normals" offset="1"/>
+          <p>0 0 1 1 2 2 3 3 4 4</p>
+        </trifans>
+      </mesh>
+    </geometry>
+
+    <geometry id="polygons-mesh" name="polygons">
+      <mesh>
+        <source id="polygons-positions">
+          <float_array id="polygons-positions-array" count="24">
+            0 0 0
+            1 0 0
+            1 1 0
+            0 1 0
+            2 0 0
+            2 1 0
+            3 0 0
+          </float_array>
+          <technique_common>
+            <accessor source="#polygons-positions-array" count="8" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+
+        <source id="polygons-normals">
+          <float_array id="polygons-normals-array" count="24">
+            0 0 1
+            0 0 1
+            0 0 1
+            0 0 1
+            0 0 1
+            0 0 1
+            0 0 1
+          </float_array>
+          <technique_common>
+            <accessor source="#polygons-normals-array" count="8" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+
+        <vertices id="polygons-vertices">
+          <input semantic="POSITION" source="#polygons-positions"/>
+        </vertices>
+
+        <polygons count="3" material="material0">
+          <input semantic="VERTEX" source="#polygons-vertices" offset="0"/>
+          <input semantic="NORMAL" source="#polygons-normals" offset="1"/>
+          <p>0 0 1 1 2 2</p>
+          <p>2 2 3 3 4 4 5 5</p>
+          <p>5 5 6 6 7 7</p>
+        </polygons>
+      </mesh>
+    </geometry>
+  </library_geometries>
+
+  <library_visual_scenes>
+    <visual_scene id="Scene" name="Scene">
+      <node id="trifans-node" name="trifans" type="NODE">
+        <instance_geometry url="#trifans-mesh"/>
+      </node>
+      <node id="polygons-node" name="polygons" type="NODE">
+        <instance_geometry url="#polygons-mesh"/>
+      </node>
+    </visual_scene>
+  </library_visual_scenes>
+
+  <scene>
+    <instance_visual_scene url="#Scene"/>
+  </scene>
+</COLLADA>

@@ -1,0 +1,207 @@
+; FBX 7.4.0 project file
+; Tests morph/blend shape animation (DeformPercent) in FBXConverter
+
+FBXHeaderExtension:  {
+	FBXHeaderVersion: 1003
+	FBXVersion: 7400
+	Creator: "seed"
+}
+GlobalSettings:  {
+	Version: 1000
+	Properties70:  {
+		P: "UpAxis", "int", "Integer", "",1
+		P: "UpAxisSign", "int", "Integer", "",1
+		P: "FrontAxis", "int", "Integer", "",2
+		P: "FrontAxisSign", "int", "Integer", "",1
+		P: "CoordAxis", "int", "Integer", "",0
+		P: "CoordAxisSign", "int", "Integer", "",1
+		P: "OriginalUpAxis", "int", "Integer", "",1
+		P: "OriginalUpAxisSign", "int", "Integer", "",1
+		P: "UnitScaleFactor", "double", "Number", "",1
+		P: "OriginalUnitScaleFactor", "double", "Number", "",1
+	}
+}
+
+Documents:  {
+	Count: 1
+	Document: 100000, "", "Scene" {
+		Properties70:  {
+			P: "SourceObject", "object", "", ""
+			P: "ActiveAnimStackName", "KString", "", "", "Take 001"
+		}
+		RootNode: 0
+	}
+}
+
+References:  {
+}
+
+Definitions:  {
+	Version: 100
+	Count: 8
+	ObjectType: "GlobalSettings" {
+		Count: 1
+	}
+	ObjectType: "Geometry" {
+		Count: 2
+	}
+	ObjectType: "Model" {
+		Count: 1
+	}
+	ObjectType: "Material" {
+		Count: 1
+	}
+	ObjectType: "Deformer" {
+		Count: 3
+	}
+	ObjectType: "AnimationStack" {
+		Count: 1
+	}
+	ObjectType: "AnimationLayer" {
+		Count: 1
+	}
+	ObjectType: "AnimationCurveNode" {
+		Count: 1
+	}
+}
+
+Objects:  {
+	Geometry: 2000001, "Geometry::MorphBase", "Mesh" {
+		Vertices: *12 {
+			a: -1,0,0,1,0,0,0,1,0,0,0,1
+		}
+		PolygonVertexIndex: *6 {
+			a: 0,1,-3,0,2,-4
+		}
+		GeometryVersion: 124
+		LayerElementNormal: 0 {
+			Version: 102
+			Name: ""
+			MappingInformationType: "ByPolygonVertex"
+			ReferenceInformationType: "Direct"
+			Normals: *18 {
+				a: 0,0,1,0,0,1,0,0,1,0,1,0,0,1,0,0,1,0
+			}
+		}
+		LayerElementMaterial: 0 {
+			Version: 101
+			Name: ""
+			MappingInformationType: "AllSame"
+			ReferenceInformationType: "IndexToDirect"
+			Materials: *1 {
+				a: 0
+			}
+		}
+		Layer: 0 {
+			Version: 100
+			LayerElement:  {
+				Type: "LayerElementNormal"
+				TypedIndex: 0
+			}
+			LayerElement:  {
+				Type: "LayerElementMaterial"
+				TypedIndex: 0
+			}
+		}
+	}
+	Geometry: 2000002, "Geometry::MorphShape", "Shape" {
+		Version: 100
+		Indexes: *3 {
+			a: 0,1,2
+		}
+		Vertices: *9 {
+			a: -0.5,0.5,0,0.5,0.5,0,0,0.5,0
+		}
+		Normals: *9 {
+			a: 0,0,0,0,0,0,0,0,0
+		}
+	}
+	Model: 3000001, "Model::MorphMesh", "Mesh" {
+		Version: 232
+		Properties70:  {
+			P: "Lcl Translation", "Lcl Translation", "", "A",0,0,0
+			P: "Lcl Rotation", "Lcl Rotation", "", "A",0,0,0
+			P: "Lcl Scaling", "Lcl Scaling", "", "A",1,1,1
+			P: "DefaultAttributeIndex", "int", "Integer", "",0
+		}
+		Shading: T
+		Culling: "CullingOff"
+	}
+	Material: 5000001, "Material::MorphMat", "" {
+		Version: 102
+		ShadingModel: "lambert"
+		MultiLayer: 0
+		Properties70:  {
+			P: "DiffuseColor", "Color", "", "A",0.3,0.7,0.3
+		}
+	}
+	Deformer: 7000001, "Deformer::BlendShape", "BlendShape" {
+		Version: 100
+	}
+	Deformer: 7000002, "Deformer::BlendShapeChannel", "BlendShapeChannel" {
+		Version: 100
+		DeformPercent: 50
+		Properties70:  {
+			P: "DeformPercent", "double", "Number", "",50
+		}
+		FullWeights: *1 {
+			a: 100
+		}
+	}
+	AnimationStack: 6000001, "AnimStack::Take 001", "" {
+		Properties70:  {
+			P: "LocalStart", "KTime", "Time", "",0
+			P: "LocalStop", "KTime", "Time", "",46186158000
+			P: "ReferenceStart", "KTime", "Time", "",0
+			P: "ReferenceStop", "KTime", "Time", "",46186158000
+		}
+	}
+	AnimationLayer: 6100001, "AnimLayer::BaseLayer", "" {
+	}
+	AnimationCurveNode: 6200001, "AnimCurveNode::DeformPercent", "" {
+		Properties70:  {
+			P: "DeformPercent", "Number", "", "A",0
+		}
+	}
+	AnimationCurve: 6300001, "AnimCurve::DeformPercent", "" {
+		Default: 0
+		KeyVer: 4009
+		KeyTime: *3 {
+			a: 0,23093079000,46186158000
+		}
+		KeyValueFloat: *3 {
+			a: 0,100,0
+		}
+		KeyAttrFlags: *1 {
+			a: 24840
+		}
+		KeyAttrDataFloat: *4 {
+			a: 0,0,0,0
+		}
+		KeyAttrRefCount: *1 {
+			a: 3
+		}
+	}
+}
+
+Connections:  {
+	C: "OO",3000001,0
+	C: "OO",2000001,3000001
+	C: "OO",5000001,3000001
+	C: "OO",7000001,2000001
+	C: "OO",7000002,7000001
+	C: "OO",2000002,7000002
+	C: "OO",6100001,6000001
+	C: "OO",6200001,6100001
+	C: "OP",6200001,7000002,"DeformPercent"
+	C: "OP",6300001,6200001,"DeformPercent"
+}
+
+Takes:  {
+	Current: "Take 001"
+	Take: "Take 001" {
+		FileName: "Take_001.tak"
+		LocalTime: 0,46186158000
+		ReferenceTime: 0,46186158000
+	}
+}

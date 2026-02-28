@@ -1,0 +1,42 @@
+HIERARCHY
+ROOT Pelvis
+{
+  OFFSET 0.0 0.0 0.0
+  CHANNELS 6 Xposition Yposition Zposition Xrotation Yrotation Zrotation
+  JOINT Torso
+  {
+    OFFSET 0.0 10.0 0.0
+    CHANNELS 3 Xrotation Yrotation Zrotation
+    JOINT LeftShoulder
+    {
+      OFFSET -5.5 8.0 0.0
+      CHANNELS 6 Xposition Yposition Zposition Yrotation Zrotation Xrotation
+      JOINT LeftElbow
+      {
+        OFFSET -6.0 0.0 0.0
+        CHANNELS 3 Yrotation Xrotation Zrotation
+        End Site
+        {
+          OFFSET -5.0 0.0 0.0
+        }
+      }
+    }
+    JOINT RightShoulder
+    {
+      OFFSET 5.5 8.0 0.0
+      CHANNELS 3 Zrotation Yrotation Xrotation
+      End Site
+      {
+        OFFSET 5.0 0.0 0.0
+      }
+    }
+  }
+}
+MOTION
+Frames: 5
+Frame Time: 0.016667
+0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0
+0.5 1.0 0.0 10.0 5.0 -3.0 2.0 4.0 6.0 1.0 0.5 0.2 15.0 10.0 5.0 8.0 -3.0 6.0 -5.0 3.0 -7.0
+-0.5 -1.0 0.0 -10.0 -5.0 3.0 -2.0 -4.0 -6.0 -1.0 -0.5 -0.2 -15.0 -10.0 -5.0 -8.0 3.0 -6.0 5.0 -3.0 7.0
+1.0 0.0 1.0 20.0 15.0 10.0 5.0 3.0 1.0 2.0 1.0 0.5 30.0 20.0 10.0 12.0 -6.0 9.0 -10.0 6.0 -12.0
+0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0

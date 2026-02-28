@@ -1,0 +1,331 @@
+Metric (key = "distance") {float {1.0}}
+Metric (key = "angle") {int32 {1}}
+Metric (key = "time") {float {1.0}}
+Metric (key = "up") {string {"y"}}
+
+CameraNode $camnode1
+{
+    Name {string {"MainCamera"}}
+    ObjectRef {ref {$camera1}}
+
+    Transform
+    {
+        float[16]
+        {
+            {0.686, 0.728, -0.011, 0,
+             -0.317, 0.312, 0.895, 0,
+             0.655, -0.611, 0.445, 0,
+             7.48, -6.51, 5.34, 1}
+        }
+    }
+}
+
+CameraNode $camnode2
+{
+    Name {string {"TopCamera"}}
+    ObjectRef {ref {$camera2}}
+
+    Transform
+    {
+        float[16]
+        {
+            {1, 0, 0, 0, 0, 0, -1, 0, 0, 1, 0, 0, 0, 10, 0, 1}
+        }
+    }
+}
+
+CameraNode $camnode3
+{
+    Name {string {"SideCamera"}}
+    ObjectRef {ref {$camera3}}
+
+    Transform %xform_cam3
+    {
+        float[16]
+        {
+            {0, 0, 1, 0, 0, 1, 0, 0, -1, 0, 0, 0, -5, 0, 0, 1}
+        }
+    }
+}
+
+LightNode $lightnode1
+{
+    Name {string {"PointLamp"}}
+    ObjectRef {ref {$light1}}
+
+    Transform
+    {
+        float[16]
+        {
+            {1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 4, 1, 6, 1}
+        }
+    }
+}
+
+LightNode $lightnode2
+{
+    Name {string {"SpotLamp"}}
+    ObjectRef {ref {$light2}}
+
+    Transform
+    {
+        float[16]
+        {
+            {1, 0, 0, 0, 0, 0.866, -0.5, 0, 0, 0.5, 0.866, 0, 0, 5, 3, 1}
+        }
+    }
+}
+
+LightNode $lightnode3
+{
+    Name {string {"SunLamp"}}
+    ObjectRef {ref {$light3}}
+
+    Transform
+    {
+        float[16]
+        {
+            {1, 0, 0, 0, 0, 0.707, -0.707, 0, 0, 0.707, 0.707, 0, 0, 100, 100, 1}
+        }
+    }
+}
+
+GeometryNode $geonode1
+{
+    Name {string {"Floor"}}
+    ObjectRef {ref {$geometry1}}
+    MaterialRef {ref {$mat_floor}}
+
+    Transform
+    {
+        float[16]
+        {
+            {10, 0, 0, 0, 0, 10, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1}
+        }
+    }
+}
+
+GeometryNode $geonode2
+{
+    Name {string {"Pillar"}}
+    ObjectRef {ref {$geometry2}}
+    MaterialRef {ref {$mat_pillar}}
+
+    Transform
+    {
+        float[16]
+        {
+            {0.5, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0.5, 0, 2, 0, 0, 1}
+        }
+    }
+}
+
+GeometryObject $geometry1
+{
+    Mesh (primitive = "quads")
+    {
+        VertexArray (attrib = "position")
+        {
+            float[3]
+            {
+                {-1, -1, 0}, {1, -1, 0}, {1, 1, 0}, {-1, 1, 0}
+            }
+        }
+
+        VertexArray (attrib = "normal")
+        {
+            float[3]
+            {
+                {0, 0, 1}, {0, 0, 1}, {0, 0, 1}, {0, 0, 1}
+            }
+        }
+
+        VertexArray (attrib = "texcoord")
+        {
+            float[2]
+            {
+                {0, 0}, {1, 0}, {1, 1}, {0, 1}
+            }
+        }
+
+        IndexArray
+        {
+            unsigned_int32[4]
+            {
+                {0, 1, 2, 3}
+            }
+        }
+    }
+}
+
+GeometryObject $geometry2
+{
+    Mesh (primitive = "triangles")
+    {
+        VertexArray (attrib = "position")
+        {
+            float[3]
+            {
+                {-1, 0, -1}, {1, 0, -1}, {1, 1, -1}, {-1, 1, -1},
+                {-1, 0, 1}, {1, 0, 1}, {1, 1, 1}, {-1, 1, 1}
+            }
+        }
+
+        VertexArray (attrib = "normal")
+        {
+            float[3]
+            {
+                {0, 0, -1}, {0, 0, -1}, {0, 0, -1}, {0, 0, -1},
+                {0, 0, 1}, {0, 0, 1}, {0, 0, 1}, {0, 0, 1}
+            }
+        }
+
+        VertexArray (attrib = "color")
+        {
+            float[4]
+            {
+                {0.8, 0.7, 0.6, 1}, {0.8, 0.7, 0.6, 1}, {0.9, 0.8, 0.7, 1}, {0.9, 0.8, 0.7, 1},
+                {0.8, 0.7, 0.6, 1}, {0.8, 0.7, 0.6, 1}, {0.9, 0.8, 0.7, 1}, {0.9, 0.8, 0.7, 1}
+            }
+        }
+
+        VertexArray (attrib = "texcoord")
+        {
+            float[2]
+            {
+                {0, 0}, {1, 0}, {1, 1}, {0, 1},
+                {0, 0}, {1, 0}, {1, 1}, {0, 1}
+            }
+        }
+
+        IndexArray
+        {
+            unsigned_int16[3]
+            {
+                {0, 1, 2}, {0, 2, 3}, {4, 5, 6}, {4, 6, 7}
+            }
+        }
+    }
+}
+
+LightObject $light1 (type = "point")
+{
+    Color (attrib = "light") {float[3] {{1.0, 0.95, 0.8}}}
+
+    Atten (curve = "inverse_square")
+    {
+        Param (attrib = "scale") {float {30.0}}
+    }
+}
+
+LightObject $light2 (type = "spot")
+{
+    Color (attrib = "light") {float[4] {{1.0, 1.0, 0.9, 1.0}}}
+
+    Atten (curve = "linear")
+    {
+        Param (attrib = "scale") {float {15.0}}
+    }
+
+    Atten (curve = "scale")
+    {
+        Param (attrib = "scale") {float {0.5}}
+    }
+}
+
+LightObject $light3 (type = "infinite")
+{
+    Color (attrib = "light") {float[3] {{0.9, 0.9, 1.0}}}
+
+    Param (attrib = "intensity") {float {3.0}}
+}
+
+CameraObject $camera1
+{
+    Param (attrib = "fov") {float {0.858}}
+    Param (attrib = "near") {float {0.1}}
+    Param (attrib = "far") {float {1000.0}}
+}
+
+CameraObject $camera2
+{
+    Param (attrib = "fov") {float {1.047}}
+    Param (attrib = "near") {float {1.0}}
+    Param (attrib = "far") {float {500.0}}
+}
+
+CameraObject $camera3
+{
+    Param (attrib = "fov") {float {0.5}}
+    Param (attrib = "near") {float {0.01}}
+    Param (attrib = "far") {float {2000.0}}
+}
+
+Animation (clip = 0)
+{
+    Track (target = %xform_cam3)
+    {
+        Time
+        {
+            Key {float {0.0, 1.0, 2.0, 3.0}}
+        }
+
+        Value
+        {
+            Key
+            {
+                float[16]
+                {
+                    {0, 0, 1, 0, 0, 1, 0, 0, -1, 0, 0, 0, -5, 0, 0, 1},
+                    {0, 0, 1, 0, 0, 1, 0, 0, -1, 0, 0, 0, -5, 2, 0, 1},
+                    {0, 0, 1, 0, 0, 1, 0, 0, -1, 0, 0, 0, -5, 4, 0, 1},
+                    {0, 0, 1, 0, 0, 1, 0, 0, -1, 0, 0, 0, -5, 0, 0, 1}
+                }
+            }
+        }
+    }
+}
+
+Material $mat_floor
+{
+    Name {string {"FloorMat"}}
+    Color (attrib = "diffuse") {float[3] {{0.5, 0.5, 0.5}}}
+    Color (attrib = "specular") {float[3] {{0.2, 0.2, 0.2}}}
+    Color (attrib = "emission") {float[3] {{0.0, 0.0, 0.0}}}
+
+    Texture (attrib = "diffuse")
+    {
+        string {"textures/floor_diffuse.png"}
+    }
+    Texture (attrib = "normal")
+    {
+        string {"textures/floor_normal.png"}
+    }
+    Texture (attrib = "specular")
+    {
+        string {"textures/floor_spec.png"}
+    }
+    Texture (attrib = "emission")
+    {
+        string {"textures/floor_emit.png"}
+    }
+    Texture (attrib = "opacity")
+    {
+        string {"textures/floor_opacity.png"}
+    }
+    Texture (attrib = "specular_power")
+    {
+        string {"textures/floor_specpow.png"}
+    }
+    Texture (attrib = "transparency")
+    {
+        string {"textures/floor_trans.png"}
+    }
+}
+
+Material $mat_pillar
+{
+    Name {string {"PillarMat"}}
+    Color (attrib = "diffuse") {float[4] {{0.7, 0.6, 0.5, 1.0}}}
+    Color (attrib = "specular") {float[4] {{0.9, 0.9, 0.9, 1.0}}}
+}

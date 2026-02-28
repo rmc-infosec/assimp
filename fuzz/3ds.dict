@@ -1,0 +1,44 @@
+# 3DS format dictionary
+# Magic bytes and chunk IDs (little-endian)
+
+# Primary chunk types
+"\x4d\x4d"
+"\x02\x00"
+
+# Editor chunks
+"\x3d\x3d"
+"\x3e\x3d"
+"\x00\x01"
+
+# Object chunks
+"\x00\x40"
+"\x00\x41"
+"\x10\x41"
+"\x20\x41"
+"\x30\x41"
+"\x40\x41"
+"\x50\x41"
+"\x60\x41"
+
+# Material chunks
+"\x00\xaf"
+"\x01\xaf"
+"\x10\xaf"
+"\x20\xaf"
+"\x30\xaf"
+
+# Color chunks
+"\x10\x00"
+"\x11\x00"
+
+# Keyframe chunks
+"\x00\xb0"
+"\x01\xb0"
+"\x02\xb0"
+
+# Common strings
+"MAIN"
+"EDIT"
+"KEYF"
+"MATERIAL"
+"OBJECT"

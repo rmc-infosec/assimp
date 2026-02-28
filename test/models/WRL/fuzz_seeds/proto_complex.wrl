@@ -1,0 +1,31 @@
+#VRML V2.0 utf8
+
+PROTO Chair [
+  field SFColor seatColor 0.5 0.3 0.1
+  field SFFloat legHeight 0.8
+] {
+  Group {
+    children [
+      Transform {
+        translation 0 0 0
+        children [
+          Shape {
+            appearance Appearance {
+              material Material { diffuseColor IS seatColor }
+            }
+            geometry Box { size 1.0 0.1 1.0 }
+          }
+        ]
+      }
+      Transform {
+        translation -0.4 -0.4 -0.4
+        children [
+          Shape {
+            geometry Cylinder { height IS legHeight radius 0.05 }
+          }
+        ]
+      }
+    ]
+  }
+}
+Chair { seatColor 0.7 0.4 0.2 legHeight 1.0 }

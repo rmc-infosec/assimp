@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<X3D profile="Interchange" version="3.3">
+  <Scene>
+    <Shape>
+      <Appearance><Material diffuseColor="1 0 0"/></Appearance>
+      <Cone bottomRadius="1.5" height="3" side="true" bottom="true" solid="true"/>
+    </Shape>
+  </Scene>
+</X3D>

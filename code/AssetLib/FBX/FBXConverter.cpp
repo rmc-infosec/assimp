@@ -1600,12 +1600,13 @@ void FBXConverter::ConvertWeights(aiMesh *out, const MeshGeometry &geo, const ai
 
                 unsigned int count = 0;
                 const unsigned int *const out_idx = geo.ToOutputVertexIndex(index, count);
-                // ToOutputVertexIndex only returns nullptr if index is out of bounds
-                // which should never happen
-                ai_assert(out_idx != nullptr);
-
+                // ToOutputVertexIndex can return nullptr if the index is out of bounds.
+                // Skip invalid indices to avoid crashing on malformed inputs.
                 index_out_indices.push_back(no_index_sentinel);
                 count_out_indices.push_back(0);
+                if (out_idx == nullptr || count == 0) {
+                    continue;
+                }
 
                 for (unsigned int i = 0; i < count; ++i) {
                     if (no_mat_check || static_cast<size_t>(mats[geo.FaceForVertexIndex(out_idx[i])]) == materialIndex) {

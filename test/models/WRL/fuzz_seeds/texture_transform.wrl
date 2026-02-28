@@ -1,0 +1,19 @@
+#VRML V2.0 utf8
+
+Shape {
+  appearance Appearance {
+    material Material { diffuseColor 1 1 1 }
+    texture ImageTexture {
+      url [ "texture.png" "fallback.jpg" ]
+      repeatS TRUE
+      repeatT TRUE
+    }
+    textureTransform TextureTransform {
+      center 0.5 0.5
+      rotation 0.785
+      scale 2.0 2.0
+      translation 0.0 0.0
+    }
+  }
+  geometry Box { size 2 2 2 }
+}

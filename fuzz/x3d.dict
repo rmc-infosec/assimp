@@ -1,0 +1,119 @@
+#
+# X3D dictionary for fuzzing
+#
+
+# Top-level structure
+"X3D"
+"Scene"
+"head"
+"meta"
+"ROUTE"
+"Viewpoint"
+
+# Grouping nodes
+"Group"
+"Transform"
+"Switch"
+"StaticGroup"
+"Inline"
+
+# Shape and appearance
+"Shape"
+"Appearance"
+"Material"
+"ImageTexture"
+"TextureTransform"
+
+# Geometry primitives
+"Box"
+"Cone"
+"Cylinder"
+"Sphere"
+"ElevationGrid"
+"Extrusion"
+
+# Face/polygon geometry
+"IndexedFaceSet"
+
+# Triangle geometry
+"TriangleSet"
+"TriangleFanSet"
+"TriangleStripSet"
+"IndexedTriangleSet"
+"IndexedTriangleFanSet"
+"IndexedTriangleStripSet"
+
+# Line and point geometry
+"LineSet"
+"IndexedLineSet"
+"PointSet"
+
+# Vertex attribute nodes
+"Color"
+"ColorRGBA"
+"Coordinate"
+"Normal"
+"TextureCoordinate"
+
+# Lights
+"DirectionalLight"
+"PointLight"
+"SpotLight"
+
+# Metadata nodes
+"MetaBoolean"
+"MetaDouble"
+"MetaFloat"
+"MetaInteger"
+"MetaSet"
+"MetaString"
+
+# Boolean attributes
+"colorPerVertex"
+"normalPerVertex"
+"ccw"
+"solid"
+"convex"
+
+# Numeric attributes
+"creaseAngle"
+
+# Index attributes
+"coordIndex"
+"colorIndex"
+"normalIndex"
+"texCoordIndex"
+"index"
+
+# Count attributes
+"fanCount"
+"stripCount"
+"vertexCount"
+
+# Data attributes
+"point"
+"vector"
+"color"
+
+# Naming / instancing
+"DEF"
+"USE"
+"containerField"
+
+# Material attributes
+"diffuseColor"
+"specularColor"
+"emissiveColor"
+"ambientIntensity"
+"shininess"
+"transparency"
+"appearance"
+
+# Common attribute values / patterns
+"TRUE"
+"FALSE"
+"0 0 0"
+"1 1 1"
+"0 1 0"
+"1 0 0"
+"0 0 1"

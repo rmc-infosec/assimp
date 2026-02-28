@@ -1,0 +1,370 @@
+<?xml version="1.0"?>
+<irr_scene>
+  <attributes>
+    <string name="Name" value="root"/>
+  </attributes>
+
+  <!-- Point light with full properties -->
+  <node type="light">
+    <attributes>
+      <string name="Name" value="PointLight"/>
+      <vector3d name="Position" value="0, 10, 0"/>
+      <vector3d name="Rotation" value="0, 0, 0"/>
+      <vector3d name="Scale" value="1, 1, 1"/>
+      <enum name="LightType" value="Point"/>
+      <colorf name="AmbientColor" value="0.1, 0.1, 0.1, 1.0"/>
+      <colorf name="DiffuseColor" value="1.0, 1.0, 0.9, 1.0"/>
+      <colorf name="SpecularColor" value="1.0, 1.0, 1.0, 1.0"/>
+      <float name="Radius" value="100"/>
+      <float name="Attenuation" value="0.01"/>
+      <bool name="CastShadows" value="true"/>
+    </attributes>
+  </node>
+
+  <!-- Directional light -->
+  <node type="light">
+    <attributes>
+      <string name="Name" value="DirLight"/>
+      <vector3d name="Position" value="0, 50, 0"/>
+      <vector3d name="Rotation" value="-45, 30, 0"/>
+      <enum name="LightType" value="Directional"/>
+      <colorf name="AmbientColor" value="0.05, 0.05, 0.05, 1.0"/>
+      <colorf name="DiffuseColor" value="0.8, 0.8, 1.0, 1.0"/>
+      <colorf name="SpecularColor" value="0.5, 0.5, 0.5, 1.0"/>
+      <float name="Attenuation" value="0.0"/>
+    </attributes>
+  </node>
+
+  <!-- Spot light with inner/outer cone -->
+  <node type="light">
+    <attributes>
+      <string name="Name" value="SpotLight"/>
+      <vector3d name="Position" value="5, 15, 5"/>
+      <vector3d name="Rotation" value="-60, 0, 0"/>
+      <enum name="LightType" value="Spot"/>
+      <colorf name="AmbientColor" value="0.0, 0.0, 0.0, 1.0"/>
+      <colorf name="DiffuseColor" value="1.0, 0.9, 0.7, 1.0"/>
+      <colorf name="SpecularColor" value="1.0, 1.0, 1.0, 1.0"/>
+      <float name="Radius" value="50"/>
+      <float name="Attenuation" value="0.05"/>
+      <float name="OuterCone" value="45.0"/>
+      <float name="InnerCone" value="30.0"/>
+      <bool name="CastShadows" value="true"/>
+    </attributes>
+  </node>
+
+  <!-- Spot light with different cone angles -->
+  <node type="light">
+    <attributes>
+      <string name="Name" value="NarrowSpot"/>
+      <vector3d name="Position" value="-10, 20, 0"/>
+      <vector3d name="Rotation" value="-90, 0, 0"/>
+      <enum name="LightType" value="Spot"/>
+      <colorf name="DiffuseColor" value="1.0, 0.0, 0.0, 1.0"/>
+      <float name="Radius" value="200"/>
+      <float name="Attenuation" value="0.02"/>
+      <float name="OuterCone" value="15.0"/>
+      <float name="InnerCone" value="10.0"/>
+    </attributes>
+  </node>
+
+  <!-- Light with unknown type (triggers dummy node conversion) -->
+  <node type="light">
+    <attributes>
+      <string name="Name" value="UnknownLight"/>
+      <vector3d name="Position" value="0, 5, -10"/>
+      <enum name="LightType" value="Area"/>
+    </attributes>
+  </node>
+
+  <!-- Second point light to test multiple lights -->
+  <node type="light">
+    <attributes>
+      <string name="Name" value="PointLight2"/>
+      <vector3d name="Position" value="-5, 8, -5"/>
+      <enum name="LightType" value="Point"/>
+      <colorf name="DiffuseColor" value="0.0, 1.0, 0.0, 1.0"/>
+      <float name="Attenuation" value="0.1"/>
+    </attributes>
+    <!-- Light with animator -->
+    <animators>
+      <attributes>
+        <enum name="Type" value="flyCircle"/>
+        <vector3d name="Center" value="0, 8, 0"/>
+        <float name="Radius" value="5.0"/>
+        <float name="Speed" value="0.001"/>
+        <vector3d name="Direction" value="0, 1, 0"/>
+      </attributes>
+    </animators>
+  </node>
+
+  <!-- Camera to view the scene -->
+  <node type="camera">
+    <attributes>
+      <string name="Name" value="MainCamera"/>
+      <vector3d name="Position" value="0, 10, -25"/>
+      <vector3d name="Target" value="0, 0, 0"/>
+      <vector3d name="UpVector" value="0, 1, 0"/>
+      <float name="Fovy" value="0.9"/>
+      <float name="Aspect" value="1.777"/>
+      <float name="ZNear" value="0.5"/>
+      <float name="ZFar" value="5000"/>
+    </attributes>
+  </node>
+
+  <!-- Cube to receive light (with lightmap material) -->
+  <node type="cube">
+    <attributes>
+      <string name="Name" value="LitCube"/>
+      <vector3d name="Position" value="0, 0, 0"/>
+      <vector3d name="Scale" value="5, 0.5, 5"/>
+      <float name="Size" value="10.0"/>
+    </attributes>
+    <materials>
+      <attributes>
+        <enum name="Type" value="lightmap_m2"/>
+        <color name="Diffuse" value="ffffffff"/>
+        <color name="Ambient" value="ff808080"/>
+        <color name="Specular" value="ffffffff"/>
+        <float name="Shininess" value="10.0"/>
+        <bool name="Wireframe" value="false"/>
+        <bool name="GouraudShading" value="true"/>
+        <bool name="BackfaceCulling" value="true"/>
+        <texture name="Texture1" value="floor_diffuse.png"/>
+        <texture name="Texture2" value="floor_lightmap.png"/>
+        <texture name="Texture3" value="floor_detail.png"/>
+        <texture name="Texture4" value="floor_extra.png"/>
+        <enum name="TextureWrap1" value="texture_clamp_repeat"/>
+        <enum name="TextureWrap2" value="texture_clamp_mirror"/>
+        <enum name="TextureWrap3" value="texture_clamp_repeat"/>
+        <enum name="TextureWrap4" value="texture_clamp_repeat"/>
+      </attributes>
+    </materials>
+  </node>
+
+  <!-- Cube with solid_2layer material -->
+  <node type="cube">
+    <attributes>
+      <string name="Name" value="TwoLayerCube"/>
+      <vector3d name="Position" value="15, 0, 0"/>
+      <float name="Size" value="3.0"/>
+    </attributes>
+    <materials>
+      <attributes>
+        <enum name="Type" value="solid_2layer"/>
+        <color name="Diffuse" value="ffffffff"/>
+        <texture name="Texture1" value="layer1.png"/>
+        <texture name="Texture2" value="layer2.png"/>
+        <enum name="TextureWrap1" value="texture_clamp_repeat"/>
+        <enum name="TextureWrap2" value="texture_clamp_mirror"/>
+      </attributes>
+    </materials>
+  </node>
+
+  <!-- Cube with normalmap_solid material -->
+  <node type="cube">
+    <attributes>
+      <string name="Name" value="NormalmapCube"/>
+      <vector3d name="Position" value="-15, 0, 0"/>
+      <float name="Size" value="3.0"/>
+    </attributes>
+    <materials>
+      <attributes>
+        <enum name="Type" value="normalmap_solid"/>
+        <color name="Diffuse" value="ffffffff"/>
+        <color name="Specular" value="ffffffff"/>
+        <float name="Shininess" value="64.0"/>
+        <texture name="Texture1" value="brick_diffuse.png"/>
+        <texture name="Texture2" value="brick_normal.png"/>
+        <enum name="TextureWrap1" value="texture_clamp_repeat"/>
+        <enum name="TextureWrap2" value="texture_clamp_repeat"/>
+      </attributes>
+    </materials>
+  </node>
+
+  <!-- Cube with parallaxmap_solid material -->
+  <node type="cube">
+    <attributes>
+      <string name="Name" value="ParallaxCube"/>
+      <vector3d name="Position" value="0, 0, 15"/>
+      <float name="Size" value="3.0"/>
+    </attributes>
+    <materials>
+      <attributes>
+        <enum name="Type" value="parallaxmap_solid"/>
+        <color name="Diffuse" value="ffffffff"/>
+        <texture name="Texture1" value="stone_diffuse.png"/>
+        <texture name="Texture2" value="stone_normal.png"/>
+      </attributes>
+    </materials>
+  </node>
+
+  <!-- Cube with lightmap_m4 material -->
+  <node type="cube">
+    <attributes>
+      <string name="Name" value="LightmapM4Cube"/>
+      <vector3d name="Position" value="0, 0, -15"/>
+      <float name="Size" value="3.0"/>
+    </attributes>
+    <materials>
+      <attributes>
+        <enum name="Type" value="lightmap_m4"/>
+        <color name="Diffuse" value="ffffffff"/>
+        <texture name="Texture1" value="wall_diffuse.png"/>
+        <texture name="Texture2" value="wall_lm.png"/>
+      </attributes>
+    </materials>
+  </node>
+
+  <!-- Cube with lightmap_light material -->
+  <node type="cube">
+    <attributes>
+      <string name="Name" value="LightmapLightCube"/>
+      <vector3d name="Position" value="8, 0, 8"/>
+      <float name="Size" value="2.0"/>
+    </attributes>
+    <materials>
+      <attributes>
+        <enum name="Type" value="lightmap_light"/>
+        <color name="Diffuse" value="ffffffff"/>
+        <texture name="Texture1" value="ceil_diffuse.png"/>
+        <texture name="Texture2" value="ceil_lm.png"/>
+      </attributes>
+    </materials>
+  </node>
+
+  <!-- Cube with lightmap_light_m2 material -->
+  <node type="cube">
+    <attributes>
+      <string name="Name" value="LmLightM2Cube"/>
+      <vector3d name="Position" value="-8, 0, 8"/>
+      <float name="Size" value="2.0"/>
+    </attributes>
+    <materials>
+      <attributes>
+        <enum name="Type" value="lightmap_light_m2"/>
+        <color name="Diffuse" value="ffffffff"/>
+        <texture name="Texture1" value="ground_diffuse.png"/>
+        <texture name="Texture2" value="ground_lm.png"/>
+      </attributes>
+    </materials>
+  </node>
+
+  <!-- Cube with lightmap_light_m4 material -->
+  <node type="cube">
+    <attributes>
+      <string name="Name" value="LmLightM4Cube"/>
+      <vector3d name="Position" value="8, 0, -8"/>
+      <float name="Size" value="2.0"/>
+    </attributes>
+    <materials>
+      <attributes>
+        <enum name="Type" value="lightmap_light_m4"/>
+        <color name="Diffuse" value="ffffffff"/>
+        <texture name="Texture1" value="roof_diffuse.png"/>
+        <texture name="Texture2" value="roof_lm.png"/>
+      </attributes>
+    </materials>
+  </node>
+
+  <!-- Cube with lightmap_add material -->
+  <node type="cube">
+    <attributes>
+      <string name="Name" value="LmAddCube"/>
+      <vector3d name="Position" value="-8, 0, -8"/>
+      <float name="Size" value="2.0"/>
+    </attributes>
+    <materials>
+      <attributes>
+        <enum name="Type" value="lightmap_add"/>
+        <color name="Diffuse" value="ffffffff"/>
+        <texture name="Texture1" value="glow_diffuse.png"/>
+        <texture name="Texture2" value="glow_lm.png"/>
+      </attributes>
+    </materials>
+  </node>
+
+  <!-- Cube with normalmap_trans_vertex_alpha material -->
+  <node type="cube">
+    <attributes>
+      <string name="Name" value="NmTvaCube"/>
+      <vector3d name="Position" value="12, 3, 0"/>
+      <float name="Size" value="1.5"/>
+    </attributes>
+    <materials>
+      <attributes>
+        <enum name="Type" value="normalmap_trans_vertex_alpha"/>
+        <color name="Diffuse" value="80ffffff"/>
+        <texture name="Texture1" value="glass_diffuse.png"/>
+        <texture name="Texture2" value="glass_normal.png"/>
+      </attributes>
+    </materials>
+  </node>
+
+  <!-- Cube with normalmap_trans_add material -->
+  <node type="cube">
+    <attributes>
+      <string name="Name" value="NmTaCube"/>
+      <vector3d name="Position" value="-12, 3, 0"/>
+      <float name="Size" value="1.5"/>
+    </attributes>
+    <materials>
+      <attributes>
+        <enum name="Type" value="normalmap_trans_add"/>
+        <color name="Diffuse" value="ffffffff"/>
+        <texture name="Texture1" value="energy_diffuse.png"/>
+        <texture name="Texture2" value="energy_normal.png"/>
+      </attributes>
+    </materials>
+  </node>
+
+  <!-- Cube with parallaxmap_trans_vertex_alpha -->
+  <node type="cube">
+    <attributes>
+      <string name="Name" value="PxTvaCube"/>
+      <vector3d name="Position" value="0, 6, 12"/>
+      <float name="Size" value="1.5"/>
+    </attributes>
+    <materials>
+      <attributes>
+        <enum name="Type" value="parallaxmap_trans_vertex_alpha"/>
+        <color name="Diffuse" value="c0ffffff"/>
+        <texture name="Texture1" value="ice_diffuse.png"/>
+        <texture name="Texture2" value="ice_normal.png"/>
+      </attributes>
+    </materials>
+  </node>
+
+  <!-- Cube with parallaxmap_trans_add -->
+  <node type="cube">
+    <attributes>
+      <string name="Name" value="PxTaCube"/>
+      <vector3d name="Position" value="0, 6, -12"/>
+      <float name="Size" value="1.5"/>
+    </attributes>
+    <materials>
+      <attributes>
+        <enum name="Type" value="parallaxmap_trans_add"/>
+        <color name="Diffuse" value="ffffffff"/>
+        <texture name="Texture1" value="lava_diffuse.png"/>
+        <texture name="Texture2" value="lava_normal.png"/>
+      </attributes>
+    </materials>
+  </node>
+
+  <!-- Cube with unrecognized material type (triggers warning) -->
+  <node type="cube">
+    <attributes>
+      <string name="Name" value="CustomMatCube"/>
+      <vector3d name="Position" value="0, 10, 0"/>
+      <float name="Size" value="1.0"/>
+    </attributes>
+    <materials>
+      <attributes>
+        <enum name="Type" value="custom_shader_99"/>
+        <color name="Diffuse" value="ffffffff"/>
+        <texture name="Texture1" value="custom.png"/>
+      </attributes>
+    </materials>
+  </node>
+</irr_scene>

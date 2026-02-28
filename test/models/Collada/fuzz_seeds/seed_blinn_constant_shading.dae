@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1">
+<asset><created>2026-01-01</created></asset>
+<library_effects>
+<effect id="e1"><profile_COMMON><technique sid="common">
+<blinn>
+<emission><color>0 0 0 1</color></emission>
+<diffuse><color>0.8 0.1 0.1 1</color></diffuse>
+<specular><color>1 1 1 1</color></specular>
+<shininess><float>40</float></shininess>
+</blinn>
+</technique></profile_COMMON></effect>
+<effect id="e2"><profile_COMMON><technique sid="common">
+<constant>
+<emission><color>1 0.5 0 1</color></emission>
+</constant>
+</technique></profile_COMMON></effect>
+<effect id="e3"><profile_COMMON><technique sid="common">
+<lambert>
+<diffuse><color>0.2 0.7 0.2 1</color></diffuse>
+</lambert>
+<extra><technique profile="GOOGLEEARTH">
+<double_sided>1</double_sided>
+</technique></extra>
+</technique></profile_COMMON></effect>
+<effect id="e4"><profile_COMMON><technique sid="common">
+<phong>
+<diffuse><color>0.1 0.1 0.8 1</color></diffuse>
+<specular><color>1 1 1 1</color></specular>
+<shininess><float>64</float></shininess>
+</phong>
+<extra><technique profile="MAX3D">
+<faceted>1</faceted>
+<wireframe>0</wireframe>
+</technique></extra>
+</technique></profile_COMMON></effect>
+</library_effects>
+<library_materials>
+<material id="m1"><instance_effect url="#e1"/></material>
+<material id="m2"><instance_effect url="#e2"/></material>
+<material id="m3"><instance_effect url="#e3"/></material>
+<material id="m4"><instance_effect url="#e4"/></material>
+</library_materials>
+<library_geometries>
+<geometry id="g1"><mesh>
+<source id="p1"><float_array id="a1" count="9">0 0 0 1 0 0 0 1 0</float_array>
+<technique_common><accessor source="#a1" count="3" stride="3">
+<param name="X" type="float"/><param name="Y" type="float"/><param name="Z" type="float"/>
+</accessor></technique_common></source>
+<vertices id="v1"><input semantic="POSITION" source="#p1"/></vertices>
+<triangles count="1" material="m1"><input semantic="VERTEX" source="#v1" offset="0"/><p>0 1 2</p></triangles>
+</mesh></geometry>
+<geometry id="g2"><mesh>
+<source id="p2"><float_array id="a2" count="9">2 0 0 3 0 0 2 1 0</float_array>
+<technique_common><accessor source="#a2" count="3" stride="3">
+<param name="X" type="float"/><param name="Y" type="float"/><param name="Z" type="float"/>
+</accessor></technique_common></source>
+<vertices id="v2"><input semantic="POSITION" source="#p2"/></vertices>
+<triangles count="1" material="m2"><input semantic="VERTEX" source="#v2" offset="0"/><p>0 1 2</p></triangles>
+</mesh></geometry>
+<geometry id="g3"><mesh>
+<source id="p3"><float_array id="a3" count="9">4 0 0 5 0 0 4 1 0</float_array>
+<technique_common><accessor source="#a3" count="3" stride="3">
+<param name="X" type="float"/><param name="Y" type="float"/><param name="Z" type="float"/>
+</accessor></technique_common></source>
+<vertices id="v3"><input semantic="POSITION" source="#p3"/></vertices>
+<triangles count="1" material="m3"><input semantic="VERTEX" source="#v3" offset="0"/><p>0 1 2</p></triangles>
+</mesh></geometry>
+<geometry id="g4"><mesh>
+<source id="p4"><float_array id="a4" count="9">6 0 0 7 0 0 6 1 0</float_array>
+<technique_common><accessor source="#a4" count="3" stride="3">
+<param name="X" type="float"/><param name="Y" type="float"/><param name="Z" type="float"/>
+</accessor></technique_common></source>
+<vertices id="v4"><input semantic="POSITION" source="#p4"/></vertices>
+<triangles count="1" material="m4"><input semantic="VERTEX" source="#v4" offset="0"/><p>0 1 2</p></triangles>
+</mesh></geometry>
+</library_geometries>
+<library_visual_scenes>
+<visual_scene id="S">
+<node id="A" type="NODE"><instance_geometry url="#g1">
+<bind_material><technique_common><instance_material symbol="m1" target="#m1"/></technique_common></bind_material>
+</instance_geometry></node>
+<node id="B" type="NODE"><instance_geometry url="#g2">
+<bind_material><technique_common><instance_material symbol="m2" target="#m2"/></technique_common></bind_material>
+</instance_geometry></node>
+<node id="C" type="NODE"><instance_geometry url="#g3">
+<bind_material><technique_common><instance_material symbol="m3" target="#m3"/></technique_common></bind_material>
+</instance_geometry></node>
+<node id="D" type="NODE"><instance_geometry url="#g4">
+<bind_material><technique_common><instance_material symbol="m4" target="#m4"/></technique_common></bind_material>
+</instance_geometry></node>
+</visual_scene>
+</library_visual_scenes>
+<scene><instance_visual_scene url="#S"/></scene>
+</COLLADA>

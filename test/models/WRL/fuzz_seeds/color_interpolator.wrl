@@ -1,0 +1,27 @@
+#VRML V2.0 utf8
+
+DEF Timer TimeSensor {
+  cycleInterval 4.0
+  loop TRUE
+}
+DEF CI ColorInterpolator {
+  key [ 0 0.25 0.5 0.75 1 ]
+  keyValue [
+    1 0 0,
+    0 1 0,
+    0 0 1,
+    1 1 0,
+    1 0 0
+  ]
+}
+DEF Mat Material {
+  diffuseColor 1 0 0
+}
+Shape {
+  appearance Appearance {
+    material USE Mat
+  }
+  geometry Sphere { radius 1.0 }
+}
+ROUTE Timer.fraction_changed TO CI.set_fraction
+ROUTE CI.value_changed TO Mat.set_diffuseColor

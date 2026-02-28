@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<COLLADA xmlns="http://www.collada.org/2008/03/COLLADASchema" version="1.5.0">
+<asset>
+  <contributor>
+    <author>FuzzTest</author>
+    <authoring_tool>TestTool 1.5</authoring_tool>
+  </contributor>
+  <created>2026-01-01</created>
+  <modified>2026-01-01</modified>
+  <unit meter="1.0" name="meter"/>
+  <up_axis>Z_UP</up_axis>
+</asset>
+<library_images>
+  <image id="diffImg" name="DiffuseImage">
+    <init_from><ref>textures/diffuse.png</ref></init_from>
+  </image>
+  <image id="hexImg" name="EmbeddedImage">
+    <init_from><hex format="png">89504E470D0A1A0A0000000D4948445200000002000000020802000000FDD49A730000001549444154789C6260606000620004000006000144DEBCDE0000000049454E44AE426082</hex></init_from>
+  </image>
+  <image id="specImg" name="SpecImage">
+    <init_from><ref>file:///C:\textures\specular.jpg</ref></init_from>
+  </image>
+</library_images>
+<library_effects>
+  <effect id="fx">
+    <profile_COMMON>
+      <!-- Collada 1.5 sampler2D uses instance_image instead of source -->
+      <newparam sid="diffSamp">
+        <sampler2D><instance_image url="#diffImg"/></sampler2D>
+      </newparam>
+      <newparam sid="hexSamp">
+        <sampler2D><instance_image url="#hexImg"/></sampler2D>
+      </newparam>
+      <newparam sid="specSamp">
+        <sampler2D><instance_image url="#specImg"/></sampler2D>
+      </newparam>
+      <technique sid="common">
+        <phong>
+          <emission><color>0.05 0.05 0.05 1</color></emission>
+          <ambient>
+            <texture texture="hexSamp" texcoord="UV0"/>
+          </ambient>
+          <diffuse>
+            <texture texture="diffSamp" texcoord="UV0">
+              <extra><technique profile="MAYA">
+                <wrapU>1</wrapU><wrapV>0</wrapV>
+                <mirrorU>1</mirrorU><mirrorV>0</mirrorV>
+                <repeatU>1.5</repeatU><repeatV>2.0</repeatV>
+                <offsetU>0.0</offsetU><offsetV>0.5</offsetV>
+                <blend_mode>ADD</blend_mode>
+              </technique></extra>
+            </texture>
+          </diffuse>
+          <specular>
+            <texture texture="specSamp" texcoord="UV0">
+              <extra><technique profile="MAYA">
+                <blend_mode>SUBTRACT</blend_mode>
+              </technique></extra>
+            </texture>
+          </specular>
+          <shininess><float>50</float></shininess>
+          <transparent opaque="A_ZERO">
+            <color>1 1 1 0.5</color>
+          </transparent>
+          <transparency><float>0.9</float></transparency>
+        </phong>
+      </technique>
+    </profile_COMMON>
+  </effect>
+</library_effects>
+<library_materials>
+  <material id="mat" name="V15Mat"><instance_effect url="#fx"/></material>
+</library_materials>
+<library_geometries>
+  <geometry id="geo" name="Quad">
+    <mesh>
+      <source id="pos">
+        <float_array id="posa" count="12">-1 -1 0 1 -1 0 1 1 0 -1 1 0</float_array>
+        <technique_common><accessor source="#posa" count="4" stride="3">
+          <param name="X" type="float"/><param name="Y" type="float"/><param name="Z" type="float"/>
+        </accessor></technique_common>
+      </source>
+      <source id="nrm">
+        <float_array id="nrma" count="3">0 0 1</float_array>
+        <technique_common><accessor source="#nrma" count="1" stride="3">
+          <param name="X" type="float"/><param name="Y" type="float"/><param name="Z" type="float"/>
+        </accessor></technique_common>
+      </source>
+      <source id="uv">
+        <float_array id="uva" count="8">0 0 1 0 1 1 0 1</float_array>
+        <technique_common><accessor source="#uva" count="4" stride="2">
+          <param name="S" type="float"/><param name="T" type="float"/>
+        </accessor></technique_common>
+      </source>
+      <vertices id="vt"><input semantic="POSITION" source="#pos"/></vertices>
+      <triangles count="2" material="msym">
+        <input semantic="VERTEX" source="#vt" offset="0"/>
+        <input semantic="NORMAL" source="#nrm" offset="1"/>
+        <input semantic="TEXCOORD" source="#uv" offset="2" set="0"/>
+        <p>0 0 0 1 0 1 2 0 2 0 0 0 2 0 2 3 0 3</p>
+      </triangles>
+    </mesh>
+  </geometry>
+</library_geometries>
+<library_visual_scenes>
+  <visual_scene id="Scene" name="Scene">
+    <node id="QNode" name="QNode" type="NODE">
+      <matrix sid="transform">1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</matrix>
+      <instance_geometry url="#geo">
+        <bind_material><technique_common>
+          <instance_material symbol="msym" target="#mat">
+            <bind_vertex_input semantic="UV0" input_semantic="TEXCOORD" input_set="0"/>
+          </instance_material>
+        </technique_common></bind_material>
+      </instance_geometry>
+    </node>
+  </visual_scene>
+</library_visual_scenes>
+<scene><instance_visual_scene url="#Scene"/></scene>
+</COLLADA>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<X3D profile="Interchange" version="3.3">
+  <Scene>
+    <Shape>
+      <Appearance><Material diffuseColor="0.8 0.2 0.2"/></Appearance>
+      <IndexedTriangleSet index="0 1 2 0 2 3" ccw="true" solid="true">
+        <Coordinate point="0 0 0, 2 0 0, 2 2 0, 0 2 0"/>
+        <TextureCoordinate point="0 0, 1 0, 1 1, 0 1"/>
+      </IndexedTriangleSet>
+    </Shape>
+    <Shape>
+      <Appearance><Material diffuseColor="0.2 0.8 0.2"/></Appearance>
+      <IndexedTriangleFanSet index="0 1 2 3 -1" ccw="true" solid="true">
+        <Coordinate point="0 0 0, 1 0 0, 0.7 0.7 0, 0 1 0"/>
+      </IndexedTriangleFanSet>
+    </Shape>
+    <Shape>
+      <Appearance><Material diffuseColor="0.2 0.2 0.8"/></Appearance>
+      <IndexedTriangleStripSet index="0 1 2 3 4 -1" ccw="true" solid="true">
+        <Coordinate point="0 0 0, 1 0 0, 0.5 1 0, 1.5 1 0, 1 2 0"/>
+      </IndexedTriangleStripSet>
+    </Shape>
+  </Scene>
+</X3D>

@@ -1,0 +1,70 @@
+LWMO
+3
+FirstFrame 0
+LastFrame 90
+FrameStep 1
+FramesPerSecond 30
+Channel 0
+{ Envelope
+  4
+  Key 0.0 0.0 0 1.0 0.5 0.5 0 0
+  Key 5.0 1.0 0 1.0 0.5 0.5 0 0
+  Key 10.0 2.0 0 1.0 0.5 0.5 0 0
+  Key 0.0 3.0 0 1.0 0.5 0.5 0 0
+  Behaviors 1 1
+}
+Channel 1
+{ Envelope
+  4
+  Key 0.0 0.0 0 1.0 0.5 0.5 0 0
+  Key 3.0 1.0 0 1.0 0.5 0.5 0 0
+  Key 6.0 2.0 0 1.0 0.5 0.5 0 0
+  Key 0.0 3.0 0 1.0 0.5 0.5 0 0
+  Behaviors 1 1
+}
+Channel 2
+{ Envelope
+  2
+  Key 0.0 0.0 3 0 0 0 0
+  Key -2.0 3.0 3 0 0 0 0
+  Behaviors 0 0
+}
+Channel 3
+{ Envelope
+  3
+  Key 0.0 0.0 0 1.0 0.5 0.5 0 0
+  Key 1.5708 1.5 0 1.0 0.5 0.5 0 0
+  Key 0.0 3.0 0 1.0 0.5 0.5 0 0
+  Behaviors 1 1
+}
+Channel 4
+{ Envelope
+  3
+  Key 0.0 0.0 0 1.0 0.5 0.5 0 0
+  Key 0.7854 1.5 0 1.0 0.5 0.5 0 0
+  Key 0.0 3.0 0 1.0 0.5 0.5 0 0
+  Behaviors 1 1
+}
+Channel 5
+{ Envelope
+  3
+  Key 0.0 0.0 0 1.0 0.5 0.5 0 0
+  Key 3.14159 1.5 0 1.0 0.5 0.5 0 0
+  Key 6.28318 3.0 0 1.0 0.5 0.5 0 0
+  Behaviors 1 1
+}
+Channel 6
+{ Envelope
+  1
+  Key 1.0 0 3 0 0 0 0
+}
+Channel 7
+{ Envelope
+  1
+  Key 1.0 0 3 0 0 0 0
+}
+Channel 8
+{ Envelope
+  1
+  Key 1.0 0 3 0 0 0 0
+}

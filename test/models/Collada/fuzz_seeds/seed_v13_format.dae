@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.3.1">
+<asset>
+  <contributor>
+    <author>TestAuthor</author>
+    <authoring_tool>TestTool 1.3</authoring_tool>
+    <comments>Testing Collada 1.3 format path</comments>
+    <source_data>test.blend</source_data>
+  </contributor>
+  <created>2026-01-01</created>
+  <modified>2026-01-01</modified>
+  <unit meter="0.01" name="centimeter"/>
+  <up_axis>X_UP</up_axis>
+</asset>
+<library_images>
+  <image id="img0"><init_from>texture.png</init_from></image>
+</library_images>
+<library_effects>
+  <effect id="fx">
+    <profile_COMMON>
+      <newparam sid="surf">
+        <surface type="2D"><init_from>img0</init_from></surface>
+      </newparam>
+      <newparam sid="samp">
+        <sampler2D><source>surf</source></sampler2D>
+      </newparam>
+      <technique sid="common">
+        <blinn>
+          <emission><color>0.1 0.1 0.1 1</color></emission>
+          <ambient><color>0.2 0.2 0.2 1</color></ambient>
+          <diffuse>
+            <texture texture="samp" texcoord="UVSet0">
+              <extra><technique profile="MAYA">
+                <wrapU>1</wrapU><wrapV>1</wrapV>
+                <mirrorU>0</mirrorU><mirrorV>1</mirrorV>
+                <repeatU>2.0</repeatU><repeatV>3.0</repeatV>
+                <offsetU>0.1</offsetU><offsetV>0.2</offsetV>
+                <rotateUV>45.0</rotateUV>
+                <blend_mode>MULTIPLY</blend_mode>
+              </technique></extra>
+            </texture>
+          </diffuse>
+          <specular><color>1 1 1 1</color></specular>
+          <shininess><float>64</float></shininess>
+          <reflective><color>0.5 0.5 0.5 1</color></reflective>
+          <reflectivity><float>0.3</float></reflectivity>
+          <transparent opaque="RGB_ZERO">
+            <color>1 1 1 1</color>
+          </transparent>
+          <transparency><float>0.8</float></transparency>
+          <index_of_refraction><float>1.5</float></index_of_refraction>
+        </blinn>
+      </technique>
+      <extra><technique profile="GOOGLEEARTH">
+        <double_sided>1</double_sided>
+      </technique></extra>
+      <extra><technique profile="MAX3D">
+        <wireframe>0</wireframe>
+        <faceted>1</faceted>
+      </technique></extra>
+    </profile_COMMON>
+  </effect>
+</library_effects>
+<library_materials>
+  <material id="mat" name="TestMat"><instance_effect url="#fx"/></material>
+</library_materials>
+<library_geometries>
+  <geometry id="geo" name="TestGeo">
+    <mesh>
+      <source id="pos">
+        <float_array id="posa" count="12">0 0 0 1 0 0 1 1 0 0 1 0</float_array>
+        <technique_common><accessor source="#posa" count="4" stride="3">
+          <param name="X" type="float"/><param name="Y" type="float"/><param name="Z" type="float"/>
+        </accessor></technique_common>
+      </source>
+      <source id="uv">
+        <float_array id="uva" count="8">0 0 1 0 1 1 0 1</float_array>
+        <technique_common><accessor source="#uva" count="4" stride="2">
+          <param name="S" type="float"/><param name="T" type="float"/>
+        </accessor></technique_common>
+      </source>
+      <vertices id="vt"><input semantic="POSITION" source="#pos"/></vertices>
+      <triangles count="2" material="mat">
+        <input semantic="VERTEX" source="#vt" offset="0"/>
+        <input semantic="TEXCOORD" source="#uv" offset="1" set="0"/>
+        <p>0 0 1 1 2 2 0 0 2 2 3 3</p>
+      </triangles>
+    </mesh>
+  </geometry>
+</library_geometries>
+<library_visual_scenes>
+  <visual_scene id="Scene" name="Scene">
+    <node id="Node" name="Node" type="NODE">
+      <matrix sid="transform">1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</matrix>
+      <instance_geometry url="#geo">
+        <bind_material><technique_common>
+          <instance_material symbol="mat" target="#mat">
+            <bind_vertex_input semantic="UVSet0" input_semantic="TEXCOORD" input_set="0"/>
+          </instance_material>
+        </technique_common></bind_material>
+      </instance_geometry>
+    </node>
+  </visual_scene>
+</library_visual_scenes>
+<scene><instance_visual_scene url="#Scene"/></scene>
+</COLLADA>

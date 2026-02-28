@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mesh>
+  <submeshes>
+    <submesh material="AnimBodyMat" usesharedvertices="false" operationtype="triangle_list">
+      <faces count="4">
+        <face v1="0" v2="1" v3="2"/>
+        <face v1="2" v2="3" v3="0"/>
+        <face v1="2" v2="3" v3="4"/>
+        <face v1="4" v2="5" v3="2"/>
+      </faces>
+      <geometry vertexcount="6">
+        <vertexbuffer positions="true" normals="true" texture_coords="1">
+          <vertex><position x="-0.5" y="0" z="0"/><normal x="0" y="0" z="1"/><texcoord u="0" v="0"/></vertex>
+          <vertex><position x="0.5" y="0" z="0"/><normal x="0" y="0" z="1"/><texcoord u="1" v="0"/></vertex>
+          <vertex><position x="0.5" y="1" z="0"/><normal x="0" y="0" z="1"/><texcoord u="1" v="0.5"/></vertex>
+          <vertex><position x="-0.5" y="1" z="0"/><normal x="0" y="0" z="1"/><texcoord u="0" v="0.5"/></vertex>
+          <vertex><position x="-0.5" y="2" z="0"/><normal x="0" y="0" z="1"/><texcoord u="0" v="1"/></vertex>
+          <vertex><position x="0.5" y="2" z="0"/><normal x="0" y="0" z="1"/><texcoord u="1" v="1"/></vertex>
+        </vertexbuffer>
+      </geometry>
+      <boneassignments>
+        <vertexboneassignment vertexindex="0" boneindex="0" weight="1.0"/>
+        <vertexboneassignment vertexindex="1" boneindex="0" weight="1.0"/>
+        <vertexboneassignment vertexindex="2" boneindex="0" weight="0.5"/>
+        <vertexboneassignment vertexindex="2" boneindex="1" weight="0.5"/>
+        <vertexboneassignment vertexindex="3" boneindex="0" weight="0.5"/>
+        <vertexboneassignment vertexindex="3" boneindex="1" weight="0.5"/>
+        <vertexboneassignment vertexindex="4" boneindex="1" weight="0.7"/>
+        <vertexboneassignment vertexindex="4" boneindex="2" weight="0.3"/>
+        <vertexboneassignment vertexindex="5" boneindex="1" weight="0.7"/>
+        <vertexboneassignment vertexindex="5" boneindex="2" weight="0.3"/>
+      </boneassignments>
+    </submesh>
+  </submeshes>
+  <poses>
+    <pose name="bulge" target="submesh" index="0">
+      <poseoffset index="2" x="0.1" y="0" z="0.2"/>
+      <poseoffset index="3" x="-0.1" y="0" z="0.2"/>
+    </pose>
+  </poses>
+  <animations>
+    <animation name="flex" length="1.5">
+      <tracks>
+        <track target="submesh" index="0" type="pose">
+          <keyframes>
+            <keyframe time="0">
+              <poseref poseindex="0" influence="0.0"/>
+            </keyframe>
+            <keyframe time="0.75">
+              <poseref poseindex="0" influence="1.0"/>
+            </keyframe>
+            <keyframe time="1.5">
+              <poseref poseindex="0" influence="0.0"/>
+            </keyframe>
+          </keyframes>
+        </track>
+      </tracks>
+    </animation>
+  </animations>
+  <skeletonlink name="seed_skeleton_anim.skeleton.xml"/>
+</mesh>

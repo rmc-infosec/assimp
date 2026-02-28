@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mesh>
+    <sharedgeometry vertexcount="12">
+        <vertexbuffer positions="true" normals="true" tangents="true" texture_coords="2">
+            <vertex>
+                <position x="-1" y="0" z="-1"/>
+                <normal x="0" y="-1" z="0"/>
+                <tangent x="1" y="0" z="0"/>
+                <texcoord u="0" v="0"/>
+                <texcoord u="0" v="0"/>
+            </vertex>
+            <vertex>
+                <position x="1" y="0" z="-1"/>
+                <normal x="0" y="-1" z="0"/>
+                <tangent x="1" y="0" z="0"/>
+                <texcoord u="1" v="0"/>
+                <texcoord u="1" v="0"/>
+            </vertex>
+            <vertex>
+                <position x="1" y="0" z="1"/>
+                <normal x="0" y="-1" z="0"/>
+                <tangent x="1" y="0" z="0"/>
+                <texcoord u="1" v="1"/>
+                <texcoord u="1" v="1"/>
+            </vertex>
+            <vertex>
+                <position x="-1" y="0" z="1"/>
+                <normal x="0" y="-1" z="0"/>
+                <tangent x="1" y="0" z="0"/>
+                <texcoord u="0" v="1"/>
+                <texcoord u="0" v="1"/>
+            </vertex>
+            <vertex>
+                <position x="-1" y="1" z="-1"/>
+                <normal x="0" y="0" z="-1"/>
+                <tangent x="1" y="0" z="0"/>
+                <texcoord u="0" v="0.33"/>
+                <texcoord u="0.5" v="0"/>
+            </vertex>
+            <vertex>
+                <position x="1" y="1" z="-1"/>
+                <normal x="0" y="0" z="-1"/>
+                <tangent x="1" y="0" z="0"/>
+                <texcoord u="1" v="0.33"/>
+                <texcoord u="0.5" v="1"/>
+            </vertex>
+            <vertex>
+                <position x="1" y="1" z="1"/>
+                <normal x="0" y="0" z="1"/>
+                <tangent x="1" y="0" z="0"/>
+                <texcoord u="1" v="0.66"/>
+                <texcoord u="1" v="0.5"/>
+            </vertex>
+            <vertex>
+                <position x="-1" y="1" z="1"/>
+                <normal x="0" y="0" z="1"/>
+                <tangent x="1" y="0" z="0"/>
+                <texcoord u="0" v="0.66"/>
+                <texcoord u="0" v="0.5"/>
+            </vertex>
+            <vertex>
+                <position x="-1" y="2" z="-1"/>
+                <normal x="0" y="1" z="0"/>
+                <tangent x="1" y="0" z="0"/>
+                <texcoord u="0" v="0.66"/>
+                <texcoord u="0" v="0"/>
+            </vertex>
+            <vertex>
+                <position x="1" y="2" z="-1"/>
+                <normal x="0" y="1" z="0"/>
+                <tangent x="1" y="0" z="0"/>
+                <texcoord u="1" v="0.66"/>
+                <texcoord u="1" v="0"/>
+            </vertex>
+            <vertex>
+                <position x="1" y="2" z="1"/>
+                <normal x="0" y="1" z="0"/>
+                <tangent x="1" y="0" z="0"/>
+                <texcoord u="1" v="1"/>
+                <texcoord u="1" v="1"/>
+            </vertex>
+            <vertex>
+                <position x="-1" y="2" z="1"/>
+                <normal x="0" y="1" z="0"/>
+                <tangent x="1" y="0" z="0"/>
+                <texcoord u="0" v="1"/>
+                <texcoord u="0" v="1"/>
+            </vertex>
+        </vertexbuffer>
+    </sharedgeometry>
+    <submeshes>
+        <submesh material="BodyMat" usesharedvertices="true" use32bitindexes="false" operationtype="triangle_list">
+            <faces count="8">
+                <face v1="0" v2="1" v3="2"/>
+                <face v1="0" v2="2" v3="3"/>
+                <face v1="0" v2="1" v3="5"/>
+                <face v1="0" v2="5" v3="4"/>
+                <face v1="4" v2="5" v3="6"/>
+                <face v1="4" v2="6" v3="7"/>
+                <face v1="8" v2="9" v3="10"/>
+                <face v1="8" v2="10" v3="11"/>
+            </faces>
+        </submesh>
+        <submesh material="DetailMat" usesharedvertices="false" use32bitindexes="false" operationtype="triangle_list">
+            <faces count="2">
+                <face v1="0" v2="1" v3="2"/>
+                <face v1="2" v2="3" v3="0"/>
+            </faces>
+            <geometry vertexcount="4">
+                <vertexbuffer positions="true" normals="true" texture_coords="1">
+                    <vertex>
+                        <position x="-0.5" y="3" z="-0.5"/>
+                        <normal x="0" y="1" z="0"/>
+                        <texcoord u="0" v="0"/>
+                    </vertex>
+                    <vertex>
+                        <position x="0.5" y="3" z="-0.5"/>
+                        <normal x="0" y="1" z="0"/>
+                        <texcoord u="1" v="0"/>
+                    </vertex>
+                    <vertex>
+                        <position x="0.5" y="3" z="0.5"/>
+                        <normal x="0" y="1" z="0"/>
+                        <texcoord u="1" v="1"/>
+                    </vertex>
+                    <vertex>
+                        <position x="-0.5" y="3" z="0.5"/>
+                        <normal x="0" y="1" z="0"/>
+                        <texcoord u="0" v="1"/>
+                    </vertex>
+                </vertexbuffer>
+            </geometry>
+            <boneassignments>
+                <vertexboneassignment vertexindex="0" boneindex="3" weight="0.7"/>
+                <vertexboneassignment vertexindex="0" boneindex="4" weight="0.3"/>
+                <vertexboneassignment vertexindex="1" boneindex="3" weight="0.7"/>
+                <vertexboneassignment vertexindex="1" boneindex="4" weight="0.3"/>
+                <vertexboneassignment vertexindex="2" boneindex="4" weight="1.0"/>
+                <vertexboneassignment vertexindex="3" boneindex="4" weight="1.0"/>
+            </boneassignments>
+        </submesh>
+    </submeshes>
+    <boneassignments>
+        <vertexboneassignment vertexindex="0" boneindex="0" weight="1.0"/>
+        <vertexboneassignment vertexindex="1" boneindex="0" weight="1.0"/>
+        <vertexboneassignment vertexindex="2" boneindex="0" weight="0.8"/>
+        <vertexboneassignment vertexindex="2" boneindex="1" weight="0.2"/>
+        <vertexboneassignment vertexindex="3" boneindex="0" weight="0.8"/>
+        <vertexboneassignment vertexindex="3" boneindex="1" weight="0.2"/>
+        <vertexboneassignment vertexindex="4" boneindex="1" weight="0.6"/>
+        <vertexboneassignment vertexindex="4" boneindex="0" weight="0.4"/>
+        <vertexboneassignment vertexindex="5" boneindex="1" weight="0.6"/>
+        <vertexboneassignment vertexindex="5" boneindex="0" weight="0.4"/>
+        <vertexboneassignment vertexindex="6" boneindex="1" weight="0.5"/>
+        <vertexboneassignment vertexindex="6" boneindex="2" weight="0.5"/>
+        <vertexboneassignment vertexindex="7" boneindex="1" weight="0.5"/>
+        <vertexboneassignment vertexindex="7" boneindex="2" weight="0.5"/>
+        <vertexboneassignment vertexindex="8" boneindex="2" weight="0.7"/>
+        <vertexboneassignment vertexindex="8" boneindex="3" weight="0.3"/>
+        <vertexboneassignment vertexindex="9" boneindex="2" weight="0.7"/>
+        <vertexboneassignment vertexindex="9" boneindex="3" weight="0.3"/>
+        <vertexboneassignment vertexindex="10" boneindex="3" weight="1.0"/>
+        <vertexboneassignment vertexindex="11" boneindex="3" weight="1.0"/>
+    </boneassignments>
+    <skeletonlink name="seed_skeleton_anim.skeleton.xml"/>
+    <poses>
+        <pose target="mesh" name="expand">
+            <poseoffset index="0" x="-0.2" y="-0.1" z="-0.2"/>
+            <poseoffset index="1" x="0.2" y="-0.1" z="-0.2"/>
+            <poseoffset index="2" x="0.2" y="-0.1" z="0.2"/>
+            <poseoffset index="3" x="-0.2" y="-0.1" z="0.2"/>
+            <poseoffset index="8" x="-0.2" y="0.1" z="-0.2"/>
+            <poseoffset index="9" x="0.2" y="0.1" z="-0.2"/>
+            <poseoffset index="10" x="0.2" y="0.1" z="0.2"/>
+            <poseoffset index="11" x="-0.2" y="0.1" z="0.2"/>
+        </pose>
+        <pose target="mesh" name="twist">
+            <poseoffset index="4" x="0.3" y="0" z="-0.3"/>
+            <poseoffset index="5" x="0.3" y="0" z="0.3"/>
+            <poseoffset index="6" x="-0.3" y="0" z="0.3"/>
+            <poseoffset index="7" x="-0.3" y="0" z="-0.3"/>
+        </pose>
+        <pose target="submesh" name="detail_bulge" index="1">
+            <poseoffset index="0" x="0" y="0.2" z="0"/>
+            <poseoffset index="1" x="0" y="0.2" z="0"/>
+            <poseoffset index="2" x="0" y="0.15" z="0"/>
+            <poseoffset index="3" x="0" y="0.15" z="0"/>
+        </pose>
+    </poses>
+    <animations>
+        <animation name="breathe" length="3.0">
+            <tracks>
+                <track target="mesh" type="pose" index="0">
+                    <keyframes>
+                        <keyframe time="0">
+                            <poseref poseindex="0" influence="0"/>
+                            <poseref poseindex="1" influence="0"/>
+                        </keyframe>
+                        <keyframe time="1.0">
+                            <poseref poseindex="0" influence="0.8"/>
+                            <poseref poseindex="1" influence="0.3"/>
+                        </keyframe>
+                        <keyframe time="2.0">
+                            <poseref poseindex="0" influence="0.4"/>
+                            <poseref poseindex="1" influence="0.8"/>
+                        </keyframe>
+                        <keyframe time="3.0">
+                            <poseref poseindex="0" influence="0"/>
+                            <poseref poseindex="1" influence="0"/>
+                        </keyframe>
+                    </keyframes>
+                </track>
+            </tracks>
+        </animation>
+        <animation name="morph_cycle" length="2.0">
+            <tracks>
+                <track target="mesh" type="morph" index="0">
+                    <keyframes>
+                        <keyframe time="0">
+                            <position x="-1" y="0" z="-1"/>
+                            <position x="1" y="0" z="-1"/>
+                            <position x="1" y="0" z="1"/>
+                            <position x="-1" y="0" z="1"/>
+                            <position x="-1" y="1" z="-1"/>
+                            <position x="1" y="1" z="-1"/>
+                            <position x="1" y="1" z="1"/>
+                            <position x="-1" y="1" z="1"/>
+                            <position x="-1" y="2" z="-1"/>
+                            <position x="1" y="2" z="-1"/>
+                            <position x="1" y="2" z="1"/>
+                            <position x="-1" y="2" z="1"/>
+                        </keyframe>
+                        <keyframe time="1.0">
+                            <position x="-1.5" y="-0.5" z="-1.5"/>
+                            <position x="1.5" y="-0.5" z="-1.5"/>
+                            <position x="1.5" y="-0.5" z="1.5"/>
+                            <position x="-1.5" y="-0.5" z="1.5"/>
+                            <position x="-1.5" y="1.5" z="-1.5"/>
+                            <position x="1.5" y="1.5" z="-1.5"/>
+                            <position x="1.5" y="1.5" z="1.5"/>
+                            <position x="-1.5" y="1.5" z="1.5"/>
+                            <position x="-1.5" y="2.5" z="-1.5"/>
+                            <position x="1.5" y="2.5" z="-1.5"/>
+                            <position x="1.5" y="2.5" z="1.5"/>
+                            <position x="-1.5" y="2.5" z="1.5"/>
+                        </keyframe>
+                        <keyframe time="2.0">
+                            <position x="-1" y="0" z="-1"/>
+                            <position x="1" y="0" z="-1"/>
+                            <position x="1" y="0" z="1"/>
+                            <position x="-1" y="0" z="1"/>
+                            <position x="-1" y="1" z="-1"/>
+                            <position x="1" y="1" z="-1"/>
+                            <position x="1" y="1" z="1"/>
+                            <position x="-1" y="1" z="1"/>
+                            <position x="-1" y="2" z="-1"/>
+                            <position x="1" y="2" z="-1"/>
+                            <position x="1" y="2" z="1"/>
+                            <position x="-1" y="2" z="1"/>
+                        </keyframe>
+                    </keyframes>
+                </track>
+            </tracks>
+        </animation>
+    </animations>
+</mesh>

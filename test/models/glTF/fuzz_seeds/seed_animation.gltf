@@ -1,0 +1,161 @@
+{
+  "asset": {
+    "generator": "seed",
+    "version": "1.0"
+  },
+  "scene": "scene0",
+  "scenes": {
+    "scene0": {
+      "nodes": ["node0"]
+    }
+  },
+  "nodes": {
+    "node0": {
+      "meshes": ["mesh0"],
+      "name": "AnimNode",
+      "translation": [0, 0, 0],
+      "rotation": [0, 0, 0, 1],
+      "scale": [1, 1, 1]
+    }
+  },
+  "meshes": {
+    "mesh0": {
+      "primitives": [{
+        "attributes": {
+          "POSITION": "acc_pos"
+        },
+        "indices": "acc_idx",
+        "material": "mat0",
+        "mode": 4
+      }]
+    }
+  },
+  "animations": {
+    "anim0": {
+      "channels": [
+        {
+          "sampler": "samp_rot",
+          "target": {
+            "id": "node0",
+            "path": "rotation"
+          }
+        },
+        {
+          "sampler": "samp_trans",
+          "target": {
+            "id": "node0",
+            "path": "translation"
+          }
+        },
+        {
+          "sampler": "samp_scale",
+          "target": {
+            "id": "node0",
+            "path": "scale"
+          }
+        }
+      ],
+      "parameters": {
+        "TIME": "acc_time",
+        "rotation": "acc_rot",
+        "translation": "acc_trans",
+        "scale": "acc_scale"
+      },
+      "samplers": {
+        "samp_rot": {
+          "input": "TIME",
+          "interpolation": "LINEAR",
+          "output": "rotation"
+        },
+        "samp_trans": {
+          "input": "TIME",
+          "interpolation": "LINEAR",
+          "output": "translation"
+        },
+        "samp_scale": {
+          "input": "TIME",
+          "interpolation": "LINEAR",
+          "output": "scale"
+        }
+      }
+    }
+  },
+  "accessors": {
+    "acc_pos": {
+      "bufferView": "bv_pos",
+      "byteOffset": 0,
+      "componentType": 5126,
+      "count": 3,
+      "type": "VEC3"
+    },
+    "acc_idx": {
+      "bufferView": "bv_idx",
+      "byteOffset": 0,
+      "componentType": 5123,
+      "count": 3,
+      "type": "SCALAR"
+    },
+    "acc_time": {
+      "bufferView": "bv_anim",
+      "byteOffset": 0,
+      "componentType": 5126,
+      "count": 3,
+      "type": "SCALAR"
+    },
+    "acc_rot": {
+      "bufferView": "bv_anim",
+      "byteOffset": 12,
+      "componentType": 5126,
+      "count": 3,
+      "type": "VEC4"
+    },
+    "acc_trans": {
+      "bufferView": "bv_anim",
+      "byteOffset": 60,
+      "componentType": 5126,
+      "count": 3,
+      "type": "VEC3"
+    },
+    "acc_scale": {
+      "bufferView": "bv_anim",
+      "byteOffset": 96,
+      "componentType": 5126,
+      "count": 3,
+      "type": "VEC3"
+    }
+  },
+  "bufferViews": {
+    "bv_pos": {
+      "buffer": "buf_geo",
+      "byteOffset": 0,
+      "byteLength": 36
+    },
+    "bv_idx": {
+      "buffer": "buf_geo",
+      "byteOffset": 36,
+      "byteLength": 6
+    },
+    "bv_anim": {
+      "buffer": "buf_anim",
+      "byteOffset": 0,
+      "byteLength": 132
+    }
+  },
+  "buffers": {
+    "buf_geo": {
+      "uri": "data:application/octet-stream;base64,AAAAAAAAAAAAAAAAAACAPwAAAAAAAAAAAAAAAAAAgD8AAAAAAAABAAIA",
+      "byteLength": 42
+    },
+    "buf_anim": {
+      "uri": "data:application/octet-stream;base64,AAAAAAAAAD8AAIA/AAAAAAAAAAAAAAAAAACAPwAAAAAAAAAA9P00P/T9ND8AAAAAAAAAAAAAgD8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAgD8AAAAAAAAAAAAAAEAAAAAAAACAPwAAgD8AAIA/AADAPwAAwD8AAMA/AACAPwAAgD8AAIA/",
+      "byteLength": 132
+    }
+  },
+  "materials": {
+    "mat0": {
+      "values": {
+        "diffuse": [0.4, 0.8, 0.4, 1.0]
+      }
+    }
+  }
+}

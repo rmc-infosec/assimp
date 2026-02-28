@@ -1,0 +1,60 @@
+{
+  "asset": {"version": "2.0", "generator": "assimp-fuzz-seeds", "copyright": "Test copyright 2025", "minVersion": "2.0"},
+  "extensionsUsed": ["KHR_materials_specular", "KHR_materials_unlit"],
+  "extensionsRequired": ["KHR_materials_specular"],
+  "scene": 0,
+  "scenes": [{"name": "MainScene", "nodes": [0, 2]}],
+  "nodes": [
+    {"name": "MultiPrimNode", "mesh": 0},
+    {"name": "ChildLeaf", "mesh": 0},
+    {"name": "EmptyParent", "children": [1]}
+  ],
+  "meshes": [{
+    "name": "MultiPrimMesh",
+    "primitives": [
+      {"attributes": {"POSITION": 0}, "indices": 2, "material": 0},
+      {"attributes": {"POSITION": 1}, "indices": 3, "material": 1}
+    ]
+  }],
+  "accessors": [
+    {"bufferView": 0, "componentType": 5126, "count": 3, "type": "VEC3", "max": [1.0, 1.0, 0.0], "min": [0.0, 0.0, 0.0]},
+    {"bufferView": 1, "componentType": 5126, "count": 3, "type": "VEC3", "max": [3.0, 1.0, 0.0], "min": [2.0, 0.0, 0.0]},
+    {"bufferView": 2, "componentType": 5123, "count": 3, "type": "SCALAR"},
+    {"bufferView": 3, "componentType": 5123, "count": 3, "type": "SCALAR"},
+    {"bufferView": 4, "componentType": 5126, "count": 2, "type": "SCALAR", "min": [0.0], "max": [0.0]},
+    {"bufferView": 5, "componentType": 5126, "count": 2, "type": "VEC3"}
+  ],
+  "bufferViews": [
+    {"buffer": 0, "byteOffset": 0, "byteLength": 36, "target": 34962},
+    {"buffer": 0, "byteOffset": 36, "byteLength": 36, "target": 34962},
+    {"buffer": 0, "byteOffset": 72, "byteLength": 8, "target": 34963},
+    {"buffer": 0, "byteOffset": 80, "byteLength": 8, "target": 34963},
+    {"buffer": 0, "byteOffset": 88, "byteLength": 8},
+    {"buffer": 0, "byteOffset": 96, "byteLength": 24}
+  ],
+  "buffers": [{"uri": "data:application/octet-stream;base64,AAAAAAAAAAAAAAAAAACAPwAAAAAAAAAAAAAAPwAAgD8AAAAAAAAAQAAAAAAAAAAAAABAQAAAAAAAAAAAAAAgQAAAgD8AAAAAAAABAAIAAAAAAAEAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA", "byteLength": 120}],
+  "materials": [
+    {
+      "name": "SpecularMat",
+      "pbrMetallicRoughness": {"baseColorFactor": [0.8, 0.2, 0.2, 1.0], "metallicFactor": 0.0, "roughnessFactor": 0.5},
+      "extensions": {
+        "KHR_materials_specular": {
+          "specularFactor": 0.8,
+          "specularColorFactor": [1.0, 0.9, 0.8]
+        }
+      }
+    },
+    {
+      "name": "UnlitMat",
+      "pbrMetallicRoughness": {"baseColorFactor": [0.1, 0.5, 0.9, 1.0]},
+      "extensions": {
+        "KHR_materials_unlit": {}
+      }
+    }
+  ],
+  "animations": [{
+    "name": "EmptyishAnim",
+    "channels": [{"sampler": 0, "target": {"node": 2, "path": "translation"}}],
+    "samplers": [{"input": 4, "output": 5, "interpolation": "LINEAR"}]
+  }]
+}

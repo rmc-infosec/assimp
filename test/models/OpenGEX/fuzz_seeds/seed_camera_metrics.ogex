@@ -1,0 +1,241 @@
+Metric (key = "distance") {float {0.01}}
+Metric (key = "angle") {int32 {1}}
+Metric (key = "time") {int32 {24}}
+Metric (key = "up") {string {"y"}}
+
+CameraNode $camnode1
+{
+    Name {string {"PerspCam"}}
+    ObjectRef {ref {$cam_persp}}
+
+    Transform
+    {
+        float[16]
+        {
+            {0.686, 0.728, -0.011, 0,
+             -0.317, 0.312, 0.895, 0,
+             0.655, -0.611, 0.445, 0,
+             7.48, -6.51, 5.34, 1}
+        }
+    }
+}
+
+CameraNode $camnode2
+{
+    Name {string {"WideCam"}}
+    ObjectRef {ref {$cam_wide}}
+
+    Transform
+    {
+        float[16]
+        {
+            {1, 0, 0, 0, 0, 0, -1, 0, 0, 1, 0, 0, 0, 20, 0, 1}
+        }
+    }
+}
+
+CameraNode $camnode3
+{
+    Name {string {"NarrowCam"}}
+    ObjectRef {ref {$cam_narrow}}
+
+    Transform
+    {
+        float[16]
+        {
+            {0, 0, 1, 0, 0, 1, 0, 0, -1, 0, 0, 0, -10, 0, 0, 1}
+        }
+    }
+}
+
+GeometryNode $node_root
+{
+    Name {string {"SceneRoot"}}
+    ObjectRef {ref {$geo_outer}}
+    MaterialRef {ref {$mat1}}
+
+    Transform
+    {
+        float[16]
+        {
+            {1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1}
+        }
+    }
+
+    GeometryNode $node_child1
+    {
+        Name {string {"Child1"}}
+        ObjectRef {ref {$geo_inner}}
+        MaterialRef {ref {$mat1}}
+
+        Transform
+        {
+            float[16]
+            {
+                {1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 2, 0, 0, 1}
+            }
+        }
+
+        GeometryNode $node_grandchild1
+        {
+            Name {string {"GrandChild1"}}
+            ObjectRef {ref {$geo_inner}}
+            MaterialRef {ref {$mat2}}
+
+            Transform
+            {
+                float[16]
+                {
+                    {0.5, 0, 0, 0, 0, 0.5, 0, 0, 0, 0, 0.5, 0, 1, 0, 0, 1}
+                }
+            }
+
+            GeometryNode $node_greatgrand
+            {
+                Name {string {"GreatGrandChild"}}
+                ObjectRef {ref {$geo_inner}}
+                MaterialRef {ref {$mat1}}
+
+                Transform
+                {
+                    float[16]
+                    {
+                        {0.25, 0, 0, 0, 0, 0.25, 0, 0, 0, 0, 0.25, 0, 0.5, 0, 0, 1}
+                    }
+                }
+            }
+        }
+
+        GeometryNode $node_grandchild2
+        {
+            Name {string {"GrandChild2"}}
+            ObjectRef {ref {$geo_inner}}
+            MaterialRef {ref {$mat2}}
+
+            Transform
+            {
+                float[16]
+                {
+                    {0.5, 0, 0, 0, 0, 0.5, 0, 0, 0, 0, 0.5, 0, -1, 0, 0, 1}
+                }
+            }
+        }
+    }
+
+    GeometryNode $node_child2
+    {
+        Name {string {"Child2"}}
+        ObjectRef {ref {$geo_outer}}
+        MaterialRef {ref {$mat2}}
+
+        Transform
+        {
+            float[16]
+            {
+                {1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, -2, 0, 0, 1}
+            }
+        }
+    }
+}
+
+CameraObject $cam_persp
+{
+    Param (attrib = "fov") {float {1.047}}
+    Param (attrib = "near") {float {0.1}}
+    Param (attrib = "far") {float {1000.0}}
+}
+
+CameraObject $cam_wide
+{
+    Param (attrib = "fov") {float {2.094}}
+    Param (attrib = "near") {float {0.01}}
+    Param (attrib = "far") {float {5000.0}}
+}
+
+CameraObject $cam_narrow
+{
+    Param (attrib = "fov") {float {0.35}}
+    Param (attrib = "near") {float {1.0}}
+    Param (attrib = "far") {float {10000.0}}
+}
+
+GeometryObject $geo_outer
+{
+    Mesh (primitive = "triangles")
+    {
+        VertexArray (attrib = "position")
+        {
+            float[3]
+            {
+                {-2, -2, 0}, {2, -2, 0}, {2, 2, 0}, {-2, 2, 0}
+            }
+        }
+
+        VertexArray (attrib = "normal")
+        {
+            float[3]
+            {
+                {0, 0, 1}, {0, 0, 1}, {0, 0, 1}, {0, 0, 1}
+            }
+        }
+
+        VertexArray (attrib = "texcoord")
+        {
+            float[2]
+            {
+                {0, 0}, {1, 0}, {1, 1}, {0, 1}
+            }
+        }
+
+        IndexArray
+        {
+            unsigned_int32[3]
+            {
+                {0, 1, 2}, {0, 2, 3}
+            }
+        }
+    }
+}
+
+GeometryObject $geo_inner
+{
+    Mesh (primitive = "triangles")
+    {
+        VertexArray (attrib = "position")
+        {
+            float[3]
+            {
+                {-0.5, -0.5, 0}, {0.5, -0.5, 0}, {0, 0.5, 0}
+            }
+        }
+
+        VertexArray (attrib = "normal")
+        {
+            float[3]
+            {
+                {0, 0, 1}, {0, 0, 1}, {0, 0, 1}
+            }
+        }
+
+        IndexArray
+        {
+            unsigned_int32[3]
+            {
+                {0, 1, 2}
+            }
+        }
+    }
+}
+
+Material $mat1
+{
+    Name {string {"FlatGray"}}
+    Color (attrib = "diffuse") {float[3] {{0.5, 0.5, 0.5}}}
+}
+
+Material $mat2
+{
+    Name {string {"FlatBlue"}}
+    Color (attrib = "diffuse") {float[4] {{0.2, 0.4, 0.9, 1.0}}}
+    Color (attrib = "specular") {float[3] {{0.8, 0.8, 0.8}}}
+}

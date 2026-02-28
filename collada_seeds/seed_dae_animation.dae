@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1">
+  <asset><created>2024-01-01</created><modified>2024-01-01</modified></asset>
+  <library_geometries>
+    <geometry id="Mesh" name="Mesh">
+      <mesh>
+        <source id="pos"><float_array id="pos-arr" count="9">0 0 0 1 0 0 0.5 1 0</float_array>
+          <technique_common><accessor source="#pos-arr" count="3" stride="3">
+            <param name="X" type="float"/><param name="Y" type="float"/><param name="Z" type="float"/>
+          </accessor></technique_common></source>
+        <vertices id="verts"><input semantic="POSITION" source="#pos"/></vertices>
+        <triangles count="1"><input semantic="VERTEX" source="#verts" offset="0"/><p>0 1 2</p></triangles>
+      </mesh>
+    </geometry>
+  </library_geometries>
+  <library_animations>
+    <animation id="TransAnim" name="TransAnim">
+      <source id="trans-input">
+        <float_array id="trans-input-arr" count="3">0 0.5 1</float_array>
+        <technique_common><accessor source="#trans-input-arr" count="3" stride="1">
+          <param name="TIME" type="float"/>
+        </accessor></technique_common>
+      </source>
+      <source id="trans-output">
+        <float_array id="trans-output-arr" count="9">0 0 0 1 2 0 0 0 0</float_array>
+        <technique_common><accessor source="#trans-output-arr" count="3" stride="3">
+          <param name="X" type="float"/><param name="Y" type="float"/><param name="Z" type="float"/>
+        </accessor></technique_common>
+      </source>
+      <source id="trans-interp">
+        <Name_array id="trans-interp-arr" count="3">LINEAR LINEAR LINEAR</Name_array>
+        <technique_common><accessor source="#trans-interp-arr" count="3" stride="1">
+          <param name="INTERPOLATION" type="name"/>
+        </accessor></technique_common>
+      </source>
+      <sampler id="trans-sampler">
+        <input semantic="INPUT" source="#trans-input"/>
+        <input semantic="OUTPUT" source="#trans-output"/>
+        <input semantic="INTERPOLATION" source="#trans-interp"/>
+      </sampler>
+      <channel source="#trans-sampler" target="AnimNode/translate"/>
+    </animation>
+    <animation id="RotAnim" name="RotAnim">
+      <source id="rot-input">
+        <float_array id="rot-input-arr" count="3">0 0.5 1</float_array>
+        <technique_common><accessor source="#rot-input-arr" count="3" stride="1">
+          <param name="TIME" type="float"/>
+        </accessor></technique_common>
+      </source>
+      <source id="rot-output">
+        <float_array id="rot-output-arr" count="12">0 0 0 1 0 0.383 0 0.924 0 0 0 1</float_array>
+        <technique_common><accessor source="#rot-output-arr" count="3" stride="4">
+          <param name="X" type="float"/><param name="Y" type="float"/><param name="Z" type="float"/><param name="W" type="float"/>
+        </accessor></technique_common>
+      </source>
+      <source id="rot-interp">
+        <Name_array id="rot-interp-arr" count="3">LINEAR LINEAR LINEAR</Name_array>
+        <technique_common><accessor source="#rot-interp-arr" count="3" stride="1">
+          <param name="INTERPOLATION" type="name"/>
+        </accessor></technique_common>
+      </source>
+      <sampler id="rot-sampler">
+        <input semantic="INPUT" source="#rot-input"/>
+        <input semantic="OUTPUT" source="#rot-output"/>
+        <input semantic="INTERPOLATION" source="#rot-interp"/>
+      </sampler>
+      <channel source="#rot-sampler" target="AnimNode/rotate"/>
+    </animation>
+  </library_animations>
+  <library_visual_scenes>
+    <visual_scene id="Scene" name="Scene">
+      <node id="AnimNode" name="AnimNode" type="NODE">
+        <translate sid="translate">0 0 0</translate>
+        <rotate sid="rotate">0 0 0 1</rotate>
+        <instance_geometry url="#Mesh"/>
+      </node>
+    </visual_scene>
+  </library_visual_scenes>
+  <scene><instance_visual_scene url="#Scene"/></scene>
+</COLLADA>

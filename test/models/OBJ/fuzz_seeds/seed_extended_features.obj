@@ -1,0 +1,55 @@
+# OBJ with extended features for coverage
+mtllib seed_extended_features.mtl
+
+# Vertices with colors (v x y z r g b)
+v -1.0 0.0 -1.0 1.0 0.0 0.0
+v 1.0 0.0 -1.0 0.0 1.0 0.0
+v 1.0 0.0 1.0 0.0 0.0 1.0
+v -1.0 0.0 1.0 1.0 1.0 0.0
+
+# Homogeneous vertex (v x y z w)
+v 0.0 2.0 0.0 1.0
+
+# 3D texture coordinates (vt u v w)
+vt 0.0 0.0 0.5
+vt 1.0 0.0 0.3
+vt 1.0 1.0 0.8
+vt 0.0 1.0 0.1
+vt 0.5 0.5
+
+# Normals
+vn 0.0 1.0 0.0
+vn 0.0 0.0 1.0
+
+# Smoothing groups
+g group1
+s 1
+usemtl Material1
+f 1/1/1 2/2/1 3/3/1
+s 2
+f 1/1/1 3/3/1 4/4/1
+
+# Different group with material change
+g group2
+s off
+usemtl Material2
+f 1/1/2 2/2/2 5/5/2
+
+# Line elements
+l 1 2 3 4 1
+
+# Point elements
+p 5
+
+# Use undefined material (triggers fallback path)
+usemtl UndefinedMaterial
+f 2/2/1 3/3/1 5/5/1
+
+# Merging group (mg)
+mg 1
+
+# cstype section (curve/surface)
+cstype bspline
+deg 3
+curv 0.0 1.0 1 2 3 4
+end

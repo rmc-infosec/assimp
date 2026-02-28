@@ -1,0 +1,42 @@
+# Blender format dictionary
+# Magic
+"BLENDER"
+"BLENDERv"
+"\x1f\x8b"
+
+# Block codes
+"REND"
+"TEST"
+"GLOB"
+"DATA"
+"DNA1"
+"ENDB"
+"SDNA"
+
+# Common DNA struct names
+"Mesh"
+"Object"
+"Material"
+"Texture"
+"Image"
+"Camera"
+"Lamp"
+"World"
+"Scene"
+"Armature"
+"Bone"
+"bAction"
+"bPose"
+"Curve"
+"MetaBall"
+
+# Mesh data
+"MVert"
+"MEdge"
+"MFace"
+"MLoop"
+"MPoly"
+"MLoopUV"
+"MLoopCol"
+"MDeformVert"
+"MDeformWeight"

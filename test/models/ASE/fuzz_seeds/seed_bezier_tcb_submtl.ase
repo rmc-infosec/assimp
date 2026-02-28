@@ -1,0 +1,228 @@
+*3DSMAX_ASCIIEXPORT 200
+*SCENE {
+  *SCENE_FIRSTFRAME 0
+  *SCENE_LASTFRAME 100
+  *SCENE_FRAMESPEED 30
+  *SCENE_TICKSPERFRAME 160
+}
+*MATERIAL_LIST {
+  *MATERIAL_COUNT 1
+  *MATERIAL 0 {
+    *MATERIAL_NAME "MultiMat"
+    *MATERIAL_CLASS "Multi/Sub-Object"
+    *MATERIAL_AMBIENT 0.2 0.2 0.2
+    *MATERIAL_DIFFUSE 0.8 0.8 0.8
+    *MATERIAL_SPECULAR 1.0 1.0 1.0
+    *MATERIAL_SHINE 0.5
+    *MATERIAL_SHINESTRENGTH 0.3
+    *MATERIAL_TRANSPARENCY 0.0
+    *MAP_DIFFUSE {
+      *MAP_NAME "DiffuseMap"
+      *MAP_CLASS "Bitmap"
+      *BITMAP "diffuse.tga"
+      *MAP_AMOUNT 1.0
+      *UVW_U_OFFSET 0.0
+      *UVW_V_OFFSET 0.0
+      *UVW_U_TILING 1.0
+      *UVW_V_TILING 1.0
+    }
+    *MAP_BUMP {
+      *MAP_NAME "BumpMap"
+      *MAP_CLASS "Bitmap"
+      *BITMAP "bump.tga"
+      *MAP_AMOUNT 0.5
+    }
+    *MAP_SPECULAR {
+      *MAP_NAME "SpecMap"
+      *MAP_CLASS "Bitmap"
+      *BITMAP "spec.tga"
+      *MAP_AMOUNT 1.0
+    }
+    *MAP_OPACITY {
+      *MAP_NAME "OpacityMap"
+      *MAP_CLASS "Bitmap"
+      *BITMAP "opacity.tga"
+      *MAP_AMOUNT 1.0
+    }
+    *MAP_REFLECT {
+      *MAP_NAME "ReflectMap"
+      *MAP_CLASS "Bitmap"
+      *BITMAP "reflect.tga"
+      *MAP_AMOUNT 0.3
+    }
+    *MAP_SELFILLUM {
+      *MAP_NAME "SelfIllumMap"
+      *MAP_CLASS "Bitmap"
+      *BITMAP "selfillum.tga"
+      *MAP_AMOUNT 1.0
+    }
+    *NUMSUBMTLS 2
+    *SUBMATERIAL 0 {
+      *MATERIAL_NAME "SubMat0"
+      *MATERIAL_AMBIENT 0.1 0.1 0.3
+      *MATERIAL_DIFFUSE 0.2 0.5 0.8
+      *MATERIAL_SPECULAR 0.5 0.5 0.5
+      *MAP_DIFFUSE {
+        *MAP_NAME "SubDiffuse0"
+        *MAP_CLASS "Bitmap"
+        *BITMAP "sub0_diff.tga"
+        *MAP_AMOUNT 1.0
+      }
+    }
+    *SUBMATERIAL 1 {
+      *MATERIAL_NAME "SubMat1"
+      *MATERIAL_AMBIENT 0.3 0.1 0.1
+      *MATERIAL_DIFFUSE 0.8 0.2 0.2
+      *MATERIAL_SPECULAR 1.0 1.0 1.0
+      *MAP_BUMP {
+        *MAP_NAME "SubBump1"
+        *MAP_CLASS "Bitmap"
+        *BITMAP "sub1_bump.tga"
+        *MAP_AMOUNT 0.8
+      }
+    }
+  }
+}
+*GEOMOBJECT {
+  *NODE_NAME "AnimatedMesh"
+  *NODE_TM {
+    *NODE_NAME "AnimatedMesh"
+    *TM_ROW0 1.0 0.0 0.0
+    *TM_ROW1 0.0 1.0 0.0
+    *TM_ROW2 0.0 0.0 1.0
+    *TM_ROW3 0.0 0.0 0.0
+  }
+  *MESH {
+    *TIMEVALUE 0
+    *MESH_NUMVERTEX 8
+    *MESH_NUMFACES 6
+    *MESH_VERTEX_LIST {
+      *MESH_VERTEX 0 -1.0 -1.0 0.0
+      *MESH_VERTEX 1  1.0 -1.0 0.0
+      *MESH_VERTEX 2  1.0  1.0 0.0
+      *MESH_VERTEX 3 -1.0  1.0 0.0
+      *MESH_VERTEX 4 -1.0 -1.0 1.0
+      *MESH_VERTEX 5  1.0 -1.0 1.0
+      *MESH_VERTEX 6  1.0  1.0 1.0
+      *MESH_VERTEX 7 -1.0  1.0 1.0
+    }
+    *MESH_FACE_LIST {
+      *MESH_FACE 0: A: 0 B: 1 C: 2 AB: 1 BC: 1 CA: 0 *MESH_SMOOTHING 1 *MESH_MTLID 0
+      *MESH_FACE 1: A: 0 B: 2 C: 3 AB: 1 BC: 1 CA: 0 *MESH_SMOOTHING 1 *MESH_MTLID 0
+      *MESH_FACE 2: A: 4 B: 5 C: 6 AB: 1 BC: 1 CA: 0 *MESH_SMOOTHING 2 *MESH_MTLID 1
+      *MESH_FACE 3: A: 4 B: 6 C: 7 AB: 1 BC: 1 CA: 0 *MESH_SMOOTHING 2 *MESH_MTLID 1
+      *MESH_FACE 4: A: 0 B: 1 C: 5 AB: 1 BC: 1 CA: 0 *MESH_SMOOTHING 3 *MESH_MTLID 0
+      *MESH_FACE 5: A: 0 B: 5 C: 4 AB: 1 BC: 1 CA: 0 *MESH_SMOOTHING 3 *MESH_MTLID 1
+    }
+    *MESH_NUMTVERTEX 4
+    *MESH_TVERTLIST {
+      *MESH_TVERT 0 0.0 0.0 0.0
+      *MESH_TVERT 1 1.0 0.0 0.0
+      *MESH_TVERT 2 1.0 1.0 0.0
+      *MESH_TVERT 3 0.0 1.0 0.0
+    }
+    *MESH_NUMTVFACES 6
+    *MESH_TFACELIST {
+      *MESH_TFACE 0 0 1 2
+      *MESH_TFACE 1 0 2 3
+      *MESH_TFACE 2 0 1 2
+      *MESH_TFACE 3 0 2 3
+      *MESH_TFACE 4 0 1 2
+      *MESH_TFACE 5 0 2 3
+    }
+    *MESH_NORMALS {
+      *MESH_FACENORMAL 0 0.0 0.0 -1.0
+        *MESH_VERTEXNORMAL 0 0.0 0.0 -1.0
+        *MESH_VERTEXNORMAL 1 0.0 0.0 -1.0
+        *MESH_VERTEXNORMAL 2 0.0 0.0 -1.0
+      *MESH_FACENORMAL 1 0.0 0.0 -1.0
+        *MESH_VERTEXNORMAL 0 0.0 0.0 -1.0
+        *MESH_VERTEXNORMAL 2 0.0 0.0 -1.0
+        *MESH_VERTEXNORMAL 3 0.0 0.0 -1.0
+      *MESH_FACENORMAL 2 0.0 0.0 1.0
+        *MESH_VERTEXNORMAL 4 0.0 0.0 1.0
+        *MESH_VERTEXNORMAL 5 0.0 0.0 1.0
+        *MESH_VERTEXNORMAL 6 0.0 0.0 1.0
+      *MESH_FACENORMAL 3 0.0 0.0 1.0
+        *MESH_VERTEXNORMAL 4 0.0 0.0 1.0
+        *MESH_VERTEXNORMAL 6 0.0 0.0 1.0
+        *MESH_VERTEXNORMAL 7 0.0 0.0 1.0
+      *MESH_FACENORMAL 4 0.0 -1.0 0.0
+        *MESH_VERTEXNORMAL 0 0.0 -1.0 0.0
+        *MESH_VERTEXNORMAL 1 0.0 -1.0 0.0
+        *MESH_VERTEXNORMAL 5 0.0 -1.0 0.0
+      *MESH_FACENORMAL 5 0.0 -1.0 0.0
+        *MESH_VERTEXNORMAL 0 0.0 -1.0 0.0
+        *MESH_VERTEXNORMAL 5 0.0 -1.0 0.0
+        *MESH_VERTEXNORMAL 4 0.0 -1.0 0.0
+    }
+  }
+  *MATERIAL_REF 0
+  *TM_ANIMATION {
+    *NODE_NAME "AnimatedMesh"
+    *CONTROL_POS_BEZIER {
+      *CONTROL_BEZIER_POS_KEY 0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0
+      *CONTROL_BEZIER_POS_KEY 4800 2.0 0.0 0.0 1.0 0.0 0.0 3.0 0.0 0.0
+      *CONTROL_BEZIER_POS_KEY 9600 0.0 3.0 0.0 -1.0 2.0 0.0 1.0 4.0 0.0
+    }
+    *CONTROL_SCALE_TCB {
+      *CONTROL_TCB_SCALE_KEY 0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0
+      *CONTROL_TCB_SCALE_KEY 4800 2.0 2.0 2.0 0.5 0.5 0.5 0.0 0.0 0.0
+      *CONTROL_TCB_SCALE_KEY 9600 1.0 1.0 1.0 0.5 0.5 0.5 0.0 0.0 0.0
+    }
+    *CONTROL_ROT_TCB {
+      *CONTROL_TCB_ROT_KEY 0 0.0 0.0 1.0 0.0 0.0 0.0 0.0
+      *CONTROL_TCB_ROT_KEY 4800 0.0 0.0 1.0 1.571 0.5 0.5 0.5
+      *CONTROL_TCB_ROT_KEY 9600 0.0 0.0 1.0 3.142 0.5 0.5 0.5
+    }
+  }
+}
+*CAMERAOBJECT {
+  *NODE_NAME "Camera01"
+  *NODE_TM {
+    *NODE_NAME "Camera01"
+    *TM_ROW0 1.0 0.0 0.0
+    *TM_ROW1 0.0 1.0 0.0
+    *TM_ROW2 0.0 0.0 1.0
+    *TM_ROW3 5.0 -5.0 3.0
+  }
+  *CAMERA_SETTINGS {
+    *CAMERA_TYPE Target
+    *CAMERA_FOV 0.7854
+    *CAMERA_NEAR 1.0
+    *CAMERA_FAR 1000.0
+    *CAMERA_TDIST 8.66
+  }
+  *TM_ANIMATION {
+    *NODE_NAME "Camera01"
+    *CONTROL_POS_TRACK {
+      *CONTROL_POS_KEY 0 5.0 -5.0 3.0
+      *CONTROL_POS_KEY 4800 10.0 -10.0 5.0
+    }
+  }
+}
+*LIGHTOBJECT {
+  *NODE_NAME "SpotLight01"
+  *NODE_TM {
+    *NODE_NAME "SpotLight01"
+    *TM_ROW0 1.0 0.0 0.0
+    *TM_ROW1 0.0 1.0 0.0
+    *TM_ROW2 0.0 0.0 1.0
+    *TM_ROW3 0.0 0.0 5.0
+  }
+  *LIGHT_SETTINGS {
+    *LIGHT_TYPE Spot
+    *LIGHT_SHADOWS On
+    *LIGHT_COLOR 1.0 0.9 0.8
+    *LIGHT_INTENS 1.5
+    *LIGHT_HOTSPOT 30.0
+    *LIGHT_FALLOFF 45.0
+  }
+  *TM_ANIMATION {
+    *NODE_NAME "SpotLight01"
+    *CONTROL_ROT_BEZIER {
+      *CONTROL_BEZIER_ROT_KEY 0 0.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0
+      *CONTROL_BEZIER_ROT_KEY 4800 0.0 1.0 0.0 0.785 0.5 0.5 0.5 0.5 0.5
+    }
+  }
+}

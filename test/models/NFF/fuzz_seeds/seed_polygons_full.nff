@@ -1,0 +1,67 @@
+# NFF1 exercising all polygon types: p, pp, tpp
+from 0 5 10
+at 0 0 0
+up 0 1 0
+angle 50
+resolution 800 600
+l 5 10 5 1.5 1 1 1
+# Basic polygon (p) - triangle
+f 0.8 0.2 0.2 0.7 0.3 20 0 1.0
+p 3
+-1 0 0
+1 0 0
+0 1.5 0
+# Basic polygon (p) - quad
+p 4
+-3 -2 -1
+3 -2 -1
+3 2 -1
+-3 2 -1
+# Basic polygon (p) - pentagon
+p 5
+2 0 1
+3 1 1
+2.5 2.5 1
+1.5 2.5 1
+1 1 1
+# Polygon patch with normals (pp) - triangle
+f 0.2 0.8 0.2 0.6 0.4 40 0 1.0
+pp 3
+-2 0 2 0 0 1
+2 0 2 0 0 1
+0 2 2 0 0.707 0.707
+# Polygon patch with normals (pp) - quad
+pp 4
+-4 -3 0 0 0 1
+4 -3 0 0 0 1
+4 3 0 0 0.5 0.866
+-4 3 0 0 0.5 0.866
+# Polygon patch with normals (pp) - hexagon
+pp 6
+2 0 -2 0 1 0
+3 0 -2 0 1 0
+3.5 0 -1 0 1 0
+3 0 0 0 1 0
+2 0 0 0 1 0
+1.5 0 -1 0 1 0
+# Texture polygon patch (tpp) - triangle with UV
+f 0.2 0.2 0.8 0.5 0.5 60 0 1.0
+tpp 3
+0 0 -3 0 0 1 0.5 0
+2 0 -3 0 0 1 1 0
+1 2 -3 0 0 1 0.5 1
+# Texture polygon patch (tpp) - quad with UV
+tpp 4
+-5 0 -5 0 1 0 0 0
+5 0 -5 0 1 0 1 0
+5 0 5 0 1 0 1 1
+-5 0 5 0 1 0 0 1
+# Another tpp - with UV values wrapping multi-line
+f 0.9 0.1 0.9 0.4 0.6 80 0 1.0
+tpp 3
+-2 3 0 0 0 1
+0 0
+2 3 0 0 0 1
+1 0
+0 5 0 0 0 1
+0.5 1

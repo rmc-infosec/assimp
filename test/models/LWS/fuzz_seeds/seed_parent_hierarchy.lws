@@ -1,0 +1,512 @@
+LWSC
+5
+
+RenderRangeType 0
+FirstFrame 1
+LastFrame 120
+FrameStep 1
+RenderRangeObject 0
+RenderRangeArbitrary 1-120
+PreviewFirstFrame 0
+PreviewLastFrame 120
+PreviewFrameStep 1
+CurrentFrame 1
+FramesPerSecond 30
+ChangeScene 0
+
+AddNullObject 10000000 SceneRoot
+ShowObject 7 -1 0.376471 0.878431 0.941176
+Group 0
+ObjectMotion
+NumChannels 9
+Channel 0
+{ Envelope
+  1
+  Key 0 0 0 0 0 0 0 0 0
+  Behaviors 1 1
+}
+Channel 1
+{ Envelope
+  1
+  Key 0 0 0 0 0 0 0 0 0
+  Behaviors 1 1
+}
+Channel 2
+{ Envelope
+  1
+  Key 0 0 0 0 0 0 0 0 0
+  Behaviors 1 1
+}
+Channel 3
+{ Envelope
+  1
+  Key 0 0 0 0 0 0 0 0 0
+  Behaviors 1 1
+}
+Channel 4
+{ Envelope
+  1
+  Key 0 0 0 0 0 0 0 0 0
+  Behaviors 1 1
+}
+Channel 5
+{ Envelope
+  1
+  Key 0 0 0 0 0 0 0 0 0
+  Behaviors 1 1
+}
+Channel 6
+{ Envelope
+  1
+  Key 1 0 0 0 0 0 0 0 0
+  Behaviors 1 1
+}
+Channel 7
+{ Envelope
+  1
+  Key 1 0 0 0 0 0 0 0 0
+  Behaviors 1 1
+}
+Channel 8
+{ Envelope
+  1
+  Key 1 0 0 0 0 0 0 0 0
+  Behaviors 1 1
+}
+
+AddNullObject 10000001 ArmatureRoot
+ShowObject 7 -1 0.376471 0.878431 0.941176
+ParentItem 10000000
+PivotPosition 0.0 0.0 0.0
+ObjectMotion
+NumChannels 9
+Channel 0
+{ Envelope
+  3
+  Key 0 0 0 0 0 0 0 1.5 0
+  Key 3.0 1.0 0 0 0 0 -1.5 -1.5 0
+  Key -3.0 2.0 0 0 0 0 -3.0 0 0
+  Behaviors 2 3
+}
+Channel 1
+{ Envelope
+  2
+  Key 0 0 0 0 0 0 0 0.5 0
+  Key 1.0 2.0 0 0 0 0 -1.0 0 0
+  Behaviors 1 2
+}
+Channel 2
+{ Envelope
+  1
+  Key 0 0 0 0 0 0 0 0 0
+  Behaviors 1 1
+}
+Channel 3
+{ Envelope
+  2
+  Key 0 0 0 0 0 0 0 0.3927 0
+  Key 0.7854 2.0 0 0 0 0 -0.7854 0 0
+  Behaviors 1 4
+}
+Channel 4
+{ Envelope
+  1
+  Key 0 0 0 0 0 0 0 0 0
+  Behaviors 1 1
+}
+Channel 5
+{ Envelope
+  1
+  Key 0 0 0 0 0 0 0 0 0
+  Behaviors 1 1
+}
+Channel 6
+{ Envelope
+  1
+  Key 1 0 0 0 0 0 0 0 0
+  Behaviors 1 1
+}
+Channel 7
+{ Envelope
+  1
+  Key 1 0 0 0 0 0 0 0 0
+  Behaviors 1 1
+}
+Channel 8
+{ Envelope
+  1
+  Key 1 0 0 0 0 0 0 0 0
+  Behaviors 1 1
+}
+
+AddNullObject 10000002 UpperBody
+ShowObject 7 -1 0.376471 0.878431 0.941176
+ParentItem 10000001
+PivotPosition 0.0 1.0 0.0
+ObjectMotion
+NumChannels 9
+Channel 0
+{ Envelope
+  1
+  Key 0 0 0 0 0 0 0 0 0
+  Behaviors 1 1
+}
+Channel 1
+{ Envelope
+  2
+  Key 0 0 0 0 0 0 0 1.0 0
+  Key 2.0 2.0 0 0 0 0 -2.0 0 0
+  Behaviors 3 3
+}
+Channel 2
+{ Envelope
+  1
+  Key 0 0 0 0 0 0 0 0 0
+  Behaviors 1 1
+}
+Channel 3
+{ Envelope
+  3
+  Key 0 0 0 0 0 0 0 0.1745 0
+  Key 0.3491 1.0 0 0 0 0 -0.1745 -0.1745 0
+  Key -0.3491 2.0 0 0 0 0 -0.5236 0 0
+  Behaviors 4 2
+}
+Channel 4
+{ Envelope
+  1
+  Key 0 0 0 0 0 0 0 0 0
+  Behaviors 1 1
+}
+Channel 5
+{ Envelope
+  2
+  Key 0 0 0 0 0 0 0 0.2618 0
+  Key 0.5236 2.0 0 0 0 0 -0.5236 0 0
+  Behaviors 2 4
+}
+Channel 6
+{ Envelope
+  1
+  Key 1 0 0 0 0 0 0 0 0
+  Behaviors 1 1
+}
+Channel 7
+{ Envelope
+  1
+  Key 1 0 0 0 0 0 0 0 0
+  Behaviors 1 1
+}
+Channel 8
+{ Envelope
+  1
+  Key 1 0 0 0 0 0 0 0 0
+  Behaviors 1 1
+}
+
+AddNullObject 10000003 Head
+ShowObject 7 -1 0.376471 0.878431 0.941176
+ParentItem 10000002
+PivotPosition 0.0 1.5 0.0
+ObjectMotion
+NumChannels 9
+Channel 0
+{ Envelope
+  1
+  Key 0 0 0 0 0 0 0 0 0
+  Behaviors 1 1
+}
+Channel 1
+{ Envelope
+  1
+  Key 0.5 0 0 0 0 0 0 0 0
+  Behaviors 1 1
+}
+Channel 2
+{ Envelope
+  1
+  Key 0 0 0 0 0 0 0 0 0
+  Behaviors 1 1
+}
+Channel 3
+{ Envelope
+  2
+  Key 0 0 0 0 0 0 0 0.5236 0
+  Key 1.0472 2.0 0 0 0 0 -1.0472 0 0
+  Behaviors 3 4
+}
+Channel 4
+{ Envelope
+  3
+  Key -0.2618 0 0 0 0 0 0 0.2618 0
+  Key 0.2618 1.0 0 0 0 0 -0.2618 -0.2618 0
+  Key -0.2618 2.0 0 0 0 0 -0.5236 0 0
+  Behaviors 4 4
+}
+Channel 5
+{ Envelope
+  1
+  Key 0 0 0 0 0 0 0 0 0
+  Behaviors 1 1
+}
+Channel 6
+{ Envelope
+  1
+  Key 1 0 0 0 0 0 0 0 0
+  Behaviors 1 1
+}
+Channel 7
+{ Envelope
+  1
+  Key 1 0 0 0 0 0 0 0 0
+  Behaviors 1 1
+}
+Channel 8
+{ Envelope
+  1
+  Key 1 0 0 0 0 0 0 0 0
+  Behaviors 1 1
+}
+
+AddNullObject 10000004 LowerBody
+ShowObject 7 -1 0.376471 0.878431 0.941176
+ParentItem 10000001
+PivotPosition 0.0 -0.5 0.0
+ObjectMotion
+NumChannels 9
+Channel 0
+{ Envelope
+  1
+  Key 0 0 0 0 0 0 0 0 0
+  Behaviors 1 1
+}
+Channel 1
+{ Envelope
+  1
+  Key -1.0 0 0 0 0 0 0 0 0
+  Behaviors 1 1
+}
+Channel 2
+{ Envelope
+  1
+  Key 0 0 0 0 0 0 0 0 0
+  Behaviors 1 1
+}
+Channel 3
+{ Envelope
+  1
+  Key 0 0 0 0 0 0 0 0 0
+  Behaviors 1 1
+}
+Channel 4
+{ Envelope
+  1
+  Key 0 0 0 0 0 0 0 0 0
+  Behaviors 1 1
+}
+Channel 5
+{ Envelope
+  2
+  Key 0 0 0 0 0 0 0 3.14159 0
+  Key 6.28318 4.0 0 0 0 0 -6.28318 0 0
+  Behaviors 2 2
+}
+Channel 6
+{ Envelope
+  2
+  Key 1 0 0 0 0 0 0 0 0
+  Key 1.5 2.0 0 0 0 0 0 0 0
+  Behaviors 0 0
+}
+Channel 7
+{ Envelope
+  2
+  Key 1 0 0 0 0 0 0 0 0
+  Key 1.5 2.0 0 0 0 0 0 0 0
+  Behaviors 0 0
+}
+Channel 8
+{ Envelope
+  2
+  Key 1 0 0 0 0 0 0 0 0
+  Key 1.5 2.0 0 0 0 0 0 0 0
+  Behaviors 0 0
+}
+
+AddNullObject 10000005 LeftFoot
+ShowObject 7 -1 0.376471 0.878431 0.941176
+ParentItem 10000004
+PivotPosition -0.5 -1.5 0.0
+ObjectMotion
+NumChannels 9
+Channel 0
+{ Envelope
+  1
+  Key -0.5 0 0 0 0 0 0 0 0
+  Behaviors 1 1
+}
+Channel 1
+{ Envelope
+  2
+  Key -1.5 0 0 0 0 0 0 0.25 0
+  Key -1.0 2.0 0 0 0 0 -0.5 0 0
+  Behaviors 3 3
+}
+Channel 2
+{ Envelope
+  2
+  Key 0 0 0 0 0 0 0 0.4 0
+  Key 0.8 1.0 0 0 0 0 -0.8 0 0
+  Behaviors 4 4
+}
+Channel 3
+{ Envelope
+  1
+  Key 0 0 0 0 0 0 0 0 0
+  Behaviors 1 1
+}
+Channel 4
+{ Envelope
+  1
+  Key 0 0 0 0 0 0 0 0 0
+  Behaviors 1 1
+}
+Channel 5
+{ Envelope
+  1
+  Key 0 0 0 0 0 0 0 0 0
+  Behaviors 1 1
+}
+Channel 6
+{ Envelope
+  1
+  Key 1 0 0 0 0 0 0 0 0
+  Behaviors 1 1
+}
+Channel 7
+{ Envelope
+  1
+  Key 1 0 0 0 0 0 0 0 0
+  Behaviors 1 1
+}
+Channel 8
+{ Envelope
+  1
+  Key 1 0 0 0 0 0 0 0 0
+  Behaviors 1 1
+}
+
+AddNullObject 10000006 RightFoot
+ShowObject 7 -1 0.376471 0.878431 0.941176
+ParentItem 10000004
+PivotPosition 0.5 -1.5 0.0
+ObjectMotion
+NumChannels 9
+Channel 0
+{ Envelope
+  1
+  Key 0.5 0 0 0 0 0 0 0 0
+  Behaviors 1 1
+}
+Channel 1
+{ Envelope
+  2
+  Key -1.5 0 0 0 0 0 0 0.25 0
+  Key -1.0 2.0 0 0 0 0 -0.5 0 0
+  Behaviors 3 3
+}
+Channel 2
+{ Envelope
+  2
+  Key 0 0 0 0 0 0 0 -0.4 0
+  Key -0.8 1.0 0 0 0 0 0.8 0 0
+  Behaviors 4 4
+}
+Channel 3
+{ Envelope
+  1
+  Key 0 0 0 0 0 0 0 0 0
+  Behaviors 1 1
+}
+Channel 4
+{ Envelope
+  1
+  Key 0 0 0 0 0 0 0 0 0
+  Behaviors 1 1
+}
+Channel 5
+{ Envelope
+  1
+  Key 0 0 0 0 0 0 0 0 0
+  Behaviors 1 1
+}
+Channel 6
+{ Envelope
+  1
+  Key 1 0 0 0 0 0 0 0 0
+  Behaviors 1 1
+}
+Channel 7
+{ Envelope
+  1
+  Key 1 0 0 0 0 0 0 0 0
+  Behaviors 1 1
+}
+Channel 8
+{ Envelope
+  1
+  Key 1 0 0 0 0 0 0 0 0
+  Behaviors 1 1
+}
+
+AddCamera 30000000
+CameraName MainCam
+ShowCamera 1 -1 0.125490 0.878431 0.125490
+CameraMotion
+NumChannels 6
+Channel 0
+{ Envelope
+  1
+  Key 0 0 0 0 0 0 0 0 0
+  Behaviors 1 1
+}
+Channel 1
+{ Envelope
+  1
+  Key 3.0 0 0 0 0 0 0 0 0
+  Behaviors 1 1
+}
+Channel 2
+{ Envelope
+  1
+  Key -10.0 0 0 0 0 0 0 0 0
+  Behaviors 1 1
+}
+Channel 3
+{ Envelope
+  1
+  Key 0 0 0 0 0 0 0 0 0
+  Behaviors 1 1
+}
+Channel 4
+{ Envelope
+  1
+  Key 0 0 0 0 0 0 0 0 0
+  Behaviors 1 1
+}
+Channel 5
+{ Envelope
+  1
+  Key 0 0 0 0 0 0 0 0 0
+  Behaviors 1 1
+}
+ZoomFactor 3.2
+ZoomType 1
+ResolutionMultiplier 1.0
+FrameSize 640 480
+PixelAspect 1
+
+AmbientColor 1 1 1
+AmbientIntensity 0.1
+SolidBackdrop 1
+BackdropColor 0 0 0

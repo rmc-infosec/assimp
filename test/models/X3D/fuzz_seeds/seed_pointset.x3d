@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<X3D profile="Interchange" version="3.3">
+  <Scene>
+    <Shape>
+      <PointSet>
+        <Coordinate point="0 0 0, 1 0 0, 0 1 0, 0 0 1, 1 1 1"/>
+        <ColorRGBA color="1 0 0 1, 0 1 0 1, 0 0 1 1, 1 1 0 1, 0 1 1 1"/>
+      </PointSet>
+    </Shape>
+  </Scene>
+</X3D>

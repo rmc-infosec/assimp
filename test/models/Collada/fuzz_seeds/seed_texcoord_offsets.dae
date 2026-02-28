@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1">
+  <asset><created>2024-01-01</created><modified>2024-01-01</modified></asset>
+  <library_images>
+    <image id="diffuse-img" name="DiffuseTex">
+      <init_from>diffuse.png</init_from>
+    </image>
+    <image id="bump-img" name="BumpTex">
+      <init_from>bump.png</init_from>
+    </image>
+    <image id="specular-img" name="SpecularTex">
+      <init_from>specular.png</init_from>
+    </image>
+  </library_images>
+  <library_effects>
+    <effect id="mat-fx">
+      <profile_COMMON>
+        <newparam sid="diffuse-surface">
+          <surface type="2D"><init_from>diffuse-img</init_from></surface>
+        </newparam>
+        <newparam sid="diffuse-sampler">
+          <sampler2D><source>diffuse-surface</source></sampler2D>
+        </newparam>
+        <newparam sid="bump-surface">
+          <surface type="2D"><init_from>bump-img</init_from></surface>
+        </newparam>
+        <newparam sid="bump-sampler">
+          <sampler2D><source>bump-surface</source></sampler2D>
+        </newparam>
+        <newparam sid="specular-surface">
+          <surface type="2D"><init_from>specular-img</init_from></surface>
+        </newparam>
+        <newparam sid="specular-sampler">
+          <sampler2D><source>specular-surface</source></sampler2D>
+        </newparam>
+        <technique sid="standard">
+          <phong>
+            <diffuse>
+              <texture texture="diffuse-sampler" texcoord="CHANNEL0">
+                <extra>
+                  <technique profile="MAYA">
+                    <wrapU>1</wrapU>
+                    <wrapV>1</wrapV>
+                    <mirrorU>0</mirrorU>
+                    <mirrorV>0</mirrorV>
+                    <repeatU>2.0</repeatU>
+                    <repeatV>2.0</repeatV>
+                    <offsetU>0.5</offsetU>
+                    <offsetV>0.25</offsetV>
+                    <rotateUV>45.0</rotateUV>
+                    <blend_mode>NONE</blend_mode>
+                  </technique>
+                </extra>
+              </texture>
+            </diffuse>
+            <specular>
+              <texture texture="specular-sampler" texcoord="CHANNEL1">
+                <extra>
+                  <technique profile="MAYA">
+                    <wrapU>0</wrapU>
+                    <wrapV>0</wrapV>
+                    <repeatU>1.0</repeatU>
+                    <repeatV>1.0</repeatV>
+                    <offsetU>0.0</offsetU>
+                    <offsetV>0.0</offsetV>
+                  </technique>
+                </extra>
+              </texture>
+            </specular>
+            <shininess><float>25.0</float></shininess>
+          </phong>
+        </technique>
+        <extra>
+          <technique profile="FCOLLADA">
+            <bump>
+              <texture texture="bump-sampler" texcoord="CHANNEL0">
+                <extra>
+                  <technique profile="MAYA">
+                    <repeatU>1.0</repeatU>
+                    <repeatV>1.0</repeatV>
+                    <offsetU>0.0</offsetU>
+                    <offsetV>0.0</offsetV>
+                  </technique>
+                </extra>
+              </texture>
+            </bump>
+          </technique>
+        </extra>
+      </profile_COMMON>
+    </effect>
+  </library_effects>
+  <library_materials>
+    <material id="mat" name="TexturedMat">
+      <instance_effect url="#mat-fx"/>
+    </material>
+  </library_materials>
+  <library_geometries>
+    <geometry id="plane-mesh" name="Plane">
+      <mesh>
+        <source id="plane-pos">
+          <float_array id="plane-pos-array" count="12">-1 0 -1 1 0 -1 1 0 1 -1 0 1</float_array>
+          <technique_common>
+            <accessor source="#plane-pos-array" count="4" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="plane-norm">
+          <float_array id="plane-norm-array" count="12">0 1 0 0 1 0 0 1 0 0 1 0</float_array>
+          <technique_common>
+            <accessor source="#plane-norm-array" count="4" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="plane-uv0">
+          <float_array id="plane-uv0-array" count="8">0 0 1 0 1 1 0 1</float_array>
+          <technique_common>
+            <accessor source="#plane-uv0-array" count="4" stride="2">
+              <param name="S" type="float"/>
+              <param name="T" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="plane-uv1">
+          <float_array id="plane-uv1-array" count="8">0 0 2 0 2 2 0 2</float_array>
+          <technique_common>
+            <accessor source="#plane-uv1-array" count="4" stride="2">
+              <param name="S" type="float"/>
+              <param name="T" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <vertices id="plane-vertices">
+          <input semantic="POSITION" source="#plane-pos"/>
+          <input semantic="NORMAL" source="#plane-norm"/>
+        </vertices>
+        <triangles count="2" material="mat-ref">
+          <input semantic="VERTEX" source="#plane-vertices" offset="0"/>
+          <input semantic="TEXCOORD" source="#plane-uv0" offset="0" set="0"/>
+          <input semantic="TEXCOORD" source="#plane-uv1" offset="0" set="1"/>
+          <p>0 1 2 0 2 3</p>
+        </triangles>
+      </mesh>
+    </geometry>
+  </library_geometries>
+  <library_visual_scenes>
+    <visual_scene id="Scene" name="Scene">
+      <node id="PlaneNode" name="PlaneNode" type="NODE">
+        <instance_geometry url="#plane-mesh">
+          <bind_material>
+            <technique_common>
+              <instance_material symbol="mat-ref" target="#mat">
+                <bind_vertex_input semantic="CHANNEL0" input_semantic="TEXCOORD" input_set="0"/>
+                <bind_vertex_input semantic="CHANNEL1" input_semantic="TEXCOORD" input_set="1"/>
+              </instance_material>
+            </technique_common>
+          </bind_material>
+        </instance_geometry>
+      </node>
+    </visual_scene>
+  </library_visual_scenes>
+  <scene><instance_visual_scene url="#Scene"/></scene>
+</COLLADA>

@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1">
+<asset><created>2026-01-01</created><modified>2026-01-01</modified></asset>
+<library_geometries>
+  <geometry id="geo" name="Tri">
+    <mesh>
+      <source id="pos"><float_array id="posa" count="9">0 0 0 1 0 0 0.5 1 0</float_array>
+        <technique_common><accessor source="#posa" count="3" stride="3">
+          <param name="X" type="float"/><param name="Y" type="float"/><param name="Z" type="float"/>
+        </accessor></technique_common></source>
+      <vertices id="vt"><input semantic="POSITION" source="#pos"/></vertices>
+      <triangles count="1"><input semantic="VERTEX" source="#vt" offset="0"/>
+        <p>0 1 2</p></triangles>
+    </mesh>
+  </geometry>
+</library_geometries>
+<library_animations>
+  <!-- Animate individual matrix sub-elements using (row)(col) notation -->
+  <animation id="a_tx" name="TranslateX">
+    <source id="txt"><float_array id="txta" count="3">0 0.5 1</float_array>
+      <technique_common><accessor source="#txta" count="3" stride="1">
+        <param name="TIME" type="float"/>
+      </accessor></technique_common></source>
+    <source id="txv"><float_array id="txva" count="3">0 2 4</float_array>
+      <technique_common><accessor source="#txva" count="3" stride="1">
+        <param name="VALUE" type="float"/>
+      </accessor></technique_common></source>
+    <sampler id="txs">
+      <input semantic="INPUT" source="#txt"/>
+      <input semantic="OUTPUT" source="#txv"/>
+    </sampler>
+    <channel source="#txs" target="AN/transform(0)(3)"/>
+  </animation>
+  <animation id="a_ty" name="TranslateY">
+    <source id="tyt"><float_array id="tyta" count="3">0 0.5 1</float_array>
+      <technique_common><accessor source="#tyta" count="3" stride="1">
+        <param name="TIME" type="float"/>
+      </accessor></technique_common></source>
+    <source id="tyv"><float_array id="tyva" count="3">0 1 0</float_array>
+      <technique_common><accessor source="#tyva" count="3" stride="1">
+        <param name="VALUE" type="float"/>
+      </accessor></technique_common></source>
+    <sampler id="tys">
+      <input semantic="INPUT" source="#tyt"/>
+      <input semantic="OUTPUT" source="#tyv"/>
+    </sampler>
+    <channel source="#tys" target="AN/transform(1)(3)"/>
+  </animation>
+  <!-- Animate scale X via matrix element (0)(0) -->
+  <animation id="a_sx" name="ScaleX">
+    <source id="sxt"><float_array id="sxta" count="3">0 0.5 1</float_array>
+      <technique_common><accessor source="#sxta" count="3" stride="1">
+        <param name="TIME" type="float"/>
+      </accessor></technique_common></source>
+    <source id="sxv"><float_array id="sxva" count="3">1 1.5 1</float_array>
+      <technique_common><accessor source="#sxva" count="3" stride="1">
+        <param name="VALUE" type="float"/>
+      </accessor></technique_common></source>
+    <sampler id="sxs">
+      <input semantic="INPUT" source="#sxt"/>
+      <input semantic="OUTPUT" source="#sxv"/>
+    </sampler>
+    <channel source="#sxs" target="AN/transform(0)(0)"/>
+  </animation>
+  <!-- Animate using .X .Y .Z sub-element notation on translate -->
+  <animation id="a_tz" name="TranslateZ">
+    <source id="tzt"><float_array id="tzta" count="3">0 0.5 1</float_array>
+      <technique_common><accessor source="#tzta" count="3" stride="1">
+        <param name="TIME" type="float"/>
+      </accessor></technique_common></source>
+    <source id="tzv"><float_array id="tzva" count="3">0 -1 0</float_array>
+      <technique_common><accessor source="#tzva" count="3" stride="1">
+        <param name="VALUE" type="float"/>
+      </accessor></technique_common></source>
+    <sampler id="tzs">
+      <input semantic="INPUT" source="#tzt"/>
+      <input semantic="OUTPUT" source="#tzv"/>
+    </sampler>
+    <channel source="#tzs" target="AN/pos.Z"/>
+  </animation>
+  <!-- Animate rotation angle using .ANGLE notation -->
+  <animation id="a_ra" name="RotAngle">
+    <source id="rat"><float_array id="rata" count="4">0 0.33 0.66 1</float_array>
+      <technique_common><accessor source="#rata" count="4" stride="1">
+        <param name="TIME" type="float"/>
+      </accessor></technique_common></source>
+    <source id="rav"><float_array id="rava" count="4">0 120 240 360</float_array>
+      <technique_common><accessor source="#rava" count="4" stride="1">
+        <param name="ANGLE" type="float"/>
+      </accessor></technique_common></source>
+    <sampler id="ras">
+      <input semantic="INPUT" source="#rat"/>
+      <input semantic="OUTPUT" source="#rav"/>
+    </sampler>
+    <channel source="#ras" target="AN/rotY.ANGLE"/>
+  </animation>
+</library_animations>
+<library_visual_scenes>
+  <visual_scene id="Scene" name="Scene">
+    <node id="AN" name="AN" type="NODE">
+      <translate sid="pos">0 0 0</translate>
+      <rotate sid="rotY">0 1 0 0</rotate>
+      <matrix sid="transform">1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</matrix>
+      <instance_geometry url="#geo"/>
+    </node>
+  </visual_scene>
+</library_visual_scenes>
+<scene><instance_visual_scene url="#Scene"/></scene>
+</COLLADA>

@@ -1,0 +1,21 @@
+#VRML V2.0 utf8
+
+Sound {
+  source AudioClip {
+    url "sound.wav"
+    loop TRUE
+    pitch 1.0
+    startTime 0
+    stopTime -1
+    description "ambient sound"
+  }
+  location 0 1 0
+  direction 0 0 1
+  intensity 1.0
+  maxBack 10
+  maxFront 10
+  minBack 1
+  minFront 1
+  priority 0.5
+  spatialize TRUE
+}

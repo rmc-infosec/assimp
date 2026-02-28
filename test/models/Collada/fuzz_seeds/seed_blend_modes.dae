@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1">
+<asset><created>2026-01-01</created><modified>2026-01-01</modified></asset>
+<library_images>
+  <image id="diff_img"><init_from>diffuse.png</init_from></image>
+  <image id="bump_img"><init_from>bump.png</init_from></image>
+  <image id="spec_img"><init_from>specular.png</init_from></image>
+</library_images>
+<library_effects>
+  <effect id="eff"><profile_COMMON>
+    <newparam sid="d_surf"><surface type="2D"><init_from>diff_img</init_from></surface></newparam>
+    <newparam sid="d_samp"><sampler2D><source>d_surf</source>
+      <wrap_s>WRAP</wrap_s><wrap_t>MIRROR</wrap_t>
+      <minfilter>LINEAR_MIPMAP_LINEAR</minfilter><magfilter>LINEAR</magfilter>
+    </sampler2D></newparam>
+    <newparam sid="b_surf"><surface type="2D"><init_from>bump_img</init_from></surface></newparam>
+    <newparam sid="b_samp"><sampler2D><source>b_surf</source></sampler2D></newparam>
+    <newparam sid="s_surf"><surface type="2D"><init_from>spec_img</init_from></surface></newparam>
+    <newparam sid="s_samp"><sampler2D><source>s_surf</source></sampler2D></newparam>
+    <technique sid="common">
+      <blinn>
+        <emission><color>0.05 0.05 0.05 1</color></emission>
+        <ambient><color>0.2 0.2 0.2 1</color></ambient>
+        <diffuse><texture texture="d_samp" texcoord="UV0"/></diffuse>
+        <specular><texture texture="s_samp" texcoord="UV0"/></specular>
+        <shininess><float>64</float></shininess>
+        <reflective><color>0.3 0.3 0.3 1</color></reflective>
+        <reflectivity><float>0.1</float></reflectivity>
+        <transparent opaque="A_ONE"><color>1 1 1 1</color></transparent>
+        <transparency><float>0.9</float></transparency>
+        <index_of_refraction><float>1.5</float></index_of_refraction>
+      </blinn>
+      <extra><technique profile="MAYA">
+        <bump><texture texture="b_samp" texcoord="UV0"/></bump>
+      </technique></extra>
+    </technique>
+    <extra><technique profile="MAYA">
+      <wrapU sid="wrapU0">TRUE</wrapU>
+      <wrapV sid="wrapV0">TRUE</wrapV>
+      <blend_mode sid="blend0">ADD</blend_mode>
+    </technique></extra>
+  </profile_COMMON></effect>
+</library_effects>
+<library_materials>
+  <material id="mat"><instance_effect url="#eff"/></material>
+</library_materials>
+<library_geometries>
+  <geometry id="mesh">
+    <mesh>
+      <source id="p"><float_array id="pa" count="12">-1 0 -1 1 0 -1 1 0 1 -1 0 1</float_array>
+        <technique_common><accessor source="#pa" count="4" stride="3">
+          <param name="X" type="float"/><param name="Y" type="float"/><param name="Z" type="float"/>
+        </accessor></technique_common></source>
+      <source id="n"><float_array id="na" count="3">0 1 0</float_array>
+        <technique_common><accessor source="#na" count="1" stride="3">
+          <param name="X" type="float"/><param name="Y" type="float"/><param name="Z" type="float"/>
+        </accessor></technique_common></source>
+      <source id="uv"><float_array id="uva" count="8">0 0 1 0 1 1 0 1</float_array>
+        <technique_common><accessor source="#uva" count="4" stride="2">
+          <param name="S" type="float"/><param name="T" type="float"/>
+        </accessor></technique_common></source>
+      <vertices id="v"><input semantic="POSITION" source="#p"/></vertices>
+      <triangles material="msym" count="2">
+        <input semantic="VERTEX" source="#v" offset="0"/>
+        <input semantic="NORMAL" source="#n" offset="1"/>
+        <input semantic="TEXCOORD" source="#uv" offset="2" set="0"/>
+        <p>0 0 0 1 0 1 2 0 2 0 0 0 2 0 2 3 0 3</p>
+      </triangles>
+    </mesh>
+  </geometry>
+</library_geometries>
+<library_visual_scenes>
+  <visual_scene id="Scene">
+    <node id="N" type="NODE">
+      <matrix sid="transform">1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</matrix>
+      <instance_geometry url="#mesh">
+        <bind_material><technique_common>
+          <instance_material symbol="msym" target="#mat"/>
+        </technique_common></bind_material>
+      </instance_geometry>
+    </node>
+  </visual_scene>
+</library_visual_scenes>
+<scene><instance_visual_scene url="#Scene"/></scene>
+</COLLADA>

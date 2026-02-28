@@ -1,0 +1,80 @@
+material BaseWhite
+{
+    technique
+    {
+        pass
+        {
+            ambient 1.0 1.0 1.0 1.0
+            diffuse 1.0 1.0 1.0 1.0
+            specular 0.5 0.5 0.5 1.0 12.5
+            emissive 0.0 0.0 0.0 1.0
+            scene_blend alpha_blend
+            depth_write off
+            depth_check on
+            lighting on
+            cull_hardware none
+            cull_software none
+
+            texture_unit
+            {
+                texture diffuse.tga
+                tex_address_mode wrap
+                filtering trilinear
+                colour_op modulate
+            }
+            texture_unit
+            {
+                texture normal.tga
+                tex_address_mode clamp
+                filtering bilinear
+                colour_op_ex add src_texture src_current
+            }
+        }
+        pass
+        {
+            ambient 0.5 0.0 0.0
+            diffuse 1.0 0.0 0.0
+            scene_blend add
+            depth_write off
+        }
+    }
+    technique LOD1
+    {
+        pass
+        {
+            ambient 0.8 0.8 0.8
+            diffuse 0.8 0.8 0.8
+            texture_unit
+            {
+                texture lod1.tga
+            }
+        }
+    }
+}
+
+material TransparentGlass
+{
+    technique
+    {
+        pass
+        {
+            ambient 0.1 0.1 0.1
+            diffuse 0.5 0.5 0.8 0.5
+            specular 1.0 1.0 1.0 1.0 50.0
+            scene_blend alpha_blend
+            depth_write off
+            cull_hardware none
+
+            texture_unit
+            {
+                texture glass.tga
+                tex_address_mode mirror
+                filtering anisotropic
+                max_anisotropy 8
+                colour_op replace
+                scroll_anim 0.1 0.0
+                rotate_anim 0.05
+            }
+        }
+    }
+}

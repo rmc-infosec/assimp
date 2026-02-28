@@ -1,0 +1,80 @@
+{
+  "asset": { "version": "2.0", "generator": "fuzz-seed" },
+  "scene": 0,
+  "scenes": [{ "nodes": [0] }],
+  "nodes": [{ "mesh": 0, "name": "MorphNode" }],
+  "buffers": [{
+    "uri": "data:application/octet-stream;base64,AAAAAAAAAAAAAAAAAACAPwAAAAAAAAAAAAAAPwAAgD8AAAAAAAAAAAAAAAAAAIA/AAAAAAAAAAAAAIA/AAAAAAAAAAAAAIA/AAABAAIAAADNzMw9AAAAAAAAAADNzMw9AAAAAAAAAADNzMw9AAAAAAAAAAAAAAAAzczMPQAAAAAAAAAAzczMPQAAAAAAAAAAzczMPQAAAAAAAAAAzczMPQAAAAAAAAAAzczMPQAAAAAAAAAAzczMPQAAAADNzMw9AAAAAAAAAADNzMw9AAAAAAAAAADNzMw9AAAAAAAAAAAAAAAAAAAAAM3MzD0AAAAAAAAAAM3MzD0AAAAAAAAAAM3MzD0AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPwAAgD8AAAAAAAAAAAAAAAAAAIA/AAAAPwAAgD4AAAAAAACAPwAAAD8=",
+    "byteLength": 344
+  }],
+  "bufferViews": [
+    { "buffer": 0, "byteOffset": 0, "byteLength": 36, "target": 34962 },
+    { "buffer": 0, "byteOffset": 36, "byteLength": 36, "target": 34962 },
+    { "buffer": 0, "byteOffset": 72, "byteLength": 6, "target": 34963 },
+    { "buffer": 0, "byteOffset": 80, "byteLength": 36, "target": 34962 },
+    { "buffer": 0, "byteOffset": 116, "byteLength": 36, "target": 34962 },
+    { "buffer": 0, "byteOffset": 152, "byteLength": 36, "target": 34962 },
+    { "buffer": 0, "byteOffset": 188, "byteLength": 36, "target": 34962 },
+    { "buffer": 0, "byteOffset": 224, "byteLength": 36, "target": 34962 },
+    { "buffer": 0, "byteOffset": 260, "byteLength": 36, "target": 34962 },
+    { "buffer": 0, "byteOffset": 296, "byteLength": 12 },
+    { "buffer": 0, "byteOffset": 308, "byteLength": 36 }
+  ],
+  "accessors": [
+    {
+      "bufferView": 0, "componentType": 5126, "count": 3, "type": "VEC3",
+      "min": [0.0, 0.0, 0.0], "max": [1.0, 1.0, 0.0]
+    },
+    {
+      "bufferView": 1, "componentType": 5126, "count": 3, "type": "VEC3",
+      "min": [0.0, 0.0, 1.0], "max": [0.0, 0.0, 1.0]
+    },
+    {
+      "bufferView": 2, "componentType": 5123, "count": 3, "type": "SCALAR",
+      "max": [2]
+    },
+    { "bufferView": 3, "componentType": 5126, "count": 3, "type": "VEC3", "min": [0.1, 0.0, 0.0], "max": [0.1, 0.0, 0.0] },
+    { "bufferView": 4, "componentType": 5126, "count": 3, "type": "VEC3", "min": [0.0, 0.1, 0.0], "max": [0.0, 0.1, 0.0] },
+    { "bufferView": 5, "componentType": 5126, "count": 3, "type": "VEC3", "min": [0.0, 0.1, 0.0], "max": [0.1, 0.1, 0.0] },
+    { "bufferView": 6, "componentType": 5126, "count": 3, "type": "VEC3", "min": [0.1, 0.0, 0.0], "max": [0.1, 0.0, 0.0] },
+    { "bufferView": 7, "componentType": 5126, "count": 3, "type": "VEC3", "min": [0.0, 0.0, 0.1], "max": [0.0, 0.0, 0.1] },
+    { "bufferView": 8, "componentType": 5126, "count": 3, "type": "VEC3", "min": [0.0, 0.0, 0.0], "max": [0.0, 0.0, 0.0] },
+    {
+      "bufferView": 9, "componentType": 5126, "count": 3, "type": "SCALAR",
+      "min": [0.0], "max": [1.0]
+    },
+    {
+      "bufferView": 10, "componentType": 5126, "count": 9, "type": "SCALAR",
+      "min": [0.0], "max": [1.0]
+    }
+  ],
+  "meshes": [{
+    "name": "MorphMesh",
+    "primitives": [{
+      "attributes": { "POSITION": 0, "NORMAL": 1 },
+      "indices": 2,
+      "targets": [
+        { "POSITION": 3, "NORMAL": 4 },
+        { "POSITION": 5, "NORMAL": 6 },
+        { "POSITION": 7, "NORMAL": 8 }
+      ]
+    }],
+    "weights": [0.5, 0.3, 0.2],
+    "extras": {
+      "targetNames": ["MorphTarget1", "MorphTarget2", "MorphTarget3"]
+    }
+  }],
+  "animations": [{
+    "name": "MorphAnimation",
+    "channels": [{
+      "sampler": 0,
+      "target": { "node": 0, "path": "weights" }
+    }],
+    "samplers": [{
+      "input": 9,
+      "output": 10,
+      "interpolation": "LINEAR"
+    }]
+  }],
+  "materials": [{ "name": "DefaultMaterial" }]
+}

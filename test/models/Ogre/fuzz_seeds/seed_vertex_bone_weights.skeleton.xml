@@ -1,0 +1,87 @@
+<skeleton>
+  <bones>
+    <bone id="0" name="Hip">
+      <position x="0" y="0" z="0"/>
+      <rotation angle="0">
+        <axis x="0" y="1" z="0"/>
+      </rotation>
+    </bone>
+    <bone id="1" name="Torso">
+      <position x="0" y="1" z="0"/>
+      <rotation angle="0">
+        <axis x="0" y="1" z="0"/>
+      </rotation>
+      <scale x="1" y="1" z="1"/>
+    </bone>
+    <bone id="2" name="Head">
+      <position x="0" y="1" z="0"/>
+      <rotation angle="0">
+        <axis x="0" y="1" z="0"/>
+      </rotation>
+      <scale factor="1.0"/>
+    </bone>
+  </bones>
+  <bonehierarchy>
+    <boneparent bone="Torso" parent="Hip"/>
+    <boneparent bone="Head" parent="Torso"/>
+  </bonehierarchy>
+  <animations>
+    <animation name="Nod" length="1.5">
+      <tracks>
+        <track bone="Head">
+          <keyframes>
+            <keyframe time="0">
+              <translate x="0" y="0" z="0"/>
+              <rotate angle="0">
+                <axis x="1" y="0" z="0"/>
+              </rotate>
+            </keyframe>
+            <keyframe time="0.5">
+              <translate x="0" y="-0.1" z="0.05"/>
+              <rotate angle="0.4">
+                <axis x="1" y="0" z="0"/>
+              </rotate>
+            </keyframe>
+            <keyframe time="1.0">
+              <translate x="0" y="0.05" z="-0.03"/>
+              <rotate angle="-0.2">
+                <axis x="1" y="0" z="0"/>
+              </rotate>
+            </keyframe>
+            <keyframe time="1.5">
+              <translate x="0" y="0" z="0"/>
+              <rotate angle="0">
+                <axis x="1" y="0" z="0"/>
+              </rotate>
+            </keyframe>
+          </keyframes>
+        </track>
+        <track bone="Torso">
+          <keyframes>
+            <keyframe time="0">
+              <translate x="0" y="0" z="0"/>
+              <rotate angle="0">
+                <axis x="1" y="0" z="0"/>
+              </rotate>
+              <scale x="1" y="1" z="1"/>
+            </keyframe>
+            <keyframe time="0.75">
+              <translate x="0" y="0.02" z="0"/>
+              <rotate angle="0.05">
+                <axis x="1" y="0" z="0"/>
+              </rotate>
+              <scale x="1" y="1.01" z="1"/>
+            </keyframe>
+            <keyframe time="1.5">
+              <translate x="0" y="0" z="0"/>
+              <rotate angle="0">
+                <axis x="1" y="0" z="0"/>
+              </rotate>
+              <scale x="1" y="1" z="1"/>
+            </keyframe>
+          </keyframes>
+        </track>
+      </tracks>
+    </animation>
+  </animations>
+</skeleton>

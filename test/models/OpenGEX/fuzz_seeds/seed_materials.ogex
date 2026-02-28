@@ -1,0 +1,115 @@
+Metric (key = "distance") {float {1.0}}
+Metric (key = "angle") {float {1.0}}
+Metric (key = "time") {float {1.0}}
+Metric (key = "up") {string {"z"}}
+
+GeometryNode $node1
+{
+    Name {string {"MatTestMesh"}}
+    ObjectRef {ref {$geometry1}}
+    MaterialRef {ref {$material1}}
+
+    Transform
+    {
+        float[16]
+        {
+            {1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1}
+        }
+    }
+}
+
+GeometryNode $node2
+{
+    Name {string {"MatTestMesh2"}}
+    ObjectRef {ref {$geometry1}}
+    MaterialRef {ref {$material2}}
+
+    Transform
+    {
+        float[16]
+        {
+            {1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 3, 0, 0, 1}
+        }
+    }
+}
+
+GeometryObject $geometry1
+{
+    Mesh (primitive = "triangles")
+    {
+        VertexArray (attrib = "position")
+        {
+            float[3]
+            {
+                {0, 0, 0}, {1, 0, 0}, {0, 1, 0}
+            }
+        }
+
+        VertexArray (attrib = "normal")
+        {
+            float[3]
+            {
+                {0, 0, 1}, {0, 0, 1}, {0, 0, 1}
+            }
+        }
+
+        IndexArray
+        {
+            unsigned_int32[3]
+            {
+                {0, 1, 2}
+            }
+        }
+    }
+}
+
+Material $material1
+{
+    Name {string {"RedShiny"}}
+
+    Color (attrib = "diffuse") {float[3] {{0.9, 0.1, 0.1}}}
+    Color (attrib = "specular") {float[3] {{1.0, 1.0, 1.0}}}
+    Color (attrib = "emission") {float[3] {{0.05, 0.0, 0.0}}}
+    Param (attrib = "specular_power") {float {80.0}}
+
+    Texture (attrib = "diffuse")
+    {
+        string {"textures/red_diffuse.png"}
+    }
+    Texture (attrib = "specular")
+    {
+        string {"textures/red_specular.png"}
+    }
+    Texture (attrib = "emission")
+    {
+        string {"textures/red_emission.png"}
+    }
+    Texture (attrib = "normal")
+    {
+        string {"textures/red_normal.png"}
+    }
+}
+
+Material $material2
+{
+    Name {string {"GlassAlpha"}}
+
+    Color (attrib = "diffuse") {float[4] {{0.5, 0.8, 0.9, 0.3}}}
+    Color (attrib = "specular") {float[4] {{1.0, 1.0, 1.0, 1.0}}}
+    Param (attrib = "specular_power") {float {120.0}}
+
+    Texture (attrib = "opacity")
+    {
+        string {"textures/glass_opacity.png"}
+    }
+    Texture (attrib = "specular_power")
+    {
+        string {"textures/glass_specpow.png"}
+    }
+}
+
+Material $material3
+{
+    Name {string {"EmissiveOnly"}}
+    Color (attrib = "emission") {float[3] {{1.0, 0.8, 0.2}}}
+}

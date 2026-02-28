@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1">
+<asset><created>2026-01-01</created><modified>2026-01-01</modified></asset>
+<library_geometries>
+  <geometry id="tri" name="Tri">
+    <mesh>
+      <source id="tp"><float_array id="tpa" count="9">0 0 0 1 0 0 0.5 1 0</float_array>
+        <technique_common><accessor source="#tpa" count="3" stride="3">
+          <param name="X" type="float"/><param name="Y" type="float"/><param name="Z" type="float"/>
+        </accessor></technique_common></source>
+      <vertices id="tv"><input semantic="POSITION" source="#tp"/></vertices>
+      <triangles count="1"><input semantic="VERTEX" source="#tv" offset="0"/>
+        <p>0 1 2</p></triangles>
+    </mesh>
+  </geometry>
+</library_geometries>
+<library_animations>
+  <animation id="bz-tr" name="BezierTranslate">
+    <source id="bi"><float_array id="bia" count="3">0 0.5 1</float_array>
+      <technique_common><accessor source="#bia" count="3" stride="1">
+        <param name="TIME" type="float"/>
+      </accessor></technique_common></source>
+    <source id="bo"><float_array id="boa" count="9">0 0 0 2 3 0 5 0 0</float_array>
+      <technique_common><accessor source="#boa" count="3" stride="3">
+        <param name="X" type="float"/><param name="Y" type="float"/><param name="Z" type="float"/>
+      </accessor></technique_common></source>
+    <source id="bit"><float_array id="bita" count="9">0 0 0 1.5 2.5 0 4 0.5 0</float_array>
+      <technique_common><accessor source="#bita" count="3" stride="3">
+        <param name="X" type="float"/><param name="Y" type="float"/><param name="Z" type="float"/>
+      </accessor></technique_common></source>
+    <source id="bot"><float_array id="bota" count="9">0.5 0.5 0 2.5 3.5 0 5 0 0</float_array>
+      <technique_common><accessor source="#bota" count="3" stride="3">
+        <param name="X" type="float"/><param name="Y" type="float"/><param name="Z" type="float"/>
+      </accessor></technique_common></source>
+    <source id="bip"><Name_array id="bipa" count="3">BEZIER BEZIER BEZIER</Name_array>
+      <technique_common><accessor source="#bipa" count="3" stride="1">
+        <param name="INTERPOLATION" type="name"/>
+      </accessor></technique_common></source>
+    <sampler id="bs">
+      <input semantic="INPUT" source="#bi"/>
+      <input semantic="OUTPUT" source="#bo"/>
+      <input semantic="IN_TANGENT" source="#bit"/>
+      <input semantic="OUT_TANGENT" source="#bot"/>
+      <input semantic="INTERPOLATION" source="#bip"/>
+    </sampler>
+    <channel source="#bs" target="TN/translate"/>
+  </animation>
+  <animation id="bz-rot" name="BezierRotate">
+    <source id="ri"><float_array id="ria" count="3">0 0.5 1</float_array>
+      <technique_common><accessor source="#ria" count="3" stride="1">
+        <param name="TIME" type="float"/>
+      </accessor></technique_common></source>
+    <source id="ro"><float_array id="roa" count="12">0 0 1 0 0 0 1 45 0 0 1 90</float_array>
+      <technique_common><accessor source="#roa" count="3" stride="4">
+        <param name="X" type="float"/><param name="Y" type="float"/><param name="Z" type="float"/><param name="ANGLE" type="float"/>
+      </accessor></technique_common></source>
+    <source id="rit"><float_array id="rita" count="12">0 0 1 0 0 0 1 30 0 0 1 75</float_array>
+      <technique_common><accessor source="#rita" count="3" stride="4">
+        <param name="X" type="float"/><param name="Y" type="float"/><param name="Z" type="float"/><param name="ANGLE" type="float"/>
+      </accessor></technique_common></source>
+    <source id="rot"><float_array id="rota" count="12">0 0 1 15 0 0 1 60 0 0 1 90</float_array>
+      <technique_common><accessor source="#rota" count="3" stride="4">
+        <param name="X" type="float"/><param name="Y" type="float"/><param name="Z" type="float"/><param name="ANGLE" type="float"/>
+      </accessor></technique_common></source>
+    <source id="rip"><Name_array id="ripa" count="3">BEZIER BEZIER BEZIER</Name_array>
+      <technique_common><accessor source="#ripa" count="3" stride="1">
+        <param name="INTERPOLATION" type="name"/>
+      </accessor></technique_common></source>
+    <sampler id="rs">
+      <input semantic="INPUT" source="#ri"/>
+      <input semantic="OUTPUT" source="#ro"/>
+      <input semantic="IN_TANGENT" source="#rit"/>
+      <input semantic="OUT_TANGENT" source="#rot"/>
+      <input semantic="INTERPOLATION" source="#rip"/>
+    </sampler>
+    <channel source="#rs" target="TN/rotateZ"/>
+  </animation>
+</library_animations>
+<library_visual_scenes>
+  <visual_scene id="Scene" name="Scene">
+    <node id="TN" name="TN" type="NODE">
+      <translate sid="translate">0 0 0</translate>
+      <rotate sid="rotateZ">0 0 1 0</rotate>
+      <matrix sid="transform">1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1</matrix>
+      <instance_geometry url="#tri"/>
+    </node>
+  </visual_scene>
+</library_visual_scenes>
+<scene><instance_visual_scene url="#Scene"/></scene>
+</COLLADA>

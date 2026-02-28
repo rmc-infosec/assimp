@@ -135,6 +135,8 @@ protected:
     aiNode *popNode();
     aiNode *top() const;
     void clearNodeStack();
+    void resetCurrentVertices();
+    void clearImporterState(bool success);
     void createNodeTree( aiScene *pScene );
 
 private:

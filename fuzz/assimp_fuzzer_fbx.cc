@@ -39,25 +39,72 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ---------------------------------------------------------------------------
 */
 #include "fuzzer_common.h"
-#include <assimp/cimport.h>
 #include <assimp/scene.h>
-#include <assimp/postprocess.h>
 
 using namespace Assimp;
 
 extern "C" int LLVMFuzzerTestOneInput(const uint8_t *data, size_t dataSize) {
-    if (dataSize > 1024 * 1024) {
+    if (!AssimpFuzz::IsValidSize(dataSize, "fbx")) {
         return 0;
     }
 
+    const uint32_t hash = AssimpFuzz::HashBytes(data, dataSize);
     Importer importer;
     // Force FBX format
     if (!AssimpFuzz::ForceFormat(importer, "fbx")) {
         return 0;
     }
 
-    unsigned int flags = aiProcessPreset_TargetRealtime_Quality | aiProcess_ValidateDataStructure;
-    const aiScene *sc = importer.ReadFileFromMemory(data, dataSize, flags, "fbx");
+    AssimpFuzz::ApplyImporterConfigs(importer, data, dataSize);
+
+    // Always enable ALL FBX reading features for maximum coverage.
+    // The generic ApplyImporterConfigs randomly toggles these, but for the
+    // dedicated FBX fuzzer we want to exercise every code path.
+    importer.SetPropertyBool(AI_CONFIG_IMPORT_FBX_PRESERVE_PIVOTS, true);
+    importer.SetPropertyBool(AI_CONFIG_IMPORT_FBX_READ_CAMERAS, true);
+    importer.SetPropertyBool(AI_CONFIG_IMPORT_FBX_READ_LIGHTS, true);
+    importer.SetPropertyBool(AI_CONFIG_IMPORT_FBX_READ_ANIMATIONS, true);
+    importer.SetPropertyBool(AI_CONFIG_IMPORT_FBX_READ_WEIGHTS, true);
+    importer.SetPropertyBool(AI_CONFIG_IMPORT_FBX_READ_MATERIALS, true);
+    importer.SetPropertyBool(AI_CONFIG_IMPORT_FBX_READ_TEXTURES, true);
+    importer.SetPropertyBool(AI_CONFIG_IMPORT_FBX_READ_ALL_GEOMETRY_LAYERS, true);
+    importer.SetPropertyBool(AI_CONFIG_IMPORT_FBX_READ_ALL_MATERIALS, true);
+    importer.SetPropertyBool(AI_CONFIG_IMPORT_FBX_OPTIMIZE_EMPTY_ANIMATION_CURVES, true);
+
+    unsigned int flags = AssimpFuzz::GetProcessingFlags(data, dataSize);
+    importer.ReadFileFromMemory(data, dataSize, flags, "fbx");
+
+    // Second FBX pass with complementary feature toggles to cover disabled paths.
+    Importer importerAlt;
+    if (!AssimpFuzz::ForceFormat(importerAlt, "fbx")) {
+        return 0;
+    }
+    AssimpFuzz::ApplyImporterConfigs(importerAlt, data, dataSize);
+    importerAlt.SetPropertyBool(AI_CONFIG_IMPORT_FBX_PRESERVE_PIVOTS, (hash & 0x0001u) == 0u);
+    importerAlt.SetPropertyBool(AI_CONFIG_IMPORT_FBX_READ_CAMERAS, (hash & 0x0002u) != 0u);
+    importerAlt.SetPropertyBool(AI_CONFIG_IMPORT_FBX_READ_LIGHTS, (hash & 0x0004u) != 0u);
+    importerAlt.SetPropertyBool(AI_CONFIG_IMPORT_FBX_READ_ANIMATIONS, (hash & 0x0008u) != 0u);
+    importerAlt.SetPropertyBool(AI_CONFIG_IMPORT_FBX_READ_WEIGHTS, (hash & 0x0010u) != 0u);
+    importerAlt.SetPropertyBool(AI_CONFIG_IMPORT_FBX_READ_MATERIALS, (hash & 0x0020u) != 0u);
+    importerAlt.SetPropertyBool(AI_CONFIG_IMPORT_FBX_READ_TEXTURES, (hash & 0x0040u) != 0u);
+    importerAlt.SetPropertyBool(AI_CONFIG_IMPORT_FBX_READ_ALL_GEOMETRY_LAYERS, (hash & 0x0080u) != 0u);
+    importerAlt.SetPropertyBool(AI_CONFIG_IMPORT_FBX_READ_ALL_MATERIALS, (hash & 0x0100u) != 0u);
+    importerAlt.SetPropertyBool(AI_CONFIG_IMPORT_FBX_OPTIMIZE_EMPTY_ANIMATION_CURVES, (hash & 0x0200u) == 0u);
+    importerAlt.SetPropertyBool(AI_CONFIG_IMPORT_FBX_STRICT_MODE, (hash & 0x0400u) != 0u);
+    importerAlt.SetPropertyBool(AI_CONFIG_IMPORT_FBX_EMBEDDED_TEXTURES_LEGACY_NAMING, (hash & 0x0800u) != 0u);
+
+    unsigned int altFlags = flags ^ (aiProcess_Triangulate
+            | aiProcess_GenNormals
+            | aiProcess_GenUVCoords
+            | aiProcess_FindInvalidData
+            | aiProcess_GlobalScale);
+    if ((altFlags & aiProcess_GenSmoothNormals) && (altFlags & aiProcess_GenNormals)) {
+        altFlags &= ~aiProcess_GenNormals;
+    }
+    if ((altFlags & aiProcess_OptimizeGraph) && (altFlags & aiProcess_PreTransformVertices)) {
+        altFlags &= ~aiProcess_OptimizeGraph;
+    }
+    importerAlt.ReadFileFromMemory(data, dataSize, altFlags, "fbx");
 
     return 0;
 }

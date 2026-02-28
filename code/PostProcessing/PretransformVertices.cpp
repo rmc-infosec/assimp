@@ -475,11 +475,13 @@ void PretransformVertices::Execute(aiScene *pScene) {
 
 		// now iterate through all meshes and transform them to world-space
 		for (unsigned int i = 0; i < pScene->mNumMeshes; ++i) {
-			ApplyTransform(pScene->mMeshes[i], *reinterpret_cast<aiMatrix4x4 *>(pScene->mMeshes[i]->mBones));
+			if (pScene->mMeshes[i] && pScene->mMeshes[i]->mBones) {
+				ApplyTransform(pScene->mMeshes[i], *reinterpret_cast<aiMatrix4x4 *>(pScene->mMeshes[i]->mBones));
 
-			// prevent improper destruction
-            pScene->mMeshes[i]->mBones = nullptr;
-			pScene->mMeshes[i]->mNumBones = 0;
+				// prevent improper destruction
+				pScene->mMeshes[i]->mBones = nullptr;
+				pScene->mMeshes[i]->mNumBones = 0;
+			}
 		}
 	} else {
 		apcOutMeshes.reserve(static_cast<size_t>(pScene->mNumMaterials) << 1u);

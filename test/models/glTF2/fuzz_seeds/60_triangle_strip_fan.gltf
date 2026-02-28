@@ -1,0 +1,42 @@
+{
+  "asset": { "version": "2.0", "generator": "fuzz-seed" },
+  "scene": 0,
+  "scenes": [{ "nodes": [0] }],
+  "nodes": [{ "mesh": 0 }],
+  "buffers": [{
+    "uri": "data:application/octet-stream;base64,AAAAAAAAAAAAAAAAzcxMPgAAAD8AAAAAzczMPgAAAAAAAAAAmpkZPwAAAD8AAAAAzcxMPwAAAAAAAAAAAACAPwAAAD8AAAAAmpmZPwAAAAAAAAAAMzOzPwAAAD8AAAAAAAAAAAAAAAAAAAAAAAAAPwAAAAAAAAAAB52fPhwmyD4AAAAAh9zjveCU+T4AAAAA5aXmvgImXj4AAAAA5aXmvgImXr4AAAAAh9zjveCU+b4AAAAAB52fPhwmyL4AAAAAAAABAAIAAwAEAAUABgAHAAAAAQACAAMABAAFAAYABwA=",
+    "byteLength": 224
+  }],
+  "bufferViews": [
+    { "buffer": 0, "byteOffset": 0, "byteLength": 96, "target": 34962 },
+    { "buffer": 0, "byteOffset": 96, "byteLength": 96, "target": 34962 },
+    { "buffer": 0, "byteOffset": 192, "byteLength": 16, "target": 34963 },
+    { "buffer": 0, "byteOffset": 208, "byteLength": 16, "target": 34963 }
+  ],
+  "accessors": [
+    {
+      "bufferView": 0, "componentType": 5126, "count": 8, "type": "VEC3",
+      "min": [0.0, 0.0, 0.0], "max": [1.4, 0.5, 0.0]
+    },
+    {
+      "bufferView": 1, "componentType": 5126, "count": 8, "type": "VEC3",
+      "min": [-0.450484, -0.487464, 0.0], "max": [0.5, 0.487464, 0.0]
+    },
+    {
+      "bufferView": 2, "componentType": 5123, "count": 8, "type": "SCALAR",
+      "max": [7]
+    },
+    {
+      "bufferView": 3, "componentType": 5123, "count": 8, "type": "SCALAR",
+      "max": [7]
+    }
+  ],
+  "meshes": [{
+    "name": "StripFanMesh",
+    "primitives": [
+      { "attributes": { "POSITION": 0 }, "indices": 2, "mode": 5 },
+      { "attributes": { "POSITION": 1 }, "indices": 3, "mode": 6 }
+    ]
+  }],
+  "materials": [{ "name": "DefaultMaterial" }]
+}

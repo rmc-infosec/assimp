@@ -1,0 +1,32 @@
+#VRML V2.0 utf8
+
+DEF T1 TimeSensor { cycleInterval 3 loop TRUE }
+DEF T2 TimeSensor { cycleInterval 5 loop TRUE }
+DEF PI1 PositionInterpolator {
+  key [ 0 1 ]
+  keyValue [ 0 0 0, 3 0 0 ]
+}
+DEF OI1 OrientationInterpolator {
+  key [ 0 1 ]
+  keyValue [ 0 1 0 0, 0 1 0 6.28 ]
+}
+DEF CI1 ColorInterpolator {
+  key [ 0 0.5 1 ]
+  keyValue [ 1 0 0, 0 1 0, 0 0 1 ]
+}
+DEF Obj Transform {
+  children [
+    Shape {
+      geometry Box { size 1 1 1 }
+      appearance Appearance {
+        material DEF ObjMat Material { diffuseColor 1 0 0 }
+      }
+    }
+  ]
+}
+ROUTE T1.fraction_changed TO PI1.set_fraction
+ROUTE T1.fraction_changed TO OI1.set_fraction
+ROUTE T2.fraction_changed TO CI1.set_fraction
+ROUTE PI1.value_changed TO Obj.set_translation
+ROUTE OI1.value_changed TO Obj.set_rotation
+ROUTE CI1.value_changed TO ObjMat.set_diffuseColor

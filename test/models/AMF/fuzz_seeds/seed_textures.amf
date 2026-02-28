@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<amf unit="millimeter" version="1.1">
+  <metadata type="name">TexturesSeed</metadata>
+  <texture id="1" width="2" height="2" depth="1" tiled="true" type="grayscale">AQIDBA==</texture>
+  <texture id="2" width="4" height="4" depth="1" tiled="false" type="grayscale">AAECAwQFBgcICQoLDA0ODw==</texture>
+  <texture id="3" width="2" height="2" depth="1" tiled="true" type="grayscale">/v39/A==</texture>
+  <material id="1">
+    <metadata type="name">TexturedMat</metadata>
+    <color>
+      <r><texmap rtexid="1" gtexid="1" btexid="1" atexid="1"><utex1>0</utex1><utex2>1</utex2><utex3>0</utex3><vtex1>0</vtex1><vtex2>0</vtex2><vtex3>1</vtex3></texmap></r>
+      <g><texmap rtexid="2" gtexid="2" btexid="2" atexid="2"><utex1>0</utex1><utex2>1</utex2><utex3>0.5</utex3><vtex1>0</vtex1><vtex2>0</vtex2><vtex3>1</vtex3></texmap></g>
+      <b>0.5</b>
+      <a>1.0</a>
+    </color>
+  </material>
+  <material id="2">
+    <metadata type="name">FullyTexturedMat</metadata>
+    <color>
+      <r><texmap rtexid="1" gtexid="2" btexid="3" atexid="1"><utex1>0</utex1><utex2>1</utex2><utex3>0</utex3><vtex1>0</vtex1><vtex2>0</vtex2><vtex3>1</vtex3></texmap></r>
+      <g><texmap rtexid="2" gtexid="1" btexid="1" atexid="3"><utex1>0</utex1><utex2>0.5</utex2><utex3>1</utex3><vtex1>0</vtex1><vtex2>1</vtex2><vtex3>0.5</vtex3></texmap></g>
+      <b><texmap rtexid="3" gtexid="3" btexid="3" atexid="3"><utex1>0</utex1><utex2>1</utex2><utex3>0</utex3><vtex1>0</vtex1><vtex2>0</vtex2><vtex3>1</vtex3></texmap></b>
+      <a><texmap rtexid="1" gtexid="1" btexid="1" atexid="1"><utex1>0</utex1><utex2>1</utex2><utex3>0</utex3><vtex1>0</vtex1><vtex2>0</vtex2><vtex3>1</vtex3></texmap></a>
+    </color>
+  </material>
+  <material id="3">
+    <metadata type="name">MixedMat</metadata>
+    <color>
+      <r>0.8</r>
+      <g>0.3</g>
+      <b>0.3</b>
+      <a><texmap rtexid="1" gtexid="1" btexid="1" atexid="1"><utex1>0</utex1><utex2>1</utex2><utex3>0</utex3><vtex1>0</vtex1><vtex2>0</vtex2><vtex3>1</vtex3></texmap></a>
+    </color>
+  </material>
+  <object id="1">
+    <metadata type="name">TexturedObject</metadata>
+    <mesh>
+      <vertices>
+        <vertex>
+          <coordinates><x>0</x><y>0</y><z>0</z></coordinates>
+          <color><r>1</r><g>0</g><b>0</b><a>1</a></color>
+        </vertex>
+        <vertex>
+          <coordinates><x>1</x><y>0</y><z>0</z></coordinates>
+          <color><r>0</r><g>1</g><b>0</b><a>1</a></color>
+        </vertex>
+        <vertex>
+          <coordinates><x>0.5</x><y>1</y><z>0</z></coordinates>
+          <color><r>0</r><g>0</g><b>1</b><a>1</a></color>
+        </vertex>
+        <vertex>
+          <coordinates><x>0.5</x><y>0.5</y><z>1</z></coordinates>
+          <color><r>1</r><g>1</g><b>0</b><a>1</a></color>
+        </vertex>
+      </vertices>
+      <volume materialid="1">
+        <triangle>
+          <v1>0</v1><v2>1</v2><v3>2</v3>
+          <color><r>0.5</r><g>0.5</g><b>0.5</b><a>1.0</a></color>
+        </triangle>
+        <triangle><v1>0</v1><v2>1</v2><v3>3</v3></triangle>
+      </volume>
+      <volume materialid="2">
+        <triangle><v1>1</v1><v2>2</v2><v3>3</v3></triangle>
+      </volume>
+      <volume materialid="3">
+        <triangle><v1>0</v1><v2>2</v2><v3>3</v3></triangle>
+      </volume>
+    </mesh>
+  </object>
+</amf>

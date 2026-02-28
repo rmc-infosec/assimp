@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<X3D profile="Interchange" version="3.3">
+  <Scene>
+    <DirectionalLight ambientIntensity="0.3" color="1 1 1" direction="0 -1 -1" global="false" intensity="0.8" on="true"/>
+    <PointLight ambientIntensity="0.2" attenuation="1 0 0" color="1 0.9 0.8" global="true" intensity="1" location="3 5 3" on="true" radius="50"/>
+    <SpotLight ambientIntensity="0.1" attenuation="1 0 0" beamWidth="0.5" color="1 1 0.9" cutOffAngle="1.0" direction="0 -1 0" global="true" intensity="0.9" location="0 10 0" on="true" radius="100"/>
+    <Shape>
+      <Appearance><Material diffuseColor="0.8 0.8 0.8"/></Appearance>
+      <Sphere radius="1"/>
+    </Shape>
+  </Scene>
+</X3D>

@@ -1709,23 +1709,18 @@ void MDLImporter::AddBonesToNodeGraph_3DGS_MDL7(const MDL::IntBone_MDL7 **apcBon
     // get a pointer to the header ...
     const MDL::Header_MDL7 *const pcHeader = (const MDL::Header_MDL7 *)this->mBuffer;
 
-    const MDL::IntBone_MDL7 **apcBones2 = apcBones;
     for (uint32_t i = 0; i < pcHeader->bones_num; ++i) {
-
-        const MDL::IntBone_MDL7 *const pcBone = *apcBones2++;
-        if (pcBone->iParent == iParentIndex) {
+        if (apcBones[i]->iParent == iParentIndex) {
             ++pcParent->mNumChildren;
         }
     }
     pcParent->mChildren = new aiNode *[pcParent->mNumChildren];
     unsigned int qq = 0;
     for (uint32_t i = 0; i < pcHeader->bones_num; ++i) {
-
-        const MDL::IntBone_MDL7 *const pcBone = *apcBones++;
-        if (pcBone->iParent != iParentIndex) continue;
+        if (apcBones[i]->iParent != iParentIndex) continue;
 
         aiNode *pcNode = pcParent->mChildren[qq++] = new aiNode();
-        pcNode->mName = aiString(pcBone->mName);
+        pcNode->mName = aiString(apcBones[i]->mName);
 
         AddBonesToNodeGraph_3DGS_MDL7(apcBones, pcNode, (uint16_t)i);
     }

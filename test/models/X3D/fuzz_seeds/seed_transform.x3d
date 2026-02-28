@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<X3D profile="Interchange" version="3.3">
+  <Scene>
+    <Transform translation="1 2 3" rotation="0 1 0 1.5708" scale="2 2 2" center="0 0 0" scaleOrientation="0 0 1 0">
+      <Shape>
+        <Appearance><Material diffuseColor="0 0.5 0"/></Appearance>
+        <Box size="1 1 1"/>
+      </Shape>
+      <Transform translation="3 0 0" rotation="1 0 0 0.7854">
+        <Shape>
+          <Appearance><Material diffuseColor="0 0 0.8"/></Appearance>
+          <Sphere radius="0.5"/>
+        </Shape>
+      </Transform>
+    </Transform>
+  </Scene>
+</X3D>
